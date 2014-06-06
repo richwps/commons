@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ows="http://www.opengis.net/ows/1.1"
+	xmlns:wps="http://www.opengis.net/wps/1.0.0" targetNamespace="http://www.opengis.net/wps/1.0.0"
+	xml:lang="en" version="1.0.0.3">
+	<annotation>
+		<appinfo>$Id: wpsDeployProcess_response.xsd 2007-10-09 $</appinfo>
+		<documentation>
+			<description>.</description>
+			<copyright>
+			</copyright>
+		</documentation>
+	</annotation>
+	<!-- ============================================================= includes 
+		and imports ============================================================== -->
+	<include schemaLocation="wpsAll.xsd" />
+	<include schemaLocation="common/ResponseBaseType.xsd" />
+	<include schemaLocation="common/DescriptionType.xsd" />
+	<include schemaLocation="common/ProcessBriefType.xsd" />
+	<import namespace="http://www.opengis.net/ows/1.1"
+		schemaLocation="http://schemas.opengis.net/ows/1.1.0/owsAll.xsd" />
+	<!-- ============================================================= elements 
+		and types ============================================================== -->
+	<element name="DeployProcessResponse">
+		<complexType>
+			<complexContent>
+				<extension base="wps:ResponseBaseType">
+					<sequence>
+						<element minOccurs="1" maxOccurs="1" name="ProcessOfferings"
+							type="wps:ProcessBriefType" />
+						<element minOccurs="1" maxOccurs="1" name="Deployment">
+							<complexType>
+								<simpleContent>
+									<extension base="boolean">
+										<attribute name="done" type="boolean" />
+									</extension>
+								</simpleContent>
+							</complexType>
+						</element>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element><!-- of DeployProcessResponse -->
+</schema>
