@@ -1,4 +1,4 @@
-wps-config
+wps-client-config
 ==========
 
-XML-based configuration of the WPS.
+XML-based configuration of the WPS-Client library.

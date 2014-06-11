@@ -1,10 +1,10 @@
 /*****************************************************************
-Copyright � 2007 52�North Initiative for Geospatial Open Source Software GmbH
+Copyright  2007 52North Initiative for Geospatial Open Source Software GmbH
 
  Author: foerster
 
  Contact: Andreas Wytzisk, 
- 52�North Initiative for Geospatial Open Source SoftwareGmbH, 
+ 52 North Initiative for Geospatial Open Source SoftwareGmbH, 
  Martin-Luther-King-Weg 24,
  48155 Muenster, Germany, 
  info@52north.org
@@ -47,6 +47,7 @@ import org.n52.wps.io.IOHandler;
 import org.n52.wps.io.IParser;
 import org.n52.wps.io.data.IData;
 import org.n52.wps.io.data.binding.complex.GTVectorDataBinding;
+
 
 /*
  * 
