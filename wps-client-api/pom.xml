@@ -7,7 +7,9 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <groupId>org.n52.wps</groupId>
     <artifactId>52n-wps-client-lib</artifactId>
+    <version>3.3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>52North WPS Client Library</name>
     <description>This module contains some convenient classes to interact with WPS.</description>
