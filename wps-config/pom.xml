@@ -40,7 +40,7 @@
     <groupId>org.n52.wps</groupId>
     <artifactId>52n-wps-client-config</artifactId>
     <packaging>jar</packaging>
-    <name>52n-WPS-Client-Config</name>
+    <name>52North WPS-Client Config //RichWPS Fork</name>
     <version>1.0.0-SNAPSHOT</version>
     <inceptionYear>2012</inceptionYear>
     <licenses>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/de.hsos.richwps.dsl/src-gen" editDirectory="/de.hsos.richwps.dsl.edit/src"
+    editorDirectory="/de.hsos.richwps.dsl.editor/src" modelPluginID="de.hsos.richwps.dsl"
+    forceOverwrite="true" modelName="DSL" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="de.hsos.richwps.dsl.edit"
+    editorPluginID="de.hsos.richwps.dsl.editor" runtimeVersion="2.10">
+  <genPackages prefix="DSL" basePackage="de.hsos.richwps" disposableProviderFactory="true"
+      fileExtensions="dsl" ecorePackage="DSL.ecore#/">
+    <genClasses ecoreClass="DSL.ecore#//Worksequence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//Worksequence/operations"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//Operation"/>
+    <genClasses ecoreClass="DSL.ecore#//LocalBinding">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//LocalBinding/processid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//LocalBinding/handle"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//RemoteBinding">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//RemoteBinding/protocol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//RemoteBinding/host"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//RemoteBinding/port"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//RemoteBinding/path"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//RemoteBinding/processid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//RemoteBinding/handle"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//ExecuteStatement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//ExecuteStatement/handle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//ExecuteStatement/execinputs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//ExecuteStatement/execoutputs"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//ExecInput">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//ExecInput/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//ExecInput/wpsid"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//ExecOutput">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//ExecOutput/wpsid"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//ExecOutput/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//Assignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//Assignment/lefthand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//Assignment/righthand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//Assignment/val_s"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//Assignment/val_i"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//IN_REFERENCE">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//IN_REFERENCE/refname"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//OUT_REFERENCE">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//OUT_REFERENCE/refname"/>
+    </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//VAR_REFERENCE">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//VAR_REFERENCE/refname"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

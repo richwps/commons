@@ -11,7 +11,7 @@
     <artifactId>52n-wps-client-lib</artifactId>
     <version>3.3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-    <name>52North WPS Client Library</name>
+    <name>52North WPS Client Library //RichWPS Fork</name>
     <description>This module contains some convenient classes to interact with WPS.</description>
     
     <properties>

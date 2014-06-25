@@ -10,7 +10,7 @@
     <artifactId>52n-common-xml</artifactId>
     <version>1.1.5</version>
     <packaging>pom</packaging>
-    <name>52North XML Schema Bindings</name>
+    <name>52North XML Schema Bindings //RichWPS Fork</name>
     <description>
         The 52n XML Bindings comprise the OGC schema models and 
         all 52n schema models needed across the 52n SWE framework.

@@ -3,7 +3,7 @@
     <groupId>richwps</groupId>
     <artifactId>commons</artifactId>
     <packaging>pom</packaging>
-    <name>richwps commons</name>
+    <name>RichWPS Commons</name>
     <version>1.0.0-SNAPSHOT</version>
     
     <description>
@@ -17,6 +17,7 @@
         <module>common-xml</module>
         <module>wps-config</module>
         <module>wps-client-api</module>
+        <module>rola-api</module>
     </modules>
   
   
@@ -25,6 +26,16 @@
         <project.52nwpsgroup>org.n52.wps</project.52nwpsgroup>
         <project.52nwpsversion>3.3.0-SNAPSHOT</project.52nwpsversion>
     </properties>
+    
+    <!--<dependencies>
+        <dependency>
+            <groupId>de.hsos.richwps</groupId>
+            <artifactId>dsl.lang</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>./rola-core/de.hsos.richwps.dsl.jar</systemPath>
+        </dependency>
+    </dependencies>-->
     
    
 </project>

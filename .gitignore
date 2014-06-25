@@ -9,3 +9,17 @@ nb-configuration*.xml
 **/nb-configuration*.xml
 .classpath
 .Rhistory
+
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+#*.jar        we need those
+*.war
+*.ear
+*/target/**
+rola-core/de.hsos.richwps.dsl_lib
+*/src-gen/**
+rola-core/xtext/de.hsos.richwps.dsl/src-gen
