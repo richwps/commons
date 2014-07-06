@@ -6,14 +6,27 @@
 
 package org.n52.wps.client;
 
+import java.math.BigInteger;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Vector;
 import javax.swing.text.html.HTML;
+import net.opengis.ows.x11.AnyValueDocument;
 import net.opengis.ows.x11.CodeType;
 import net.opengis.ows.x11.LanguageStringType;
+import net.opengis.ows.x11.MetadataType;
 import net.opengis.ows.x11.impl.LanguageStringTypeImpl;
 import net.opengis.ows11.Ows11Factory;
+import net.opengis.wps.x100.InputDescriptionType;
+import net.opengis.wps.x100.LiteralInputType;
 import net.opengis.wps.x100.OutputDescriptionType;
 import net.opengis.wps.x100.ProcessDescriptionType;
+import net.opengis.wps.x100.ProcessDescriptionsDocument;
+import net.opengis.wps.x100.WSDLDocument;
+import org.apache.xmlbeans.SchemaType;
+import org.apache.xmlbeans.XmlAnyURI;
 import org.apache.xmlbeans.XmlErrorCodes;
+import org.apache.xmlbeans.XmlOptions;
 import org.geotools.ows.v1_1.OWS;
 
 /**
@@ -49,13 +62,8 @@ public class BasicProcessDescriptionType {
     
     private void addNewProcessOutputs(ProcessDescriptionType.ProcessOutputs processOutputs) {
         ProcessDescriptionType.ProcessOutputs pdtpo = pdt.addNewProcessOutputs();
-        pdtpo = processOutputs;
-    }
-    
-    /* String -> LanguageStringType/CodeType */
-    private void addNewAbstract(String text) {
-        LanguageStringType lst = pdt.addNewAbstract();
-        lst.setStringValue(text);
+        //pdtpo = processOutputs;
+        pdt.setProcessOutputs(processOutputs);
     }
     
     private void addNewTitle(String text) {
@@ -68,25 +76,60 @@ public class BasicProcessDescriptionType {
         ct.setStringValue(text);
     }   
     
+    /* Optional */
     
-    
-    
-    public static void main(String[] args) {
-        ProcessDescriptionType.ProcessOutputs po = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
-        OutputDescriptionType odt = po.addNewOutput();
-        
-        
-        BasicProcessDescriptionType bpdt = new BasicProcessDescriptionType(
-                "Buffer", //Identifier
-                "Create a buffer around a polygon.", //Title
-                "2", //ProcessVersion
-                po); //ProcessOuputs
-        
-        
-        System.out.println("--------####---------");
-        System.out.println(bpdt.pdt.toString());
-        System.out.println("--------####---------");
+    public void addNewAbstract(String text) {
+        LanguageStringType lst = pdt.addNewAbstract();
+        lst.setStringValue(text);
     }
+    
+    public void addNewWSDL(String text) {
+        WSDLDocument.WSDL wsdl = pdt.addNewWSDL();
+        wsdl.setHref(text);
+        
+    }
+    
+    public void addNewMetadata(String title) {
+        MetadataType newMetadata = pdt.addNewMetadata();
+        newMetadata.setTitle(title);
+        /* Optional:
+        newMetadata.setAbout(null);
+        newMetadata.setAbstractMetaData(null);
+        newMetadata.setActuate(null);
+        newMetadata.setArcrole(null);
+        newMetadata.setHref(null);
+        newMetadata.setRole(null);
+        newMetadata.setShow(null);
+        newMetadata.setTitle(null);
+        newMetadata.setType(null);
+        */
+    }
+    
+    public void addNewProfile(String text) {
+        XmlAnyURI newProfile = pdt.addNewProfile();
+        newProfile.setStringValue(text);
+    }
+    
+    public void setStatusSupported(boolean statusSupported) {
+       pdt.setStatusSupported(statusSupported);
+    }
+    
+    public void setStoreSupported(boolean storeSupported) {
+       pdt.setStoreSupported(true);
+    }
+    
+    public void addNewDataInput(InputDescriptionType input) {
+        ProcessDescriptionType.DataInputs dataInputs;
+        if(pdt.getDataInputs()==null) {
+            dataInputs = pdt.addNewDataInputs();
+        } else {
+            dataInputs = pdt.getDataInputs();
+        }
+       
+        dataInputs.addNewInput();
+        dataInputs.setInputArray(dataInputs.sizeOfInputArray()-1, input);
+    }
+    
     
     
     /* -- Getter & Setter -- */

@@ -6,20 +6,17 @@
 
 package org.n52.wps.client;
 
-import javafx.geometry.BoundingBox;
-import javax.swing.text.html.HTML;
 import net.opengis.ows.x11.CodeType;
 import net.opengis.ows.x11.LanguageStringType;
-import net.opengis.ows.x11.impl.LanguageStringTypeImpl;
-import net.opengis.ows11.Ows11Factory;
+import net.opengis.ows.x11.MetadataType;
+import net.opengis.wps.x100.CRSsType;
+import net.opengis.wps.x100.ComplexDataCombinationType;
+import net.opengis.wps.x100.ComplexDataCombinationsType;
+import net.opengis.wps.x100.ComplexDataDescriptionType;
 import net.opengis.wps.x100.LiteralOutputType;
 import net.opengis.wps.x100.OutputDescriptionType;
-import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.SupportedCRSsType;
-import net.opengis.wps.x100.SupportedComplexDataInputType;
 import net.opengis.wps.x100.SupportedComplexDataType;
-import org.apache.xmlbeans.XmlErrorCodes;
-import org.geotools.ows.v1_1.OWS;
 
 /**
  *
@@ -29,15 +26,16 @@ public class BasicOutputDescriptionType {
     private OutputDescriptionType odt;
     
     /* general constructor */
-    private void initialize(String identifier,String title, String processVersion) {
+    private void initialize(String identifier,String title) {
         odt = OutputDescriptionType.Factory.newInstance();
+        
         
         /* Mandatory (One) */
         this.addNewIdentifier(identifier);
         this.addNewTitle(title);
         
         /* Mandatory (One of the three) */
-        //See functions that call this one
+        //Outputs - See functions that call this one
         
         /* Optional (Zero or one) */
         //Abstract
@@ -46,45 +44,77 @@ public class BasicOutputDescriptionType {
         //Metadata
     }
     
-    public BasicOutputDescriptionType(SupportedCRSsType OutputFormChoice, String identifier,String title, String processVersion) {
-        initialize(identifier,title,processVersion);
+    public BasicOutputDescriptionType(String defaultCRS_URI, String identifier,String title, String processVersion) {
+        initialize(identifier,title);
         /* Mandatory (One of the three) */
-        this.addNewBoundingBoxOutput(OutputFormChoice);
+        this.addNewBoundingBoxOutput(defaultCRS_URI);
     }
     
     public BasicOutputDescriptionType(LiteralOutputType OutputFormChoice, String identifier,String title, String processVersion) {
-        initialize(identifier,title,processVersion);
+        initialize(identifier,title);
         /* Mandatory (One of the three) */
         this.addNewLiteralOutput(OutputFormChoice);
     }
     
-    public BasicOutputDescriptionType(SupportedComplexDataType OutputFormChoice, String identifier,String title, String processVersion) {
-        initialize(identifier,title,processVersion);
+    public BasicOutputDescriptionType(String defaultMimeType, String supportedMimeType, String identifier,String title, String processVersion) {
+        initialize(identifier,title);
         /* Mandatory (One of the three) */
-        this.addNewComplexOutput(OutputFormChoice);
+        this.addNewComplexOutput(defaultMimeType, supportedMimeType);
     }
     
     
     
     /* -- Simplified functions -- */
     
-    private void addNewBoundingBoxOutput(SupportedCRSsType OutputFormChoice) {
-        SupportedCRSsType scrst = odt.addNewBoundingBoxOutput();
-        scrst = OutputFormChoice;
+    private void addNewBoundingBoxOutput(String defaultURI) {
+        SupportedCRSsType supportedCRSsType = odt.addNewBoundingBoxOutput();
+        
+        SupportedCRSsType.Default defaultType = supportedCRSsType.addNewDefault();
+        defaultType.setCRS(defaultURI);//URI
+        
+        /* Optional (One or More)*/
+        CRSsType supportedType = supportedCRSsType.addNewSupported();
+        supportedType.addCRS(defaultURI); // <-- Array for more
+        
     }   
+    //private void addNewBoundingBoxOutput(String defaultURI,Container<String> supportedURIs) {}
     
     private void addNewLiteralOutput(LiteralOutputType OutputFormChoice) {
-        LiteralOutputType lot = odt.addNewLiteralOutput();
-        lot = OutputFormChoice;
+        /* Optional (Zero or one) */
+        LiteralOutputType literalOT = odt.addNewLiteralOutput();
+        //literalOT.addNewDataType();
+        //literalOT.addNewUOMs();
+        
+        literalOT = OutputFormChoice;
     }   
     
-    private void addNewComplexOutput(SupportedComplexDataType OutputFormChoice) {
-        SupportedComplexDataType scdit = odt.addNewComplexOutput();
-        scdit = OutputFormChoice;
+    private void addNewComplexOutput(String defaultMimeType, String supportedMimeType) {
+        SupportedComplexDataType complexDataType = odt.addNewComplexOutput();
+        
+        /* -- Default -- */
+        ComplexDataCombinationType cdct = complexDataType.addNewDefault();
+        ComplexDataDescriptionType cddt = cdct.addNewFormat();
+        
+        /* Mandatory (one) */
+        cddt.setMimeType(defaultMimeType);
+        /* Optional (Zero or one) */
+        //cddt.setEncoding(null);
+        //cddt.setSchema(null);
+        
+        /* -- Supported --*/
+        ComplexDataCombinationsType supportedFormats =  complexDataType.addNewSupported();
+        ComplexDataDescriptionType supportedFormat = supportedFormats.addNewFormat();
+        
+        /* Mandatory (one) */
+        supportedFormat.setMimeType(supportedMimeType);
+        /* Optional (Zero or one) */
+        //supportedFormat.setEncoding(null);
+        //supportedFormat.setSchema(null);
+       
     }   
     
     /* String -> LanguageStringType/CodeType */
-    private void addNewAbstract(String text) {
+    public void addNewAbstract(String text) {
         LanguageStringType lst = odt.addNewAbstract();
         lst.setStringValue(text);
     }
@@ -99,13 +129,29 @@ public class BasicOutputDescriptionType {
         ct.setStringValue(text);
     }   
     
+    public void addNewMetadata(String title) {
+        MetadataType newMetadata = odt.addNewMetadata();
+        newMetadata.setTitle(title);
+        /* Optional:
+        newMetadata.setAbout(null);
+        newMetadata.setAbstractMetaData(null);
+        newMetadata.setActuate(null);
+        newMetadata.setArcrole(null);
+        newMetadata.setHref(null);
+        newMetadata.setRole(null);
+        newMetadata.setShow(null);
+        newMetadata.setTitle(null);
+        newMetadata.setType(null);
+        */
+    }
+    
     /* -- Getter & Setter -- */
     
     public OutputDescriptionType getOdt() {
         return odt;
     }
 
-    public void setPdt(OutputDescriptionType odt) {
+    public void setOdt(OutputDescriptionType odt) {
         this.odt = odt;
     }
     
