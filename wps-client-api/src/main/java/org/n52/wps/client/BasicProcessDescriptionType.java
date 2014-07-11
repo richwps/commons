@@ -66,14 +66,14 @@ public class BasicProcessDescriptionType {
         pdt.setProcessOutputs(processOutputs);
     }
     
-    private void addNewTitle(String text) {
+    private void addNewTitle(String title) {
         LanguageStringType lst = pdt.addNewTitle();
-        lst.setStringValue(text);
+        lst.setStringValue(title);
     }
     
-    private void addNewIdentifier(String text) {
+    private void addNewIdentifier(String identifier) {
         CodeType ct = pdt.addNewIdentifier();
-        ct.setStringValue(text);
+        ct.setStringValue(identifier);
     }   
     
     /* Optional */
@@ -83,9 +83,14 @@ public class BasicProcessDescriptionType {
         lst.setStringValue(text);
     }
     
-    public void addNewWSDL(String text) {
-        WSDLDocument.WSDL wsdl = pdt.addNewWSDL();
-        wsdl.setHref(text);
+    public void setWSDL(String href) {
+        WSDLDocument.WSDL wsdl;
+        if(pdt.getWSDL()==null) {
+            wsdl = pdt.addNewWSDL();
+        } else {
+            wsdl = pdt.getWSDL();
+        }
+        wsdl.setHref(href);
         
     }
     
@@ -105,9 +110,9 @@ public class BasicProcessDescriptionType {
         */
     }
     
-    public void addNewProfile(String text) {
+    public void addNewProfile(String profileURI) {
         XmlAnyURI newProfile = pdt.addNewProfile();
-        newProfile.setStringValue(text);
+        newProfile.setStringValue(profileURI);
     }
     
     public void setStatusSupported(boolean statusSupported) {

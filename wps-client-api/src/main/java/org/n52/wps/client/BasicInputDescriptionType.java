@@ -22,6 +22,7 @@ import net.opengis.wps.x100.ComplexDataDescriptionType;
 import net.opengis.wps.x100.InputDescriptionType;
 import net.opengis.wps.x100.LiteralInputType;
 import net.opengis.wps.x100.SupportedCRSsType;
+import net.opengis.wps.x100.SupportedComplexDataInputType;
 import net.opengis.wps.x100.SupportedComplexDataType;
 import net.opengis.wps.x100.SupportedUOMsType;
 import net.opengis.wps.x100.UOMsType;
@@ -55,30 +56,51 @@ public class BasicInputDescriptionType {
         //Metadata
     }
     
+    /**
+     * Constructor for Input with <b>BoundingBoxData</b>
+     * @param defaultCRS_URI Default Reference to one coordinate reference system
+     * @param identifier Unambiguous identifier or name of a process, input, or output, unique for this server 
+     * @param title Title of a process, input, or output, normally available for display to a human 
+     * @param minOccurs
+     * @param maxOccurs
+     */
     public BasicInputDescriptionType(String defaultCRS_URI, String identifier,String title, BigInteger minOccurs, BigInteger maxOccurs) {
         initialize(identifier,title,minOccurs,maxOccurs);
         /* Mandatory (One of the three) */
         this.addNewBoundingBoxData(defaultCRS_URI);
     }
     
+    /**
+     * Constructor for Input with <b>LiteralData</b>, should be followed by addLiteraldata*
+     * @param identifier Unambiguous identifier or name of a process, input, or output, unique for this server 
+     * @param title Title of a process, input, or output, normally available for display to a human 
+     * @param minOccurs
+     * @param maxOccurs
+     */
+    
     public BasicInputDescriptionType(String identifier,String title, BigInteger minOccurs, BigInteger maxOccurs) {
         initialize(identifier,title,minOccurs,maxOccurs);
         /* Mandatory (One of the three) */
         //addLiteraldata...
-        System.out.println("Don't forget to initialize the literal data!");
     }
     
-    public BasicInputDescriptionType(String defaultMimeType, String supportedMimeType, String identifier,String title, BigInteger minOccurs, BigInteger maxOccurs) {
+    /**
+     * Constructor for Input with <b>ComplexData</b>
+     * @param default...
+     * @param supported...
+     * @param maxMegabytes The maximum file size, in megabytes, of this input. If the input exceeds this size, the server will return an error instead of processing the inputs. 
+     * @param identifier Unambiguous identifier or name of a process, input, or output, unique for this server 
+     * @param title Title of a process, input, or output, normally available for display to a human 
+     * @param minOccurs
+     * @param maxOccurs
+     */
+    public BasicInputDescriptionType(String defaultMimeType, String defaultEncoding, String defaultSchema,
+            String supportedMimeType, String supportedEncoding, String supportedSchema,
+            BigInteger maxMegabytes, String identifier,String title, BigInteger minOccurs, BigInteger maxOccurs) {
         initialize(identifier,title,minOccurs,maxOccurs);
         /* Mandatory (One of the three) */
-        this.addNewComplexData(defaultMimeType, supportedMimeType);
+        this.addNewComplexData(defaultMimeType, defaultEncoding, defaultSchema, supportedMimeType, supportedEncoding, supportedSchema, maxMegabytes);
     }
-    
-    
-    
-    /* -- Simplified functions -- */
-    
-    
     
     private void addNewBoundingBoxData(String defaultURI) {
         SupportedCRSsType supportedCRSsType = idt.addNewBoundingBoxData();
@@ -95,7 +117,7 @@ public class BasicInputDescriptionType {
     
     
     //Todo: Simplify AllowedValues creation
-    public void addNewLiteralData(AllowedValuesDocument.AllowedValues allowedValues,
+    public void addNewLiteralDataAllowedValues(AllowedValuesDocument.AllowedValues allowedValues,
                                     String typeUri, String typeName, String defaultUOM,Collection<String> supportedUOMs, String defaultValue) {
         this.initializeLiteralData(typeUri,typeName,defaultUOM,supportedUOMs,defaultValue);
         LiteralInputType literalData = this.idt.getLiteralData();
@@ -104,7 +126,7 @@ public class BasicInputDescriptionType {
     }
     
     //Todo: Simplify Anyvalues creation
-    public void addNewLiteralData(AnyValueDocument.AnyValue anyValue,
+    public void addNewLiteralDataAnyValue(AnyValueDocument.AnyValue anyValue,
                                    String typeUri, String typeName, String defaultUOM,Collection<String> supportedUOMs, String defaultValue) {
         this.initializeLiteralData(typeUri,typeName,defaultUOM,supportedUOMs,defaultValue);
         LiteralInputType literalData = this.idt.getLiteralData();
@@ -113,7 +135,7 @@ public class BasicInputDescriptionType {
     }
     
     //Todo: Simplify Constructor
-    public void addNewLiteralData(String reference, String valuesForm,
+    public void addNewLiteralDataReference(String reference, String valuesForm,
                                     String typeUri, String typeName, String defaultUOM,Collection<String> supportedUOMs, String defaultValue) {
         this.initializeLiteralData(typeUri,typeName,defaultUOM,supportedUOMs,defaultValue);
         LiteralInputType literalData = this.idt.getLiteralData();
@@ -168,33 +190,49 @@ public class BasicInputDescriptionType {
         }
         literalIT.setDefaultValue(defaultValue);
     }   
-    
-    private void addNewComplexData(String defaultMimeType, String supportedMimeType) {
-        SupportedComplexDataType complexDataType = idt.addNewComplexData();
+    /**
+     * Adds ComplexData
+     * @param maxMegabytes The maximum file size, in megabytes, of this input. If the input exceeds this size, the server will return an error instead of processing the inputs. 
+     */
+    private void addNewComplexData(String defaultMimeType, String defaultEncoding, String defaultSchema, String supportedMimeType, String supportedEncoding, String supportedSchema, BigInteger maxMegabytes) {
+        SupportedComplexDataInputType complexDataInputType = idt.addNewComplexData();
+        
+        if(maxMegabytes!=null) {
+            complexDataInputType.setMaximumMegabytes(maxMegabytes);
+        }
         
         /* -- Default -- */
-        ComplexDataCombinationType cdct = complexDataType.addNewDefault();
-        ComplexDataDescriptionType cddt = cdct.addNewFormat();
+        ComplexDataCombinationType defaultFormats = complexDataInputType.addNewDefault();
+        ComplexDataDescriptionType aDefaultFormat = defaultFormats.addNewFormat();
         
+        
+
         /* Mandatory (one) */
-        cddt.setMimeType(defaultMimeType);
+        aDefaultFormat.setMimeType(defaultMimeType);
         /* Optional (Zero or one) */
-        //cddt.setEncoding(null);
-        //cddt.setSchema(null);
+        if(defaultEncoding!=null) {
+            aDefaultFormat.setEncoding(defaultEncoding);
+        }
+        if(defaultSchema!=null){
+            aDefaultFormat.setSchema(defaultSchema);
+        }
         
         /* -- Supported --*/
-        ComplexDataCombinationsType supportedFormats =  complexDataType.addNewSupported();
-        ComplexDataDescriptionType supportedFormat = supportedFormats.addNewFormat();
+        ComplexDataCombinationsType supportedFormats =  complexDataInputType.addNewSupported();
+        ComplexDataDescriptionType aSupportedFormat = supportedFormats.addNewFormat();
         
         /* Mandatory (one) */
-        supportedFormat.setMimeType(supportedMimeType);
+        aSupportedFormat.setMimeType(supportedMimeType);
         /* Optional (Zero or one) */
-        //supportedFormat.setEncoding(null);
-        //supportedFormat.setSchema(null);
-       
+        if(supportedEncoding!=null) {
+            aSupportedFormat.setEncoding(supportedEncoding);
+        }
+        if(supportedSchema!=null) {
+            aSupportedFormat.setSchema(supportedSchema);
+        }
     }   
     
-    /* String -> LanguageStringType/CodeType */
+    
     private void addNewAbstract(String text) {
         LanguageStringType lst = idt.addNewAbstract();
         lst.setStringValue(text);
