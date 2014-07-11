@@ -86,20 +86,19 @@ public class BasicInputDescriptionType {
     
     /**
      * Constructor for Input with <b>ComplexData</b>
-     * @param default...
-     * @param supported...
+     * @param defaultFormat Add with createComplexDataDescriptionType(...)
+     * @param supportedFormat Add with createComplexDataDescriptionType(...)
      * @param maxMegabytes The maximum file size, in megabytes, of this input. If the input exceeds this size, the server will return an error instead of processing the inputs. 
      * @param identifier Unambiguous identifier or name of a process, input, or output, unique for this server 
      * @param title Title of a process, input, or output, normally available for display to a human 
      * @param minOccurs
      * @param maxOccurs
      */
-    public BasicInputDescriptionType(String defaultMimeType, String defaultEncoding, String defaultSchema,
-            String supportedMimeType, String supportedEncoding, String supportedSchema,
-            BigInteger maxMegabytes, String identifier,String title, BigInteger minOccurs, BigInteger maxOccurs) {
+    public BasicInputDescriptionType(ComplexDataDescriptionType defaultFormat, ComplexDataDescriptionType supportedFormat, BigInteger maxMegabytes,
+            String identifier,String title, BigInteger minOccurs, BigInteger maxOccurs) {
         initialize(identifier,title,minOccurs,maxOccurs);
         /* Mandatory (One of the three) */
-        this.addNewComplexData(defaultMimeType, defaultEncoding, defaultSchema, supportedMimeType, supportedEncoding, supportedSchema, maxMegabytes);
+        this.addNewComplexData(defaultFormat,supportedFormat, maxMegabytes);
     }
     
     private void addNewBoundingBoxData(String defaultURI) {
@@ -190,11 +189,38 @@ public class BasicInputDescriptionType {
         }
         literalIT.setDefaultValue(defaultValue);
     }   
+    
+    /**
+     *
+     * @param mimeType
+     * @param encoding
+     * @param schema
+     * @return
+     */
+    public static ComplexDataDescriptionType createComplexDataDescriptionType(String mimeType, String encoding, String schema) {
+        ComplexDataDescriptionType format = ComplexDataDescriptionType.Factory.newInstance();
+    
+        /* Mandatory (one) */
+        format.setMimeType(mimeType);
+        
+        /* Optional (Zero or one) */
+        if(encoding!=null) {
+            format.setEncoding(encoding);
+        }
+        if(schema!=null){
+            format.setSchema(schema);
+        }
+        
+        return format;
+    }
+    
+    
+    
     /**
      * Adds ComplexData
      * @param maxMegabytes The maximum file size, in megabytes, of this input. If the input exceeds this size, the server will return an error instead of processing the inputs. 
      */
-    private void addNewComplexData(String defaultMimeType, String defaultEncoding, String defaultSchema, String supportedMimeType, String supportedEncoding, String supportedSchema, BigInteger maxMegabytes) {
+    private void addNewComplexData(ComplexDataDescriptionType defaultFormat, ComplexDataDescriptionType supportedFormat, BigInteger maxMegabytes) {
         SupportedComplexDataInputType complexDataInputType = idt.addNewComplexData();
         
         if(maxMegabytes!=null) {
@@ -203,33 +229,15 @@ public class BasicInputDescriptionType {
         
         /* -- Default -- */
         ComplexDataCombinationType defaultFormats = complexDataInputType.addNewDefault();
-        ComplexDataDescriptionType aDefaultFormat = defaultFormats.addNewFormat();
-        
-        
-
-        /* Mandatory (one) */
-        aDefaultFormat.setMimeType(defaultMimeType);
-        /* Optional (Zero or one) */
-        if(defaultEncoding!=null) {
-            aDefaultFormat.setEncoding(defaultEncoding);
-        }
-        if(defaultSchema!=null){
-            aDefaultFormat.setSchema(defaultSchema);
-        }
+        defaultFormats.addNewFormat();
+        defaultFormats.setFormat(defaultFormat);
         
         /* -- Supported --*/
         ComplexDataCombinationsType supportedFormats =  complexDataInputType.addNewSupported();
-        ComplexDataDescriptionType aSupportedFormat = supportedFormats.addNewFormat();
+        supportedFormats.addNewFormat();
+        //Todo: Add way to add more than one supported Format 
+        supportedFormats.setFormatArray(0,supportedFormat); 
         
-        /* Mandatory (one) */
-        aSupportedFormat.setMimeType(supportedMimeType);
-        /* Optional (Zero or one) */
-        if(supportedEncoding!=null) {
-            aSupportedFormat.setEncoding(supportedEncoding);
-        }
-        if(supportedSchema!=null) {
-            aSupportedFormat.setSchema(supportedSchema);
-        }
     }   
     
     
