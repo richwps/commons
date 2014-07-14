@@ -17,9 +17,3 @@ This procedure is based on [stackoverflow question](http://stackoverflow.com/que
 * `Export` -> `Java` -> `Runnable Jar file`
 	* Select `Copy required libraries into a sub-folder next to the generated JAR.`
 * `Finish`
-
-## API
-
-* Obtain IDE with maven-capability.
-* install `de.hsos.richwps.dsl.jar` to m2-repository with
-`mvn install:install-file -Dfile=./de.hsos.richwps.dsl.jar -DgroupId=de.hsos.richwps -DartifactId=dsl.lang -Dversion=1.0-SNAPSHOT -Dpackaging=jar` or `./installM2.sh`

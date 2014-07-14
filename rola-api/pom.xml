@@ -121,8 +121,6 @@
             <systemPath>${basedir}/../rola-core/de.hsos.richwps.dsl.jar</systemPath>
         </dependency>
         
-          
-            
         <dependency>
             <groupId>org.eclipse.xtend</groupId>
             <artifactId>xtend-maven-plugin</artifactId>
