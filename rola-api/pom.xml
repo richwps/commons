@@ -117,8 +117,8 @@
             <groupId>de.hsos.richwps</groupId>
             <artifactId>dsl.lang</artifactId>
             <version>1.0.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/../rola-core/de.hsos.richwps.dsl.jar</systemPath>
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${basedir}/../rola-core/de.hsos.richwps.dsl.jar</systemPath>-->
         </dependency>
         
         <dependency>

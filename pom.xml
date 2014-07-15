@@ -18,13 +18,14 @@
         <module>wps-config</module>
         <module>wps-client-api</module>
         <module>rola-api</module>
+        <!--<module>rola-core</module>-->
     </modules>
   
   
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.52nwpsgroup>org.n52.wps</project.52nwpsgroup>
-        <project.52nwpsversion>3.3.0-SNAPSHOT</project.52nwpsversion>
+        <project.52nwpsversion>3.3.0</project.52nwpsversion>
     </properties>
     
 </project>
