@@ -33,6 +33,7 @@ import org.geotools.ows.v1_1.OWS;
  *
  * @author carstenduvel
  */
+
 public class BasicProcessDescriptionType {
     private ProcessDescriptionType pdt;
     
@@ -41,10 +42,10 @@ public class BasicProcessDescriptionType {
         pdt = ProcessDescriptionType.Factory.newInstance();
         
         /* Mandatory (One) */
-        this.addNewIdentifier(identifier);
-        this.addNewTitle(title);
+        this.setIdentifier(identifier);
+        this.setTitle(title);
         pdt.setProcessVersion(processVersion);
-        this.addNewProcessOutputs(processOutputs);
+        this.setProcessOutputs(processOutputs);
         
         /* Optional (Zero or one) */
         //Abstract
@@ -60,38 +61,50 @@ public class BasicProcessDescriptionType {
     
     /* -- Simplified functions -- */
     
-    private void addNewProcessOutputs(ProcessDescriptionType.ProcessOutputs processOutputs) {
-        ProcessDescriptionType.ProcessOutputs pdtpo = pdt.addNewProcessOutputs();
-        //pdtpo = processOutputs;
-        pdt.setProcessOutputs(processOutputs);
+    
+    
+    public String getTitle() {
+        return (pdt.getTitle()==null)?null:pdt.getTitle().getStringValue();
     }
     
-    private void addNewTitle(String title) {
-        LanguageStringType lst = pdt.addNewTitle();
-        lst.setStringValue(title);
+    private void setTitle(String text) {
+        if(pdt.getTitle()==null) {
+            pdt.addNewTitle().setStringValue(text);
+        } else {
+            pdt.getTitle().setStringValue(text);
+        }
     }
     
-    private void addNewIdentifier(String identifier) {
-        CodeType ct = pdt.addNewIdentifier();
-        ct.setStringValue(identifier);
+    public String getIdentifier() {
+        return (this.pdt.getIdentifier()==null)?null:pdt.getIdentifier().getStringValue();
+    }
+    
+    public void setIdentifier(String text) {
+        if(pdt.getIdentifier()==null) {
+            pdt.addNewIdentifier().setStringValue(text);
+        } else {
+            pdt.getIdentifier().setStringValue(text);
+        }
     }   
     
-    /* Optional */
     
-    public void addNewAbstract(String text) {
-        LanguageStringType lst = pdt.addNewAbstract();
-        lst.setStringValue(text);
+    public String getAbstract() {
+        return (pdt.getAbstract()==null)?null:pdt.getAbstract().getStringValue();
+    }
+    
+    public void setAbstract(String text) {
+        if(pdt.getAbstract()!=null){pdt.unsetAbstract();}
+        pdt.addNewAbstract().setStringValue(text);
+    }
+    
+    
+    public String getWSDL() {
+        return (pdt.getWSDL()==null)?null:pdt.getWSDL().getHref();
     }
     
     public void setWSDL(String href) {
-        WSDLDocument.WSDL wsdl;
-        if(pdt.getWSDL()==null) {
-            wsdl = pdt.addNewWSDL();
-        } else {
-            wsdl = pdt.getWSDL();
-        }
-        wsdl.setHref(href);
-        
+        if(pdt.getWSDL()!=null){pdt.unsetWSDL();}
+        pdt.addNewWSDL().setHref(href);
     }
     
     public void addNewMetadata(String title) {
@@ -115,26 +128,55 @@ public class BasicProcessDescriptionType {
         newProfile.setStringValue(profileURI);
     }
     
+    public boolean getStatusSupported() {
+        return pdt.getStatusSupported();
+    }
+    
     public void setStatusSupported(boolean statusSupported) {
        pdt.setStatusSupported(statusSupported);
+    }
+    
+    public boolean getStoreSupported() {
+        return pdt.getStoreSupported();
     }
     
     public void setStoreSupported(boolean storeSupported) {
        pdt.setStoreSupported(true);
     }
     
-    public void addNewDataInput(InputDescriptionType input) {
+    public void unsetAbstract() {
+        pdt.unsetAbstract();
+    }
+    public void unsetDataInputs() {
+        pdt.unsetDataInputs();
+    }
+    public void unsetStatusSupported() {
+        pdt.unsetStatusSupported();
+    }
+    public void unsetStoreSupported() {
+        pdt.unsetStoreSupported();
+    }
+    public void unsetWSDL() {
+        pdt.unsetWSDL();
+    }
+    
+    //Optional (Zero or One)
+    public void addNewInputToDataInputs(InputDescriptionType input) {
         ProcessDescriptionType.DataInputs dataInputs;
         if(pdt.getDataInputs()==null) {
             dataInputs = pdt.addNewDataInputs();
         } else {
             dataInputs = pdt.getDataInputs();
         }
-       
-        dataInputs.addNewInput();
-        dataInputs.setInputArray(dataInputs.sizeOfInputArray()-1, input);
+        dataInputs.addNewInput().set(input);
     }
     
+    //Mandatory (One)
+    private void setProcessOutputs(ProcessDescriptionType.ProcessOutputs processOutputs) {
+        ProcessDescriptionType.ProcessOutputs pdtpo = pdt.addNewProcessOutputs();
+        //pdtpo = processOutputs;
+        pdt.setProcessOutputs(processOutputs);
+    }
     
     
     /* -- Getter & Setter -- */
