@@ -22,6 +22,9 @@ import net.opengis.wps.x100.SupportedComplexDataType;
  *
  * @author carstenduvel
  */
+
+//Todo: FormatTypes (Three types problem) & Metadata
+
 public class BasicOutputDescriptionType {
     private OutputDescriptionType odt;
     
@@ -31,8 +34,8 @@ public class BasicOutputDescriptionType {
         
         
         /* Mandatory (One) */
-        this.addNewIdentifier(identifier);
-        this.addNewTitle(title);
+        this.setIdentifier(identifier);
+        this.setTitle(title);
         
         /* Mandatory (One of the three) */
         //Outputs - See functions that call this one
@@ -118,6 +121,10 @@ public class BasicOutputDescriptionType {
     /* -- Simplified functions -- */
     
     private void addNewBoundingBoxOutput(String defaultURI) {
+        if(odt.getComplexOutput()!=null||odt.getLiteralOutput()!=null) {
+            
+        }
+        
         SupportedCRSsType supportedCRSsType = odt.addNewBoundingBoxOutput();
         
         SupportedCRSsType.Default defaultType = supportedCRSsType.addNewDefault();
@@ -164,20 +171,38 @@ public class BasicOutputDescriptionType {
        
     }   
     
-    /* String -> LanguageStringType/CodeType */
-    public void addNewAbstract(String text) {
-        LanguageStringType lst = odt.addNewAbstract();
-        lst.setStringValue(text);
+    public String getAbstract() {
+        return (odt.getAbstract()==null)?null:odt.getAbstract().getStringValue();
     }
     
-    private void addNewTitle(String text) {
-        LanguageStringType lst = odt.addNewTitle();
-        lst.setStringValue(text);
+    public void setAbstract(String text) {
+        if(odt.getAbstract()!=null){this.odt.unsetAbstract();}
+        LanguageStringType newAbstract = this.odt.addNewAbstract();
+        newAbstract.setStringValue(text);
     }
     
-    private void addNewIdentifier(String text) {
-        CodeType ct = odt.addNewIdentifier();
-        ct.setStringValue(text);
+    public String getTitle() {
+        return (odt.getTitle()==null)?null:odt.getTitle().getStringValue();
+    }
+    
+    private void setTitle(String text) {
+        if(odt.getTitle()==null) {
+            odt.addNewTitle().setStringValue(text);
+        } else {
+            odt.getTitle().setStringValue(text);
+        }
+    }
+    
+    public String getIdentifier() {
+        return (this.odt.getIdentifier()==null)?null:odt.getIdentifier().getStringValue();
+    }
+    
+    public void setIdentifier(String text) {
+        if(odt.getIdentifier()==null) {
+            odt.addNewIdentifier().setStringValue(text);
+        } else {
+            odt.getIdentifier().setStringValue(text);
+        }
     }   
     
     public void addNewMetadata(String title) {
@@ -194,6 +219,10 @@ public class BasicOutputDescriptionType {
         newMetadata.setTitle(null);
         newMetadata.setType(null);
         */
+    }
+    
+    public  MetadataType[] getAllMetadata() {
+        return odt.getMetadataArray();
     }
     
     /* -- Getter & Setter -- */
