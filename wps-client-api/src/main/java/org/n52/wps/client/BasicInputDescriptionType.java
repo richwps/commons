@@ -32,6 +32,9 @@ import net.opengis.wps.x100.ValuesReferenceType;
  *
  * @author carstenduvel
  */
+
+//Todo: FormatTypes (Three types problem) 
+
 public class BasicInputDescriptionType {
     private InputDescriptionType idt;
     
@@ -40,8 +43,8 @@ public class BasicInputDescriptionType {
         idt = InputDescriptionType.Factory.newInstance();
         
         /* Mandatory (One) */
-        this.addNewIdentifier(identifier);
-        this.addNewTitle(title);
+        this.setIdentifier(identifier);
+        this.setTitle(title);
         
         this.setMinOccurs(minOccurs);
         this.setMaxOccurs(maxOccurs);
@@ -243,34 +246,50 @@ public class BasicInputDescriptionType {
         
     }   
     
-    
-    public void addNewAbstract(String text) {
-        LanguageStringType lst = idt.addNewAbstract();
-        lst.setStringValue(text);
+    public String getAbstract() {
+        return (idt.getAbstract()==null)?null:idt.getAbstract().getStringValue();
     }
     
     public void setAbstract(String text) {
-        LanguageStringType lst;
-        if(idt.getAbstract()==null) {
-            lst = idt.addNewAbstract();
+        if(idt.getAbstract()!=null){this.idt.unsetAbstract();}
+        LanguageStringType newAbstract = this.idt.addNewAbstract();
+        newAbstract.setStringValue(text);
+    }
+    
+    public String getTitle() {
+        return (idt.getTitle()==null)?null:idt.getTitle().getStringValue();
+    }
+    
+    private void setTitle(String text) {
+        if(idt.getTitle()==null) {
+            idt.addNewTitle().setStringValue(text);
         } else {
-            lst = idt.getAbstract();
+            idt.getTitle().setStringValue(text);
         }
-        lst.setStringValue(text);
     }
     
-    private void addNewTitle(String text) {
-        LanguageStringType lst = idt.addNewTitle();
-        lst.setStringValue(text);
+    public String getIdentifier() {
+        return (this.idt.getIdentifier()==null)?null:idt.getIdentifier().getStringValue();
     }
     
-    private void addNewIdentifier(String text) {
-        CodeType ct = idt.addNewIdentifier();
-        ct.setStringValue(text);
+    public void setIdentifier(String text) {
+        if(idt.getIdentifier()==null) {
+            idt.addNewIdentifier().setStringValue(text);
+        } else {
+            idt.getIdentifier().setStringValue(text);
+        }
     }   
+    
+    public BigInteger getMinOccurs() {
+        return this.idt.getMinOccurs();
+    }
     
     public void setMinOccurs(BigInteger minOccurs) {        
         this.idt.setMinOccurs(minOccurs);
+    }
+    
+    public BigInteger getMaxOccurs() {
+        return this.idt.getMaxOccurs();
     }
     
     public void setMaxOccurs(BigInteger maxOccurs) {        
