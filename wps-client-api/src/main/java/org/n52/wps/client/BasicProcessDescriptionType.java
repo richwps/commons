@@ -11,6 +11,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.text.html.HTML;
+import javax.xml.crypto.dsig.XMLObject;
 import net.opengis.ows.x11.AnyValueDocument;
 import net.opengis.ows.x11.CodeType;
 import net.opengis.ows.x11.LanguageStringType;
@@ -110,17 +111,24 @@ public class BasicProcessDescriptionType {
     public void addNewMetadata(String title) {
         MetadataType newMetadata = pdt.addNewMetadata();
         newMetadata.setTitle(title);
-        /* Optional:
-        newMetadata.setAbout(null);
-        newMetadata.setAbstractMetaData(null);
-        newMetadata.setActuate(null);
-        newMetadata.setArcrole(null);
-        newMetadata.setHref(null);
-        newMetadata.setRole(null);
-        newMetadata.setShow(null);
-        newMetadata.setTitle(null);
-        newMetadata.setType(null);
-        */
+    }
+    
+    public void addNewMetadata(String title, String about, XMLObject abstractMetadata,org.​w3.​x1999.​xlink.​ActuateType.Enum actuate,
+            String arcrole,String href,String role,net.​opengis.​ows.​x11.​MetadataType show,org.​w3.​x1999.​xlink.​TypeType type ) {
+        
+        MetadataType newMetadata = pdt.addNewMetadata();
+        
+        newMetadata.setTitle(title);
+        
+        //Optional:
+        if(about!=null){newMetadata.setAbout(about);}
+        if(abstractMetadata!=null){newMetadata.setAbstractMetaData(abstractMetadata);}
+        if(actuate!=null){newMetadata.setActuate(actuate);}
+        if(arcrole!=null){newMetadata.setArcrole(arcrole);}
+        if(href!=null){newMetadata.setHref(href);}
+        if(role!=null){newMetadata.setRole(role);}
+        if(show!=null){newMetadata.setShow(show);}
+        if(type!=null){newMetadata.setType(type);}
     }
     
     public void addNewProfile(String profileURI) {
