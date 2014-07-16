@@ -62,6 +62,57 @@ public class BasicOutputDescriptionType {
         this.addNewComplexOutput(defaultMimeType, supportedMimeType);
     }
     
+    public BasicOutputDescriptionType(ComplexDataCombinationType defaultFormats, ComplexDataCombinationsType supportedFormats,
+            String identifier,String title, String processVersion) {
+        initialize(identifier,title);
+        /* Mandatory (One of the three) */
+        SupportedComplexDataType newComplexOutput = odt.addNewComplexOutput();
+        
+        newComplexOutput.addNewDefault();
+        newComplexOutput.setDefault(defaultFormats);
+        
+        newComplexOutput.addNewSupported();
+        newComplexOutput.setSupported(supportedFormats);
+    }
+    
+    public static ComplexDataCombinationType createComplexDataCombinationType(String mimeType, String encoding, String schema) {
+        ComplexDataCombinationType formats = ComplexDataCombinationType.Factory.newInstance();
+        ComplexDataDescriptionType format = formats.addNewFormat();
+        
+        /* Mandatory (one) */
+        format.setMimeType(mimeType);
+        
+        /* Optional (Zero or one) */
+        if(encoding!=null) {
+            format.setEncoding(encoding);
+        }
+        if(schema!=null){
+            format.setSchema(schema);
+        }
+        
+        return formats;
+    }
+    
+    public static ComplexDataCombinationsType createComplexDataCombinationsType(String mimeType, String encoding, String schema) {
+        ComplexDataCombinationsType formats = ComplexDataCombinationsType.Factory.newInstance();
+        ComplexDataDescriptionType format = formats.addNewFormat();
+        
+        /* Mandatory (one) */
+        format.setMimeType(mimeType);
+        
+        /* Optional (Zero or one) */
+        if(encoding!=null) {
+            format.setEncoding(encoding);
+        }
+        if(schema!=null){
+            format.setSchema(schema);
+        }
+        
+        //formats.setFormatArray(0, format);
+        
+        return formats;
+    }
+    
     
     
     /* -- Simplified functions -- */
@@ -92,11 +143,11 @@ public class BasicOutputDescriptionType {
         SupportedComplexDataType complexDataType = odt.addNewComplexOutput();
         
         /* -- Default -- */
-        ComplexDataCombinationType cdct = complexDataType.addNewDefault();
-        ComplexDataDescriptionType cddt = cdct.addNewFormat();
+        ComplexDataCombinationType defaultFormats = complexDataType.addNewDefault();
+        ComplexDataDescriptionType defaultFormat = defaultFormats.addNewFormat();
         
         /* Mandatory (one) */
-        cddt.setMimeType(defaultMimeType);
+        defaultFormat.setMimeType(defaultMimeType);
         /* Optional (Zero or one) */
         //cddt.setEncoding(null);
         //cddt.setSchema(null);
