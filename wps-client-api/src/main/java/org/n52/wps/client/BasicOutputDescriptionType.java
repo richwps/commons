@@ -205,6 +205,23 @@ public class BasicOutputDescriptionType {
         }
     }   
     
+    public void unsetAbstract() {
+        odt.unsetAbstract();
+    }
+    
+    public void unsetBoundingBoxOutput() {
+        odt.unsetBoundingBoxOutput();
+    }
+
+    public void unsetComplexOutput() {
+        odt.unsetComplexOutput();
+    }
+
+    public void unsetLiteralOutput() {
+        odt.unsetLiteralOutput();
+    }
+    
+    
     public void addNewMetadata(String title) {
         MetadataType newMetadata = odt.addNewMetadata();
         newMetadata.setTitle(title);
