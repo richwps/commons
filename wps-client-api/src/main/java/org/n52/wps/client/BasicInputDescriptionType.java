@@ -296,6 +296,24 @@ public class BasicInputDescriptionType {
         this.idt.setMaxOccurs(maxOccurs);
     }
     
+    public void unsetAbstract() {
+        idt.unsetAbstract();
+    }
+    
+    public void unsetBoundingBoxData() {
+        idt.unsetBoundingBoxData();
+    }
+    
+    public void unsetComplexData() {
+        idt.unsetComplexData();
+    }
+    
+    public void unsetLiteralData() {
+        idt.unsetLiteralData();
+    }
+    
+    
+    
     /* -- Getter & Setter -- */
     
     public InputDescriptionType getIdt() {
