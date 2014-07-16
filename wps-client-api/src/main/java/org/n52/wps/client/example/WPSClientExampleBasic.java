@@ -33,16 +33,14 @@ import org.n52.wps.io.data.IData;
 import org.n52.wps.io.data.binding.complex.GTVectorDataBinding;
 
 public class WPSClientExampleBasic {
-
+        // Recreates "commons/common-xml/52n-ogc-schema/src/main/resources/40_wpsDescribeProcess_response.xml"
         public void testBasicTypes() {
-                
-
                 ProcessDescriptionType.ProcessOutputs procOutputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
                 ComplexDataCombinationType outputDefaultFormats = BasicOutputDescriptionType.createComplexDataCombinationType("text/xml", "base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
                 ComplexDataCombinationsType outputSupportedFormats = BasicOutputDescriptionType.createComplexDataCombinationsType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
                 
                 BasicOutputDescriptionType basicOutputDescriptionType = new BasicOutputDescriptionType(outputDefaultFormats,outputSupportedFormats, "BufferedPolygon", "Buffered Polygon", "2");
-                basicOutputDescriptionType.addNewAbstract("GML stream describing the buffered polygon feature.");
+                basicOutputDescriptionType.setAbstract("GML stream describing the buffered polygon feature.");
                 
                 procOutputs.addNewOutput();
                 procOutputs.setOutputArray(0, basicOutputDescriptionType.getOdt());        
@@ -53,7 +51,7 @@ public class WPSClientExampleBasic {
                         "2", //ProcessVersion
                         procOutputs); //ProcessOuputs
 
-                basicProcDesc.addNewAbstract("Create a buffer around a single polygon. Accepts the polygon as GML and provides GML output for the buffered feature.");
+                basicProcDesc.setAbstract("Create a buffer around a single polygon. Accepts the polygon as GML and provides GML output for the buffered feature.");
                 basicProcDesc.addNewMetadata("spatial");
                 basicProcDesc.addNewMetadata("geometry");
                 basicProcDesc.addNewMetadata("buffer");
@@ -67,7 +65,7 @@ public class WPSClientExampleBasic {
                 ComplexDataDescriptionType defaultFormat = BasicInputDescriptionType.createComplexDataDescriptionType("text/xml","base64","http://foo.bar/gml/3.1.0/polygon.xsd");
                 ComplexDataDescriptionType supportedFormat = BasicInputDescriptionType.createComplexDataDescriptionType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
                 BasicInputDescriptionType inputPolygon = new BasicInputDescriptionType(defaultFormat, supportedFormat, BigInteger.valueOf(5), "InputPolygon", "Polygon to be buffered", BigInteger.ONE, BigInteger.ONE);
-                inputPolygon.addNewAbstract("URI to a set of GML that describes the polygon.");
+                inputPolygon.setAbstract("URI to a set of GML that describes the polygon.");
                 
                 
                 BasicInputDescriptionType bufferDistance = new BasicInputDescriptionType("BufferDistance", "Buffer Distance", BigInteger.ZERO, BigInteger.ONE);
@@ -79,8 +77,8 @@ public class WPSClientExampleBasic {
                 supportedUOM.add("feet");
                 bufferDistance.addNewLiteralDataAnyValue(av, "http://www.w3.org/TR/xmlschema-2/#float", "float", "meters", supportedUOM, "100");
                 
-                basicProcDesc.addNewDataInput(inputPolygon.getIdt());
-                basicProcDesc.addNewDataInput(bufferDistance.getIdt());
+                basicProcDesc.addNewInputToDataInputs(inputPolygon.getIdt());
+                basicProcDesc.addNewInputToDataInputs(bufferDistance.getIdt());
                 
                 
                 ProcessDescriptionsDocument pdd = ProcessDescriptionsDocument.Factory.newInstance();
