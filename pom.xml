@@ -18,7 +18,7 @@
         <module>wps-config</module>
         <module>wps-client-api</module>
         <module>rola-api</module>
-        <!--<module>rola-core</module>-->
+        <module>rola-core</module>
     </modules>
   
   

@@ -16,10 +16,12 @@ nb-configuration*.xml
 .mtj.tmp/
 
 # Package Files #
-#*.jar        we need those
+*.jar
 *.war
 *.ear
 */target/**
 rola-core/de.hsos.richwps.dsl_lib
+de.hsos.richwps.dsl_lib
 */src-gen/**
+!rola-core/target/dsl.lang-1.0.0-SNAPSHOT.jar
 rola-core/xtext/de.hsos.richwps.dsl/src-gen
