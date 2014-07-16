@@ -129,7 +129,10 @@ public class BasicInputDescriptionType {
                                    String typeUri, String typeName, String defaultUOM,Collection<String> supportedUOMs, String defaultValue) {
         this.initializeLiteralData(typeUri,typeName,defaultUOM,supportedUOMs,defaultValue);
         LiteralInputType literalData = this.idt.getLiteralData();
-        literalData.addNewAnyValue();
+        
+        if(literalData.getAllowedValues()==null) {
+            literalData.addNewAnyValue();
+        }
         literalData.setAnyValue(anyValue);
     }
     
@@ -153,10 +156,10 @@ public class BasicInputDescriptionType {
             literalIT = idt.getLiteralData();
         }
         
-        /* Mandatory: One of three*/
-        literalIT.addNewAllowedValues();
-        literalIT.addNewAnyValue();
-        literalIT.addNewValuesReference();
+        /* Mandatory: One of three -> called in super function */
+        //literalIT.addNewAllowedValues();
+        //literalIT.addNewAnyValue();
+        //literalIT.addNewValuesReference();
         
         /* Optional (Zero or one) */
         
@@ -241,8 +244,18 @@ public class BasicInputDescriptionType {
     }   
     
     
-    private void addNewAbstract(String text) {
+    public void addNewAbstract(String text) {
         LanguageStringType lst = idt.addNewAbstract();
+        lst.setStringValue(text);
+    }
+    
+    public void setAbstract(String text) {
+        LanguageStringType lst;
+        if(idt.getAbstract()==null) {
+            lst = idt.addNewAbstract();
+        } else {
+            lst = idt.getAbstract();
+        }
         lst.setStringValue(text);
     }
     
