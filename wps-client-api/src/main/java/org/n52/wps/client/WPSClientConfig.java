@@ -30,10 +30,11 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class WPSClientConfig implements Serializable {
+
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -5034849968372875707L;
+     *
+     */
+    private static final long serialVersionUID = -5034849968372875707L;
     private static transient WPSClientConfig wpsClientConfig;
     private static transient WPSClientConfigurationImpl wpsClientConfigXMLBeans;
 
@@ -65,7 +66,7 @@ public class WPSClientConfig implements Serializable {
 
     /**
      * Add an Listener to the wpsConfig
-     * 
+     *
      * @param propertyName
      * @param listener
      */
@@ -75,7 +76,7 @@ public class WPSClientConfig implements Serializable {
 
     /**
      * remove a listener from the wpsConfig
-     * 
+     *
      * @param propertyName
      * @param listener
      */
@@ -89,14 +90,14 @@ public class WPSClientConfig implements Serializable {
     }
 
     public void firePropertyChange(String event) {
-    	propertyChangeSupport.firePropertyChange(event, null, null);
+        propertyChangeSupport.firePropertyChange(event, null, null);
     }
 
     /**
-     * WPSClientConfig is a singleton. If there is a need for reinitialization, use this path.
-     * 
-     * @param configPathp
-     *        path to the wps_config.xml
+     * WPSClientConfig is a singleton. If there is a need for reinitialization,
+     * use this path.
+     *
+     * @param configPathp path to the wps_config.xml
      * @throws XmlException
      * @throws IOException
      */
@@ -120,10 +121,10 @@ public class WPSClientConfig implements Serializable {
     }
 
     /**
-     * WPSClientConfig is a singleton. If there is a need for reinitialization, use this path.
-     * 
-     * @param stream
-     *        stream containing the wps_config.xml
+     * WPSClientConfig is a singleton. If there is a need for reinitialization,
+     * use this path.
+     *
+     * @param stream stream containing the wps_config.xml
      * @throws XmlException
      * @throws IOException
      */
@@ -148,10 +149,11 @@ public class WPSClientConfig implements Serializable {
     }
 
     /**
-     * returns an instance of the WPSClientConfig class. WPSClientConfig is a single. If there is need for
-     * reinstantitation, use forceInitialization().
-     * 
-     * @return WPSClientConfig object representing the wps_config.xml from the classpath or webapps folder
+     * returns an instance of the WPSClientConfig class. WPSClientConfig is a
+     * single. If there is need for reinstantitation, use forceInitialization().
+     *
+     * @return WPSClientConfig object representing the wps_config.xml from the
+     * classpath or webapps folder
      */
     public static WPSClientConfig getInstance() {
         if (wpsClientConfig == null) {
@@ -164,38 +166,39 @@ public class WPSClientConfig implements Serializable {
     }
 
     /**
-     * returns an instance of the WPSClientConfig class. WPSCofnig is a single. If there is need for
-     * reinstantitation, use forceInitialization().
-     * 
-     * @param path
-     *        path to the wps_config.xml
-     * @return WPSClientConfig object representing the wps_config.xml from the given path
+     * returns an instance of the WPSClientConfig class. WPSCofnig is a single.
+     * If there is need for reinstantitation, use forceInitialization().
+     *
+     * @param path path to the wps_config.xml
+     * @return WPSClientConfig object representing the wps_config.xml from the
+     * given path
      */
     public static WPSClientConfig getInstance(String path) {
-        if (LOGGER.isDebugEnabled())
+        if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("Getting WPSClientConfig instance... from path: " + path);
+        }
 
         if (wpsClientConfig == null) {
             try {
                 wpsClientConfig = new WPSClientConfig(path);
-            }
-            catch (XmlException e) {
+            } catch (XmlException e) {
                 LOGGER.error("Failed to initialize WPS. Reason: " + e.getMessage());
                 throw new RuntimeException("Failed to initialize WPS. Reason: " + e.getMessage());
-            }
-            catch (IOException e) {
+            } catch (IOException e) {
                 LOGGER.error("Failed to initialize WPS. Reason: " + e.getMessage());
                 throw new RuntimeException("Failed to initialize WPS. Reason: " + e.getMessage());
             }
         }
         return wpsClientConfig;
     }
-    
+
     /**
-     * This method retrieves the full path for the file (wps_config.xml), searching in WEB-INF/config. This is
-     * only applicable for webapp applications. To customize this, please use directly
-     * {@link WPSClientConfig#forceInitialization(String)} and then getInstance().
-     * 
+     * This method retrieves the full path for the file (wps_config.xml),
+     * searching in WEB-INF/config. This is only applicable for webapp
+     * applications. To customize this, please use directly
+     * {@link WPSClientConfig#forceInitialization(String)} and then
+     * getInstance().
+     *
      * @return
      * @throws IOException
      */
@@ -226,8 +229,7 @@ public class WPSClientConfig implements Serializable {
             String config = configPathURL.getFile();
             try {
                 config = URLDecoder.decode(config, URL_DECODE_ENCODING);
-            }
-            catch (UnsupportedEncodingException e) {
+            } catch (UnsupportedEncodingException e) {
                 LOGGER.error("Could not devode URL to get config from class path.", e);
                 return null;
             }
@@ -236,16 +238,15 @@ public class WPSClientConfig implements Serializable {
         return null;
     }
 
-
     public static String tryToGetPathLastResort() {
         String domain = WPSClientConfig.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-        
+
         try {
-			domain = URLDecoder.decode(domain, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			LOGGER.warn("Could not decode URL of WPSClientConfig class, continuing.");
-		}
-        
+            domain = URLDecoder.decode(domain, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.warn("Could not decode URL of WPSClientConfig class, continuing.");
+        }
+
         /*
          * domain should always be 52n-wps-commons/target/classes so we just go three directories up
          */
@@ -382,7 +383,7 @@ public class WPSClientConfig implements Serializable {
     }
 
     /**
-     * 
+     *
      * @return directory of the configuration folder
      */
     public static final String getConfigDir() {

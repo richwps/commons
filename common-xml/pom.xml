@@ -26,7 +26,7 @@
         <!-- schema dependencies -->
         <!--<module>52n-oasis-schema</module>-->
         
-<module>52n-ogc-schema</module>
+        <module>52n-ogc-schema</module>
         <!--<module>52n-w3c-schema</module>-->
         <!-- binding dependencies -->
         <!--<module>52n-xml-aixm-v511</module>
