@@ -24,11 +24,12 @@
 	
     <modules>
         <!-- schema dependencies -->
-        <module>52n-oasis-schema</module>
-        <module>52n-ogc-schema</module>
-        <module>52n-w3c-schema</module>
+        <!--<module>52n-oasis-schema</module>-->
+        
+<module>52n-ogc-schema</module>
+        <!--<module>52n-w3c-schema</module>-->
         <!-- binding dependencies -->
-        <module>52n-xml-aixm-v511</module>
+        <!--<module>52n-xml-aixm-v511</module>
         <module>52n-xml-context-v100</module>
         <module>52n-xml-csw-v202</module>
         <module>52n-xml-em-v020</module>
@@ -37,11 +38,11 @@
         <module>52n-xml-filter-v100</module>
         <module>52n-xml-filter-v110</module>
         <module>52n-xml-filter-v20</module>
-        <module>52n-xml-gml-v212</module>
+        <module>52n-xml-gml-v212</module>-->
         <!-- 
         <module>52n-xml-gml-v301</module> 
         -->
-        <module>52n-xml-gml-v311</module>
+        <!--<module>52n-xml-gml-v311</module>
         <module>52n-xml-gml-v321</module>
         <module>52n-xml-gmlcov-v10</module>
         <module>52n-xml-kml-v220</module>
@@ -71,12 +72,12 @@
         <module>52n-xml-wfs-v110</module>
         <module>52n-xml-wfs-v20</module>
         <module>52n-xml-wms-v130</module>
-        <module>52n-xml-wns-v0.0.9</module>
+        <module>52n-xml-wns-v0.0.9</module>-->
         <module>52n-xml-wps-v100</module>
-        <module>52n-xml-wsa-v10</module>
+        <!--<module>52n-xml-wsa-v10</module>
         <module>52n-xml-wsn-v13</module>
         <module>52n-xml-wsrf-v12</module>
-        <module>52n-xml-xlink-v110</module>
+        <module>52n-xml-xlink-v110</module>-->
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
