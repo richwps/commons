@@ -6,6 +6,7 @@
 package org.n52.wps.client;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
 import net.opengis.ows.x11.AllowedValuesDocument;
 import net.opengis.ows.x11.AnyValueDocument;
@@ -26,14 +27,30 @@ import net.opengis.wps.x100.ValuesReferenceType;
 /**
  *
  * @author carstenduvel
+ * @todo: FormatTypes (Three types problem)
  */
-//Todo: FormatTypes (Three types problem) 
 public class BasicInputDescriptionType {
 
+    /**
+     * idt InputDescriptionType wrapped by this class. Used by
+     * BasicProcessDescriptionType
+     */
     private InputDescriptionType idt;
 
-    /* general constructor */
-    private void initialize(String identifier, String title, BigInteger minOccurs, BigInteger maxOccurs) {
+    /**
+     * Helper: Initializes Identifier, Title, MinOccurs & MaxOccurs.
+     *
+     * @param identifier Unambiguous identifier or name of a process, input, or
+     * output, unique for this server
+     * @param title Title of a process, input, or output, normally available for
+     * display to a human
+     * @param minOccurs Minimum number of times that values for this parameter
+     * are required
+     * @param maxOccurs Maximum number of times that this parameter may be
+     * present
+     */
+    private void initialize(final String identifier, final String title,
+            final BigInteger minOccurs, final BigInteger maxOccurs) {
         idt = InputDescriptionType.Factory.newInstance();
 
         /* Mandatory (One) */
@@ -52,42 +69,73 @@ public class BasicInputDescriptionType {
     }
 
     /**
-     * Constructor for Input with <b>BoundingBoxData</b>
+     * Constructor for Input with <b>BoundingBoxData</b>.
      *
-     * @param defaultCRS_URI Default Reference to one coordinate reference
-     * system
+     * @param defaultCRSURI Default Reference to one coordinate reference system
      * @param identifier Unambiguous identifier or name of a process, input, or
      * output, unique for this server
      * @param title Title of a process, input, or output, normally available for
      * display to a human
-     * @param minOccurs
-     * @param maxOccurs
+     * @param minOccurs Minimum number of times that values for this parameter
+     * are required
+     * @param maxOccurs Maximum number of times that this parameter may be
+     * present
      */
-    public BasicInputDescriptionType(String defaultCRS_URI, String identifier, String title, BigInteger minOccurs, BigInteger maxOccurs) {
+    public BasicInputDescriptionType(final String defaultCRSURI,
+            final String identifier, final String title,
+            final BigInteger minOccurs, final BigInteger maxOccurs) {
         initialize(identifier, title, minOccurs, maxOccurs);
         /* Mandatory (One of the three) */
-        this.addNewBoundingBoxData(defaultCRS_URI);
+        this.addNewBoundingBoxData(defaultCRSURI);
     }
 
     /**
-     * Constructor for Input with <b>LiteralData</b>, should be followed by addLiteraldata
+     * Constructor for Input with <b>BoundingBoxData</b>.
+     *
+     * @param defaultCRSURI Default Reference to one coordinate reference system
+     * @param supportedCRSURIs Reference to supported coordinate references
+     * @param identifier Unambiguous identifier or name of a process, input, or
+     * output, unique for this server
+     * @param title Title of a process, input, or output, normally available for
+     * display to a human
+     * @param minOccurs Minimum number of times that values for this parameter
+     * are required
+     * @param maxOccurs Maximum number of times that this parameter may be
+     * present
+     */
+    public BasicInputDescriptionType(final String defaultCRSURI,
+            final ArrayList<String> supportedCRSURIs, final String identifier,
+            final String title,
+            final BigInteger minOccurs, final BigInteger maxOccurs) {
+        initialize(identifier, title, minOccurs, maxOccurs);
+        /* Mandatory (One of the three) */
+        this.addNewBoundingBoxData(defaultCRSURI, supportedCRSURIs);
+    }
+
+    /**
+     * Constructor for Input with <b>LiteralData</b>, should be followed by
+     * addLiteraldata.
      *
      *
      * @param identifier Unambiguous identifier or name of a process, input, or
      * output, unique for this server
      * @param title Title of a process, input, or output, normally available for
      * display to a human
-     * @param minOccurs
-     * @param maxOccurs
+     * @param minOccurs Minimum number of times that values for this parameter
+     * are required
+     * @param maxOccurs Maximum number of times that this parameter may be
+     * present
      */
-    public BasicInputDescriptionType(String identifier, String title, BigInteger minOccurs, BigInteger maxOccurs) {
+    public BasicInputDescriptionType(
+            final String identifier, final String title,
+            final BigInteger minOccurs, final BigInteger maxOccurs) {
         initialize(identifier, title, minOccurs, maxOccurs);
         /* Mandatory (One of the three) */
         //addLiteraldata...
     }
 
     /**
-     * Constructor for Input with <b>ComplexData</b>
+     * Constructor for Input with <b>ComplexData</b>.
      *
      * @param defaultFormat Add with createComplexDataDescriptionType(...)
      * @param supportedFormat Add with createComplexDataDescriptionType(...)
@@ -98,42 +146,112 @@ public class BasicInputDescriptionType {
      * output, unique for this server
      * @param title Title of a process, input, or output, normally available for
      * display to a human
-     * @param minOccurs
-     * @param maxOccurs
+     * @param minOccurs Minimum number of times that values for this parameter
+     * are required
+     * @param maxOccurs Maximum number of times that this parameter may be
+     * present
      */
-    public BasicInputDescriptionType(ComplexDataDescriptionType defaultFormat, ComplexDataDescriptionType supportedFormat, BigInteger maxMegabytes,
-            String identifier, String title, BigInteger minOccurs, BigInteger maxOccurs) {
+    public BasicInputDescriptionType(
+            final ComplexDataDescriptionType defaultFormat,
+            final ComplexDataDescriptionType supportedFormat,
+            final BigInteger maxMegabytes,
+            final String identifier, final String title,
+            final BigInteger minOccurs, final BigInteger maxOccurs) {
         initialize(identifier, title, minOccurs, maxOccurs);
         /* Mandatory (One of the three) */
         this.addNewComplexData(defaultFormat, supportedFormat, maxMegabytes);
     }
 
-    private void addNewBoundingBoxData(String defaultURI) {
+    /**
+     * Called by Constructor for Input with <b>BoundingBoxData</b>.
+     *
+     * @param defaultURI Reference to default coordinate reference system
+     */
+    private void addNewBoundingBoxData(final String defaultURI) {
         SupportedCRSsType supportedCRSsType = idt.addNewBoundingBoxData();
 
-        SupportedCRSsType.Default defaultType = supportedCRSsType.addNewDefault();
-        defaultType.setCRS(defaultURI);//URI
+        SupportedCRSsType.Default defaultType;
+        defaultType = supportedCRSsType.addNewDefault();
+        defaultType.setCRS(defaultURI);
 
         /* Optional (One or More)*/
         CRSsType supportedType = supportedCRSsType.addNewSupported();
-        supportedType.addCRS(defaultURI); // <-- Array for more
+        supportedType.addCRS(defaultURI);
 
     }
-    //private void addNewBoundingBoxOutput(String defaultURI,Container<String> supportedURIs) {}
 
-    //Todo: Simplify AllowedValues creation
-    public void addNewLiteralDataAllowedValues(AllowedValuesDocument.AllowedValues allowedValues,
-            String typeUri, String typeName, String defaultUOM, Collection<String> supportedUOMs, String defaultValue) {
-        this.initializeLiteralData(typeUri, typeName, defaultUOM, supportedUOMs, defaultValue);
+    /**
+     * Called by Constructor for Input with <b>BoundingBoxData</b>.
+     *
+     * @param defaultURI Reference to default coordinate reference system
+     * @param supportedURIs References to supported coordinate reference systems
+     */
+    private void addNewBoundingBoxData(final String defaultURI,
+            final ArrayList<String> supportedURIs) {
+        SupportedCRSsType supportedCRSsType = idt.addNewBoundingBoxData();
+
+        SupportedCRSsType.Default defaultType;
+        defaultType = supportedCRSsType.addNewDefault();
+        defaultType.setCRS(defaultURI);
+
+        /* Optional (One or More)*/
+        CRSsType supportedType = supportedCRSsType.addNewSupported();
+
+        supportedType.addCRS(defaultURI);
+        for (String supportedURI : supportedURIs) {
+            supportedType.addCRS(supportedURI);
+        }
+    }
+
+    /**
+     * Adds new LiteralData with "AllowedValues" ValueChoice.
+     *
+     * @param allowedValues Indicates that are finite set of values and ranges
+     * allowed for this input, and contains ordered list of all valid values
+     * and/or ranges
+     *
+     * @param typeUri Reference to type
+     * @param typeName Name of the type
+     * @param defaultUOM Identifies default unit of measure of this or input
+     * @param supportedUOMs Units of measure supported for this input
+     * @param defaultValue Default value of this input, encoded in character
+     * string
+     *
+     * @todo Simplify AllowedValues creation ?
+     */
+    public final void addNewLiteralDataAllowedValues(
+            final AllowedValuesDocument.AllowedValues allowedValues,
+            final String typeUri, final String typeName,
+            final String defaultUOM, final Collection<String> supportedUOMs,
+            final String defaultValue) {
+        this.initializeLiteralData(typeUri, typeName, defaultUOM,
+                supportedUOMs, defaultValue);
         LiteralInputType literalData = this.idt.getLiteralData();
         literalData.addNewAllowedValues();
         literalData.setAllowedValues(allowedValues);
     }
 
-    //Todo: Simplify Anyvalues creation
-    public void addNewLiteralDataAnyValue(AnyValueDocument.AnyValue anyValue,
-            String typeUri, String typeName, String defaultUOM, Collection<String> supportedUOMs, String defaultValue) {
-        this.initializeLiteralData(typeUri, typeName, defaultUOM, supportedUOMs, defaultValue);
+    /**
+     * Adds new LiteralData with "AnyValue" ValueChoice.
+     *
+     * @param anyValue Indicates that any value is allowed for this input
+     *
+     * @param typeUri Reference to type
+     * @param typeName Name of the type
+     * @param defaultUOM Identifies default unit of measure of this or input
+     * @param supportedUOMs Units of measure supported for this input
+     * @param defaultValue Default value of this input, encoded in character
+     * string
+     *
+     * @todo Simplify Anyvalues creation ?
+     */
+    public final void addNewLiteralDataAnyValue(
+            final AnyValueDocument.AnyValue anyValue,
+            final String typeUri, final String typeName,
+            final String defaultUOM, final Collection<String> supportedUOMs,
+            final String defaultValue) {
+        this.initializeLiteralData(typeUri, typeName, defaultUOM,
+                supportedUOMs, defaultValue);
         LiteralInputType literalData = this.idt.getLiteralData();
 
         if (literalData.getAllowedValues() == null) {
@@ -142,18 +260,51 @@ public class BasicInputDescriptionType {
         literalData.setAnyValue(anyValue);
     }
 
-    //Todo: Simplify Constructor
-    public void addNewLiteralDataReference(String reference, String valuesForm,
-            String typeUri, String typeName, String defaultUOM, Collection<String> supportedUOMs, String defaultValue) {
-        this.initializeLiteralData(typeUri, typeName, defaultUOM, supportedUOMs, defaultValue);
+    /**
+     * Adds new LiteralData with "Reference" ValueChoice. References an
+     * externally defined finite set of values and ranges for this input
+     *
+     * @param reference URL from which this set of ranges and values can be
+     * retrieved
+     * @param valuesForm Reference to a description of the mimetype, encoding,
+     * and schema used for this set of values and ranges.
+     *
+     * @param typeUri Reference to type
+     * @param typeName Name of the type
+     * @param defaultUOM Identifies default unit of measure of this or input
+     * @param supportedUOMs Units of measure supported for this input
+     * @param defaultValue Default value of this input, encoded in character
+     * string
+     *
+     * @todo: Simplify Constructor
+     */
+    public final void addNewLiteralDataReference(final String reference,
+            final String valuesForm, final String typeUri,
+            final String typeName, final String defaultUOM,
+            final Collection<String> supportedUOMs, final String defaultValue) {
+        this.initializeLiteralData(typeUri, typeName, defaultUOM, supportedUOMs,
+                defaultValue);
         LiteralInputType literalData = this.idt.getLiteralData();
-        ValuesReferenceType newValuesReference = literalData.addNewValuesReference();
+        ValuesReferenceType newValuesReference;
+        newValuesReference = literalData.addNewValuesReference();
         newValuesReference.setReference(reference);
         newValuesReference.setValuesForm(valuesForm);
         literalData.setValuesReference(newValuesReference);
     }
 
-    private void initializeLiteralData(String typeUri, String typeName, String defaultUOM, Collection<String> supportedUOMs, String defaultValue) {
+    /**
+     * Helper: Initializes Literaldata Attributes that are the same for all
+     * three types.
+     *
+     * @param typeUri Reference to type
+     * @param typeName Name of the type
+     * @param defaultUOM Identifies default unit of measure of this or input
+     * @param supportedUOMs Units of measure supported for this input
+     * @param defaultValue Default value of this input, encoded in character
+     */
+    private void initializeLiteralData(final String typeUri,
+            final String typeName, final String defaultUOM,
+            final Collection<String> supportedUOMs, final String defaultValue) {
         LiteralInputType literalIT;
         if (idt.getLiteralData() == null) {
             literalIT = idt.addNewLiteralData();
@@ -174,8 +325,11 @@ public class BasicInputDescriptionType {
 
         SupportedUOMsType newUom;
 
-        //Get/Create & Assign
-        newUom = (literalIT.getUOMs() == null) ? literalIT.addNewUOMs() : literalIT.getUOMs();
+        if (literalIT.getUOMs() == null) {
+            newUom = literalIT.addNewUOMs();
+        } else {
+            newUom = literalIT.getUOMs();
+        }
 
         if (defaultUOM != null) {
             SupportedUOMsType.Default newDefault = newUom.addNewDefault();
@@ -184,7 +338,12 @@ public class BasicInputDescriptionType {
         }
 
         if (supportedUOMs != null && !supportedUOMs.isEmpty()) {
-            UOMsType supportedArray = (newUom.getSupported() == null) ? newUom.addNewSupported() : newUom.getSupported();
+            UOMsType supportedArray;
+            if (newUom.getSupported() == null) {
+                supportedArray = newUom.addNewSupported();
+            } else {
+                supportedArray = newUom.getSupported();
+            }
 
             for (String supportedUOMName : supportedUOMs) {
                 DomainMetadataType newUOM = supportedArray.addNewUOM();
@@ -196,13 +355,19 @@ public class BasicInputDescriptionType {
 
     /**
      *
-     * @param mimeType
-     * @param encoding
-     * @param schema
-     * @return
+     * @param mimeType Identification of mime type of this input or requested
+     * for this output parameter's value
+     * @param encoding Reference to encoding of this input or requested for this
+     * output
+     * @param schema Reference to XML Schema Document that specifies content
+     * model of input or output parameter's value
+     * @return ComplexDataDescriptionType with intialized values
      */
-    public static ComplexDataDescriptionType createComplexDataDescriptionType(String mimeType, String encoding, String schema) {
-        ComplexDataDescriptionType format = ComplexDataDescriptionType.Factory.newInstance();
+    public static final ComplexDataDescriptionType
+            createComplexDataDescriptionType(final String mimeType,
+                    final String encoding, final String schema) {
+        ComplexDataDescriptionType format;
+        format = ComplexDataDescriptionType.Factory.newInstance();
 
         /* Mandatory (one) */
         format.setMimeType(mimeType);
@@ -219,107 +384,234 @@ public class BasicInputDescriptionType {
     }
 
     /**
-     * Adds ComplexData
+     * Adds ComplexData with single supportedFormat.
      *
+     * @param defaultFormat Add with createComplexDataDescriptionType(...)
+     * @param supportedFormat Add with createComplexDataDescriptionType(...)
      * @param maxMegabytes The maximum file size, in megabytes, of this input.
      * If the input exceeds this size, the server will return an error instead
      * of processing the inputs.
      */
-    private void addNewComplexData(ComplexDataDescriptionType defaultFormat, ComplexDataDescriptionType supportedFormat, BigInteger maxMegabytes) {
-        SupportedComplexDataInputType complexDataInputType = idt.addNewComplexData();
+    private void addNewComplexData(
+            final ComplexDataDescriptionType defaultFormat,
+            final ComplexDataDescriptionType supportedFormat,
+            final BigInteger maxMegabytes) {
+        SupportedComplexDataInputType complexDataInputType;
+        complexDataInputType = idt.addNewComplexData();
 
         if (maxMegabytes != null) {
             complexDataInputType.setMaximumMegabytes(maxMegabytes);
         }
 
         /* -- Default -- */
-        ComplexDataCombinationType defaultFormats = complexDataInputType.addNewDefault();
+        ComplexDataCombinationType defaultFormats;
+        defaultFormats = complexDataInputType.addNewDefault();
         defaultFormats.addNewFormat();
         defaultFormats.setFormat(defaultFormat);
 
         /* -- Supported --*/
-        ComplexDataCombinationsType supportedFormats = complexDataInputType.addNewSupported();
+        ComplexDataCombinationsType supportedFormats;
+        supportedFormats = complexDataInputType.addNewSupported();
         supportedFormats.addNewFormat();
-        //Todo: Add way to add more than one supported Format 
         supportedFormats.setFormatArray(0, supportedFormat);
 
     }
 
-    public String getAbstract() {
-        return (idt.getAbstract() == null) ? null : idt.getAbstract().getStringValue();
+    /**
+     * Adds ComplexData with multiple supportedFormats.
+     *
+     * @param defaultFormat Add with createComplexDataDescriptionType(...)
+     * @param supportedFormatList Add with createComplexDataDescriptionType(...)
+     * @param maxMegabytes The maximum file size, in megabytes, of this input.
+     * If the input exceeds this size, the server will return an error instead
+     * of processing the inputs.
+     */
+    private void addNewComplexData(
+            final ComplexDataDescriptionType defaultFormat,
+            final ArrayList<ComplexDataDescriptionType> supportedFormatList,
+            final BigInteger maxMegabytes) {
+        SupportedComplexDataInputType complexDataInputType;
+        complexDataInputType = idt.addNewComplexData();
+
+        if (maxMegabytes != null) {
+            complexDataInputType.setMaximumMegabytes(maxMegabytes);
+        }
+
+        /* -- Default -- */
+        ComplexDataCombinationType defaultFormats;
+        defaultFormats = complexDataInputType.addNewDefault();
+        defaultFormats.addNewFormat();
+        defaultFormats.setFormat(defaultFormat);
+
+        /* -- Supported --*/
+        ComplexDataCombinationsType supportedFormats;
+        supportedFormats = complexDataInputType.addNewSupported();
+
+        for (ComplexDataDescriptionType suppFormat : supportedFormatList) {
+            supportedFormats.addNewFormat().set(suppFormat);
+        }
     }
 
-    public void setAbstract(String text) {
+    /**
+     * Returns Abstract.
+     *
+     * @return Abstract
+     */
+    public final String getAbstract() {
+        if (idt.getAbstract() == null) {
+            return null;
+        } else {
+            return idt.getAbstract().getStringValue();
+        }
+    }
+
+    /**
+     * Sets text.
+     *
+     * @param abstractText new Value of "text"
+     */
+    public final void setAbstract(final String abstractText) {
         if (idt.getAbstract() != null) {
             this.idt.unsetAbstract();
         }
         LanguageStringType newAbstract = this.idt.addNewAbstract();
-        newAbstract.setStringValue(text);
+        newAbstract.setStringValue(abstractText);
     }
 
-    public String getTitle() {
-        return (idt.getTitle() == null) ? null : idt.getTitle().getStringValue();
-    }
-
-    private void setTitle(String text) {
+    /**
+     * Returns Title.
+     *
+     * @return Title
+     */
+    public final String getTitle() {
         if (idt.getTitle() == null) {
-            idt.addNewTitle().setStringValue(text);
+            return null;
         } else {
-            idt.getTitle().setStringValue(text);
+            return idt.getTitle().getStringValue();
         }
     }
 
-    public String getIdentifier() {
-        return (this.idt.getIdentifier() == null) ? null : idt.getIdentifier().getStringValue();
+    /**
+     * Sets title.
+     *
+     * @param title Title
+     */
+    public final void setTitle(final String title) {
+        if (idt.getTitle() == null) {
+            idt.addNewTitle().setStringValue(title);
+        } else {
+            idt.getTitle().setStringValue(title);
+        }
     }
 
-    public void setIdentifier(String text) {
+    /**
+     * Returns Identifier.
+     *
+     * @return Identifier
+     */
+    public final String getIdentifier() {
+        if (this.idt.getIdentifier() == null) {
+            return null;
+        } else {
+            return idt.getIdentifier().getStringValue();
+        }
+    }
+
+    /**
+     * Sets Identifier.
+     *
+     * @param identifier new Value of "text"
+     */
+    public final void setIdentifier(final String identifier) {
         if (idt.getIdentifier() == null) {
-            idt.addNewIdentifier().setStringValue(text);
+            idt.addNewIdentifier().setStringValue(identifier);
         } else {
-            idt.getIdentifier().setStringValue(text);
+            idt.getIdentifier().setStringValue(identifier);
         }
     }
 
-    public BigInteger getMinOccurs() {
+    /**
+     * Returns MinOccurs.
+     *
+     * @return MinOccurs
+     */
+    public final BigInteger getMinOccurs() {
         return this.idt.getMinOccurs();
     }
 
-    public void setMinOccurs(BigInteger minOccurs) {
+    /**
+     * Sets minOccurs.
+     *
+     * @param minOccurs new Value of "minOccurs"
+     */
+    public final void setMinOccurs(final BigInteger minOccurs) {
         this.idt.setMinOccurs(minOccurs);
     }
 
-    public BigInteger getMaxOccurs() {
+    /**
+     * Returns MaxOccurs.
+     *
+     * @return MaxOccurs
+     */
+    public final BigInteger getMaxOccurs() {
         return this.idt.getMaxOccurs();
     }
 
-    public void setMaxOccurs(BigInteger maxOccurs) {
+    /**
+     * Sets maxOccurs.
+     *
+     * @param maxOccurs new Value of "maxOccurs"
+     */
+    public final void setMaxOccurs(final BigInteger maxOccurs) {
         this.idt.setMaxOccurs(maxOccurs);
     }
 
-    public void unsetAbstract() {
+    /**
+     * Removes "Abstract" Node.
+     */
+    public final void unsetAbstract() {
         idt.unsetAbstract();
     }
 
-    public void unsetBoundingBoxData() {
+    /**
+     * Removes "BoundingBoxData" Node.
+     */
+    public final void unsetBoundingBoxData() {
         idt.unsetBoundingBoxData();
     }
 
-    public void unsetComplexData() {
+    /**
+     * Removes "ComplexData" Node.
+     */
+    public final void unsetComplexData() {
         idt.unsetComplexData();
     }
 
-    public void unsetLiteralData() {
+    /**
+     * Removes "LiteralData" Node.
+     */
+    public final void unsetLiteralData() {
         idt.unsetLiteralData();
     }
 
+
     /* -- Getter & Setter -- */
-    public InputDescriptionType getIdt() {
+    /**
+     * Returns the wrapped InputDescriptionType.
+     *
+     * @return the wrapped InputDescriptionType
+     */
+    public final InputDescriptionType getIdt() {
         return idt;
     }
 
-    public void setIdt(InputDescriptionType idt) {
-        this.idt = idt;
+    /**
+     * Sets the wrapped InputDescriptionType to idt.
+     *
+     * @param newIdt new InputDescriptionType
+     */
+    public final void setIdt(final InputDescriptionType newIdt) {
+        this.idt = newIdt;
     }
 
 }
