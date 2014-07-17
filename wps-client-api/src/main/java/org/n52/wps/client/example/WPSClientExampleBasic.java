@@ -31,28 +31,40 @@ import org.n52.wps.client.WPSClientSession;
 import org.n52.wps.io.data.IData;
 import org.n52.wps.io.data.binding.complex.GTVectorDataBinding;
 
+/**
+ *
+ * @author carstenduvel
+ */
 public class WPSClientExampleBasic {
 
-    // Recreates "commons/common-xml/52n-ogc-schema/src/main/resources/40_wpsDescribeProcess_response.xml"
+    /**
+     * Recreates wpsDescribeProcess_response.xml example.
+     */
+    public final void testBasicTypes() {
+        ProcessDescriptionType.ProcessOutputs procOutputs;
+        procOutputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
+        ComplexDataCombinationType outputDefaultFormats;
+        outputDefaultFormats = BasicOutputDescriptionType.createComplexDataCombiType("text/xml","base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
+        ComplexDataCombinationsType outputSupportedFormats;
+        outputSupportedFormats = BasicOutputDescriptionType.createComplexDataCombisType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
 
-    public void testBasicTypes() {
-        ProcessDescriptionType.ProcessOutputs procOutputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
-        ComplexDataCombinationType outputDefaultFormats = BasicOutputDescriptionType.createComplexDataCombinationType("text/xml", "base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
-        ComplexDataCombinationsType outputSupportedFormats = BasicOutputDescriptionType.createComplexDataCombinationsType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
-
-        BasicOutputDescriptionType basicOutputDescriptionType = new BasicOutputDescriptionType(outputDefaultFormats, outputSupportedFormats, "BufferedPolygon", "Buffered Polygon", "2");
+        BasicOutputDescriptionType basicOutputDescriptionType;
+        basicOutputDescriptionType = new BasicOutputDescriptionType(outputDefaultFormats, outputSupportedFormats, "BufferedPolygon", "Buffered Polygon");
         basicOutputDescriptionType.setAbstract("GML stream describing the buffered polygon feature.");
 
         procOutputs.addNewOutput();
         procOutputs.setOutputArray(0, basicOutputDescriptionType.getOdt());
 
-        BasicProcessDescriptionType basicProcDesc = new BasicProcessDescriptionType(
-                "Buffer", //Identifier
-                "Create a buffer around a polygon.", //Title
-                "2", //ProcessVersion
-                procOutputs); //ProcessOuputs
+        BasicProcessDescriptionType basicProcDesc; 
+        basicProcDesc = new BasicProcessDescriptionType(
+                "Buffer",
+                "Create a buffer around a polygon.",
+                "2", 
+                procOutputs);
 
-        basicProcDesc.setAbstract("Create a buffer around a single polygon. Accepts the polygon as GML and provides GML output for the buffered feature.");
+        basicProcDesc.setAbstract("Create a buffer around a single polygon."
+                + " Accepts the polygon as GML and provides GML output for the"
+                + " buffered feature.");
         basicProcDesc.addNewMetadata("spatial");
         basicProcDesc.addNewMetadata("geometry");
         basicProcDesc.addNewMetadata("buffer");
@@ -68,27 +80,35 @@ public class WPSClientExampleBasic {
         BasicInputDescriptionType inputPolygon = new BasicInputDescriptionType(defaultFormat, supportedFormat, BigInteger.valueOf(5), "InputPolygon", "Polygon to be buffered", BigInteger.ONE, BigInteger.ONE);
         inputPolygon.setAbstract("URI to a set of GML that describes the polygon.");
 
-        BasicInputDescriptionType bufferDistance = new BasicInputDescriptionType("BufferDistance", "Buffer Distance", BigInteger.ZERO, BigInteger.ONE);
+        BasicInputDescriptionType bufferDistance;
+        bufferDistance = new BasicInputDescriptionType("BufferDistance", 
+                "Buffer Distance", BigInteger.ZERO, BigInteger.ONE);
         bufferDistance.setAbstract("Distance to be used to calculate buffer.");
 
-        AnyValueDocument.AnyValue av = AnyValueDocument.AnyValue.Factory.newInstance();
+        AnyValueDocument.AnyValue av;
+        av = AnyValueDocument.AnyValue.Factory.newInstance();
         Collection<String> supportedUOM = new ArrayList<String>();
         supportedUOM.add("meters");
         supportedUOM.add("feet");
-        bufferDistance.addNewLiteralDataAnyValue(av, "http://www.w3.org/TR/xmlschema-2/#float", "float", "meters", supportedUOM, "100");
+        bufferDistance.addNewLiteralDataAnyValue(av, 
+                "http://www.w3.org/TR/xmlschema-2/#float", "float", "meters", 
+                supportedUOM, "100");
 
         basicProcDesc.addNewInputToDataInputs(inputPolygon.getIdt());
         basicProcDesc.addNewInputToDataInputs(bufferDistance.getIdt());
 
-        ProcessDescriptionsDocument pdd = ProcessDescriptionsDocument.Factory.newInstance();
-        ProcessDescriptionsDocument.ProcessDescriptions pddpd = pdd.addNewProcessDescriptions();
+        ProcessDescriptionsDocument pdd;
+        pdd = ProcessDescriptionsDocument.Factory.newInstance();
+        ProcessDescriptionsDocument.ProcessDescriptions pddpd;
+        pddpd = pdd.addNewProcessDescriptions();
         pddpd.addNewProcessDescription();
         pddpd.setProcessDescriptionArray(0, basicProcDesc.getPdt());
 
         XmlOptions xo = new XmlOptions();
         xo.setSavePrettyPrint();
-        xo.setSavePrettyPrintIndent(4);
-                //xo.setUseDefaultNamespace();
+        final int identation = 4;
+        xo.setSavePrettyPrintIndent(identation);
+        //xo.setUseDefaultNamespace();
         //String output = pdd.xmlText(xo);
         xo.setCharacterEncoding("UTF-8");
         xo.setGenerateJavaVersion("1.0");
@@ -96,7 +116,8 @@ public class WPSClientExampleBasic {
         System.out.println("\n");
 
         try {
-            BufferedWriter log = new BufferedWriter(new OutputStreamWriter(System.out));
+            BufferedWriter log;
+            log = new BufferedWriter(new OutputStreamWriter(System.out));
 
             log.write("####\n");
             pdd.save(log, xo);
@@ -107,11 +128,14 @@ public class WPSClientExampleBasic {
 
         System.out.println("\n");
 
-                //System.out.println("--------####---------");
+        //System.out.println("--------####---------");
         //System.out.println(output);
         //System.out.println("--------####---------");
     }
 
+    /**
+     *
+     */
     public void testExecute() {
 
         //String wpsURL = "http://localhost:8080/wps/WebProcessingService";
@@ -156,6 +180,12 @@ public class WPSClientExampleBasic {
         }
     }
 
+    /**
+     *
+     * @param url
+     * @return
+     * @throws WPSClientException
+     */
     public CapabilitiesDocument requestGetCapabilities(String url)
             throws WPSClientException {
 
@@ -174,6 +204,13 @@ public class WPSClientExampleBasic {
         return capabilities;
     }
 
+    /**
+     *
+     * @param url
+     * @param processID
+     * @return
+     * @throws IOException
+     */
     public ProcessDescriptionType requestDescribeProcess(String url,
             String processID) throws IOException {
 
@@ -191,6 +228,15 @@ public class WPSClientExampleBasic {
         return processDescription;
     }
 
+    /**
+     *
+     * @param url
+     * @param processID
+     * @param processDescription
+     * @param inputs
+     * @return
+     * @throws Exception
+     */
     public IData executeProcess(String url, String processID,
             ProcessDescriptionType processDescription,
             HashMap<String, Object> inputs) throws Exception {
@@ -253,6 +299,10 @@ public class WPSClientExampleBasic {
         throw new Exception("Exception: " + responseObject.toString());
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         WPSClientExampleBasic client = new WPSClientExampleBasic();
         //client.testExecute();
