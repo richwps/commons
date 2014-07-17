@@ -4,9 +4,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Vector;
 import net.opengis.ows.x11.AnyValueDocument;
 
 import net.opengis.wps.x100.CapabilitiesDocument;
@@ -22,7 +22,6 @@ import net.opengis.wps.x100.ProcessDescriptionsDocument;
 import org.apache.xmlbeans.XmlOptions;
 
 import org.geotools.feature.FeatureCollection;
-import org.geotools.ows.v1_1.OWS;
 import org.n52.wps.client.BasicInputDescriptionType;
 import org.n52.wps.client.BasicOutputDescriptionType;
 import org.n52.wps.client.BasicProcessDescriptionType;
@@ -33,234 +32,231 @@ import org.n52.wps.io.data.IData;
 import org.n52.wps.io.data.binding.complex.GTVectorDataBinding;
 
 public class WPSClientExampleBasic {
-        // Recreates "commons/common-xml/52n-ogc-schema/src/main/resources/40_wpsDescribeProcess_response.xml"
-        public void testBasicTypes() {
-                ProcessDescriptionType.ProcessOutputs procOutputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
-                ComplexDataCombinationType outputDefaultFormats = BasicOutputDescriptionType.createComplexDataCombinationType("text/xml", "base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
-                ComplexDataCombinationsType outputSupportedFormats = BasicOutputDescriptionType.createComplexDataCombinationsType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
-                
-                BasicOutputDescriptionType basicOutputDescriptionType = new BasicOutputDescriptionType(outputDefaultFormats,outputSupportedFormats, "BufferedPolygon", "Buffered Polygon", "2");
-                basicOutputDescriptionType.setAbstract("GML stream describing the buffered polygon feature.");
-                
-                procOutputs.addNewOutput();
-                procOutputs.setOutputArray(0, basicOutputDescriptionType.getOdt());        
 
-                BasicProcessDescriptionType basicProcDesc = new BasicProcessDescriptionType(
-                        "Buffer", //Identifier
-                        "Create a buffer around a polygon.", //Title
-                        "2", //ProcessVersion
-                        procOutputs); //ProcessOuputs
+    // Recreates "commons/common-xml/52n-ogc-schema/src/main/resources/40_wpsDescribeProcess_response.xml"
 
-                basicProcDesc.setAbstract("Create a buffer around a single polygon. Accepts the polygon as GML and provides GML output for the buffered feature.");
-                basicProcDesc.addNewMetadata("spatial");
-                basicProcDesc.addNewMetadata("geometry");
-                basicProcDesc.addNewMetadata("buffer");
-                basicProcDesc.addNewMetadata("GML");
-                basicProcDesc.addNewProfile("urn:ogc:wps:1.0.0:buffer");
-                
-                basicProcDesc.setStatusSupported(false);
-                basicProcDesc.setStoreSupported(true);
-                basicProcDesc.setWSDL("http://foo.bar/foo");
-                
-                ComplexDataDescriptionType defaultFormat = BasicInputDescriptionType.createComplexDataDescriptionType("text/xml","base64","http://foo.bar/gml/3.1.0/polygon.xsd");
-                ComplexDataDescriptionType supportedFormat = BasicInputDescriptionType.createComplexDataDescriptionType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
-                BasicInputDescriptionType inputPolygon = new BasicInputDescriptionType(defaultFormat, supportedFormat, BigInteger.valueOf(5), "InputPolygon", "Polygon to be buffered", BigInteger.ONE, BigInteger.ONE);
-                inputPolygon.setAbstract("URI to a set of GML that describes the polygon.");
-                
-                
-                BasicInputDescriptionType bufferDistance = new BasicInputDescriptionType("BufferDistance", "Buffer Distance", BigInteger.ZERO, BigInteger.ONE);
-                bufferDistance.setAbstract("Distance to be used to calculate buffer.");
-        
-                AnyValueDocument.AnyValue av = AnyValueDocument.AnyValue.Factory.newInstance();
-                Collection<String> supportedUOM = new Vector<String>();
-                supportedUOM.add("meters");
-                supportedUOM.add("feet");
-                bufferDistance.addNewLiteralDataAnyValue(av, "http://www.w3.org/TR/xmlschema-2/#float", "float", "meters", supportedUOM, "100");
-                
-                basicProcDesc.addNewInputToDataInputs(inputPolygon.getIdt());
-                basicProcDesc.addNewInputToDataInputs(bufferDistance.getIdt());
-                
-                
-                ProcessDescriptionsDocument pdd = ProcessDescriptionsDocument.Factory.newInstance();
-                ProcessDescriptionsDocument.ProcessDescriptions pddpd = pdd.addNewProcessDescriptions();
-                pddpd.addNewProcessDescription();
-                pddpd.setProcessDescriptionArray(0, basicProcDesc.getPdt());
+    public void testBasicTypes() {
+        ProcessDescriptionType.ProcessOutputs procOutputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
+        ComplexDataCombinationType outputDefaultFormats = BasicOutputDescriptionType.createComplexDataCombinationType("text/xml", "base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
+        ComplexDataCombinationsType outputSupportedFormats = BasicOutputDescriptionType.createComplexDataCombinationsType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
 
-                XmlOptions xo = new XmlOptions();
-                xo.setSavePrettyPrint();
-                xo.setSavePrettyPrintIndent(4);
+        BasicOutputDescriptionType basicOutputDescriptionType = new BasicOutputDescriptionType(outputDefaultFormats, outputSupportedFormats, "BufferedPolygon", "Buffered Polygon", "2");
+        basicOutputDescriptionType.setAbstract("GML stream describing the buffered polygon feature.");
+
+        procOutputs.addNewOutput();
+        procOutputs.setOutputArray(0, basicOutputDescriptionType.getOdt());
+
+        BasicProcessDescriptionType basicProcDesc = new BasicProcessDescriptionType(
+                "Buffer", //Identifier
+                "Create a buffer around a polygon.", //Title
+                "2", //ProcessVersion
+                procOutputs); //ProcessOuputs
+
+        basicProcDesc.setAbstract("Create a buffer around a single polygon. Accepts the polygon as GML and provides GML output for the buffered feature.");
+        basicProcDesc.addNewMetadata("spatial");
+        basicProcDesc.addNewMetadata("geometry");
+        basicProcDesc.addNewMetadata("buffer");
+        basicProcDesc.addNewMetadata("GML");
+        basicProcDesc.addNewProfile("urn:ogc:wps:1.0.0:buffer");
+
+        basicProcDesc.setStatusSupported(false);
+        basicProcDesc.setStoreSupported(true);
+        basicProcDesc.setWSDL("http://foo.bar/foo");
+
+        ComplexDataDescriptionType defaultFormat = BasicInputDescriptionType.createComplexDataDescriptionType("text/xml", "base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
+        ComplexDataDescriptionType supportedFormat = BasicInputDescriptionType.createComplexDataDescriptionType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
+        BasicInputDescriptionType inputPolygon = new BasicInputDescriptionType(defaultFormat, supportedFormat, BigInteger.valueOf(5), "InputPolygon", "Polygon to be buffered", BigInteger.ONE, BigInteger.ONE);
+        inputPolygon.setAbstract("URI to a set of GML that describes the polygon.");
+
+        BasicInputDescriptionType bufferDistance = new BasicInputDescriptionType("BufferDistance", "Buffer Distance", BigInteger.ZERO, BigInteger.ONE);
+        bufferDistance.setAbstract("Distance to be used to calculate buffer.");
+
+        AnyValueDocument.AnyValue av = AnyValueDocument.AnyValue.Factory.newInstance();
+        Collection<String> supportedUOM = new ArrayList<String>();
+        supportedUOM.add("meters");
+        supportedUOM.add("feet");
+        bufferDistance.addNewLiteralDataAnyValue(av, "http://www.w3.org/TR/xmlschema-2/#float", "float", "meters", supportedUOM, "100");
+
+        basicProcDesc.addNewInputToDataInputs(inputPolygon.getIdt());
+        basicProcDesc.addNewInputToDataInputs(bufferDistance.getIdt());
+
+        ProcessDescriptionsDocument pdd = ProcessDescriptionsDocument.Factory.newInstance();
+        ProcessDescriptionsDocument.ProcessDescriptions pddpd = pdd.addNewProcessDescriptions();
+        pddpd.addNewProcessDescription();
+        pddpd.setProcessDescriptionArray(0, basicProcDesc.getPdt());
+
+        XmlOptions xo = new XmlOptions();
+        xo.setSavePrettyPrint();
+        xo.setSavePrettyPrintIndent(4);
                 //xo.setUseDefaultNamespace();
-                //String output = pdd.xmlText(xo);
-                xo.setCharacterEncoding("UTF-8");
-                xo.setGenerateJavaVersion("1.0");
+        //String output = pdd.xmlText(xo);
+        xo.setCharacterEncoding("UTF-8");
+        xo.setGenerateJavaVersion("1.0");
 
-                System.out.println("\n");
-                
-                try {    
-                    BufferedWriter log = new BufferedWriter(new OutputStreamWriter(System.out));
+        System.out.println("\n");
 
-                    log.write("####\n");
-                    pdd.save(log,xo);
-                    log.flush();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                
-               System.out.println("\n");
-                
-                //System.out.println("--------####---------");
-                //System.out.println(output);
-                //System.out.println("--------####---------");
+        try {
+            BufferedWriter log = new BufferedWriter(new OutputStreamWriter(System.out));
+
+            log.write("####\n");
+            pdd.save(log, xo);
+            log.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    
-	public void testExecute() {
-                
-            
-            
-		//String wpsURL = "http://localhost:8080/wps/WebProcessingService";
-                String wpsURL = "http://geoprocessing.demo.52north.org:8080/wps/WebProcessingService";
-                
-		String processID = "org.n52.wps.server.algorithm.SimpleBufferAlgorithm";
 
-		try {
-			ProcessDescriptionType describeProcessDocument = requestDescribeProcess(
-					wpsURL, processID);
-			System.out.println(describeProcessDocument);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			CapabilitiesDocument capabilitiesDocument = requestGetCapabilities(wpsURL);
-			ProcessDescriptionType describeProcessDocument = requestDescribeProcess(
-					wpsURL, processID);
-			// define inputs
-			HashMap<String, Object> inputs = new HashMap<String, Object>();
-			// complex data by reference
-			inputs.put(
-					"data",
-					"http://geoprocessing.demo.52north.org:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=topp:tasmania_roads&outputFormat=GML3");
-			// literal data
-			inputs.put("width", "0.05");
-			IData data = executeProcess(wpsURL, processID,
-					describeProcessDocument, inputs);
+        System.out.println("\n");
 
-			if (data instanceof GTVectorDataBinding) {
-				FeatureCollection featureCollection = ((GTVectorDataBinding) data)
-						.getPayload();
-				System.out.println(featureCollection.size());
-			}
-		} catch (WPSClientException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+                //System.out.println("--------####---------");
+        //System.out.println(output);
+        //System.out.println("--------####---------");
+    }
 
-	public CapabilitiesDocument requestGetCapabilities(String url)
-			throws WPSClientException {
+    public void testExecute() {
 
-		WPSClientSession wpsClient = WPSClientSession.getInstance();
+        //String wpsURL = "http://localhost:8080/wps/WebProcessingService";
+        String wpsURL = "http://geoprocessing.demo.52north.org:8080/wps/WebProcessingService";
 
-		wpsClient.connect(url);
+        String processID = "org.n52.wps.server.algorithm.SimpleBufferAlgorithm";
 
-		CapabilitiesDocument capabilities = wpsClient.getWPSCaps(url);
+        try {
+            ProcessDescriptionType describeProcessDocument = requestDescribeProcess(
+                    wpsURL, processID);
+            System.out.println(describeProcessDocument);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        try {
+            CapabilitiesDocument capabilitiesDocument = requestGetCapabilities(wpsURL);
+            ProcessDescriptionType describeProcessDocument = requestDescribeProcess(
+                    wpsURL, processID);
+            // define inputs
+            HashMap<String, Object> inputs = new HashMap<String, Object>();
+            // complex data by reference
+            inputs.put(
+                    "data",
+                    "http://geoprocessing.demo.52north.org:8080/geoserver/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=topp:tasmania_roads&outputFormat=GML3");
+            // literal data
+            inputs.put("width", "0.05");
+            IData data = executeProcess(wpsURL, processID,
+                    describeProcessDocument, inputs);
 
-		ProcessBriefType[] processList = capabilities.getCapabilities()
-				.getProcessOfferings().getProcessArray();
+            if (data instanceof GTVectorDataBinding) {
+                FeatureCollection featureCollection = ((GTVectorDataBinding) data)
+                        .getPayload();
+                System.out.println(featureCollection.size());
+            }
+        } catch (WPSClientException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-		for (ProcessBriefType process : processList) {
-			System.out.println(process.getIdentifier().getStringValue());
-		}
-		return capabilities;
-	}
+    public CapabilitiesDocument requestGetCapabilities(String url)
+            throws WPSClientException {
 
-	public ProcessDescriptionType requestDescribeProcess(String url,
-			String processID) throws IOException {
+        WPSClientSession wpsClient = WPSClientSession.getInstance();
 
-		WPSClientSession wpsClient = WPSClientSession.getInstance();
+        wpsClient.connect(url);
 
-		ProcessDescriptionType processDescription = wpsClient
-				.getProcessDescription(url, processID);
+        CapabilitiesDocument capabilities = wpsClient.getWPSCaps(url);
 
-		InputDescriptionType[] inputList = processDescription.getDataInputs()
-				.getInputArray();
+        ProcessBriefType[] processList = capabilities.getCapabilities()
+                .getProcessOfferings().getProcessArray();
 
-		for (InputDescriptionType input : inputList) {
-			System.out.println(input.getIdentifier().getStringValue());
-		}
-		return processDescription;
-	}
+        for (ProcessBriefType process : processList) {
+            System.out.println(process.getIdentifier().getStringValue());
+        }
+        return capabilities;
+    }
 
-	public IData executeProcess(String url, String processID,
-			ProcessDescriptionType processDescription,
-			HashMap<String, Object> inputs) throws Exception {
-		org.n52.wps.client.ExecuteRequestBuilder executeBuilder = new org.n52.wps.client.ExecuteRequestBuilder(
-				processDescription);
+    public ProcessDescriptionType requestDescribeProcess(String url,
+            String processID) throws IOException {
 
-		for (InputDescriptionType input : processDescription.getDataInputs()
-				.getInputArray()) {
-			String inputName = input.getIdentifier().getStringValue();
-			Object inputValue = inputs.get(inputName);
-			if (input.getLiteralData() != null) {
-				if (inputValue instanceof String) {
-					executeBuilder.addLiteralData(inputName,
-							(String) inputValue);
-				}
-			} else if (input.getComplexData() != null) {
-				// Complexdata by value
-				if (inputValue instanceof FeatureCollection) {
-					IData data = new GTVectorDataBinding(
-							(FeatureCollection) inputValue);
-					executeBuilder
-							.addComplexData(
-									inputName,
-									data,
-									"http://schemas.opengis.net/gml/3.1.1/base/feature.xsd",
-									"UTF-8", "text/xml");
-				}
-				// Complexdata Reference
-				if (inputValue instanceof String) {
-					executeBuilder
-							.addComplexDataReference(
-									inputName,
-									(String) inputValue,
-									"http://schemas.opengis.net/gml/3.1.1/base/feature.xsd",
-									"UTF-8", "text/xml");
-				}
+        WPSClientSession wpsClient = WPSClientSession.getInstance();
 
-				if (inputValue == null && input.getMinOccurs().intValue() > 0) {
-					throw new IOException("Property not set, but mandatory: "
-							+ inputName);
-				}
-			}
-		}
-		executeBuilder.setMimeTypeForOutput("text/xml", "result");
-		executeBuilder.setSchemaForOutput(
-				"http://schemas.opengis.net/gml/3.1.1/base/feature.xsd",
-				"result");
-		ExecuteDocument execute = executeBuilder.getExecute();
-		execute.getExecute().setService("WPS");
-		WPSClientSession wpsClient = WPSClientSession.getInstance();
-		Object responseObject = wpsClient.execute(url, execute);
-		if (responseObject instanceof ExecuteResponseDocument) {
-			ExecuteResponseDocument response = (ExecuteResponseDocument) responseObject;
-			ExecuteResponseAnalyser analyser = new ExecuteResponseAnalyser(
-					execute, response, processDescription);
-			IData data = (IData) analyser.getComplexDataByIndex(0,
-					GTVectorDataBinding.class);
-			return data;
-		}
-		throw new Exception("Exception: " + responseObject.toString());
-	}
+        ProcessDescriptionType processDescription = wpsClient
+                .getProcessDescription(url, processID);
 
-	public static void main(String[] args) {
-		WPSClientExampleBasic client = new WPSClientExampleBasic();
-		//client.testExecute();
-                client.testBasicTypes();
-	}
+        InputDescriptionType[] inputList = processDescription.getDataInputs()
+                .getInputArray();
+
+        for (InputDescriptionType input : inputList) {
+            System.out.println(input.getIdentifier().getStringValue());
+        }
+        return processDescription;
+    }
+
+    public IData executeProcess(String url, String processID,
+            ProcessDescriptionType processDescription,
+            HashMap<String, Object> inputs) throws Exception {
+        org.n52.wps.client.ExecuteRequestBuilder executeBuilder = new org.n52.wps.client.ExecuteRequestBuilder(
+                processDescription);
+
+        for (InputDescriptionType input : processDescription.getDataInputs()
+                .getInputArray()) {
+            String inputName = input.getIdentifier().getStringValue();
+            Object inputValue = inputs.get(inputName);
+            if (input.getLiteralData() != null) {
+                if (inputValue instanceof String) {
+                    executeBuilder.addLiteralData(inputName,
+                            (String) inputValue);
+                }
+            } else if (input.getComplexData() != null) {
+                // Complexdata by value
+                if (inputValue instanceof FeatureCollection) {
+                    IData data = new GTVectorDataBinding(
+                            (FeatureCollection) inputValue);
+                    executeBuilder
+                            .addComplexData(
+                                    inputName,
+                                    data,
+                                    "http://schemas.opengis.net/gml/3.1.1/base/feature.xsd",
+                                    "UTF-8", "text/xml");
+                }
+                // Complexdata Reference
+                if (inputValue instanceof String) {
+                    executeBuilder
+                            .addComplexDataReference(
+                                    inputName,
+                                    (String) inputValue,
+                                    "http://schemas.opengis.net/gml/3.1.1/base/feature.xsd",
+                                    "UTF-8", "text/xml");
+                }
+
+                if (inputValue == null && input.getMinOccurs().intValue() > 0) {
+                    throw new IOException("Property not set, but mandatory: "
+                            + inputName);
+                }
+            }
+        }
+        executeBuilder.setMimeTypeForOutput("text/xml", "result");
+        executeBuilder.setSchemaForOutput(
+                "http://schemas.opengis.net/gml/3.1.1/base/feature.xsd",
+                "result");
+        ExecuteDocument execute = executeBuilder.getExecute();
+        execute.getExecute().setService("WPS");
+        WPSClientSession wpsClient = WPSClientSession.getInstance();
+        Object responseObject = wpsClient.execute(url, execute);
+        if (responseObject instanceof ExecuteResponseDocument) {
+            ExecuteResponseDocument response = (ExecuteResponseDocument) responseObject;
+            ExecuteResponseAnalyser analyser = new ExecuteResponseAnalyser(
+                    execute, response, processDescription);
+            IData data = (IData) analyser.getComplexDataByIndex(0,
+                    GTVectorDataBinding.class);
+            return data;
+        }
+        throw new Exception("Exception: " + responseObject.toString());
+    }
+
+    public static void main(String[] args) {
+        WPSClientExampleBasic client = new WPSClientExampleBasic();
+        //client.testExecute();
+        client.testBasicTypes();
+    }
 
 }
