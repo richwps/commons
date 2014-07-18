@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:UndeployProcess
+	service="WPS"
+	version="1.0.0"
+	xmlns:wps="http://www.opengis.net/wps/1.0.0"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ows="http://www.opengis.net/ows/1.1"
+	xsi:schemaLocation="./wpsUndeployProcess_response.xsd"> 　　
+	<wps:undeployment done="true"/>
+	<wps:Process wps:processVersion="2">
+		<ows:Identifier>BufferProcess2</ows:Identifier>
+	</wps:Process>
+	</wps:UndeployProcess>
