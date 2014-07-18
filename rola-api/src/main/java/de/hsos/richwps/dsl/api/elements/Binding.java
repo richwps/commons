@@ -7,7 +7,7 @@ import java.text.MessageFormat;
  *
  * @author fbensmann
  * @author dalcacer
- * @versoin draft
+ * @version draft
  */
 public class Binding implements IOperation {
 

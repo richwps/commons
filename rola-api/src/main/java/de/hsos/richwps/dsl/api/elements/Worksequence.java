@@ -66,7 +66,7 @@ public class Worksequence extends ArrayList<IOperation> {
     /**
      * Transforms this model to notation.
      *
-     * @return
+     * @return ROLA notation.
      */
     public String toNotation() {
         String notation = "";
