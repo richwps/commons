@@ -455,7 +455,8 @@ public class BasicInputDescriptionType {
     /**
      * Returns Abstract.
      *
-     * @return Abstract
+     * @return Text of the abstract.abstractText Brief narrative description of
+     * a process, input, or output, normally available for display to a human
      */
     public final String getAbstract() {
         if (idt.getAbstract() == null) {
@@ -468,7 +469,9 @@ public class BasicInputDescriptionType {
     /**
      * Sets text.
      *
-     * @param abstractText new Value of "text"
+     * @param abstractText Text of the abstract.abstractText Brief narrative
+     * description of a process, input, or output, normally available for
+     * display to a human
      */
     public final void setAbstract(final String abstractText) {
         if (idt.getAbstract() != null) {
@@ -481,7 +484,8 @@ public class BasicInputDescriptionType {
     /**
      * Returns Title.
      *
-     * @return Title
+     * @return Title of a process, input, or output, normally available for
+     * display to a human
      */
     public final String getTitle() {
         if (idt.getTitle() == null) {
@@ -494,7 +498,8 @@ public class BasicInputDescriptionType {
     /**
      * Sets title.
      *
-     * @param title Title
+     * @param title Title of a process, input, or output, normally available for
+     * display to a human
      */
     public final void setTitle(final String title) {
         if (idt.getTitle() == null) {
@@ -507,7 +512,8 @@ public class BasicInputDescriptionType {
     /**
      * Returns Identifier.
      *
-     * @return Identifier
+     * @return Unambiguous identifier or name of a process, input, or output,
+     * unique for this server
      */
     public final String getIdentifier() {
         if (this.idt.getIdentifier() == null) {
@@ -520,7 +526,8 @@ public class BasicInputDescriptionType {
     /**
      * Sets Identifier.
      *
-     * @param identifier new Value of "text"
+     * @param identifier Unambiguous identifier or name of a process, input, or
+     * output, unique for this server
      */
     public final void setIdentifier(final String identifier) {
         if (idt.getIdentifier() == null) {
@@ -533,7 +540,8 @@ public class BasicInputDescriptionType {
     /**
      * Returns MinOccurs.
      *
-     * @return MinOccurs
+     * @return Minimum number of times that values for this parameter are
+     * required
      */
     public final BigInteger getMinOccurs() {
         return this.idt.getMinOccurs();
@@ -542,7 +550,8 @@ public class BasicInputDescriptionType {
     /**
      * Sets minOccurs.
      *
-     * @param minOccurs new Value of "minOccurs"
+     * @param minOccurs Minimum number of times that values for this parameter
+     * are required
      */
     public final void setMinOccurs(final BigInteger minOccurs) {
         this.idt.setMinOccurs(minOccurs);
@@ -551,7 +560,8 @@ public class BasicInputDescriptionType {
     /**
      * Returns MaxOccurs.
      *
-     * @return MaxOccurs
+     * @return Maximum number of times that this parameter may be
+     * present
      */
     public final BigInteger getMaxOccurs() {
         return this.idt.getMaxOccurs();
@@ -560,7 +570,8 @@ public class BasicInputDescriptionType {
     /**
      * Sets maxOccurs.
      *
-     * @param maxOccurs new Value of "maxOccurs"
+     * @param maxOccurs Maximum number of times that this parameter
+     * may be present
      */
     public final void setMaxOccurs(final BigInteger maxOccurs) {
         this.idt.setMaxOccurs(maxOccurs);
@@ -599,7 +610,7 @@ public class BasicInputDescriptionType {
     /**
      * Returns the wrapped InputDescriptionType.
      *
-     * @return the wrapped InputDescriptionType
+     * @return List of the required and optional inputs to this process
      */
     public final InputDescriptionType getIdt() {
         return idt;
@@ -608,7 +619,7 @@ public class BasicInputDescriptionType {
     /**
      * Sets the wrapped InputDescriptionType to idt.
      *
-     * @param newIdt new InputDescriptionType
+     * @param newIdt List of the required and optional inputs to this process
      */
     public final void setIdt(final InputDescriptionType newIdt) {
         this.idt = newIdt;

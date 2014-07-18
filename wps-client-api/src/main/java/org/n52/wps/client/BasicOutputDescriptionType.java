@@ -288,7 +288,8 @@ public class BasicOutputDescriptionType {
     /**
      * Returns Abstract.
      *
-     * @return Abstract
+     * @return  Brief narrative description of a process, input, or
+     * output, normally available for display to a human
      */
     public final String getAbstract() {
         if (odt.getAbstract() == null) {
@@ -300,7 +301,8 @@ public class BasicOutputDescriptionType {
 
     /**
      * Sets Abstract to abstractText.
-     * @param abstractText Text of the abstract.
+     * @param abstractText  Brief narrative description of a process, input, or
+     * output, normally available for display to a human
      */
     public final void setAbstract(final String abstractText) {
         if (odt.getAbstract() != null) {
@@ -313,7 +315,8 @@ public class BasicOutputDescriptionType {
     /**
      * Returns Title.
      *
-     * @return Title
+     * @return Title of a process, input, or output, normally available for
+     * display to a human
      */
     public final String getTitle() {
         if (odt.getTitle() == null) {
@@ -325,7 +328,8 @@ public class BasicOutputDescriptionType {
 
     /**
      * Sets Title to title.
-     * @param title Title
+     * @param title Title of a process, input, or output, normally available for
+     * display to a human
      */
     public final void setTitle(final String title) {
         if (odt.getTitle() == null) {
@@ -338,7 +342,8 @@ public class BasicOutputDescriptionType {
     /**
      * Returns Identifier.
      *
-     * @return Identifier
+     * @return Unambiguous identifier or name of a process, input, or
+     * output, unique for this server
      */
     public final String getIdentifier() {
         if (this.odt.getIdentifier() == null) {
@@ -350,7 +355,8 @@ public class BasicOutputDescriptionType {
 
     /**
      * Sets Identifier to identifier.
-     * @param identifier Identifier
+     * @param identifier Unambiguous identifier or name of a process, input, or
+     * output, unique for this server
      */
     public final void setIdentifier(final String identifier) {
         if (odt.getIdentifier() == null) {
@@ -382,7 +388,7 @@ public class BasicOutputDescriptionType {
     }
 
     /**
-     *
+     * Removes "LiteralOutput" Node.
      */
     public final void unsetLiteralOutput() {
         odt.unsetLiteralOutput();
@@ -463,7 +469,8 @@ public class BasicOutputDescriptionType {
     /**
      * Returns the wrapped OutputDescriptionType.
      *
-     * @return the wrapped OutputDescriptionType
+     * @return List of the required and optional outputs from executing this
+     * process
      */
     public final OutputDescriptionType getOdt() {
         return odt;
@@ -472,7 +479,8 @@ public class BasicOutputDescriptionType {
     /**
      * Sets the wrapped OutputDescriptionType to odt.
      *
-     * @param newOdt new OutputDescriptionType
+     * @param newOdt List of the required and optional outputs from executing
+     * this process
      */
     public final void setOdt(final OutputDescriptionType newOdt) {
         this.odt = newOdt;

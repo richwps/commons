@@ -107,7 +107,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @return Title
+     * @return Title of a process, input, or output, normally available for
+     * display to a human
      */
     public String getTitle() {
         if (pdt.getTitle() == null) {
@@ -119,7 +120,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param title Title
+     * @param title Title of a process, input, or output, normally available for
+     * display to a human
      */
     public void setTitle(final String title) {
         if (pdt.getTitle() == null) {
@@ -131,7 +133,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @return Identifier
+     * @return Unambiguous identifier or name of a process, input, or output,
+     * unique for this server
      */
     public String getIdentifier() {
         if (this.pdt.getIdentifier() == null) {
@@ -143,7 +146,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param identifier Identifier
+     * @param identifier Unambiguous identifier or name of a process, input, or
+     * output, unique for this server
      */
     public void setIdentifier(final String identifier) {
         if (pdt.getIdentifier() == null) {
@@ -155,7 +159,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @return Abstract
+     * @return Brief narrative description of a process, input, or
+     * output, normally available for display to a human
      */
     public String getAbstract() {
         if (pdt.getAbstract() == null) {
@@ -167,7 +172,9 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param abstractText Text of the abstract.
+     * @param abstractText Text of the abstract.abstractText Brief narrative
+     * description of a process, input, or output, normally available for
+     * display to a human
      */
     public void setAbstract(final String abstractText) {
         if (pdt.getAbstract() != null) {
@@ -178,7 +185,7 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @return WSDL
+     * @return wsdl Location of a WSDL document which describes this process.
      */
     public String getWSDL() {
         if (pdt.getWSDL() == null) {
@@ -190,7 +197,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param href Href
+     * @param href wsdl Location of a WSDL document which describes this 
+     * process.
      */
     public void setWSDL(final String href) {
         if (pdt.getWSDL() != null) {
@@ -272,7 +280,7 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param profileURI ProfileURI
+     * @param profileURI Profile to which the WPS process complies
      */
     public void addNewProfile(final String profileURI) {
         XmlAnyURI newProfile = pdt.addNewProfile();
@@ -281,7 +289,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @return StatusSupported
+     * @return statusSupported Indicates if Execute operation response can be
+     * returned quickly with status information
      */
     public boolean getStatusSupported() {
         return pdt.getStatusSupported();
@@ -289,7 +298,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param statusSupported StatusSupported
+     * @param statusSupported statusSupported Indicates if Execute operation response can be
+     * returned quickly with status information
      */
     public void setStatusSupported(final boolean statusSupported) {
         pdt.setStatusSupported(statusSupported);
@@ -297,7 +307,9 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @return StoreSupported StoreSupported
+     * @return storeSupported Indicates if complex data output(s) from this
+     * process can be requested to be stored by the WPS server as web-accessible
+     * resources
      */
     public boolean getStoreSupported() {
         return pdt.getStoreSupported();
@@ -305,7 +317,9 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param storeSupported StoreSupported
+     * @param storeSupported storeSupported Indicates if complex data output(s) from this
+     * process can be requested to be stored by the WPS server as web-accessible
+     * resources
      */
     public void setStoreSupported(final boolean storeSupported) {
         pdt.setStoreSupported(true);
@@ -363,7 +377,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param newDataInputs New DataInputs
+     * @param newDataInputs List of the required and optional inputs to this
+     * process
      */
     public void setProcessDataInputs(
             final ProcessDescriptionType.DataInputs newDataInputs) {
@@ -374,7 +389,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param processOutputs ProcessOutputs
+     * @param processOutputs List of the required and optional outputs from
+     * executing this process
      */
     public void setProcessOutputs(
             final ProcessDescriptionType.ProcessOutputs processOutputs) {
@@ -386,7 +402,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @return Returns ProcessDescriptionType
+     * @return Full description of process, including all input and output
+     * parameters
      */
     public ProcessDescriptionType getPdt() {
         return pdt;
@@ -394,7 +411,8 @@ public final class BasicProcessDescriptionType {
 
     /**
      *
-     * @param processDescriptionType new ProcessDescriptionType
+     * @param processDescriptionType Full description of process, including all
+     * input and output parameters
      */
     public void setPdt(final ProcessDescriptionType processDescriptionType) {
         this.pdt = processDescriptionType;
