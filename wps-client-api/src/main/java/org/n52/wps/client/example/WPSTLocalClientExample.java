@@ -2,11 +2,11 @@ package org.n52.wps.client.example;
 
 import java.math.BigInteger;
 import net.opengis.wps.x100.ProcessDescriptionType;
-import org.n52.wps.client.BasicInputDescriptionType;
-import org.n52.wps.client.BasicOutputDescriptionType;
-import org.n52.wps.client.BasicProcessDescriptionType;
-import org.n52.wps.client.TrasactionalRequestBuilder;
-import org.n52.wps.client.WPSClientSession;
+import org.n52.wps.client.transactional.BasicInputDescriptionType;
+import org.n52.wps.client.transactional.BasicOutputDescriptionType;
+import org.n52.wps.client.transactional.BasicProcessDescriptionType;
+import org.n52.wps.client.transactional.TrasactionalRequestBuilder;
+import org.n52.wps.client.WPSTClientSession;
 
 /**
  * @author dalcacer
@@ -16,12 +16,13 @@ public class WPSTLocalClientExample {
 
     public void testDeploy() {
 
+        String wpsURL = "http://192.168.56.101:8080/wps/WebProcessingService";
         String wpstURL = "http://192.168.56.101:8080/wps/WPS-T";
 
-        WPSClientSession wpsClient = WPSClientSession.getInstance();
+        WPSTClientSession wpstClient = WPSTClientSession.getInstance();
 
         try {
-            boolean connected = wpsClient.connectTransactional(wpstURL);
+            boolean connected = wpstClient.connect(wpsURL, wpstURL);
             System.out.println("Connected to "+wpstURL+" "+connected);
         } catch (Exception e) {
             System.err.println(e.getLocalizedMessage());
@@ -41,6 +42,7 @@ public class WPSTLocalClientExample {
         builder.setDeployProcessDescription(bpdt);
         builder.setDeployExecutionUnit("brr");
         System.out.println(builder.getDeploydocument().toString());
+        wpstClient.disconnect(wpsURL);
         
     }
 

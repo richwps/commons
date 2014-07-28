@@ -22,9 +22,9 @@ import net.opengis.wps.x100.ProcessDescriptionsDocument;
 import org.apache.xmlbeans.XmlOptions;
 
 import org.geotools.feature.FeatureCollection;
-import org.n52.wps.client.BasicInputDescriptionType;
-import org.n52.wps.client.BasicOutputDescriptionType;
-import org.n52.wps.client.BasicProcessDescriptionType;
+import org.n52.wps.client.transactional.BasicInputDescriptionType;
+import org.n52.wps.client.transactional.BasicOutputDescriptionType;
+import org.n52.wps.client.transactional.BasicProcessDescriptionType;
 import org.n52.wps.client.ExecuteResponseAnalyser;
 import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.WPSClientSession;

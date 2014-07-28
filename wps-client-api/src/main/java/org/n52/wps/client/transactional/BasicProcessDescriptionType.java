@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package org.n52.wps.client;
+package org.n52.wps.client.transactional;
 
 import java.util.ArrayList;
 import net.opengis.ows.x11.MetadataType;
