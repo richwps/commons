@@ -12,7 +12,7 @@ nb-configuration*.xml
 
 *.class
 
-# Mobile Tools for Java (J2ME)
+# Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
 # Package Files #
@@ -20,8 +20,8 @@ nb-configuration*.xml
 *.war
 *.ear
 */target/**
-rola-core/de.hsos.richwps.dsl_lib
 de.hsos.richwps.dsl_lib
 */src-gen/**
-!rola-core/target/dsl.lang-1.0.0-SNAPSHOT.jar
+!rola-api/libs
+rola-core/de.hsos.richwps.dsl_lib
 rola-core/xtext/de.hsos.richwps.dsl/src-gen

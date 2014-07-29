@@ -18,7 +18,7 @@
         <module>wps-config</module>
         <module>wps-client-api</module>
         <module>rola-api</module>
-        <module>rola-core</module>
+        <!--<module>rola-core</module>-->
     </modules>
   
   
@@ -27,6 +27,5 @@
         <project.52nwpsgroup>org.n52.wps</project.52nwpsgroup>
         <project.52nwpsversion>3.3.0</project.52nwpsversion>
     </properties>
-    
    
 </project>

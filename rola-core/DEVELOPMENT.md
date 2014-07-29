@@ -17,3 +17,5 @@ This procedure is based on [stackoverflow question](http://stackoverflow.com/que
 * `Export` -> `Java` -> `Runnable Jar file`
 	* Select `Copy required libraries into a sub-folder next to the generated JAR.`
 * `Finish`
+
+* Manually move generated lib to `rola-api/libs/de/hsos/richwps/dsl.lang/dsl.lang-1.0.0-SNAPSHOT.jar`
