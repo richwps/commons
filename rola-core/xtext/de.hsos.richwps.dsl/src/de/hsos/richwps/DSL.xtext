@@ -39,13 +39,13 @@ Assignment:
 	| (lefthand=VAR_REFERENCE '=' val_i=INT);
 
 IN_REFERENCE:
-	(IN_REFERENCE_HANDLE refname=ID);
+	(IN_REFERENCE_HANDLE refname=HYPHID);
 
 OUT_REFERENCE:
-	(OUT_REFERENCE_HANDLE refname=ID);
+	(OUT_REFERENCE_HANDLE refname=HYPHID);
 
 VAR_REFERENCE:
-	(VAR_REFERENCE_HANDLE refname=ID);
+	(VAR_REFERENCE_HANDLE refname=HYPHID);
 
 terminal IN_REFERENCE_HANDLE:
 	'in.' | 'IN.';
@@ -55,6 +55,9 @@ terminal VAR_REFERENCE_HANDLE:
 
 terminal OUT_REFERENCE_HANDLE:
 	'out.' | 'OUT.';
+
+terminal HYPHID:
+	'^'?('a'..'z'|'A'..'Z'|'_'|'-') ('a'..'z'|'A'..'Z'|'_'|'0'..'9'|'-')*;
 
 QUALIFIEDNAME:
 	ID ('.' ID)*;
