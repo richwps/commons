@@ -629,6 +629,7 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	private QUALIFIEDIDElements pQUALIFIEDID;
 	private URIElements pURI;
 	private TerminalRule tPROTOCOL;
+	private TerminalRule tID;
 	
 	private final Grammar grammar;
 
@@ -843,9 +844,9 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal ID:
-	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
+	//	("a".."z" | "A".."Z" | "_" | "-") ("a".."z" | "A".."Z" | "_" | "-" | "0".."9")*;
 	public TerminalRule getIDRule() {
-		return gaTerminals.getIDRule();
+		return (tID != null) ? tID : (tID = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "ID"));
 	} 
 
 	//terminal INT returns ecore::EInt:

@@ -67,3 +67,7 @@ URI:
 
 terminal PROTOCOL:
 	'http' | 'https';
+	
+terminal ID: 
+	('a'..'z'|'A'..'Z'|'_'|'-') ('a'..'z'|'A'..'Z'|'_'|'-'|'0'..'9')*
+	;

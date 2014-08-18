@@ -221,7 +221,7 @@ public class ReaderTest extends TestCase {
             Assignment act_as3 = (Assignment) ws.get(2);
             assertEquals(exp_as3, act_as3);
 
-            Assignment exp_as4 = new Assignment(new OutReference("test"), new VarReference("foo"));
+            Assignment exp_as4 = new Assignment(new OutReference("test"), new VarReference("foo-1"));
             Assignment act_as4 = (Assignment) ws.get(3);
             assertEquals(exp_as4, act_as4);
         }
