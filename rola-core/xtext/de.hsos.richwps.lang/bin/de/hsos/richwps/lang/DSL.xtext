@@ -1,0 +1,69 @@
+grammar de.hsos.richwps.DSL with org.eclipse.xtext.common.Terminals
+
+generate dSL "http://www.hsos.de/richwps/DSL"
+
+Worksequence:
+	(operations+=Operation)*
+	//	(
+	//	(bindings+=(LocalBinding | RemoteBinding)*)+ //1..n
+	//	| (assignments+=Assignment)* //0..n
+	//	| (executes+=ExecuteStatement)* //1.n
+	//	)*
+;
+
+Operation:
+	LocalBinding | RemoteBinding | Assignment | ExecuteStatement;
+
+	// e.g. bind process de.hsos.processname to hsos/proc1
+LocalBinding:
+	'bind' 'process' processid=QUALIFIEDNAME 'to' handle=QUALIFIEDID;
+
+	// e.g. bind process http test.de 80 /wps/WebProcessingService de.hsos.testprocess to hsos/proc2
+RemoteBinding:
+	'bind' 'process' protocol=PROTOCOL host=QUALIFIEDNAME port=INT path=URI processid=QUALIFIEDNAME 'to'
+	handle=QUALIFIEDID;
+
+ExecuteStatement:
+	'execute' handle=QUALIFIEDID 'with' (execinputs+=ExecInput*) 'store' (execoutputs+=ExecOutput*);
+
+ExecInput:
+	(reference=IN_REFERENCE 'as' wpsid=ID) | (reference=VAR_REFERENCE 'as' wpsid=ID);
+
+ExecOutput:
+	(wpsid=ID 'as' reference=OUT_REFERENCE) | (wpsid=ID 'as' reference=VAR_REFERENCE);
+
+Assignment:
+	(lefthand=OUT_REFERENCE '=' righthand=IN_REFERENCE) |
+	(lefthand=OUT_REFERENCE '=' righthand=VAR_REFERENCE) |
+	(lefthand=VAR_REFERENCE '=' val_s=STRING) //literaldata
+	| (lefthand=VAR_REFERENCE '=' val_i=INT);
+
+IN_REFERENCE:
+	(IN_REFERENCE_HANDLE refname=ID);
+
+OUT_REFERENCE:
+	(OUT_REFERENCE_HANDLE refname=ID);
+
+VAR_REFERENCE:
+	(VAR_REFERENCE_HANDLE refname=ID);
+
+terminal IN_REFERENCE_HANDLE:
+	'in.' | 'IN.';
+
+terminal VAR_REFERENCE_HANDLE:
+	'var.' | 'VAR.';
+
+terminal OUT_REFERENCE_HANDLE:
+	'out.' | 'OUT.';
+
+QUALIFIEDNAME:
+	ID ('.' ID)*;
+
+QUALIFIEDID:
+	ID ('/' ID)*;
+
+URI:
+	('/' ID)*;
+
+terminal PROTOCOL:
+	'http' | 'https';
