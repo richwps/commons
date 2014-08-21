@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wps:DeployProcess xmlns:wps="http://www.opengis.net/wps/2.0.0"
+<wps:DeployProcess xmlns:wps="http://www.opengis.net/wps/1.0.0"
 	xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="./wpsDeployProcess_request.xsd" service="WPS"
@@ -278,8 +278,8 @@
 		</ProcessOutputs>
 	</wps:ProcessDescription>
 	<!-- base64 encoded zip-file -->
-	<wps:executionUnit>UEsDBAoAAAAAAAJprEQAAAAAAAAAAAAAAAAFABwARGF0YS9VVAkAA5OrcFOMq3BTdXgLAAEE6AMA
+	<wps:ExecutionUnit>UEsDBAoAAAAAAAJprEQAAAAAAAAAAAAAAAAFABwARGF0YS9VVAkAA5OrcFOMq3BTdXgLAAEE6AMA
 AAToAwAAUEsBAh4DCgAAAAAAAmmsRAAAAAAAAAAAAAAAAAUAGAAAAAAAAAAQAP1BAAAAAERhdGEv
 VVQFAAOTq3BTdXgLAAEE6AMAAAToAwAAUEsFBgAAAAABAAEASwAAAD8AAAAAAA==
-</wps:executionUnit>
+</wps:ExecutionUnit>
 </wps:DeployProcess>

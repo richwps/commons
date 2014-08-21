@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wps:DeployProcess xmlns:wps="http://www.opengis.net/wps/2.0.0"
+<wps:DeployProcess xmlns:wps="http://www.opengis.net/wps/1.0.0"
 	xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="./wpsDeployProcess_request.xsd" service="WPS"
@@ -277,7 +277,7 @@
 			</Output>
 		</ProcessOutputs>
 	</wps:ProcessDescription>
-	<wps:executionUnit>
+	<wps:ExecutionUnit>
 		bind process org.n52.wps.server.algorithm.test.DummyTestClass to
 		richwps/dummyProcess
 		execute richwps/dummyProcess
@@ -285,5 +285,5 @@
 		in.name as IN1
 		store
 		OUT1 as out.result
-	</wps:executionUnit>
+	</wps:ExecutionUnit>
 </wps:DeployProcess>
