@@ -20,8 +20,6 @@ nb-configuration*.xml
 *.war
 *.ear
 */target/**
-de.hsos.richwps.dsl_lib
 */src-gen/**
 !rola-api/libs
-rola-core/de.hsos.richwps.dsl_lib
-rola-core/xtext/de.hsos.richwps.dsl/src-gen
+!rola-core/xtext
