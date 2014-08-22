@@ -4,9 +4,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="./wpsDeployProcess_request.xsd" service="WPS"
 	version="1.0.0" language="en-CA">
-	<wps:ProcessDescription statusSupported="true" storeSupported="true" wps:processVersion="1.1.0">
-		<ows:Identifier>org.n52.wps.server.algorithm.SimpleBufferAlgorithm</ows:Identifier>
-		<ows:Title>org.n52.wps.server.algorithm.SimpleBufferAlgorithm</ows:Title>
+	<wps:ProcessDescription statusSupported="true"
+		storeSupported="true" wps:processVersion="1.1.0">
+		<ows:Identifier>org.n52.wps.server.algorithm.SimpleBufferAlgorithm
+		</ows:Identifier>
+		<ows:Title>org.n52.wps.server.algorithm.SimpleBufferAlgorithm
+		</ows:Title>
 		<DataInputs>
 			<Input minOccurs="1" maxOccurs="1">
 				<ows:Identifier>data</ows:Identifier>
@@ -279,7 +282,8 @@
 	</wps:ProcessDescription>
 	<!-- base64 encoded zip-file -->
 	<wps:ExecutionUnit>UEsDBAoAAAAAAAJprEQAAAAAAAAAAAAAAAAFABwARGF0YS9VVAkAA5OrcFOMq3BTdXgLAAEE6AMA
-AAToAwAAUEsBAh4DCgAAAAAAAmmsRAAAAAAAAAAAAAAAAAUAGAAAAAAAAAAQAP1BAAAAAERhdGEv
-VVQFAAOTq3BTdXgLAAEE6AMAAAToAwAAUEsFBgAAAAABAAEASwAAAD8AAAAAAA==
-</wps:ExecutionUnit>
+		AAToAwAAUEsBAh4DCgAAAAAAAmmsRAAAAAAAAAAAAAAAAAUAGAAAAAAAAAAQAP1BAAAAAERhdGEv
+		VVQFAAOTq3BTdXgLAAEE6AMAAAToAwAAUEsFBgAAAAABAAEASwAAAD8AAAAAAA==
+	</wps:ExecutionUnit>
+	<wps:DeploymentProfileName>rola</wps:DeploymentProfileName>
 </wps:DeployProcess>

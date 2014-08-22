@@ -28,11 +28,10 @@
 					<sequence>
 						<element minOccurs="1"  maxOccurs="1" name="ProcessDescription" type="wps:ProcessDescriptionType" />
 						<element minOccurs="1" maxOccurs="1" name="ExecutionUnit" /> <!-- any simple type! -->
+						<element minOccurs="0" maxOccurs="1" name="DeploymentProfileName" type="string" nillable="false"/>
 					</sequence>
 				</extension>
-
 			</complexContent>
 		</complexType>
 	</element><!-- of DeployProcess -->
-
 </schema>

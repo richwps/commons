@@ -286,4 +286,5 @@
 		store
 		OUT1 as out.result
 	</wps:ExecutionUnit>
+	<wps:DeploymentProfileName>rola</wps:DeploymentProfileName>
 </wps:DeployProcess>
