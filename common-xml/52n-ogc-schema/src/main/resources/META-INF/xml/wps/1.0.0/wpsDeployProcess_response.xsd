@@ -34,8 +34,7 @@
 								</simpleContent>
 							</complexType>
 						</element>
-						<element minOccurs="1" maxOccurs="1" name="ProcessOfferings"
-							type="wps:ProcessBriefType" />
+						<element minOccurs="0" maxOccurs="1" ref="wps:ProcessOfferings"/>
 					</sequence>
 				</extension>
 			</complexContent>

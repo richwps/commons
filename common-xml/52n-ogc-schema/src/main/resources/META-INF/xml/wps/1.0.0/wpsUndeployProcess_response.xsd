@@ -27,17 +27,10 @@
 					<sequence>
 						<element minOccurs="1" maxOccurs="1" name="Undeployment">
 							<complexType>
-										<attribute name="done" type="boolean" />
+								<attribute name="done" type="boolean" />
 							</complexType>
 						</element>
-						<element minOccurs="1" maxOccurs="1" name="Process">
-							<complexType>
-								<sequence minOccurs="1">
-									<element ref="ows:Identifier" />
-								</sequence>
-								<attribute name="processVersion" type="integer" />
-							</complexType>
-						</element>
+						<element minOccurs="0" maxOccurs="1" ref="wps:ProcessOfferings"/>
 					</sequence>
 				</extension>
 			</complexContent>
