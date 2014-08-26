@@ -1,58 +1,117 @@
 package org.n52.wps.client.example;
 
-import java.math.BigInteger;
+import net.opengis.ows.x11.ExceptionReportDocument;
+import net.opengis.wps.x100.DeployProcessResponseDocument;
 import net.opengis.wps.x100.ProcessDescriptionType;
-import org.n52.wps.client.transactional.BasicInputDescriptionType;
-import org.n52.wps.client.transactional.BasicOutputDescriptionType;
+import net.opengis.wps.x100.UndeployProcessResponseDocument;
+
+import org.n52.wps.client.WPSClientException;
+import org.n52.wps.client.WPSTClientSession;
 import org.n52.wps.client.transactional.BasicProcessDescriptionType;
 import org.n52.wps.client.transactional.TrasactionalRequestBuilder;
-import org.n52.wps.client.WPSTClientSession;
 
 /**
  * @author dalcacer
- * @version 0.0.1
+ * @author woessner
+ * @version 0.0.2
  */
 public class WPSTLocalClientExample {
+	
+	String wpsURL, wpstURL;
+    WPSTClientSession wpstClient;
+    
+    
+    public WPSTLocalClientExample(String wpsURL, String wpstURL) {
+    	wpstClient = WPSTClientSession.getInstance();
+    	this.wpsURL = wpsURL;
+    	this.wpstURL = wpstURL;
+	}
 
-    public void testDeploy() {
+    public void testDeploy() throws WPSClientException {
 
-        String wpsURL = "http://192.168.56.101:8080/wps/WebProcessingService";
-        String wpstURL = "http://192.168.56.101:8080/wps/WPS-T";
+        TrasactionalRequestBuilder builder = new TrasactionalRequestBuilder();
+        //String identifier,String title, String processVersion, ProcessDescriptionType.ProcessOutputs processOutputs
+        ProcessDescriptionType.ProcessOutputs outputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
+        BasicProcessDescriptionType bpdt = new BasicProcessDescriptionType("test", "test", "1", outputs);
+        
+        // build request
+        builder.setDeployProcessDescription(bpdt);
+        builder.setDeployExecutionUnit("brr");
+        builder.setDeploymentProfileName("rola");
+        System.out.println("--- DeployProcess request: ---");
+        System.out.println(builder.getDeploydocument().toString());
+        
+        // deploy
+        Object responseObject = wpstClient.deploy(wpstURL, builder.getDeploydocument());
+        
+        // analyze response
+        if (responseObject instanceof DeployProcessResponseDocument) {
+        	DeployProcessResponseDocument response = (DeployProcessResponseDocument) responseObject;
+        	System.out.println("--- DeployProcess response: ---");
+        	System.out.println(response.toString());
+        }
+        else if (responseObject instanceof ExceptionReportDocument) {
+			ExceptionReportDocument response = (ExceptionReportDocument) responseObject;
+			System.out.println("--- Exception report: ---");
+			System.out.println(response.toString());
+        }
+    }
+    
+    public void testUndeploy() throws WPSClientException {
+    	TrasactionalRequestBuilder builder = new TrasactionalRequestBuilder();
+    	
+    	// build request
+    	builder.setIdentifier("test");
+    	builder.setKeepExecutionUnit(true);
+    	System.out.println("--- UndeployProcess request: ---");
+        System.out.println(builder.getUndeploydocument().toString());
 
-        WPSTClientSession wpstClient = WPSTClientSession.getInstance();
+        // undeploy
+        Object responseObject = wpstClient.undeploy(wpstURL, builder.getUndeploydocument());
+        
+        //analyze response
+        if (responseObject instanceof UndeployProcessResponseDocument) {
+        	UndeployProcessResponseDocument response = (UndeployProcessResponseDocument) responseObject;
+        	System.out.println("--- UndeployProcess response: ---");
+        	System.out.println(response.toString());
+        }
+        else if (responseObject instanceof ExceptionReportDocument) {
+			ExceptionReportDocument response = (ExceptionReportDocument) responseObject;
+			System.out.println("--- Exception report: ---");
+			System.out.println(response.toString());
+        }
+            	
+    }
 
-        try {
+    public void connect() {
+    	try {
             boolean connected = wpstClient.connect(wpsURL, wpstURL);
             System.out.println("Connected to "+wpstURL+" "+connected);
         } catch (Exception e) {
             System.err.println(e.getLocalizedMessage());
             e.printStackTrace();
         }
-        
-        //String defaultCRS_URI, String identifier,String title, BigInteger minOccurs, BigInteger maxOccurs
-        BasicInputDescriptionType input = new BasicInputDescriptionType("test","test", "test", BigInteger.ONE, BigInteger.ONE);
-        //String defaultCRS_URI, String identifier,String title, String processVersion
-        BasicOutputDescriptionType output = new BasicOutputDescriptionType("test", "test", "test", "1");
-        
-        TrasactionalRequestBuilder builder = new TrasactionalRequestBuilder();
-        //String identifier,String title, String processVersion, ProcessDescriptionType.ProcessOutputs processOutputs
-        ProcessDescriptionType.ProcessOutputs outputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
-        BasicProcessDescriptionType bpdt = new BasicProcessDescriptionType("test", "test", "1", outputs);
-        
-        builder.setDeployProcessDescription(bpdt);
-        builder.setDeployExecutionUnit("brr");
-        System.out.println(builder.getDeploydocument().toString());
-        wpstClient.disconnect(wpsURL);
-        
     }
-
+    
+    public void disconnect() {
+    	wpstClient.disconnect(wpsURL);
+    }
+    
     /**
      *
      * @param args
+     * @throws WPSClientException 
      */
-    public static void main(String[] args) {
-        WPSTLocalClientExample client = new WPSTLocalClientExample();
+    public static void main(String[] args) throws WPSClientException {
+    	String wpsURL = "http://localhost:8085/wps/WebProcessingService";
+        String wpstURL = "http://localhost:8085/wps/WPS-T";
+    	
+        WPSTLocalClientExample client = new WPSTLocalClientExample(wpsURL, wpstURL);
+        
+        client.connect();
         client.testDeploy();
+        client.testUndeploy();
+        client.disconnect();
     }
 
 }

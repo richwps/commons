@@ -19,9 +19,12 @@ import net.opengis.ows.x11.ExceptionReportDocument;
 import net.opengis.ows.x11.OperationDocument.Operation;
 import net.opengis.wps.x100.CapabilitiesDocument;
 import net.opengis.wps.x100.DeployProcessDocument;
+import net.opengis.wps.x100.DeployProcessResponseDocument;
 import net.opengis.wps.x100.ProcessBriefType;
 import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.ProcessDescriptionsDocument;
+import net.opengis.wps.x100.UndeployProcessDocument;
+import net.opengis.wps.x100.UndeployProcessResponseDocument;
 
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
@@ -295,24 +298,22 @@ public class WPSTClientSession {
     }
 
     /**
-     */
+	 * Deploy a process to a WPS
+	 * 
+	 * @param url url of server not the entry additionally defined in the caps
+	 * @param doc DeployProcess document
+	 * @return a DeployProcessResponseDocument
+	 */
     public Object deploy(String serverId, DeployProcessDocument doc) throws WPSClientException {
-        try {
-            this.retrieveDataViaPOST(doc, serverId);
-            //2. check answer.
-            //3. refresh capabilities.
-            //4. check capabilities for process existance.
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
+    	LOGGER.info("DeployProcess: " + doc.getDeployProcess().getProcessDescription().getIdentifier().getStringValue());
+    	return this.retrieveDeployProcessResponseViaPOST(serverId, doc);
     }
 
     /**
      */
-    public Object undeploy() throws WPSClientException {
-        //TODO
-        return null;
+    public Object undeploy(String serverId, UndeployProcessDocument doc) throws WPSClientException {
+    	LOGGER.info("UndeployProcess: " + doc.getUndeployProcess().getProcess().getIdentifier().getStringValue());
+        return this.retrieveUndeployProcessResponseViaPOST(serverId, doc);
     }
 
     private CapabilitiesDocument retrieveCapsViaGET(String url) throws WPSClientException {
@@ -350,7 +351,52 @@ public class WPSTClientSession {
             throw new WPSClientException("Error occured while parsing ProcessDescription document", e);
         }
     }
+    
+    /**
+	 * Retrieves a DeployProcess response via Http POST request and tries to parse it
+	 * @param url
+	 * @param doc
+	 * @return either an DeployProcessResponseDocument or an ExceptionReportDocument
+	 * @throws WPSClientException
+	 */
+	private Object retrieveDeployProcessResponseViaPOST(String url, DeployProcessDocument doc) throws WPSClientException{
+		InputStream is = retrieveDataViaPOST(doc, url);
+		Document documentObj = checkInputStream(is);
+		try {
+			return DeployProcessResponseDocument.Factory.parse(documentObj);
+		}
+		catch(XmlException e) {
+			try {
+				return ExceptionReportDocument.Factory.parse(documentObj);
+			} catch (Exception e2) {
+				throw new WPSClientException("Error occured while parsing deployProcessResponse", e);
+			}
+		}
+	}
+	
+	/**
+	 * Retrieves a UndeployProcess response via Http POST request and tries to parse it
+	 * @param url
+	 * @param doc
+	 * @return either an UndeployProcessResponseDocument or an ExceptionReportDocument
+	 * @throws WPSClientException
+	 */
+	private Object retrieveUndeployProcessResponseViaPOST(String url, UndeployProcessDocument doc) throws WPSClientException{
+		InputStream is = retrieveDataViaPOST(doc, url);
+		Document documentObj = checkInputStream(is);
+		try {
+			return UndeployProcessResponseDocument.Factory.parse(documentObj);
+		}
+		catch(XmlException e) {
+			try {
+				return ExceptionReportDocument.Factory.parse(documentObj);
+			} catch (Exception e2) {
+				throw new WPSClientException("Error occured while parsing undeployProcessResponse", e);
+			}
+		}
+	}
 
+    
     private InputStream retrieveDataViaPOST(XmlObject obj, String urlString) throws WPSClientException {
         try {
             URL url = new URL(urlString);
@@ -361,7 +407,7 @@ public class WPSTClientSession {
             obj.save(conn.getOutputStream());
             InputStream input = null;
             String encoding = conn.getContentEncoding();
-            if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
+            if(encoding != null && encoding.equalsIgnoreCase("gzip")) {
                 input = new GZIPInputStream(conn.getInputStream());
             } else {
                 input = conn.getInputStream();
