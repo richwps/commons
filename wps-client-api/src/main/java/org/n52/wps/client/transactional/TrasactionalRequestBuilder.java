@@ -3,7 +3,9 @@ package org.n52.wps.client.transactional;
 import net.opengis.wps.x100.DeployProcessDocument;
 import net.opengis.wps.x100.UndeployProcessDocument;
 
+import org.apache.xmlbeans.SimpleValue;
 import org.apache.xmlbeans.XmlString;
+import org.n52.wps.client.WPSClientException;
 
 /**
  * Builds an transactional request (deploy, undeploy).
@@ -82,8 +84,9 @@ public class TrasactionalRequestBuilder {
      * DeployProcess: Returns the deploy request.
      *
      * @return deploy request.
+     * @throws WPSClientException 
      */
-    public DeployProcessDocument getDeploydocument() {
+    public DeployProcessDocument getDeploydocument() throws WPSClientException {
         this.deploy.setDeployProcess(this.deployprocess);
         return validateDeployProcessDocument(this.deploy);
     }
@@ -112,8 +115,9 @@ public class TrasactionalRequestBuilder {
      * UndeployProcess: Returns the undeploy request.
      *
      * @return undeploy request.
+     * @throws WPSClientException 
      */
-    public UndeployProcessDocument getUndeploydocument() {
+    public UndeployProcessDocument getUndeploydocument() throws WPSClientException {
     	this.undeployprocess.setProcess(this.undeployprocessprocess);
     	this.undeploy.setUndeployProcess(this.undeployprocess);
         return validateUndeployProcessDocument(this.undeploy);
@@ -122,18 +126,45 @@ public class TrasactionalRequestBuilder {
     /**
      * Validates the DeployProcessDocument
      * @param doc
+     * @throws WPSClientException 
      */
-    private DeployProcessDocument validateDeployProcessDocument(DeployProcessDocument doc) {
-    	// TODO: validation
+    private DeployProcessDocument validateDeployProcessDocument(DeployProcessDocument doc) throws WPSClientException {
+    	if (doc.getDeployProcess().getProcessDescription() == null) {
+    		throw new WPSClientException("DeployProcess document does not contain a ProcessDescription");
+    	}
+    	if (doc.getDeployProcess().getExecutionUnit() == null) {
+    		throw new WPSClientException("DeployProcess document does not contain an ExecutionUnit");
+    	} else {
+    		if (((SimpleValue)doc.getDeployProcess().getExecutionUnit()).getStringValue().isEmpty()) {
+    			throw new WPSClientException("ExecutionUnit of DeployProcessDocument does not contain any value");
+    		}
+		}
+    	if (doc.getDeployProcess().getDeploymentProfileName() == null) {
+    		throw new WPSClientException("DeployProcess document does not contain an ExecutionUnit");
+    	} else {
+    		if (doc.getDeployProcess().getDeploymentProfileName().isEmpty()) {
+    			throw new WPSClientException("ExecutionUnit of DeployProcessDocument does not contain any value");
+    		}
+    	}
     	return doc;
     }
     
     /**
      * Validates the UndeployProcessDocument
      * @param doc
+     * @throws WPSClientException 
      */
-    private UndeployProcessDocument validateUndeployProcessDocument(UndeployProcessDocument doc) {
-    	// TODO: validation
+    private UndeployProcessDocument validateUndeployProcessDocument(UndeployProcessDocument doc) throws WPSClientException {
+    	if (doc.getUndeployProcess().getProcess() == null) {
+    		throw new WPSClientException("DeployProcess document does not contain a Process");
+    	}
+    	if (doc.getUndeployProcess().getProcess().getIdentifier() == null) {
+    		throw new WPSClientException("UndeployProcess document does not contain an identifer");
+    	} else {
+    		if (doc.getUndeployProcess().getProcess().getIdentifier().getStringValue().isEmpty()) {
+    			throw new WPSClientException("Identifer of UndeployProcessDocument does not contain any value");
+    		}
+    	}
     	return doc;
     }
 }
