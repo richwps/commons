@@ -3,7 +3,7 @@ package org.n52.wps.client.transactional;
 import net.opengis.wps.x100.DeployProcessDocument;
 import net.opengis.wps.x100.UndeployProcessDocument;
 
-import org.apache.xmlbeans.XmlObject;
+import org.apache.xmlbeans.XmlString;
 
 /**
  * Builds an transactional request (deploy, undeploy).
@@ -66,9 +66,7 @@ public class TrasactionalRequestBuilder {
      * implemented, yet.
      */
     public void setDeployExecutionUnit(final String exec) {
-    	XmlObject obj = XmlObject.Factory.newInstance();
-    	// TODO: Find a proper way to set string as value of XmlObject    	
-        this.deployprocess.setExecutionUnit(obj);
+        this.deployprocess.setExecutionUnit(XmlString.Factory.newValue(exec));
     }
     
     /**
