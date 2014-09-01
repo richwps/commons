@@ -1,6 +1,7 @@
 package org.n52.wps.client.transactional;
 
 import java.util.ArrayList;
+import net.opengis.ows.x11.DomainMetadataType;
 import net.opengis.ows.x11.LanguageStringType;
 import net.opengis.ows.x11.MetadataType;
 import net.opengis.wps.x100.CRSsType;
@@ -18,6 +19,7 @@ import org.w3.x1999.xlink.TypeType;
 /**
  *
  * @author carstenduvel
+ * @author dalcacer
  * @todo: FormatTypes (Three types problem) & Metadata
  */
 public class BasicOutputDescriptionType {
@@ -79,6 +81,10 @@ public class BasicOutputDescriptionType {
         initialize(identifier, title);
         /* Mandatory (One of the three) */
         this.addNewLiteralOutput(outputFormChoice);
+    }
+    
+    public BasicOutputDescriptionType(final String identifier, final String title) {
+        initialize(identifier, title);
     }
 
     /**
@@ -229,6 +235,15 @@ public class BasicOutputDescriptionType {
 
     }
 
+  
+    public void addNewLiteralOutput(final String type) {
+        LiteralOutputType literalType = LiteralOutputType.Factory.newInstance();
+        DomainMetadataType thedatatype = literalType.addNewDataType();
+        thedatatype.setReference(type);
+        literalType.setDataType(thedatatype);
+        this.odt.setLiteralOutput(literalType);
+    }
+    
     /**
      * Called by Constructor to add LiteralOutput tag.
      * @param outputFormChoice Identifies the type of this output and provides
@@ -242,7 +257,8 @@ public class BasicOutputDescriptionType {
 
         literalOT = outputFormChoice;
     }
-
+    
+     
     /**
      * Called by Constructor to add ComplexOutput tag.
      * @param defaultMimeType Identification of default Format for process input
@@ -250,7 +266,7 @@ public class BasicOutputDescriptionType {
      * @param supportedMimeType Identification of supportedf Format for process
      * input or output
      */
-    private void addNewComplexOutput(final String defaultMimeType,
+    public void addNewComplexOutput(final String defaultMimeType,
             final String supportedMimeType) {
         SupportedComplexDataType complexDataType = odt.addNewComplexOutput();
 
