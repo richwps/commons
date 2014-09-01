@@ -8,6 +8,7 @@ import net.opengis.ows.x11.AllowedValuesDocument;
 import net.opengis.ows.x11.AnyValueDocument;
 import net.opengis.ows.x11.DomainMetadataType;
 import net.opengis.ows.x11.LanguageStringType;
+import net.opengis.ows11.impl.DomainMetadataTypeImpl;
 import net.opengis.wps.x100.CRSsType;
 import net.opengis.wps.x100.ComplexDataCombinationType;
 import net.opengis.wps.x100.ComplexDataCombinationsType;
@@ -19,6 +20,7 @@ import net.opengis.wps.x100.SupportedComplexDataInputType;
 import net.opengis.wps.x100.SupportedUOMsType;
 import net.opengis.wps.x100.UOMsType;
 import net.opengis.wps.x100.ValuesReferenceType;
+import org.geotools.ows.v1_1.OWS;
 
 /**
  *
@@ -228,6 +230,23 @@ public class BasicInputDescriptionType {
         literalData.setAllowedValues(allowedValues);
     }
 
+    public final void addNewLiteralData(final String typeUri, final String defaultValue) {
+        
+         LiteralInputType literalDataInputType;
+        if (idt.getLiteralData() == null) {
+            literalDataInputType = idt.addNewLiteralData();
+        } else {
+            literalDataInputType = idt.getLiteralData();
+        }
+
+       
+        DomainMetadataType dataType =  literalDataInputType.addNewDataType();
+        dataType.setReference(typeUri);
+        literalDataInputType.setDataType(dataType);
+        literalDataInputType.setDefaultValue(defaultValue);
+    }
+
+    
     /**
      * Adds new LiteralData with "AnyValue" ValueChoice.
      *
