@@ -3,6 +3,7 @@ package org.n52.wps.client.transactional;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import net.opengis.ows.x11.AllowedValuesDocument;
 import net.opengis.ows.x11.AnyValueDocument;
 import net.opengis.ows.x11.DomainMetadataType;
@@ -22,6 +23,7 @@ import net.opengis.wps.x100.ValuesReferenceType;
 /**
  *
  * @author carstenduvel
+ * @author dalcacer
  * @todo: FormatTypes (Three types problem)
  */
 public class BasicInputDescriptionType {
@@ -99,7 +101,7 @@ public class BasicInputDescriptionType {
      * present
      */
     public BasicInputDescriptionType(final String defaultCRSURI,
-            final ArrayList<String> supportedCRSURIs, final String identifier,
+            final List<String> supportedCRSURIs, final String identifier,
             final String title,
             final BigInteger minOccurs, final BigInteger maxOccurs) {
         initialize(identifier, title, minOccurs, maxOccurs);
@@ -162,7 +164,7 @@ public class BasicInputDescriptionType {
      *
      * @param defaultURI Reference to default coordinate reference system
      */
-    private void addNewBoundingBoxData(final String defaultURI) {
+    public void addNewBoundingBoxData(final String defaultURI) {
         SupportedCRSsType supportedCRSsType = idt.addNewBoundingBoxData();
 
         SupportedCRSsType.Default defaultType;
@@ -181,8 +183,8 @@ public class BasicInputDescriptionType {
      * @param defaultURI Reference to default coordinate reference system
      * @param supportedURIs References to supported coordinate reference systems
      */
-    private void addNewBoundingBoxData(final String defaultURI,
-            final ArrayList<String> supportedURIs) {
+    public void addNewBoundingBoxData(final String defaultURI,
+            final List<String> supportedURIs) {
         SupportedCRSsType supportedCRSsType = idt.addNewBoundingBoxData();
 
         SupportedCRSsType.Default defaultType;
@@ -387,7 +389,7 @@ public class BasicInputDescriptionType {
      * If the input exceeds this size, the server will return an error instead
      * of processing the inputs.
      */
-    private void addNewComplexData(
+    public void addNewComplexData(
             final ComplexDataDescriptionType defaultFormat,
             final ComplexDataDescriptionType supportedFormat,
             final BigInteger maxMegabytes) {
@@ -421,9 +423,9 @@ public class BasicInputDescriptionType {
      * If the input exceeds this size, the server will return an error instead
      * of processing the inputs.
      */
-    private void addNewComplexData(
+    public void addNewComplexData(
             final ComplexDataDescriptionType defaultFormat,
-            final ArrayList<ComplexDataDescriptionType> supportedFormatList,
+            final List<ComplexDataDescriptionType> supportedFormatList,
             final BigInteger maxMegabytes) {
         SupportedComplexDataInputType complexDataInputType;
         complexDataInputType = idt.addNewComplexData();
@@ -555,8 +557,7 @@ public class BasicInputDescriptionType {
     /**
      * Returns MaxOccurs.
      *
-     * @return Maximum number of times that this parameter may be
-     * present
+     * @return Maximum number of times that this parameter may be present
      */
     public final BigInteger getMaxOccurs() {
         return this.idt.getMaxOccurs();
@@ -565,8 +566,8 @@ public class BasicInputDescriptionType {
     /**
      * Sets maxOccurs.
      *
-     * @param maxOccurs Maximum number of times that this parameter
-     * may be present
+     * @param maxOccurs Maximum number of times that this parameter may be
+     * present
      */
     public final void setMaxOccurs(final BigInteger maxOccurs) {
         this.idt.setMaxOccurs(maxOccurs);
@@ -620,4 +621,8 @@ public class BasicInputDescriptionType {
         this.idt = newIdt;
     }
 
+    @Override
+    public String toString() {
+        return "BasicInputDescriptionType{" + "idt=" + idt + '}';
+    }
 }
