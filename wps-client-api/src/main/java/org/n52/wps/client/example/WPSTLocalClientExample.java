@@ -7,7 +7,7 @@ import net.opengis.wps.x100.UndeployProcessResponseDocument;
 
 import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.WPSTClientSession;
-import org.n52.wps.client.transactional.BasicProcessDescriptionType;
+import org.n52.wps.client.transactional.ProcessDescriptionTypeBuilder;
 import org.n52.wps.client.transactional.TrasactionalRequestBuilder;
 
 /**
@@ -32,7 +32,7 @@ public class WPSTLocalClientExample {
         TrasactionalRequestBuilder builder = new TrasactionalRequestBuilder();
         //String identifier,String title, String processVersion, ProcessDescriptionType.ProcessOutputs processOutputs
         ProcessDescriptionType.ProcessOutputs outputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
-        BasicProcessDescriptionType bpdt = new BasicProcessDescriptionType("test", "test", "1", outputs);
+        ProcessDescriptionTypeBuilder bpdt = new ProcessDescriptionTypeBuilder("test", "test", "1", outputs);
         
         // build request
         builder.setDeployProcessDescription(bpdt);

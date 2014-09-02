@@ -57,7 +57,7 @@ public class TrasactionalRequestBuilder {
      *
      * @param description process description.
      */
-    public void setDeployProcessDescription(final BasicProcessDescriptionType description) {
+    public void setDeployProcessDescription(final ProcessDescriptionTypeBuilder description) {
         this.deployprocess.setProcessDescription(description.getPdt());
     }
 

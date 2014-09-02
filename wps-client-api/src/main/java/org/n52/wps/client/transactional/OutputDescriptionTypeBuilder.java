@@ -22,7 +22,7 @@ import org.w3.x1999.xlink.TypeType;
  * @author dalcacer
  * @todo: FormatTypes (Three types problem) & Metadata
  */
-public class BasicOutputDescriptionType {
+public class OutputDescriptionTypeBuilder {
 
     /**
      * odt OutputDescriptionType wrapped by this class. Used by
@@ -60,7 +60,7 @@ public class BasicOutputDescriptionType {
      * @param title Title of a process, input, or output, normally available for
      * display to a human
      */
-    public BasicOutputDescriptionType(final String defaultCRSURI,
+    public OutputDescriptionTypeBuilder(final String defaultCRSURI,
             final String identifier, final String title) {
         initialize(identifier, title);
         /* Mandatory (One of the three) */
@@ -76,14 +76,14 @@ public class BasicOutputDescriptionType {
      * @param title Title of a process, input, or output, normally available for
      * display to a human
      */
-    public BasicOutputDescriptionType(final LiteralOutputType outputFormChoice,
+    public OutputDescriptionTypeBuilder(final LiteralOutputType outputFormChoice,
             final String identifier, final String title) {
         initialize(identifier, title);
         /* Mandatory (One of the three) */
         this.addNewLiteralOutput(outputFormChoice);
     }
     
-    public BasicOutputDescriptionType(final String identifier, final String title) {
+    public OutputDescriptionTypeBuilder(final String identifier, final String title) {
         initialize(identifier, title);
     }
 
@@ -98,7 +98,7 @@ public class BasicOutputDescriptionType {
      * @param title Title of a process, input, or output, normally available for
      * display to a human
      */
-    public BasicOutputDescriptionType(final String defaultMimeType,
+    public OutputDescriptionTypeBuilder(final String defaultMimeType,
             final String supportedMimeType, final String identifier,
             final String title) {
         initialize(identifier, title);
@@ -117,7 +117,7 @@ public class BasicOutputDescriptionType {
      * @param title Title of a process, input, or output, normally available for
      * display to a human
      */
-    public BasicOutputDescriptionType(
+    public OutputDescriptionTypeBuilder(
             final ComplexDataCombinationType defaultFormats,
             final ComplexDataCombinationsType supportedFormats,
             final String identifier, final String title) {

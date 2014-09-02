@@ -28,7 +28,7 @@ import org.geotools.ows.v1_1.OWS;
  * @author dalcacer
  * @todo: FormatTypes (Three types problem)
  */
-public class BasicInputDescriptionType {
+public class InputDescriptionTypeBuilder {
 
     /**
      * idt InputDescriptionType wrapped by this class. Used by
@@ -80,7 +80,7 @@ public class BasicInputDescriptionType {
      * @param maxOccurs Maximum number of times that this parameter may be
      * present
      */
-    public BasicInputDescriptionType(final String defaultCRSURI,
+    public InputDescriptionTypeBuilder(final String defaultCRSURI,
             final String identifier, final String title,
             final BigInteger minOccurs, final BigInteger maxOccurs) {
         initialize(identifier, title, minOccurs, maxOccurs);
@@ -102,7 +102,7 @@ public class BasicInputDescriptionType {
      * @param maxOccurs Maximum number of times that this parameter may be
      * present
      */
-    public BasicInputDescriptionType(final String defaultCRSURI,
+    public InputDescriptionTypeBuilder(final String defaultCRSURI,
             final List<String> supportedCRSURIs, final String identifier,
             final String title,
             final BigInteger minOccurs, final BigInteger maxOccurs) {
@@ -125,7 +125,7 @@ public class BasicInputDescriptionType {
      * @param maxOccurs Maximum number of times that this parameter may be
      * present
      */
-    public BasicInputDescriptionType(
+    public InputDescriptionTypeBuilder(
             final String identifier, final String title,
             final BigInteger minOccurs, final BigInteger maxOccurs) {
         initialize(identifier, title, minOccurs, maxOccurs);
@@ -150,7 +150,7 @@ public class BasicInputDescriptionType {
      * @param maxOccurs Maximum number of times that this parameter may be
      * present
      */
-    public BasicInputDescriptionType(
+    public InputDescriptionTypeBuilder(
             final ComplexDataDescriptionType defaultFormat,
             final ComplexDataDescriptionType supportedFormat,
             final BigInteger maxMegabytes,
