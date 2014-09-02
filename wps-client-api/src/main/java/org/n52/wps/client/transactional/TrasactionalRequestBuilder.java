@@ -1,6 +1,7 @@
 package org.n52.wps.client.transactional;
 
 import net.opengis.wps.x100.DeployProcessDocument;
+import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.UndeployProcessDocument;
 
 import org.apache.xmlbeans.SimpleValue;
@@ -60,7 +61,15 @@ public class TrasactionalRequestBuilder {
     public void setDeployProcessDescription(final ProcessDescriptionTypeBuilder description) {
         this.deployprocess.setProcessDescription(description.getPdt());
     }
-
+    
+     /**
+     * DeployProcess: Sets process description.
+     *
+     * @param description process description.
+     */
+    public void setDeployProcessDescription(final ProcessDescriptionType description) {
+        this.deployprocess.setProcessDescription(description);
+    }
     /**
      * DeployProcess: Sets execution unit.
      *
