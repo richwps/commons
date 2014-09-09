@@ -8,19 +8,27 @@
     
     <description>
         Various software components that can be used in different contexts such
-        as clients or servers.
+        as RichWPS/WPS clients or servers.
     </description>
     
     <url>http://github.com/richwps/commons</url>
+    
+    <scm>
+        <connection>scm:git:ssh://github.com/richwps/commons.git</connection>
+        <developerConnection>scm:git:ssh://github.com/richwps/commons.git</developerConnection>
+        <url>http://github.com/richwps/commons</url>
+    </scm>
+    
+    <issueManagement>
+        <url>https://github.com/richwps/commons/issues</url>
+    </issueManagement>
     
     <modules>
         <module>common-xml</module>
         <module>wps-config</module>
         <module>wps-client-api</module>
         <module>rola-api</module>
-        <!--<module>rola-core</module>-->
     </modules>
-  
   
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

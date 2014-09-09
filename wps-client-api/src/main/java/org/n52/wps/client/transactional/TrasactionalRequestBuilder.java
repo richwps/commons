@@ -42,14 +42,23 @@ public class TrasactionalRequestBuilder {
      */
     private UndeployProcessDocument.UndeployProcess.Process undeployprocessprocess;
     
+    public static String SERVICE="WPS";
+    public static String VERSION="1.0.0";
     /**
      * Constructs a new TransactionalRequestBuilder.
      */
     public TrasactionalRequestBuilder() {
-        deploy = DeployProcessDocument.Factory.newInstance();
+        this.deploy = DeployProcessDocument.Factory.newInstance();
         deployprocess = DeployProcessDocument.DeployProcess.Factory.newInstance();
+        this.deployprocess.setService(SERVICE);
+        this.deployprocess.setVersion(VERSION);
+        
         undeploy = UndeployProcessDocument.Factory.newInstance();
+        
         undeployprocess = UndeployProcessDocument.UndeployProcess.Factory.newInstance();
+        this.undeployprocess.setService(SERVICE);
+        this.undeployprocess.setVersion(VERSION);
+        
         undeployprocessprocess = UndeployProcessDocument.UndeployProcess.Process.Factory.newInstance();
     }
 
@@ -138,7 +147,7 @@ public class TrasactionalRequestBuilder {
      * @throws WPSClientException 
      */
     private DeployProcessDocument validateDeployProcessDocument(DeployProcessDocument doc) throws WPSClientException {
-    	if (doc.getDeployProcess().getProcessDescription() == null) {
+        if (doc.getDeployProcess().getProcessDescription() == null) {
     		throw new WPSClientException("DeployProcess document does not contain a ProcessDescription");
     	}
     	if (doc.getDeployProcess().getExecutionUnit() == null) {

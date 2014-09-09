@@ -48,8 +48,7 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(fh);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -64,8 +63,7 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -83,8 +81,7 @@ public class ReaderTest extends TestCase {
         try {
             instance.load(abspath);
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -99,16 +96,14 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
 
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -120,15 +115,13 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -143,15 +136,13 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -166,16 +157,14 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
 
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -190,22 +179,20 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
 
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
         /**
          * out.test = in.test2 var.test = 10 var.test = 'hallo welt' out.test =
-         * var.foo
+         * var.foo-1
          */
         Worksequence ws = instance.getWorksequence();
         try {
@@ -224,8 +211,7 @@ public class ReaderTest extends TestCase {
             Assignment exp_as4 = new Assignment(new OutReference("test"), new VarReference("foo-1"));
             Assignment act_as4 = (Assignment) ws.get(3);
             assertEquals(exp_as4, act_as4);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -237,16 +223,14 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
 
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -275,8 +259,7 @@ public class ReaderTest extends TestCase {
 
             assertEquals(exp_b2, act_b2);
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -288,16 +271,14 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
 
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -309,16 +290,14 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
 
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -340,8 +319,7 @@ public class ReaderTest extends TestCase {
 
             assertEquals(act_e1, exp_e1);
 
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
@@ -353,16 +331,14 @@ public class ReaderTest extends TestCase {
         Reader instance = new Reader();
         try {
             instance.load(path);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
 
         try {
             instance.inspect();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             fail();
         }
