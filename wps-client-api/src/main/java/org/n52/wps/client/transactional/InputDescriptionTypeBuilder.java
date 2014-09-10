@@ -196,7 +196,8 @@ public class InputDescriptionTypeBuilder {
         /* Optional (One or More)*/
         CRSsType supportedType = supportedCRSsType.addNewSupported();
 
-        supportedType.addCRS(defaultURI);
+        //commented out supportedType.addCRS(defaultURI); because it creates
+        //duplicates in combination with InputBoundingBoxDataSpecifier
         for (String supportedURI : supportedURIs) {
             supportedType.addCRS(supportedURI);
         }

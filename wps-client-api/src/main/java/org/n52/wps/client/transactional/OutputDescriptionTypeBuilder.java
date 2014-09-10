@@ -199,7 +199,7 @@ public class OutputDescriptionTypeBuilder {
      * @param defaultURI Reference to the default coordinate reference system
      * (CRS)
      */
-    private void addNewBoundingBoxOutput(final String defaultURI) {
+    public void addNewBoundingBoxOutput(final String defaultURI) {
         SupportedCRSsType supportedCRSsType = odt.addNewBoundingBoxOutput();
 
         SupportedCRSsType.Default defaultType;
@@ -219,7 +219,7 @@ public class OutputDescriptionTypeBuilder {
      * (CRS)
      * @param supportedURIs References to supported coordinate reference systems
      */
-    private void addNewBoundingBoxOutput(final String defaultURI,
+    public void addNewBoundingBoxOutput(final String defaultURI,
             final ArrayList<String> supportedURIs) {
         SupportedCRSsType supportedCRSsType = odt.addNewBoundingBoxOutput();
 
@@ -228,7 +228,9 @@ public class OutputDescriptionTypeBuilder {
         defaultType.setCRS(defaultURI);
 
         CRSsType supportedType = supportedCRSsType.addNewSupported();
-        supportedType.addCRS(defaultURI);
+        
+        //commented out supportedType.addCRS(defaultURI); because it creates
+        //duplicates in combination with OutputBoundingBoxDataSpecifier
         for (String supportedURI : supportedURIs) {
             supportedType.addCRS(supportedURI);
         }
