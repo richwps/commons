@@ -22,9 +22,9 @@ import net.opengis.wps.x100.ProcessDescriptionsDocument;
 import org.apache.xmlbeans.XmlOptions;
 
 import org.geotools.feature.FeatureCollection;
-import org.n52.wps.client.transactional.BasicInputDescriptionType;
-import org.n52.wps.client.transactional.BasicOutputDescriptionType;
-import org.n52.wps.client.transactional.BasicProcessDescriptionType;
+import org.n52.wps.client.transactional.InputDescriptionTypeBuilder;
+import org.n52.wps.client.transactional.OutputDescriptionTypeBuilder;
+import org.n52.wps.client.transactional.ProcessDescriptionTypeBuilder;
 import org.n52.wps.client.ExecuteResponseAnalyser;
 import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.WPSClientSession;
@@ -44,19 +44,19 @@ public class WPSClientExampleBasic {
         ProcessDescriptionType.ProcessOutputs procOutputs;
         procOutputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
         ComplexDataCombinationType outputDefaultFormats;
-        outputDefaultFormats = BasicOutputDescriptionType.createComplexDataCombiType("text/xml","base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
+        outputDefaultFormats = OutputDescriptionTypeBuilder.createComplexDataCombiType("text/xml","base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
         ComplexDataCombinationsType outputSupportedFormats;
-        outputSupportedFormats = BasicOutputDescriptionType.createComplexDataCombisType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
+        outputSupportedFormats = OutputDescriptionTypeBuilder.createComplexDataCombisType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
 
-        BasicOutputDescriptionType basicOutputDescriptionType;
-        basicOutputDescriptionType = new BasicOutputDescriptionType(outputDefaultFormats, outputSupportedFormats, "BufferedPolygon", "Buffered Polygon");
+        OutputDescriptionTypeBuilder basicOutputDescriptionType;
+        basicOutputDescriptionType = new OutputDescriptionTypeBuilder(outputDefaultFormats, outputSupportedFormats, "BufferedPolygon", "Buffered Polygon");
         basicOutputDescriptionType.setAbstract("GML stream describing the buffered polygon feature.");
 
         procOutputs.addNewOutput();
         procOutputs.setOutputArray(0, basicOutputDescriptionType.getOdt());
 
-        BasicProcessDescriptionType basicProcDesc; 
-        basicProcDesc = new BasicProcessDescriptionType(
+        ProcessDescriptionTypeBuilder basicProcDesc; 
+        basicProcDesc = new ProcessDescriptionTypeBuilder(
                 "Buffer",
                 "Create a buffer around a polygon.",
                 "2", 
@@ -75,13 +75,13 @@ public class WPSClientExampleBasic {
         basicProcDesc.setStoreSupported(true);
         basicProcDesc.setWSDL("http://foo.bar/foo");
 
-        ComplexDataDescriptionType defaultFormat = BasicInputDescriptionType.createComplexDataDescriptionType("text/xml", "base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
-        ComplexDataDescriptionType supportedFormat = BasicInputDescriptionType.createComplexDataDescriptionType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
-        BasicInputDescriptionType inputPolygon = new BasicInputDescriptionType(defaultFormat, supportedFormat, BigInteger.valueOf(5), "InputPolygon", "Polygon to be buffered", BigInteger.ONE, BigInteger.ONE);
+        ComplexDataDescriptionType defaultFormat = InputDescriptionTypeBuilder.createComplexDataDescriptionType("text/xml", "base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
+        ComplexDataDescriptionType supportedFormat = InputDescriptionTypeBuilder.createComplexDataDescriptionType("text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
+        InputDescriptionTypeBuilder inputPolygon = new InputDescriptionTypeBuilder(defaultFormat, supportedFormat, BigInteger.valueOf(5), "InputPolygon", "Polygon to be buffered", BigInteger.ONE, BigInteger.ONE);
         inputPolygon.setAbstract("URI to a set of GML that describes the polygon.");
 
-        BasicInputDescriptionType bufferDistance;
-        bufferDistance = new BasicInputDescriptionType("BufferDistance", 
+        InputDescriptionTypeBuilder bufferDistance;
+        bufferDistance = new InputDescriptionTypeBuilder("BufferDistance", 
                 "Buffer Distance", BigInteger.ZERO, BigInteger.ONE);
         bufferDistance.setAbstract("Distance to be used to calculate buffer.");
 

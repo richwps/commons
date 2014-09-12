@@ -1,6 +1,7 @@
 package org.n52.wps.client.transactional;
 
 import net.opengis.wps.x100.DeployProcessDocument;
+import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.UndeployProcessDocument;
 
 import org.apache.xmlbeans.SimpleValue;
@@ -41,14 +42,23 @@ public class TrasactionalRequestBuilder {
      */
     private UndeployProcessDocument.UndeployProcess.Process undeployprocessprocess;
     
+    public static String SERVICE="WPS";
+    public static String VERSION="1.0.0";
     /**
      * Constructs a new TransactionalRequestBuilder.
      */
     public TrasactionalRequestBuilder() {
-        deploy = DeployProcessDocument.Factory.newInstance();
+        this.deploy = DeployProcessDocument.Factory.newInstance();
         deployprocess = DeployProcessDocument.DeployProcess.Factory.newInstance();
+        this.deployprocess.setService(SERVICE);
+        this.deployprocess.setVersion(VERSION);
+        
         undeploy = UndeployProcessDocument.Factory.newInstance();
+        
         undeployprocess = UndeployProcessDocument.UndeployProcess.Factory.newInstance();
+        this.undeployprocess.setService(SERVICE);
+        this.undeployprocess.setVersion(VERSION);
+        
         undeployprocessprocess = UndeployProcessDocument.UndeployProcess.Process.Factory.newInstance();
     }
 
@@ -57,10 +67,18 @@ public class TrasactionalRequestBuilder {
      *
      * @param description process description.
      */
-    public void setDeployProcessDescription(final BasicProcessDescriptionType description) {
+    public void setDeployProcessDescription(final ProcessDescriptionTypeBuilder description) {
         this.deployprocess.setProcessDescription(description.getPdt());
     }
-
+    
+     /**
+     * DeployProcess: Sets process description.
+     *
+     * @param description process description.
+     */
+    public void setDeployProcessDescription(final ProcessDescriptionType description) {
+        this.deployprocess.setProcessDescription(description);
+    }
     /**
      * DeployProcess: Sets execution unit.
      *
@@ -129,7 +147,7 @@ public class TrasactionalRequestBuilder {
      * @throws WPSClientException 
      */
     private DeployProcessDocument validateDeployProcessDocument(DeployProcessDocument doc) throws WPSClientException {
-    	if (doc.getDeployProcess().getProcessDescription() == null) {
+        if (doc.getDeployProcess().getProcessDescription() == null) {
     		throw new WPSClientException("DeployProcess document does not contain a ProcessDescription");
     	}
     	if (doc.getDeployProcess().getExecutionUnit() == null) {

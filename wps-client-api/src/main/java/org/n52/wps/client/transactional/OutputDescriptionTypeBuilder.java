@@ -1,6 +1,7 @@
 package org.n52.wps.client.transactional;
 
 import java.util.ArrayList;
+import net.opengis.ows.x11.DomainMetadataType;
 import net.opengis.ows.x11.LanguageStringType;
 import net.opengis.ows.x11.MetadataType;
 import net.opengis.wps.x100.CRSsType;
@@ -18,9 +19,10 @@ import org.w3.x1999.xlink.TypeType;
 /**
  *
  * @author carstenduvel
+ * @author dalcacer
  * @todo: FormatTypes (Three types problem) & Metadata
  */
-public class BasicOutputDescriptionType {
+public class OutputDescriptionTypeBuilder {
 
     /**
      * odt OutputDescriptionType wrapped by this class. Used by
@@ -58,7 +60,7 @@ public class BasicOutputDescriptionType {
      * @param title Title of a process, input, or output, normally available for
      * display to a human
      */
-    public BasicOutputDescriptionType(final String defaultCRSURI,
+    public OutputDescriptionTypeBuilder(final String defaultCRSURI,
             final String identifier, final String title) {
         initialize(identifier, title);
         /* Mandatory (One of the three) */
@@ -74,11 +76,15 @@ public class BasicOutputDescriptionType {
      * @param title Title of a process, input, or output, normally available for
      * display to a human
      */
-    public BasicOutputDescriptionType(final LiteralOutputType outputFormChoice,
+    public OutputDescriptionTypeBuilder(final LiteralOutputType outputFormChoice,
             final String identifier, final String title) {
         initialize(identifier, title);
         /* Mandatory (One of the three) */
         this.addNewLiteralOutput(outputFormChoice);
+    }
+    
+    public OutputDescriptionTypeBuilder(final String identifier, final String title) {
+        initialize(identifier, title);
     }
 
     /**
@@ -92,7 +98,7 @@ public class BasicOutputDescriptionType {
      * @param title Title of a process, input, or output, normally available for
      * display to a human
      */
-    public BasicOutputDescriptionType(final String defaultMimeType,
+    public OutputDescriptionTypeBuilder(final String defaultMimeType,
             final String supportedMimeType, final String identifier,
             final String title) {
         initialize(identifier, title);
@@ -111,7 +117,7 @@ public class BasicOutputDescriptionType {
      * @param title Title of a process, input, or output, normally available for
      * display to a human
      */
-    public BasicOutputDescriptionType(
+    public OutputDescriptionTypeBuilder(
             final ComplexDataCombinationType defaultFormats,
             final ComplexDataCombinationsType supportedFormats,
             final String identifier, final String title) {
@@ -193,7 +199,7 @@ public class BasicOutputDescriptionType {
      * @param defaultURI Reference to the default coordinate reference system
      * (CRS)
      */
-    private void addNewBoundingBoxOutput(final String defaultURI) {
+    public void addNewBoundingBoxOutput(final String defaultURI) {
         SupportedCRSsType supportedCRSsType = odt.addNewBoundingBoxOutput();
 
         SupportedCRSsType.Default defaultType;
@@ -213,7 +219,7 @@ public class BasicOutputDescriptionType {
      * (CRS)
      * @param supportedURIs References to supported coordinate reference systems
      */
-    private void addNewBoundingBoxOutput(final String defaultURI,
+    public void addNewBoundingBoxOutput(final String defaultURI,
             final ArrayList<String> supportedURIs) {
         SupportedCRSsType supportedCRSsType = odt.addNewBoundingBoxOutput();
 
@@ -222,13 +228,24 @@ public class BasicOutputDescriptionType {
         defaultType.setCRS(defaultURI);
 
         CRSsType supportedType = supportedCRSsType.addNewSupported();
-        supportedType.addCRS(defaultURI);
+        
+        //commented out supportedType.addCRS(defaultURI); because it creates
+        //duplicates in combination with OutputBoundingBoxDataSpecifier
         for (String supportedURI : supportedURIs) {
             supportedType.addCRS(supportedURI);
         }
 
     }
 
+  
+    public void addNewLiteralOutput(final String type) {
+        LiteralOutputType literalType = LiteralOutputType.Factory.newInstance();
+        DomainMetadataType thedatatype = literalType.addNewDataType();
+        thedatatype.setReference(type);
+        literalType.setDataType(thedatatype);
+        this.odt.setLiteralOutput(literalType);
+    }
+    
     /**
      * Called by Constructor to add LiteralOutput tag.
      * @param outputFormChoice Identifies the type of this output and provides
@@ -242,7 +259,8 @@ public class BasicOutputDescriptionType {
 
         literalOT = outputFormChoice;
     }
-
+    
+     
     /**
      * Called by Constructor to add ComplexOutput tag.
      * @param defaultMimeType Identification of default Format for process input
@@ -250,7 +268,7 @@ public class BasicOutputDescriptionType {
      * @param supportedMimeType Identification of supportedf Format for process
      * input or output
      */
-    private void addNewComplexOutput(final String defaultMimeType,
+    public void addNewComplexOutput(final String defaultMimeType,
             final String supportedMimeType) {
         SupportedComplexDataType complexDataType = odt.addNewComplexOutput();
 

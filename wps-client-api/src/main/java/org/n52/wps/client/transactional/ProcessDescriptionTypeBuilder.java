@@ -13,7 +13,7 @@ import org.w3.x1999.xlink.TypeType;
  *
  * @author carstenduvel
  */
-public final class BasicProcessDescriptionType {
+public final class ProcessDescriptionTypeBuilder {
     /**
      * pdt ProcessDescriptionType wrapped by this class.
      */
@@ -31,7 +31,7 @@ public final class BasicProcessDescriptionType {
      * @param processOutputs List of the required and optional outputs from
      * executing this process
      */
-    public BasicProcessDescriptionType(final String identifier,
+    public ProcessDescriptionTypeBuilder(final String identifier,
             final String title, final String processVersion,
             final ProcessDescriptionType.ProcessOutputs processOutputs) {
         pdt = ProcessDescriptionType.Factory.newInstance();
@@ -68,7 +68,7 @@ public final class BasicProcessDescriptionType {
      * @param metadataList List of MetadataTypes
      * @param profiles URN type. E.g. OGC:WPS:somename
      */
-    public BasicProcessDescriptionType(final String identifier,
+    public ProcessDescriptionTypeBuilder(final String identifier,
             final String title, final String processVersion,
             final ProcessDescriptionType.ProcessOutputs processOutputs,
             final String abstractText, final String wsdl,
