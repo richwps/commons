@@ -1,11 +1,18 @@
 package org.n52.wps.client.example;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import net.opengis.ows.x11.ExceptionReportDocument;
 import net.opengis.wps.x100.DeployProcessResponseDocument;
+import net.opengis.wps.x100.ProcessBriefType;
 import net.opengis.wps.x100.ProcessDescriptionType;
+import net.opengis.wps.x100.ProcessDescriptionsDocument;
 import net.opengis.wps.x100.UndeployProcessResponseDocument;
 
 import org.n52.wps.client.WPSClientException;
+import org.n52.wps.client.WPSClientSession;
 import org.n52.wps.client.WPSTClientSession;
 import org.n52.wps.client.transactional.BasicProcessDescriptionType;
 import org.n52.wps.client.transactional.TrasactionalRequestBuilder;
@@ -19,10 +26,12 @@ public class WPSTLocalClientExample {
 	
 	String wpsURL, wpstURL;
     WPSTClientSession wpstClient;
+    WPSClientSession wpsClient;
     
     
     public WPSTLocalClientExample(String wpsURL, String wpstURL) {
     	wpstClient = WPSTClientSession.getInstance();
+    	wpsClient = WPSClientSession.getInstance();
     	this.wpsURL = wpsURL;
     	this.wpstURL = wpstURL;
 	}
@@ -82,6 +91,33 @@ public class WPSTLocalClientExample {
         }
             	
     }
+    
+    public void listProcesses() {
+    	List<String> processes = new ArrayList<>();
+        try {
+            this.wpsClient = WPSClientSession.getInstance();
+            this.wpsClient.connect(this.wpsURL);
+            ProcessDescriptionsDocument pdd = this.wpsClient.describeAllProcesses(wpsURL);
+            ProcessDescriptionsDocument.ProcessDescriptions descriptions = pdd.getProcessDescriptions();
+            ProcessBriefType[] descs = descriptions.getProcessDescriptionArray();
+
+            for (ProcessBriefType process : descs) {
+                if (process.getIdentifier() != null) {
+                    String identifier = process.getIdentifier().getStringValue();
+                    processes.add(identifier);
+                } else {
+                	System.err.println("Debug:getAvailableProcesses()" + process);
+                }
+            }
+        } catch (WPSClientException e) {
+        	System.err.println("Debug:getAvailableProcesses()#WPSClientException:\n " + e);
+        } catch (Exception e) {
+        	System.err.println("Debug:getAvailableProcesses()#Exception:\n " + e);
+        }
+        for (String proc : processes) {
+        	System.out.println("Available process: " + proc);
+        }
+    }
 
     public void connect() {
     	try {
@@ -110,6 +146,7 @@ public class WPSTLocalClientExample {
         
         client.connect();
         client.testDeploy();
+        client.listProcesses();
         client.testUndeploy();
         client.disconnect();
     }
