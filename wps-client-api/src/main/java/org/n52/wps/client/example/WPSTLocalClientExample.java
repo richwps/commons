@@ -51,7 +51,7 @@ public class WPSTLocalClientExample {
         System.out.println(builder.getDeploydocument().toString());
         
         // deploy
-        Object responseObject = wpstClient.deploy(wpstURL, builder.getDeploydocument());
+        Object responseObject = wpstClient.deploy(wpsURL, builder.getDeploydocument());
         
         // analyze response
         if (responseObject instanceof DeployProcessResponseDocument) {
@@ -76,7 +76,7 @@ public class WPSTLocalClientExample {
         System.out.println(builder.getUndeploydocument().toString());
 
         // undeploy
-        Object responseObject = wpstClient.undeploy(wpstURL, builder.getUndeploydocument());
+        Object responseObject = wpstClient.undeploy(wpsURL, builder.getUndeploydocument());
         
         //analyze response
         if (responseObject instanceof UndeployProcessResponseDocument) {

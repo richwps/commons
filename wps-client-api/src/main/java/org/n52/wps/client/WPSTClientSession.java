@@ -305,15 +305,32 @@ public class WPSTClientSession {
 	 * @return a DeployProcessResponseDocument
 	 */
     public Object deploy(String serverId, DeployProcessDocument doc) throws WPSClientException {
-    	LOGGER.info("DeployProcess: " + doc.getDeployProcess().getProcessDescription().getIdentifier().getStringValue());
-    	return this.retrieveDeployProcessResponseViaPOST(serverId, doc);
+    	String wpstUrl;
+    	if (loggedTransactionalServices.containsKey(serverId)) {
+    		wpstUrl = loggedTransactionalServices.get(serverId);
+    		LOGGER.info("DeployProcess: " + doc.getDeployProcess().getProcessDescription().getIdentifier().getStringValue());
+        	return this.retrieveDeployProcessResponseViaPOST(wpstUrl, doc);
+    	}
+    	else {
+    		LOGGER.info("Server ID " + serverId + " not registered as transactional service");
+    		return null;
+    	}
+    	
     }
 
     /**
      */
     public Object undeploy(String serverId, UndeployProcessDocument doc) throws WPSClientException {
-    	LOGGER.info("UndeployProcess: " + doc.getUndeployProcess().getProcess().getIdentifier().getStringValue());
-        return this.retrieveUndeployProcessResponseViaPOST(serverId, doc);
+    	String wpstUrl;
+    	if (loggedTransactionalServices.containsKey(serverId)) {
+    		wpstUrl = loggedTransactionalServices.get(serverId);
+    		LOGGER.info("UndeployProcess: " + doc.getUndeployProcess().getProcess().getIdentifier().getStringValue());
+    		return this.retrieveUndeployProcessResponseViaPOST(wpstUrl, doc);
+    	}
+    	else {
+    		LOGGER.info("Server ID " + serverId + " not registered as transactional service");
+    		return null;
+    	}
     }
 
     private CapabilitiesDocument retrieveCapsViaGET(String url) throws WPSClientException {
