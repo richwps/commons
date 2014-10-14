@@ -31,8 +31,11 @@ package org.n52.wps.client;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.util.Arrays;
+import java.util.List;
+import net.opengis.ows.x11.BoundingBoxType;
 
 import net.opengis.ows.x11.DomainMetadataType;
 import net.opengis.wps.x100.ComplexDataDescriptionType;
@@ -49,6 +52,7 @@ import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.ExecuteDocument.Execute;
 import net.opengis.wps.x100.ResponseDocumentType;
 import net.opengis.wps.x100.ResponseFormType;
+import net.opengis.wps.x100.SupportedCRSsType;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -311,6 +315,40 @@ public class ExecuteRequestBuilder {
 		DomainMetadataType dataType = inputDesc.getLiteralData().getDataType();
 		if (dataType != null) {
 			input.getData().getLiteralData().setDataType(dataType.getReference());
+		}
+	}
+        
+        /**
+	 * Add boundingbox data to the request
+	 * @param parameterID the ID of the input paramter according to the describe process
+	 */
+	public void addBoundingBoxData(final String parameterID,
+                final String crs, final BigInteger dimensions,
+                final List lowerCorner, final List upperCorner) {
+		InputDescriptionType inputDesc = this.getParameterDescription(parameterID);
+		if (inputDesc == null) {
+			throw new IllegalArgumentException("inputDescription is null for: " + parameterID);
+		}
+		if (inputDesc.getLiteralData() == null) {
+			throw new IllegalArgumentException("inputDescription is not of type literalData: " + parameterID);			
+		}
+		InputType input = execute.getExecute().getDataInputs().addNewInput();
+		input.addNewIdentifier().setStringValue(parameterID);
+		
+                BoundingBoxType bbData;
+                bbData = input.addNewData().addNewBoundingBoxData();
+                
+                bbData.setCrs(crs);
+                bbData.setDimensions(dimensions);
+                bbData.setLowerCorner(lowerCorner);
+                bbData.setUpperCorner(upperCorner);
+                
+                input.getData().setBoundingBoxData(bbData);
+               
+                String defaultCRS;
+                defaultCRS = inputDesc.getBoundingBoxData().getDefault().getCRS();
+		if (defaultCRS != null) {
+			input.getData().getBoundingBoxData().setCrs(defaultCRS);
 		}
 	}
 
