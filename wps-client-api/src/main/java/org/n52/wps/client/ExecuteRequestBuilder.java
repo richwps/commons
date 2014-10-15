@@ -329,8 +329,8 @@ public class ExecuteRequestBuilder {
 		if (inputDesc == null) {
 			throw new IllegalArgumentException("inputDescription is null for: " + parameterID);
 		}
-		if (inputDesc.getLiteralData() == null) {
-			throw new IllegalArgumentException("inputDescription is not of type literalData: " + parameterID);			
+		if (inputDesc.getBoundingBoxData()== null) {
+			throw new IllegalArgumentException("inputDescription is not of type boundingBoxData: " + parameterID);			
 		}
 		InputType input = execute.getExecute().getDataInputs().addNewInput();
 		input.addNewIdentifier().setStringValue(parameterID);
