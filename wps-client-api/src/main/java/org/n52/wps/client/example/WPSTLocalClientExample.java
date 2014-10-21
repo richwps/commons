@@ -13,7 +13,7 @@ import net.opengis.wps.x100.UndeployProcessResponseDocument;
 
 import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.WPSClientSession;
-import org.n52.wps.client.WPSTClientSession;
+import org.n52.wps.client.RichWPSClientSession;
 import org.n52.wps.client.transactional.ProcessDescriptionTypeBuilder;
 import org.n52.wps.client.transactional.TransactionalRequestBuilder;
 
@@ -25,12 +25,12 @@ import org.n52.wps.client.transactional.TransactionalRequestBuilder;
 public class WPSTLocalClientExample {
 	
 	String wpsURL, wpstURL;
-    WPSTClientSession wpstClient;
+    RichWPSClientSession wpstClient;
     WPSClientSession wpsClient;
     
     
     public WPSTLocalClientExample(String wpsURL, String wpstURL) {
-    	wpstClient = WPSTClientSession.getInstance();
+    	wpstClient = RichWPSClientSession.getInstance();
     	wpsClient = WPSClientSession.getInstance();
     	this.wpsURL = wpsURL;
     	this.wpstURL = wpstURL;

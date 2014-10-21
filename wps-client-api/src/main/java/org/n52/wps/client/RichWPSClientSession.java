@@ -36,8 +36,7 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 /**
- * Contains some convenient methods to access and manage WebProcessingSerivces
- * with Transactional endpoint in a very generic way.
+ * Contains some convenient methods to access and manage RichWPS services.
  *
  * This is implemented as a singleton.
  *
@@ -45,13 +44,13 @@ import org.xml.sax.SAXException;
  * @author dalcacer
  * @see WPSClientSession
  */
-public class WPSTClientSession {
+public class RichWPSClientSession {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(WPSTClientSession.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(RichWPSClientSession.class);
     private static final String OGC_OWS_URI = "http://www.opengeospatial.net/ows";
     private static final String SUPPORTED_VERSION = "1.0.0";
 
-    private static WPSTClientSession session;
+    private static RichWPSClientSession session;
     private Map<String, CapabilitiesDocument> loggedServices;
     private Map<String, String> loggedTransactionalServices;
     private XmlOptions options = null;
@@ -60,9 +59,9 @@ public class WPSTClientSession {
     private Map<String, ProcessDescriptionsDocument> processDescriptions;
 
     /**
-     * Initializes a WPST client session.
+     * Initializes a RichWPS client session.
      */
-    private WPSTClientSession() {
+    private RichWPSClientSession() {
         this.options = new XmlOptions();
         this.options.setLoadStripWhitespace();
         this.options.setLoadTrimTextBuffer();
@@ -74,9 +73,9 @@ public class WPSTClientSession {
     /*
      * @result An instance of a WPS Client session.
      */
-    public static WPSTClientSession getInstance() {
+    public static RichWPSClientSession getInstance() {
         if (session == null) {
-            session = new WPSTClientSession();
+            session = new RichWPSClientSession();
         }
         return session;
     }
@@ -87,7 +86,7 @@ public class WPSTClientSession {
      * repopulated afterwards.
      */
     public static void reset() {
-        session = new WPSTClientSession();
+        session = new RichWPSClientSession();
     }
 
     /**
@@ -99,7 +98,7 @@ public class WPSTClientSession {
      * @return true, if connect succeeded, false else.
      * @throws WPSClientException
      */
-    public boolean connect(String wpsurl, String wpsturl) throws WPSClientException {
+    public boolean connect(String wpsurl, String richwpsurl) throws WPSClientException {
         LOGGER.info("CONNECT");
         if (loggedServices.containsKey(wpsurl)) {
             LOGGER.info("Service already registered: " + wpsurl);
@@ -119,7 +118,7 @@ public class WPSTClientSession {
         // HTTP::HEAD Operation 405 Method Not Allowed, instead of 404?
         // HTTP::GET Operation 405 Method Not Allowed, instead of 404?
         try {
-            URL urlobj = new URL(wpsturl);
+            URL urlobj = new URL(richwpsurl);
             URLConnection conn = urlobj.openConnection();
             conn.connect();
             HttpURLConnection httpConnection = (HttpURLConnection) conn;
@@ -128,14 +127,14 @@ public class WPSTClientSession {
                 return false;
             }
         } catch (Exception e) {
-            LOGGER.info("Unable to reach service: " + wpsturl);
+            LOGGER.info("Unable to reach service: " + richwpsurl);
             return false;
         }
 
         ProcessDescriptionsDocument processDescs = describeAllProcesses(wpsurl);
         if (processDescs != null && capsDoc != null) {
             processDescriptions.put(wpsurl, processDescs);
-            loggedTransactionalServices.put(wpsurl, wpsturl);
+            loggedTransactionalServices.put(wpsurl, richwpsurl);
             return true;
         }
         LOGGER.warn("retrieving caps failed, caps are null");
@@ -167,10 +166,10 @@ public class WPSTClientSession {
      */
     public List<List<String>> getLoggedServices() {
         List<String> wps = (List) loggedServices.keySet();
-        List<String> wpsts = (List) loggedTransactionalServices.values();
+        List<String> richwpss = (List) loggedTransactionalServices.values();
         List result = new ArrayList<List<String>>();
         result.add(wps);
-        result.add(wpsts);
+        result.add(richwpss);
         return result;
     }
 
@@ -305,11 +304,11 @@ public class WPSTClientSession {
 	 * @return a DeployProcessResponseDocument
 	 */
     public Object deploy(String serverId, DeployProcessDocument doc) throws WPSClientException {
-    	String wpstUrl;
+    	String richwpsurl;
     	if (loggedTransactionalServices.containsKey(serverId)) {
-    		wpstUrl = loggedTransactionalServices.get(serverId);
+    		richwpsurl = loggedTransactionalServices.get(serverId);
     		LOGGER.info("DeployProcess: " + doc.getDeployProcess().getProcessDescription().getIdentifier().getStringValue());
-        	return this.retrieveDeployProcessResponseViaPOST(wpstUrl, doc);
+        	return this.retrieveDeployProcessResponseViaPOST(richwpsurl, doc);
     	}
     	else {
     		LOGGER.info("Server ID " + serverId + " not registered as transactional service");
@@ -321,11 +320,11 @@ public class WPSTClientSession {
     /**
      */
     public Object undeploy(String serverId, UndeployProcessDocument doc) throws WPSClientException {
-    	String wpstUrl;
+    	String richwpsurl;
     	if (loggedTransactionalServices.containsKey(serverId)) {
-    		wpstUrl = loggedTransactionalServices.get(serverId);
+    		richwpsurl = loggedTransactionalServices.get(serverId);
     		LOGGER.info("UndeployProcess: " + doc.getUndeployProcess().getProcess().getIdentifier().getStringValue());
-    		return this.retrieveUndeployProcessResponseViaPOST(wpstUrl, doc);
+    		return this.retrieveUndeployProcessResponseViaPOST(richwpsurl, doc);
     	}
     	else {
     		LOGGER.info("Server ID " + serverId + " not registered as transactional service");
