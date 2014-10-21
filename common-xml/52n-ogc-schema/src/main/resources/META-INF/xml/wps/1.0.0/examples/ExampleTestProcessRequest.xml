@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:TestProcess xmlns:wps="http://www.opengis.net/wps/1.0.0"
+	xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.opengis.net/wps/1.0.0" service="WPS"
+	version="1.0.0">
+	<wps:ProcessDescription statusSupported="true"
+		storeSupported="true" wps:processVersion="1.0.0">
+		<ows:Identifier>sampleWdProcess2</ows:Identifier>
+		<ows:Title>Sample WD Process</ows:Title>
+		<ows:Abstract>Sample WD Process</ows:Abstract>
+		<DataInputs>
+			<Input maxOccurs="1" minOccurs="1">
+				<ows:Identifier>name</ows:Identifier>
+				<ows:Title>name</ows:Title>
+				<ows:Abstract />
+				<LiteralData>
+					<ows:DataType ows:reference="xs:string" />
+					<ows:AllowedValues>
+						<ows:Value>testvalue1</ows:Value>
+					</ows:AllowedValues>
+				</LiteralData>
+			</Input>
+		</DataInputs>
+		<ProcessOutputs>
+			<Output>
+				<ows:Identifier>result</ows:Identifier>
+				<ows:Title>result</ows:Title>
+				<ows:Abstract />
+				<LiteralOutput>
+					<ows:DataType ows:reference="xs:string" />
+				</LiteralOutput>
+			</Output>
+		</ProcessOutputs>
+	</wps:ProcessDescription>
+	<wps:ExecutionUnit>
+		bind process
+		org.n52.wps.server.algorithm.test.DummyTestClass to
+		richwps/dummyProcess1
+		execute richwps/dummyProcess1
+		with
+		in.name as
+		LiteralInputData
+		store
+		LiteralOutputData as var.firstResult
+		bind process
+		http localhost 8085 /wps/WebProcessingService
+		org.n52.wps.server.algorithm.test.DummyTestClass to
+		richwps/dummyProcess2
+		execute richwps/dummyProcess2
+		with
+		var.firstResult
+		as LiteralInputData
+		store
+		LiteralOutputData as out.result
+	</wps:ExecutionUnit>
+	<wps:DeploymentProfileName>rola</wps:DeploymentProfileName>
+
+	<wps:DataInputs>
+		<wps:Input>
+			<ows:Identifier>name</ows:Identifier>
+			<ows:Title>name</ows:Title>
+			<wps:Data>
+				<wps:LiteralData>foobar</wps:LiteralData>
+			</wps:Data>
+		</wps:Input>
+	</wps:DataInputs>
+
+	<wps:ResponseForm>
+		<wps:ResponseDocument lineage="false"
+			storeExecuteResponse="false" status="false">
+			<!-- regular outputs -->
+			<wps:Output>
+				<ows:Identifier>result</ows:Identifier>
+			</wps:Output>
+			<!-- intermediate results -->
+			<wps:Output>
+				<ows:Identifier>var.firstResult</ows:Identifier>
+			</wps:Output>
+		</wps:ResponseDocument>
+	</wps:ResponseForm>
+</wps:TestProcess>
