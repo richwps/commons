@@ -6,12 +6,12 @@ import java.util.ArrayList;
  * @author dalcacer
  * @version draft
  */
-public class Worksequence extends ArrayList<IOperation> {
+public class Workflow extends ArrayList<IOperation> {
 
     /**
      * Creates a new <b>sequential</b> script.
      */
-    public Worksequence() {
+    public Workflow() {
         super();
     }
 

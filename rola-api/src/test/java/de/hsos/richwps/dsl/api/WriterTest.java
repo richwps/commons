@@ -6,7 +6,7 @@ import de.hsos.richwps.dsl.api.elements.Endpoint;
 import de.hsos.richwps.dsl.api.elements.Execute;
 import de.hsos.richwps.dsl.api.elements.OutReference;
 import de.hsos.richwps.dsl.api.elements.VarReference;
-import de.hsos.richwps.dsl.api.elements.Worksequence;
+import de.hsos.richwps.dsl.api.elements.Workflow;
 import java.net.BindException;
 import junit.framework.TestCase;
 
@@ -43,7 +43,7 @@ public class WriterTest extends TestCase {
         System.out.println("testCreateBinding");
         String path = tempdir+filesep+"aabb1"+ext;
         System.err.println("writing into "+path);
-        Worksequence ws = new Worksequence();
+        Workflow ws = new Workflow();
         Binding bindingA = new Binding("hsos/test", "de.hsos.richwps.testprocess");
         Execute execA = new Execute("hsos/test");
         ws.add(bindingA);
@@ -59,7 +59,7 @@ public class WriterTest extends TestCase {
         System.out.println("testCreateRemoteBinding");
         String path = tempdir+filesep+"aabb2"+ext;
         System.err.println("writing into "+path);
-        Worksequence ws = new Worksequence();
+        Workflow ws = new Workflow();
         Binding bindingA = new Binding("hsos/test", "de.hsos.richwps.testprocess");
         Endpoint end = new Endpoint("exampl.de", "/wps");
         bindingA.setEndpoint(end);
@@ -79,7 +79,7 @@ public class WriterTest extends TestCase {
         String path = tempdir+filesep+"aabb3"+ext;
         System.err.println("writing into "+path);
         
-        Worksequence ws = new Worksequence();
+        Workflow ws = new Workflow();
         OutReference outref = new OutReference("OUTPUT");
         de.hsos.richwps.dsl.api.elements.Assignment as1 = new Assignment(outref, Integer.SIZE);
         VarReference vartref = new VarReference("TMP");
@@ -104,7 +104,7 @@ public class WriterTest extends TestCase {
         String path = tempdir+filesep+"aabb4"+ext;
         System.err.println("writing into "+path);
         
-        Worksequence ws = new Worksequence();
+        Workflow ws = new Workflow();
         Binding b = new Binding("hsos/test", "de.hsos.local.process");
         
         OutReference outref = new OutReference("OUTPUT");

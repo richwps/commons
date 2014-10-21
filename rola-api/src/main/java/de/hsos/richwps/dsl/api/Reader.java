@@ -16,7 +16,7 @@ import de.hsos.richwps.dsl.api.elements.InReference;
 import de.hsos.richwps.dsl.api.elements.OutReference;
 import de.hsos.richwps.dsl.api.elements.Reference;
 import de.hsos.richwps.dsl.api.elements.VarReference;
-import de.hsos.richwps.dsl.api.elements.Worksequence;
+import de.hsos.richwps.dsl.api.elements.Workflow;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import de.hsos.richwps.dsl.api.exceptions.UnsupportedSyntaxException;
@@ -47,7 +47,7 @@ public class Reader {
      * A more convinient representation of the worksequence, which can be
      * inspected.
      */
-    private Worksequence worksequence;
+    private Workflow worksequence;
     /**
      * Goolge Guice injector, which is needed by XText.
      */
@@ -70,7 +70,7 @@ public class Reader {
      */
     public Reader() {
         this.xtext_ws = null;
-        this.worksequence = new Worksequence();
+        this.worksequence = new Workflow();
         this.injector = new DSLStandaloneSetup().createInjectorAndDoEMFRegistration();
         this.stat_bindings = 0;
         this.stat_executes = 0;
@@ -312,7 +312,7 @@ public class Reader {
      * @return worksequence the worksequence.
      *
      */
-    public Worksequence getWorksequence() {
+    public Workflow getWorksequence() {
         return this.worksequence;
     }
 }

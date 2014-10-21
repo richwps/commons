@@ -28,7 +28,7 @@ public class WorksequenceTest extends TestCase {
      */
     public void testToNotation() {
         System.out.println("toNotation");
-        Worksequence instance = new Worksequence();
+        Workflow instance = new Workflow();
         Binding b = new Binding("hsos/proc1", "testprocess");
         Endpoint ep = new Endpoint();
         ep.setHost("example.com");

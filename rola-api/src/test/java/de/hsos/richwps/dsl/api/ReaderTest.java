@@ -7,7 +7,7 @@ import de.hsos.richwps.dsl.api.elements.Execute;
 import de.hsos.richwps.dsl.api.elements.InReference;
 import de.hsos.richwps.dsl.api.elements.OutReference;
 import de.hsos.richwps.dsl.api.elements.VarReference;
-import de.hsos.richwps.dsl.api.elements.Worksequence;
+import de.hsos.richwps.dsl.api.elements.Workflow;
 import junit.framework.TestCase;
 
 /**
@@ -194,7 +194,7 @@ public class ReaderTest extends TestCase {
          * out.test = in.test2 var.test = 10 var.test = 'hallo welt' out.test =
          * var.foo-1
          */
-        Worksequence ws = instance.getWorksequence();
+        Workflow ws = instance.getWorksequence();
         try {
             Assignment exp_as1 = new Assignment(new OutReference("test"), new InReference("test2"));
             Assignment act_as1 = (Assignment) ws.get(0);
@@ -239,7 +239,7 @@ public class ReaderTest extends TestCase {
          * test.de 80 /wps/WebProcessingService de.hsos.testprocess to
          * hsos/proc2
          */
-        Worksequence ws = instance.getWorksequence();
+        Workflow ws = instance.getWorksequence();
         try {
             Binding exp_b1 = new Binding("hsos/proc1", "de.hsos.processname");
             Binding act_b1 = (Binding) ws.get(0);
@@ -309,7 +309,7 @@ public class ReaderTest extends TestCase {
          * as out.xyz OUT2 as var.foo OUT3 as var.foo
          *
          */
-        Worksequence ws = instance.getWorksequence();
+        Workflow ws = instance.getWorksequence();
         try {
             Execute exp_e1 = new Execute("hs/proc1");
             exp_e1.addInput(new InReference("test1"), "IN1");

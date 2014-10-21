@@ -26,7 +26,7 @@ public class Writer {
     /**
      * A more convinient representation of the worksequence.
      */
-    private de.hsos.richwps.dsl.api.elements.Worksequence worksequence;
+    private de.hsos.richwps.dsl.api.elements.Workflow worksequence;
 
     /**
      * Constructs a new writer-object.
@@ -42,7 +42,7 @@ public class Writer {
      * @param path path to wd-file.
      * @throws Exception When worksequence is not loadable.
      */
-    public boolean create(final String path, de.hsos.richwps.dsl.api.elements.Worksequence ws) throws Exception {
+    public boolean create(final String path, de.hsos.richwps.dsl.api.elements.Workflow ws) throws Exception {
         //TODO validate path. must be absolute and end with .dsl
         final String notation = ws.toNotation();
         try {
