@@ -15,7 +15,7 @@ import org.n52.wps.client.WPSClientException;
  * @author woessner
  * @version 0.0.1
  */
-public class TrasactionalRequestBuilder {
+public class TransactionalRequestBuilder {
 
     /**
      * Deployment request.
@@ -47,7 +47,7 @@ public class TrasactionalRequestBuilder {
     /**
      * Constructs a new TransactionalRequestBuilder.
      */
-    public TrasactionalRequestBuilder() {
+    public TransactionalRequestBuilder() {
         this.deploy = DeployProcessDocument.Factory.newInstance();
         deployprocess = DeployProcessDocument.DeployProcess.Factory.newInstance();
         this.deployprocess.setService(SERVICE);

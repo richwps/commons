@@ -15,7 +15,7 @@ import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.WPSClientSession;
 import org.n52.wps.client.WPSTClientSession;
 import org.n52.wps.client.transactional.ProcessDescriptionTypeBuilder;
-import org.n52.wps.client.transactional.TrasactionalRequestBuilder;
+import org.n52.wps.client.transactional.TransactionalRequestBuilder;
 
 /**
  * @author dalcacer
@@ -38,7 +38,7 @@ public class WPSTLocalClientExample {
 
     public void testDeploy() throws WPSClientException {
 
-        TrasactionalRequestBuilder builder = new TrasactionalRequestBuilder();
+        TransactionalRequestBuilder builder = new TransactionalRequestBuilder();
         //String identifier,String title, String processVersion, ProcessDescriptionType.ProcessOutputs processOutputs
         ProcessDescriptionType.ProcessOutputs outputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
         ProcessDescriptionTypeBuilder bpdt = new ProcessDescriptionTypeBuilder("test", "test", "1", outputs);
@@ -67,7 +67,7 @@ public class WPSTLocalClientExample {
     }
     
     public void testUndeploy() throws WPSClientException {
-    	TrasactionalRequestBuilder builder = new TrasactionalRequestBuilder();
+    	TransactionalRequestBuilder builder = new TransactionalRequestBuilder();
     	
     	// build request
     	builder.setIdentifier("test");
