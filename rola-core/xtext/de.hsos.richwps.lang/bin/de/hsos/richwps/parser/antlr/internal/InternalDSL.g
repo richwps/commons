@@ -1044,12 +1044,16 @@ ruleQUALIFIEDID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTok
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getQUALIFIEDIDAccess().getSolidusKeyword_1_0()); 
     }
-    this_ID_2=RULE_ID    {
-		$current.merge(this_ID_2);
+
+    { 
+        newCompositeNode(grammarAccess.getQUALIFIEDIDAccess().getQUALIFIEDNAMEParserRuleCall_1_1()); 
+    }
+    this_QUALIFIEDNAME_2=ruleQUALIFIEDNAME    {
+		$current.merge(this_QUALIFIEDNAME_2);
     }
 
     { 
-    newLeafNode(this_ID_2, grammarAccess.getQUALIFIEDIDAccess().getIDTerminalRuleCall_1_1()); 
+        afterParserOrEnumRuleCall();
     }
 )*)
     ;

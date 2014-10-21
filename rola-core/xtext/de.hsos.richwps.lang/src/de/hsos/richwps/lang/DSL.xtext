@@ -60,7 +60,7 @@ QUALIFIEDNAME:
 	ID ('.' ID)*;
 
 QUALIFIEDID:
-	ID ('/' ID)*;
+	ID ('/' QUALIFIEDNAME)* ;
 
 URI:
 	('/' ID)*;

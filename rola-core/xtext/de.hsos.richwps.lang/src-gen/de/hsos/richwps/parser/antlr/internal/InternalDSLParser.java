@@ -2396,22 +2396,23 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleQUALIFIEDID"
-    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1030:1: ruleQUALIFIEDID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '/' this_ID_2= RULE_ID )* ) ;
+    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1030:1: ruleQUALIFIEDID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '/' this_QUALIFIEDNAME_2= ruleQUALIFIEDNAME )* ) ;
     public final AntlrDatatypeRuleToken ruleQUALIFIEDID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
         Token this_ID_0=null;
         Token kw=null;
-        Token this_ID_2=null;
+        AntlrDatatypeRuleToken this_QUALIFIEDNAME_2 = null;
+
 
          enterRule(); 
             
         try {
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1033:28: ( (this_ID_0= RULE_ID (kw= '/' this_ID_2= RULE_ID )* ) )
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1034:1: (this_ID_0= RULE_ID (kw= '/' this_ID_2= RULE_ID )* )
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1033:28: ( (this_ID_0= RULE_ID (kw= '/' this_QUALIFIEDNAME_2= ruleQUALIFIEDNAME )* ) )
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1034:1: (this_ID_0= RULE_ID (kw= '/' this_QUALIFIEDNAME_2= ruleQUALIFIEDNAME )* )
             {
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1034:1: (this_ID_0= RULE_ID (kw= '/' this_ID_2= RULE_ID )* )
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1034:6: this_ID_0= RULE_ID (kw= '/' this_ID_2= RULE_ID )*
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1034:1: (this_ID_0= RULE_ID (kw= '/' this_QUALIFIEDNAME_2= ruleQUALIFIEDNAME )* )
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1034:6: this_ID_0= RULE_ID (kw= '/' this_QUALIFIEDNAME_2= ruleQUALIFIEDNAME )*
             {
             this_ID_0=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQUALIFIEDID2086); 
 
@@ -2420,7 +2421,7 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
              
                 newLeafNode(this_ID_0, grammarAccess.getQUALIFIEDIDAccess().getIDTerminalRuleCall_0()); 
                 
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1041:1: (kw= '/' this_ID_2= RULE_ID )*
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1041:1: (kw= '/' this_QUALIFIEDNAME_2= ruleQUALIFIEDNAME )*
             loop9:
             do {
                 int alt9=2;
@@ -2433,19 +2434,26 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1042:2: kw= '/' this_ID_2= RULE_ID
+            	    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1042:2: kw= '/' this_QUALIFIEDNAME_2= ruleQUALIFIEDNAME
             	    {
             	    kw=(Token)match(input,24,FOLLOW_24_in_ruleQUALIFIEDID2105); 
 
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getQUALIFIEDIDAccess().getSolidusKeyword_1_0()); 
             	        
-            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQUALIFIEDID2120); 
+            	     
+            	            newCompositeNode(grammarAccess.getQUALIFIEDIDAccess().getQUALIFIEDNAMEParserRuleCall_1_1()); 
+            	        
+            	    pushFollow(FOLLOW_ruleQUALIFIEDNAME_in_ruleQUALIFIEDID2127);
+            	    this_QUALIFIEDNAME_2=ruleQUALIFIEDNAME();
 
-            	    		current.merge(this_ID_2);
+            	    state._fsp--;
+
+
+            	    		current.merge(this_QUALIFIEDNAME_2);
             	        
             	     
-            	        newLeafNode(this_ID_2, grammarAccess.getQUALIFIEDIDAccess().getIDTerminalRuleCall_1_1()); 
+            	            afterParserOrEnumRuleCall();
             	        
 
             	    }
@@ -2477,7 +2485,7 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleURI"
-    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1062:1: entryRuleURI returns [String current=null] : iv_ruleURI= ruleURI EOF ;
+    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1066:1: entryRuleURI returns [String current=null] : iv_ruleURI= ruleURI EOF ;
     public final String entryRuleURI() throws RecognitionException {
         String current = null;
 
@@ -2485,17 +2493,17 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1063:2: (iv_ruleURI= ruleURI EOF )
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1064:2: iv_ruleURI= ruleURI EOF
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1067:2: (iv_ruleURI= ruleURI EOF )
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1068:2: iv_ruleURI= ruleURI EOF
             {
              newCompositeNode(grammarAccess.getURIRule()); 
-            pushFollow(FOLLOW_ruleURI_in_entryRuleURI2168);
+            pushFollow(FOLLOW_ruleURI_in_entryRuleURI2175);
             iv_ruleURI=ruleURI();
 
             state._fsp--;
 
              current =iv_ruleURI.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleURI2179); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleURI2186); 
 
             }
 
@@ -2513,7 +2521,7 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleURI"
-    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1071:1: ruleURI returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '/' this_ID_1= RULE_ID )* ;
+    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1075:1: ruleURI returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= '/' this_ID_1= RULE_ID )* ;
     public final AntlrDatatypeRuleToken ruleURI() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -2523,10 +2531,10 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1074:28: ( (kw= '/' this_ID_1= RULE_ID )* )
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1075:1: (kw= '/' this_ID_1= RULE_ID )*
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1078:28: ( (kw= '/' this_ID_1= RULE_ID )* )
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1079:1: (kw= '/' this_ID_1= RULE_ID )*
             {
-            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1075:1: (kw= '/' this_ID_1= RULE_ID )*
+            // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1079:1: (kw= '/' this_ID_1= RULE_ID )*
             loop10:
             do {
                 int alt10=2;
@@ -2539,14 +2547,14 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1076:2: kw= '/' this_ID_1= RULE_ID
+            	    // ../de.hsos.richwps.lang/src-gen/de/hsos/richwps/parser/antlr/internal/InternalDSL.g:1080:2: kw= '/' this_ID_1= RULE_ID
             	    {
-            	    kw=(Token)match(input,24,FOLLOW_24_in_ruleURI2217); 
+            	    kw=(Token)match(input,24,FOLLOW_24_in_ruleURI2224); 
 
             	            current.merge(kw);
             	            newLeafNode(kw, grammarAccess.getURIAccess().getSolidusKeyword_0()); 
             	        
-            	    this_ID_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleURI2232); 
+            	    this_ID_1=(Token)match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleURI2239); 
 
             	    		current.merge(this_ID_1);
             	        
@@ -2729,10 +2737,10 @@ public class InternalDSLParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleQUALIFIEDID2046 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleQUALIFIEDID2086 = new BitSet(new long[]{0x0000000001000002L});
     public static final BitSet FOLLOW_24_in_ruleQUALIFIEDID2105 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleQUALIFIEDID2120 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_ruleURI_in_entryRuleURI2168 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleURI2179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_ruleURI2217 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleURI2232 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_ruleQUALIFIEDNAME_in_ruleQUALIFIEDID2127 = new BitSet(new long[]{0x0000000001000002L});
+    public static final BitSet FOLLOW_ruleURI_in_entryRuleURI2175 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleURI2186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_ruleURI2224 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleURI2239 = new BitSet(new long[]{0x0000000001000002L});
 
 }

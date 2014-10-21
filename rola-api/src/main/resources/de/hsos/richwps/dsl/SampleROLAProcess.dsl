@@ -1,5 +1,5 @@
-bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummyProcess
-execute richwps/dummyProcess
+bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummy.Process
+execute richwps/dummy.Process
 with
 in.name as IN1
 store

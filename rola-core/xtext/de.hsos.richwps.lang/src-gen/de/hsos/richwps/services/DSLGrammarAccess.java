@@ -568,26 +568,26 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cSolidusKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
+		private final RuleCall cQUALIFIEDNAMEParserRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QUALIFIEDID:
-		//	ID ("/" ID)*;
+		//	ID ("/" QUALIFIEDNAME)*;
 		public ParserRule getRule() { return rule; }
 
-		//ID ("/" ID)*
+		//ID ("/" QUALIFIEDNAME)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("/" ID)*
+		//("/" QUALIFIEDNAME)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"/"
 		public Keyword getSolidusKeyword_1_0() { return cSolidusKeyword_1_0; }
 
-		//ID
-		public RuleCall getIDTerminalRuleCall_1_1() { return cIDTerminalRuleCall_1_1; }
+		//QUALIFIEDNAME
+		public RuleCall getQUALIFIEDNAMEParserRuleCall_1_1() { return cQUALIFIEDNAMEParserRuleCall_1_1; }
 	}
 
 	public class URIElements extends AbstractParserRuleElementFinder {
@@ -818,7 +818,7 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//QUALIFIEDID:
-	//	ID ("/" ID)*;
+	//	ID ("/" QUALIFIEDNAME)*;
 	public QUALIFIEDIDElements getQUALIFIEDIDAccess() {
 		return (pQUALIFIEDID != null) ? pQUALIFIEDID : (pQUALIFIEDID = new QUALIFIEDIDElements());
 	}

@@ -6294,21 +6294,25 @@ public class InternalDSLParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__QUALIFIEDID__Group_1__1__Impl"
-    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2363:1: rule__QUALIFIEDID__Group_1__1__Impl : ( RULE_ID ) ;
+    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2363:1: rule__QUALIFIEDID__Group_1__1__Impl : ( ruleQUALIFIEDNAME ) ;
     public final void rule__QUALIFIEDID__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2367:1: ( ( RULE_ID ) )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2368:1: ( RULE_ID )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2367:1: ( ( ruleQUALIFIEDNAME ) )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2368:1: ( ruleQUALIFIEDNAME )
             {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2368:1: ( RULE_ID )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2369:1: RULE_ID
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2368:1: ( ruleQUALIFIEDNAME )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2369:1: ruleQUALIFIEDNAME
             {
-             before(grammarAccess.getQUALIFIEDIDAccess().getIDTerminalRuleCall_1_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QUALIFIEDID__Group_1__1__Impl4726); 
-             after(grammarAccess.getQUALIFIEDIDAccess().getIDTerminalRuleCall_1_1()); 
+             before(grammarAccess.getQUALIFIEDIDAccess().getQUALIFIEDNAMEParserRuleCall_1_1()); 
+            pushFollow(FOLLOW_ruleQUALIFIEDNAME_in_rule__QUALIFIEDID__Group_1__1__Impl4726);
+            ruleQUALIFIEDNAME();
+
+            state._fsp--;
+
+             after(grammarAccess.getQUALIFIEDIDAccess().getQUALIFIEDNAMEParserRuleCall_1_1()); 
 
             }
 
@@ -7975,7 +7979,7 @@ public class InternalDSLParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__QUALIFIEDID__Group_1__1_in_rule__QUALIFIEDID__Group_1__04640 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_24_in_rule__QUALIFIEDID__Group_1__0__Impl4668 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__QUALIFIEDID__Group_1__1__Impl_in_rule__QUALIFIEDID__Group_1__14699 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QUALIFIEDID__Group_1__1__Impl4726 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQUALIFIEDNAME_in_rule__QUALIFIEDID__Group_1__1__Impl4726 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__URI__Group__0__Impl_in_rule__URI__Group__04759 = new BitSet(new long[]{0x0000000000000080L});
     public static final BitSet FOLLOW_rule__URI__Group__1_in_rule__URI__Group__04762 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_24_in_rule__URI__Group__0__Impl4790 = new BitSet(new long[]{0x0000000000000002L});

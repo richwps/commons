@@ -2366,9 +2366,9 @@ rule__QUALIFIEDID__Group_1__1__Impl
     }
 :
 (
-{ before(grammarAccess.getQUALIFIEDIDAccess().getIDTerminalRuleCall_1_1()); }
-	RULE_ID
-{ after(grammarAccess.getQUALIFIEDIDAccess().getIDTerminalRuleCall_1_1()); }
+{ before(grammarAccess.getQUALIFIEDIDAccess().getQUALIFIEDNAMEParserRuleCall_1_1()); }
+	ruleQUALIFIEDNAME
+{ after(grammarAccess.getQUALIFIEDIDAccess().getQUALIFIEDNAMEParserRuleCall_1_1()); }
 )
 
 ;
