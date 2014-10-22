@@ -30,4 +30,5 @@
 	<include schemaLocation="wpsUndeployProcess_request.xsd" />
 	<include schemaLocation="wpsUndeployProcess_response.xsd" />
 	<include schemaLocation="wpsTestProcess_request.xsd" />
+        <!--<include schemaLocation="wpsTestProcess_response.xsd" />-->
 </schema>
