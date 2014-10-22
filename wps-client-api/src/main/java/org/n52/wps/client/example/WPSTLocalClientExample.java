@@ -14,8 +14,8 @@ import net.opengis.wps.x100.UndeployProcessResponseDocument;
 import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.WPSClientSession;
 import org.n52.wps.client.RichWPSClientSession;
-import org.n52.wps.client.transactional.ProcessDescriptionTypeBuilder;
-import org.n52.wps.client.transactional.TransactionalRequestBuilder;
+import org.n52.wps.client.richwps.ProcessDescriptionTypeBuilder;
+import org.n52.wps.client.richwps.TransactionalRequestBuilder;
 
 /**
  * @author dalcacer

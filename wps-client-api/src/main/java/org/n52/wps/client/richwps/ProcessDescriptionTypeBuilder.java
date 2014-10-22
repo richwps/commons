@@ -1,4 +1,4 @@
-package org.n52.wps.client.transactional;
+package org.n52.wps.client.richwps;
 
 import java.util.ArrayList;
 import net.opengis.ows.x11.MetadataType;

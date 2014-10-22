@@ -123,8 +123,10 @@ public class RichWPSClientSession {
             conn.connect();
             HttpURLConnection httpConnection = (HttpURLConnection) conn;
             int resp = httpConnection.getResponseCode();
-            if (resp != 405) {
-                return false;
+            if(resp == 200){    //200 O.K. maybe with OWS-Exception.
+                return true;
+            } else if (resp == 405) {   //method not allowed
+                return true;
             }
         } catch (Exception e) {
             LOGGER.info("Unable to reach service: " + richwpsurl);

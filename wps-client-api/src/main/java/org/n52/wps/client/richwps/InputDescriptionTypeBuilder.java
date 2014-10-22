@@ -1,4 +1,4 @@
-package org.n52.wps.client.transactional;
+package org.n52.wps.client.richwps;
 
 import java.math.BigInteger;
 import java.util.ArrayList;

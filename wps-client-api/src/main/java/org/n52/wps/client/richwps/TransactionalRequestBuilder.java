@@ -1,4 +1,4 @@
-package org.n52.wps.client.transactional;
+package org.n52.wps.client.richwps;
 
 import net.opengis.wps.x100.DeployProcessDocument;
 import net.opengis.wps.x100.ProcessDescriptionType;
