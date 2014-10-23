@@ -46,12 +46,13 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cRemoteBindingParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cAssignmentParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cExecuteStatementParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cIfStatementParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Operation:
-		//	LocalBinding | RemoteBinding | Assignment | ExecuteStatement;
+		//	LocalBinding | RemoteBinding | Assignment | ExecuteStatement | IfStatement;
 		public ParserRule getRule() { return rule; }
 
-		//LocalBinding | RemoteBinding | Assignment | ExecuteStatement
+		//LocalBinding | RemoteBinding | Assignment | ExecuteStatement | IfStatement
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//LocalBinding
@@ -65,6 +66,9 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ExecuteStatement
 		public RuleCall getExecuteStatementParserRuleCall_3() { return cExecuteStatementParserRuleCall_3; }
+
+		//IfStatement
+		public RuleCall getIfStatementParserRuleCall_4() { return cIfStatementParserRuleCall_4; }
 	}
 
 	public class LocalBindingElements extends AbstractParserRuleElementFinder {
@@ -350,6 +354,397 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getReferenceVAR_REFERENCEParserRuleCall_1_2_0() { return cReferenceVAR_REFERENCEParserRuleCall_1_2_0; }
 	}
 
+	public class IfStatementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "IfStatement");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cIfKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Assignment cLefthandAssignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
+		private final RuleCall cLefthandIN_REFERENCEParserRuleCall_1_0_0_0 = (RuleCall)cLefthandAssignment_1_0_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_0_1_0 = (RuleCall)cOperatorAssignment_1_0_1.eContents().get(0);
+		private final Assignment cRighthandAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
+		private final RuleCall cRighthandIN_REFERENCEParserRuleCall_1_0_2_0 = (RuleCall)cRighthandAssignment_1_0_2.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Assignment cLefthandAssignment_1_1_0 = (Assignment)cGroup_1_1.eContents().get(0);
+		private final RuleCall cLefthandIN_REFERENCEParserRuleCall_1_1_0_0 = (RuleCall)cLefthandAssignment_1_1_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_1_1_0 = (RuleCall)cOperatorAssignment_1_1_1.eContents().get(0);
+		private final Assignment cVal_sAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
+		private final RuleCall cVal_sSTRINGTerminalRuleCall_1_1_2_0 = (RuleCall)cVal_sAssignment_1_1_2.eContents().get(0);
+		private final Group cGroup_1_2 = (Group)cAlternatives_1.eContents().get(2);
+		private final Assignment cLefthandAssignment_1_2_0 = (Assignment)cGroup_1_2.eContents().get(0);
+		private final RuleCall cLefthandIN_REFERENCEParserRuleCall_1_2_0_0 = (RuleCall)cLefthandAssignment_1_2_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_2_1_0 = (RuleCall)cOperatorAssignment_1_2_1.eContents().get(0);
+		private final Assignment cVal_iAssignment_1_2_2 = (Assignment)cGroup_1_2.eContents().get(2);
+		private final RuleCall cVal_iINTTerminalRuleCall_1_2_2_0 = (RuleCall)cVal_iAssignment_1_2_2.eContents().get(0);
+		private final Group cGroup_1_3 = (Group)cAlternatives_1.eContents().get(3);
+		private final Assignment cLefthandAssignment_1_3_0 = (Assignment)cGroup_1_3.eContents().get(0);
+		private final RuleCall cLefthandVAR_REFERENCEParserRuleCall_1_3_0_0 = (RuleCall)cLefthandAssignment_1_3_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_3_1 = (Assignment)cGroup_1_3.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_3_1_0 = (RuleCall)cOperatorAssignment_1_3_1.eContents().get(0);
+		private final Assignment cRighthandAssignment_1_3_2 = (Assignment)cGroup_1_3.eContents().get(2);
+		private final RuleCall cRighthandIN_REFERENCEParserRuleCall_1_3_2_0 = (RuleCall)cRighthandAssignment_1_3_2.eContents().get(0);
+		private final Group cGroup_1_4 = (Group)cAlternatives_1.eContents().get(4);
+		private final Assignment cLefthandAssignment_1_4_0 = (Assignment)cGroup_1_4.eContents().get(0);
+		private final RuleCall cLefthandVAR_REFERENCEParserRuleCall_1_4_0_0 = (RuleCall)cLefthandAssignment_1_4_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_4_1 = (Assignment)cGroup_1_4.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_4_1_0 = (RuleCall)cOperatorAssignment_1_4_1.eContents().get(0);
+		private final Assignment cRighthandAssignment_1_4_2 = (Assignment)cGroup_1_4.eContents().get(2);
+		private final RuleCall cRighthandVAR_REFERENCEParserRuleCall_1_4_2_0 = (RuleCall)cRighthandAssignment_1_4_2.eContents().get(0);
+		private final Group cGroup_1_5 = (Group)cAlternatives_1.eContents().get(5);
+		private final Assignment cLefthandAssignment_1_5_0 = (Assignment)cGroup_1_5.eContents().get(0);
+		private final RuleCall cLefthandVAR_REFERENCEParserRuleCall_1_5_0_0 = (RuleCall)cLefthandAssignment_1_5_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_5_1 = (Assignment)cGroup_1_5.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_5_1_0 = (RuleCall)cOperatorAssignment_1_5_1.eContents().get(0);
+		private final Assignment cVal_sAssignment_1_5_2 = (Assignment)cGroup_1_5.eContents().get(2);
+		private final RuleCall cVal_sSTRINGTerminalRuleCall_1_5_2_0 = (RuleCall)cVal_sAssignment_1_5_2.eContents().get(0);
+		private final Group cGroup_1_6 = (Group)cAlternatives_1.eContents().get(6);
+		private final Assignment cLefthandAssignment_1_6_0 = (Assignment)cGroup_1_6.eContents().get(0);
+		private final RuleCall cLefthandVAR_REFERENCEParserRuleCall_1_6_0_0 = (RuleCall)cLefthandAssignment_1_6_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_6_1 = (Assignment)cGroup_1_6.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_6_1_0 = (RuleCall)cOperatorAssignment_1_6_1.eContents().get(0);
+		private final Assignment cVal_iAssignment_1_6_2 = (Assignment)cGroup_1_6.eContents().get(2);
+		private final RuleCall cVal_iINTTerminalRuleCall_1_6_2_0 = (RuleCall)cVal_iAssignment_1_6_2.eContents().get(0);
+		private final Group cGroup_1_7 = (Group)cAlternatives_1.eContents().get(7);
+		private final Assignment cLefthandAssignment_1_7_0 = (Assignment)cGroup_1_7.eContents().get(0);
+		private final RuleCall cLefthandOUT_REFERENCEParserRuleCall_1_7_0_0 = (RuleCall)cLefthandAssignment_1_7_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_7_1 = (Assignment)cGroup_1_7.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_7_1_0 = (RuleCall)cOperatorAssignment_1_7_1.eContents().get(0);
+		private final Assignment cRighthandAssignment_1_7_2 = (Assignment)cGroup_1_7.eContents().get(2);
+		private final RuleCall cRighthandIN_REFERENCEParserRuleCall_1_7_2_0 = (RuleCall)cRighthandAssignment_1_7_2.eContents().get(0);
+		private final Group cGroup_1_8 = (Group)cAlternatives_1.eContents().get(8);
+		private final Assignment cLefthandAssignment_1_8_0 = (Assignment)cGroup_1_8.eContents().get(0);
+		private final RuleCall cLefthandOUT_REFERENCEParserRuleCall_1_8_0_0 = (RuleCall)cLefthandAssignment_1_8_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_8_1 = (Assignment)cGroup_1_8.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_8_1_0 = (RuleCall)cOperatorAssignment_1_8_1.eContents().get(0);
+		private final Assignment cRighthandAssignment_1_8_2 = (Assignment)cGroup_1_8.eContents().get(2);
+		private final RuleCall cRighthandVAR_REFERENCEParserRuleCall_1_8_2_0 = (RuleCall)cRighthandAssignment_1_8_2.eContents().get(0);
+		private final Group cGroup_1_9 = (Group)cAlternatives_1.eContents().get(9);
+		private final Assignment cLefthandAssignment_1_9_0 = (Assignment)cGroup_1_9.eContents().get(0);
+		private final RuleCall cLefthandOUT_REFERENCEParserRuleCall_1_9_0_0 = (RuleCall)cLefthandAssignment_1_9_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_9_1 = (Assignment)cGroup_1_9.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_9_1_0 = (RuleCall)cOperatorAssignment_1_9_1.eContents().get(0);
+		private final Assignment cVal_sAssignment_1_9_2 = (Assignment)cGroup_1_9.eContents().get(2);
+		private final RuleCall cVal_sSTRINGTerminalRuleCall_1_9_2_0 = (RuleCall)cVal_sAssignment_1_9_2.eContents().get(0);
+		private final Group cGroup_1_10 = (Group)cAlternatives_1.eContents().get(10);
+		private final Assignment cLefthandAssignment_1_10_0 = (Assignment)cGroup_1_10.eContents().get(0);
+		private final RuleCall cLefthandOUT_REFERENCEParserRuleCall_1_10_0_0 = (RuleCall)cLefthandAssignment_1_10_0.eContents().get(0);
+		private final Assignment cOperatorAssignment_1_10_1 = (Assignment)cGroup_1_10.eContents().get(1);
+		private final RuleCall cOperatorIDTerminalRuleCall_1_10_1_0 = (RuleCall)cOperatorAssignment_1_10_1.eContents().get(0);
+		private final Assignment cVal_iAssignment_1_10_2 = (Assignment)cGroup_1_10.eContents().get(2);
+		private final RuleCall cVal_iINTTerminalRuleCall_1_10_2_0 = (RuleCall)cVal_iAssignment_1_10_2.eContents().get(0);
+		private final Assignment cIfoperationsAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final Alternatives cIfoperationsAlternatives_2_0 = (Alternatives)cIfoperationsAssignment_2.eContents().get(0);
+		private final RuleCall cIfoperationsAssignmentParserRuleCall_2_0_0 = (RuleCall)cIfoperationsAlternatives_2_0.eContents().get(0);
+		private final RuleCall cIfoperationsExecuteStatementParserRuleCall_2_0_1 = (RuleCall)cIfoperationsAlternatives_2_0.eContents().get(1);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cElseKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cElseoperationsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final Alternatives cElseoperationsAlternatives_3_1_0 = (Alternatives)cElseoperationsAssignment_3_1.eContents().get(0);
+		private final RuleCall cElseoperationsAssignmentParserRuleCall_3_1_0_0 = (RuleCall)cElseoperationsAlternatives_3_1_0.eContents().get(0);
+		private final RuleCall cElseoperationsExecuteStatementParserRuleCall_3_1_0_1 = (RuleCall)cElseoperationsAlternatives_3_1_0.eContents().get(1);
+		private final Keyword cEndKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		
+		//IfStatement:
+		//	"if" (lefthand=IN_REFERENCE operator=ID righthand=IN_REFERENCE | lefthand=IN_REFERENCE operator=ID val_s=STRING |
+		//	lefthand=IN_REFERENCE operator=ID val_i=INT | lefthand=VAR_REFERENCE operator=ID righthand=IN_REFERENCE |
+		//	lefthand=VAR_REFERENCE operator=ID righthand=VAR_REFERENCE | lefthand=VAR_REFERENCE operator=ID val_s=STRING |
+		//	lefthand=VAR_REFERENCE operator=ID val_i=INT | lefthand=OUT_REFERENCE operator=ID righthand=IN_REFERENCE |
+		//	lefthand=OUT_REFERENCE operator=ID righthand=VAR_REFERENCE | lefthand=OUT_REFERENCE operator=ID val_s=STRING |
+		//	lefthand=OUT_REFERENCE operator=ID val_i=INT) ifoperations+=(Assignment | ExecuteStatement)* ("else"
+		//	elseoperations+=(Assignment | ExecuteStatement)*)? //one or none else
+		//	"end";
+		public ParserRule getRule() { return rule; }
+
+		//"if" (lefthand=IN_REFERENCE operator=ID righthand=IN_REFERENCE | lefthand=IN_REFERENCE operator=ID val_s=STRING |
+		//lefthand=IN_REFERENCE operator=ID val_i=INT | lefthand=VAR_REFERENCE operator=ID righthand=IN_REFERENCE |
+		//lefthand=VAR_REFERENCE operator=ID righthand=VAR_REFERENCE | lefthand=VAR_REFERENCE operator=ID val_s=STRING |
+		//lefthand=VAR_REFERENCE operator=ID val_i=INT | lefthand=OUT_REFERENCE operator=ID righthand=IN_REFERENCE |
+		//lefthand=OUT_REFERENCE operator=ID righthand=VAR_REFERENCE | lefthand=OUT_REFERENCE operator=ID val_s=STRING |
+		//lefthand=OUT_REFERENCE operator=ID val_i=INT) ifoperations+=(Assignment | ExecuteStatement)* ("else"
+		//elseoperations+=(Assignment | ExecuteStatement)*)? //one or none else
+		//"end"
+		public Group getGroup() { return cGroup; }
+
+		//"if"
+		public Keyword getIfKeyword_0() { return cIfKeyword_0; }
+
+		//lefthand=IN_REFERENCE operator=ID righthand=IN_REFERENCE | lefthand=IN_REFERENCE operator=ID val_s=STRING |
+		//lefthand=IN_REFERENCE operator=ID val_i=INT | lefthand=VAR_REFERENCE operator=ID righthand=IN_REFERENCE |
+		//lefthand=VAR_REFERENCE operator=ID righthand=VAR_REFERENCE | lefthand=VAR_REFERENCE operator=ID val_s=STRING |
+		//lefthand=VAR_REFERENCE operator=ID val_i=INT | lefthand=OUT_REFERENCE operator=ID righthand=IN_REFERENCE |
+		//lefthand=OUT_REFERENCE operator=ID righthand=VAR_REFERENCE | lefthand=OUT_REFERENCE operator=ID val_s=STRING |
+		//lefthand=OUT_REFERENCE operator=ID val_i=INT
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//lefthand=IN_REFERENCE operator=ID righthand=IN_REFERENCE
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//lefthand=IN_REFERENCE
+		public Assignment getLefthandAssignment_1_0_0() { return cLefthandAssignment_1_0_0; }
+
+		//IN_REFERENCE
+		public RuleCall getLefthandIN_REFERENCEParserRuleCall_1_0_0_0() { return cLefthandIN_REFERENCEParserRuleCall_1_0_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_0_1() { return cOperatorAssignment_1_0_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_0_1_0() { return cOperatorIDTerminalRuleCall_1_0_1_0; }
+
+		//righthand=IN_REFERENCE
+		public Assignment getRighthandAssignment_1_0_2() { return cRighthandAssignment_1_0_2; }
+
+		//IN_REFERENCE
+		public RuleCall getRighthandIN_REFERENCEParserRuleCall_1_0_2_0() { return cRighthandIN_REFERENCEParserRuleCall_1_0_2_0; }
+
+		//lefthand=IN_REFERENCE operator=ID val_s=STRING
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//lefthand=IN_REFERENCE
+		public Assignment getLefthandAssignment_1_1_0() { return cLefthandAssignment_1_1_0; }
+
+		//IN_REFERENCE
+		public RuleCall getLefthandIN_REFERENCEParserRuleCall_1_1_0_0() { return cLefthandIN_REFERENCEParserRuleCall_1_1_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_1_1() { return cOperatorAssignment_1_1_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_1_1_0() { return cOperatorIDTerminalRuleCall_1_1_1_0; }
+
+		//val_s=STRING
+		public Assignment getVal_sAssignment_1_1_2() { return cVal_sAssignment_1_1_2; }
+
+		//STRING
+		public RuleCall getVal_sSTRINGTerminalRuleCall_1_1_2_0() { return cVal_sSTRINGTerminalRuleCall_1_1_2_0; }
+
+		//lefthand=IN_REFERENCE operator=ID val_i=INT
+		public Group getGroup_1_2() { return cGroup_1_2; }
+
+		//lefthand=IN_REFERENCE
+		public Assignment getLefthandAssignment_1_2_0() { return cLefthandAssignment_1_2_0; }
+
+		//IN_REFERENCE
+		public RuleCall getLefthandIN_REFERENCEParserRuleCall_1_2_0_0() { return cLefthandIN_REFERENCEParserRuleCall_1_2_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_2_1() { return cOperatorAssignment_1_2_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_2_1_0() { return cOperatorIDTerminalRuleCall_1_2_1_0; }
+
+		//val_i=INT
+		public Assignment getVal_iAssignment_1_2_2() { return cVal_iAssignment_1_2_2; }
+
+		//INT
+		public RuleCall getVal_iINTTerminalRuleCall_1_2_2_0() { return cVal_iINTTerminalRuleCall_1_2_2_0; }
+
+		//lefthand=VAR_REFERENCE operator=ID righthand=IN_REFERENCE
+		public Group getGroup_1_3() { return cGroup_1_3; }
+
+		//lefthand=VAR_REFERENCE
+		public Assignment getLefthandAssignment_1_3_0() { return cLefthandAssignment_1_3_0; }
+
+		//VAR_REFERENCE
+		public RuleCall getLefthandVAR_REFERENCEParserRuleCall_1_3_0_0() { return cLefthandVAR_REFERENCEParserRuleCall_1_3_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_3_1() { return cOperatorAssignment_1_3_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_3_1_0() { return cOperatorIDTerminalRuleCall_1_3_1_0; }
+
+		//righthand=IN_REFERENCE
+		public Assignment getRighthandAssignment_1_3_2() { return cRighthandAssignment_1_3_2; }
+
+		//IN_REFERENCE
+		public RuleCall getRighthandIN_REFERENCEParserRuleCall_1_3_2_0() { return cRighthandIN_REFERENCEParserRuleCall_1_3_2_0; }
+
+		//lefthand=VAR_REFERENCE operator=ID righthand=VAR_REFERENCE
+		public Group getGroup_1_4() { return cGroup_1_4; }
+
+		//lefthand=VAR_REFERENCE
+		public Assignment getLefthandAssignment_1_4_0() { return cLefthandAssignment_1_4_0; }
+
+		//VAR_REFERENCE
+		public RuleCall getLefthandVAR_REFERENCEParserRuleCall_1_4_0_0() { return cLefthandVAR_REFERENCEParserRuleCall_1_4_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_4_1() { return cOperatorAssignment_1_4_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_4_1_0() { return cOperatorIDTerminalRuleCall_1_4_1_0; }
+
+		//righthand=VAR_REFERENCE
+		public Assignment getRighthandAssignment_1_4_2() { return cRighthandAssignment_1_4_2; }
+
+		//VAR_REFERENCE
+		public RuleCall getRighthandVAR_REFERENCEParserRuleCall_1_4_2_0() { return cRighthandVAR_REFERENCEParserRuleCall_1_4_2_0; }
+
+		//lefthand=VAR_REFERENCE operator=ID val_s=STRING
+		public Group getGroup_1_5() { return cGroup_1_5; }
+
+		//lefthand=VAR_REFERENCE
+		public Assignment getLefthandAssignment_1_5_0() { return cLefthandAssignment_1_5_0; }
+
+		//VAR_REFERENCE
+		public RuleCall getLefthandVAR_REFERENCEParserRuleCall_1_5_0_0() { return cLefthandVAR_REFERENCEParserRuleCall_1_5_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_5_1() { return cOperatorAssignment_1_5_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_5_1_0() { return cOperatorIDTerminalRuleCall_1_5_1_0; }
+
+		//val_s=STRING
+		public Assignment getVal_sAssignment_1_5_2() { return cVal_sAssignment_1_5_2; }
+
+		//STRING
+		public RuleCall getVal_sSTRINGTerminalRuleCall_1_5_2_0() { return cVal_sSTRINGTerminalRuleCall_1_5_2_0; }
+
+		//lefthand=VAR_REFERENCE operator=ID val_i=INT
+		public Group getGroup_1_6() { return cGroup_1_6; }
+
+		//lefthand=VAR_REFERENCE
+		public Assignment getLefthandAssignment_1_6_0() { return cLefthandAssignment_1_6_0; }
+
+		//VAR_REFERENCE
+		public RuleCall getLefthandVAR_REFERENCEParserRuleCall_1_6_0_0() { return cLefthandVAR_REFERENCEParserRuleCall_1_6_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_6_1() { return cOperatorAssignment_1_6_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_6_1_0() { return cOperatorIDTerminalRuleCall_1_6_1_0; }
+
+		//val_i=INT
+		public Assignment getVal_iAssignment_1_6_2() { return cVal_iAssignment_1_6_2; }
+
+		//INT
+		public RuleCall getVal_iINTTerminalRuleCall_1_6_2_0() { return cVal_iINTTerminalRuleCall_1_6_2_0; }
+
+		//lefthand=OUT_REFERENCE operator=ID righthand=IN_REFERENCE
+		public Group getGroup_1_7() { return cGroup_1_7; }
+
+		//lefthand=OUT_REFERENCE
+		public Assignment getLefthandAssignment_1_7_0() { return cLefthandAssignment_1_7_0; }
+
+		//OUT_REFERENCE
+		public RuleCall getLefthandOUT_REFERENCEParserRuleCall_1_7_0_0() { return cLefthandOUT_REFERENCEParserRuleCall_1_7_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_7_1() { return cOperatorAssignment_1_7_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_7_1_0() { return cOperatorIDTerminalRuleCall_1_7_1_0; }
+
+		//righthand=IN_REFERENCE
+		public Assignment getRighthandAssignment_1_7_2() { return cRighthandAssignment_1_7_2; }
+
+		//IN_REFERENCE
+		public RuleCall getRighthandIN_REFERENCEParserRuleCall_1_7_2_0() { return cRighthandIN_REFERENCEParserRuleCall_1_7_2_0; }
+
+		//lefthand=OUT_REFERENCE operator=ID righthand=VAR_REFERENCE
+		public Group getGroup_1_8() { return cGroup_1_8; }
+
+		//lefthand=OUT_REFERENCE
+		public Assignment getLefthandAssignment_1_8_0() { return cLefthandAssignment_1_8_0; }
+
+		//OUT_REFERENCE
+		public RuleCall getLefthandOUT_REFERENCEParserRuleCall_1_8_0_0() { return cLefthandOUT_REFERENCEParserRuleCall_1_8_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_8_1() { return cOperatorAssignment_1_8_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_8_1_0() { return cOperatorIDTerminalRuleCall_1_8_1_0; }
+
+		//righthand=VAR_REFERENCE
+		public Assignment getRighthandAssignment_1_8_2() { return cRighthandAssignment_1_8_2; }
+
+		//VAR_REFERENCE
+		public RuleCall getRighthandVAR_REFERENCEParserRuleCall_1_8_2_0() { return cRighthandVAR_REFERENCEParserRuleCall_1_8_2_0; }
+
+		//lefthand=OUT_REFERENCE operator=ID val_s=STRING
+		public Group getGroup_1_9() { return cGroup_1_9; }
+
+		//lefthand=OUT_REFERENCE
+		public Assignment getLefthandAssignment_1_9_0() { return cLefthandAssignment_1_9_0; }
+
+		//OUT_REFERENCE
+		public RuleCall getLefthandOUT_REFERENCEParserRuleCall_1_9_0_0() { return cLefthandOUT_REFERENCEParserRuleCall_1_9_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_9_1() { return cOperatorAssignment_1_9_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_9_1_0() { return cOperatorIDTerminalRuleCall_1_9_1_0; }
+
+		//val_s=STRING
+		public Assignment getVal_sAssignment_1_9_2() { return cVal_sAssignment_1_9_2; }
+
+		//STRING
+		public RuleCall getVal_sSTRINGTerminalRuleCall_1_9_2_0() { return cVal_sSTRINGTerminalRuleCall_1_9_2_0; }
+
+		//lefthand=OUT_REFERENCE operator=ID val_i=INT
+		public Group getGroup_1_10() { return cGroup_1_10; }
+
+		//lefthand=OUT_REFERENCE
+		public Assignment getLefthandAssignment_1_10_0() { return cLefthandAssignment_1_10_0; }
+
+		//OUT_REFERENCE
+		public RuleCall getLefthandOUT_REFERENCEParserRuleCall_1_10_0_0() { return cLefthandOUT_REFERENCEParserRuleCall_1_10_0_0; }
+
+		//operator=ID
+		public Assignment getOperatorAssignment_1_10_1() { return cOperatorAssignment_1_10_1; }
+
+		//ID
+		public RuleCall getOperatorIDTerminalRuleCall_1_10_1_0() { return cOperatorIDTerminalRuleCall_1_10_1_0; }
+
+		//val_i=INT
+		public Assignment getVal_iAssignment_1_10_2() { return cVal_iAssignment_1_10_2; }
+
+		//INT
+		public RuleCall getVal_iINTTerminalRuleCall_1_10_2_0() { return cVal_iINTTerminalRuleCall_1_10_2_0; }
+
+		//ifoperations+=(Assignment | ExecuteStatement)*
+		public Assignment getIfoperationsAssignment_2() { return cIfoperationsAssignment_2; }
+
+		//Assignment | ExecuteStatement
+		public Alternatives getIfoperationsAlternatives_2_0() { return cIfoperationsAlternatives_2_0; }
+
+		//Assignment
+		public RuleCall getIfoperationsAssignmentParserRuleCall_2_0_0() { return cIfoperationsAssignmentParserRuleCall_2_0_0; }
+
+		//ExecuteStatement
+		public RuleCall getIfoperationsExecuteStatementParserRuleCall_2_0_1() { return cIfoperationsExecuteStatementParserRuleCall_2_0_1; }
+
+		//("else" elseoperations+=(Assignment | ExecuteStatement)*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"else"
+		public Keyword getElseKeyword_3_0() { return cElseKeyword_3_0; }
+
+		//elseoperations+=(Assignment | ExecuteStatement)*
+		public Assignment getElseoperationsAssignment_3_1() { return cElseoperationsAssignment_3_1; }
+
+		//Assignment | ExecuteStatement
+		public Alternatives getElseoperationsAlternatives_3_1_0() { return cElseoperationsAlternatives_3_1_0; }
+
+		//Assignment
+		public RuleCall getElseoperationsAssignmentParserRuleCall_3_1_0_0() { return cElseoperationsAssignmentParserRuleCall_3_1_0_0; }
+
+		//ExecuteStatement
+		public RuleCall getElseoperationsExecuteStatementParserRuleCall_3_1_0_1() { return cElseoperationsExecuteStatementParserRuleCall_3_1_0_1; }
+
+		//"end"
+		public Keyword getEndKeyword_4() { return cEndKeyword_4; }
+	}
+
 	public class AssignmentElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Assignment");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -618,6 +1013,7 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	private ExecuteStatementElements pExecuteStatement;
 	private ExecInputElements pExecInput;
 	private ExecOutputElements pExecOutput;
+	private IfStatementElements pIfStatement;
 	private AssignmentElements pAssignment;
 	private IN_REFERENCEElements pIN_REFERENCE;
 	private OUT_REFERENCEElements pOUT_REFERENCE;
@@ -685,7 +1081,7 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Operation:
-	//	LocalBinding | RemoteBinding | Assignment | ExecuteStatement;
+	//	LocalBinding | RemoteBinding | Assignment | ExecuteStatement | IfStatement;
 	public OperationElements getOperationAccess() {
 		return (pOperation != null) ? pOperation : (pOperation = new OperationElements());
 	}
@@ -745,6 +1141,23 @@ public class DSLGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getExecOutputRule() {
 		return getExecOutputAccess().getRule();
+	}
+
+	//IfStatement:
+	//	"if" (lefthand=IN_REFERENCE operator=ID righthand=IN_REFERENCE | lefthand=IN_REFERENCE operator=ID val_s=STRING |
+	//	lefthand=IN_REFERENCE operator=ID val_i=INT | lefthand=VAR_REFERENCE operator=ID righthand=IN_REFERENCE |
+	//	lefthand=VAR_REFERENCE operator=ID righthand=VAR_REFERENCE | lefthand=VAR_REFERENCE operator=ID val_s=STRING |
+	//	lefthand=VAR_REFERENCE operator=ID val_i=INT | lefthand=OUT_REFERENCE operator=ID righthand=IN_REFERENCE |
+	//	lefthand=OUT_REFERENCE operator=ID righthand=VAR_REFERENCE | lefthand=OUT_REFERENCE operator=ID val_s=STRING |
+	//	lefthand=OUT_REFERENCE operator=ID val_i=INT) ifoperations+=(Assignment | ExecuteStatement)* ("else"
+	//	elseoperations+=(Assignment | ExecuteStatement)*)? //one or none else
+	//	"end";
+	public IfStatementElements getIfStatementAccess() {
+		return (pIfStatement != null) ? pIfStatement : (pIfStatement = new IfStatementElements());
+	}
+	
+	public ParserRule getIfStatementRule() {
+		return getIfStatementAccess().getRule();
 	}
 
 	//Assignment:

@@ -12,7 +12,7 @@ Worksequence:
 ;
 
 Operation:
-	LocalBinding | RemoteBinding | Assignment | ExecuteStatement;
+	LocalBinding | RemoteBinding | Assignment | ExecuteStatement | IfStatement;
 
 	// e.g. bind process de.hsos.processname to hsos/proc1
 LocalBinding:
@@ -31,6 +31,29 @@ ExecInput:
 
 ExecOutput:
 	(wpsid=ID 'as' reference=OUT_REFERENCE) | (wpsid=ID 'as' reference=VAR_REFERENCE);
+
+IfStatement:
+	'if' 
+	(
+	(lefthand=IN_REFERENCE operator=ID righthand=IN_REFERENCE) |
+	(lefthand=IN_REFERENCE operator=ID val_s=STRING) |
+	(lefthand=IN_REFERENCE operator=ID val_i=INT) |
+	(lefthand=VAR_REFERENCE operator=ID righthand=IN_REFERENCE) |
+	(lefthand=VAR_REFERENCE operator=ID righthand=VAR_REFERENCE) |
+	(lefthand=VAR_REFERENCE operator=ID val_s=STRING) |
+	(lefthand=VAR_REFERENCE operator=ID val_i=INT) |
+	(lefthand=OUT_REFERENCE operator=ID righthand=IN_REFERENCE) |
+	(lefthand=OUT_REFERENCE operator=ID righthand=VAR_REFERENCE) |
+	(lefthand=OUT_REFERENCE operator=ID val_s=STRING) |
+	(lefthand=OUT_REFERENCE operator=ID val_i=INT)
+	)
+		(ifoperations+=(Assignment | ExecuteStatement)*)
+	('else'
+		(elseoperations+=(Assignment | ExecuteStatement)*)
+	)?//one or none else
+	'end'
+	;
+
 
 Assignment:
 	(lefthand=OUT_REFERENCE '=' righthand=IN_REFERENCE) |

@@ -14,6 +14,9 @@ import java.util.ArrayList;
 public class InternalDSLLexer extends Lexer {
     public static final int RULE_ID=7;
     public static final int RULE_OUT_REFERENCE_HANDLE=5;
+    public static final int T__27=27;
+    public static final int T__26=26;
+    public static final int T__25=25;
     public static final int T__24=24;
     public static final int T__23=23;
     public static final int T__22=22;
@@ -28,8 +31,8 @@ public class InternalDSLLexer extends Lexer {
     public static final int RULE_STRING=10;
     public static final int T__16=16;
     public static final int T__15=15;
-    public static final int RULE_PROTOCOL=8;
     public static final int T__18=18;
+    public static final int RULE_PROTOCOL=8;
     public static final int RULE_IN_REFERENCE_HANDLE=4;
     public static final int T__17=17;
     public static final int RULE_INT=9;
@@ -200,10 +203,11 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:18:7: ( '=' )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:18:9: '='
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:18:7: ( 'if' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:18:9: 'if'
             {
-            match('='); 
+            match("if"); 
+
 
             }
 
@@ -220,10 +224,11 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:19:7: ( '.' )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:19:9: '.'
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:19:7: ( 'end' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:19:9: 'end'
             {
-            match('.'); 
+            match("end"); 
+
 
             }
 
@@ -240,10 +245,11 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:20:7: ( '/' )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:20:9: '/'
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:20:7: ( 'else' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:20:9: 'else'
             {
-            match('/'); 
+            match("else"); 
+
 
             }
 
@@ -255,15 +261,75 @@ public class InternalDSLLexer extends Lexer {
     }
     // $ANTLR end "T__24"
 
+    // $ANTLR start "T__25"
+    public final void mT__25() throws RecognitionException {
+        try {
+            int _type = T__25;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:21:7: ( '=' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:21:9: '='
+            {
+            match('='); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__25"
+
+    // $ANTLR start "T__26"
+    public final void mT__26() throws RecognitionException {
+        try {
+            int _type = T__26;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:22:7: ( '.' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:22:9: '.'
+            {
+            match('.'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__26"
+
+    // $ANTLR start "T__27"
+    public final void mT__27() throws RecognitionException {
+        try {
+            int _type = T__27;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:23:7: ( '/' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:23:9: '/'
+            {
+            match('/'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__27"
+
     // $ANTLR start "RULE_IN_REFERENCE_HANDLE"
     public final void mRULE_IN_REFERENCE_HANDLE() throws RecognitionException {
         try {
             int _type = RULE_IN_REFERENCE_HANDLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2914:26: ( ( 'in.' | 'IN.' ) )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2914:28: ( 'in.' | 'IN.' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4828:26: ( ( 'in.' | 'IN.' ) )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4828:28: ( 'in.' | 'IN.' )
             {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2914:28: ( 'in.' | 'IN.' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4828:28: ( 'in.' | 'IN.' )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -281,7 +347,7 @@ public class InternalDSLLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2914:29: 'in.'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4828:29: 'in.'
                     {
                     match("in."); 
 
@@ -289,7 +355,7 @@ public class InternalDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2914:35: 'IN.'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4828:35: 'IN.'
                     {
                     match("IN."); 
 
@@ -315,10 +381,10 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_VAR_REFERENCE_HANDLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2916:27: ( ( 'var.' | 'VAR.' ) )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2916:29: ( 'var.' | 'VAR.' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4830:27: ( ( 'var.' | 'VAR.' ) )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4830:29: ( 'var.' | 'VAR.' )
             {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2916:29: ( 'var.' | 'VAR.' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4830:29: ( 'var.' | 'VAR.' )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -336,7 +402,7 @@ public class InternalDSLLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2916:30: 'var.'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4830:30: 'var.'
                     {
                     match("var."); 
 
@@ -344,7 +410,7 @@ public class InternalDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2916:37: 'VAR.'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4830:37: 'VAR.'
                     {
                     match("VAR."); 
 
@@ -370,10 +436,10 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_OUT_REFERENCE_HANDLE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2918:27: ( ( 'out.' | 'OUT.' ) )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2918:29: ( 'out.' | 'OUT.' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4832:27: ( ( 'out.' | 'OUT.' ) )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4832:29: ( 'out.' | 'OUT.' )
             {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2918:29: ( 'out.' | 'OUT.' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4832:29: ( 'out.' | 'OUT.' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -391,7 +457,7 @@ public class InternalDSLLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2918:30: 'out.'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4832:30: 'out.'
                     {
                     match("out."); 
 
@@ -399,7 +465,7 @@ public class InternalDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2918:37: 'OUT.'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4832:37: 'OUT.'
                     {
                     match("OUT."); 
 
@@ -425,10 +491,10 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_PROTOCOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2920:15: ( ( 'http' | 'https' ) )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2920:17: ( 'http' | 'https' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4834:15: ( ( 'http' | 'https' ) )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4834:17: ( 'http' | 'https' )
             {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2920:17: ( 'http' | 'https' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4834:17: ( 'http' | 'https' )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -479,7 +545,7 @@ public class InternalDSLLexer extends Lexer {
             }
             switch (alt4) {
                 case 1 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2920:18: 'http'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4834:18: 'http'
                     {
                     match("http"); 
 
@@ -487,7 +553,7 @@ public class InternalDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2920:25: 'https'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4834:25: 'https'
                     {
                     match("https"); 
 
@@ -513,8 +579,8 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2922:9: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2922:11: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4836:9: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )* )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4836:11: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             {
             if ( input.LA(1)=='-'||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -525,7 +591,7 @@ public class InternalDSLLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2922:39: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4836:39: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '-' | '0' .. '9' )*
             loop5:
             do {
                 int alt5=2;
@@ -574,10 +640,10 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2924:10: ( ( '0' .. '9' )+ )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2924:12: ( '0' .. '9' )+
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4838:10: ( ( '0' .. '9' )+ )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4838:12: ( '0' .. '9' )+
             {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2924:12: ( '0' .. '9' )+
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4838:12: ( '0' .. '9' )+
             int cnt6=0;
             loop6:
             do {
@@ -591,7 +657,7 @@ public class InternalDSLLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2924:13: '0' .. '9'
+            	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4838:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -623,10 +689,10 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -644,10 +710,10 @@ public class InternalDSLLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop7:
                     do {
                         int alt7=3;
@@ -663,7 +729,7 @@ public class InternalDSLLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -679,7 +745,7 @@ public class InternalDSLLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -704,10 +770,10 @@ public class InternalDSLLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -723,7 +789,7 @@ public class InternalDSLLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -739,7 +805,7 @@ public class InternalDSLLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2926:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4840:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -782,12 +848,12 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2928:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2928:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4842:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4842:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2928:24: ( options {greedy=false; } : . )*
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4842:24: ( options {greedy=false; } : . )*
             loop10:
             do {
                 int alt10=2;
@@ -812,7 +878,7 @@ public class InternalDSLLexer extends Lexer {
 
                 switch (alt10) {
             	case 1 :
-            	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2928:52: .
+            	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4842:52: .
             	    {
             	    matchAny(); 
 
@@ -842,12 +908,12 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2930:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2930:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4844:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4844:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2930:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4844:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop11:
             do {
                 int alt11=2;
@@ -860,7 +926,7 @@ public class InternalDSLLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2930:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4844:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -880,7 +946,7 @@ public class InternalDSLLexer extends Lexer {
                 }
             } while (true);
 
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2930:40: ( ( '\\r' )? '\\n' )?
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4844:40: ( ( '\\r' )? '\\n' )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -889,9 +955,9 @@ public class InternalDSLLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2930:41: ( '\\r' )? '\\n'
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4844:41: ( '\\r' )? '\\n'
                     {
-                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2930:41: ( '\\r' )?
+                    // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4844:41: ( '\\r' )?
                     int alt12=2;
                     int LA12_0 = input.LA(1);
 
@@ -900,7 +966,7 @@ public class InternalDSLLexer extends Lexer {
                     }
                     switch (alt12) {
                         case 1 :
-                            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2930:41: '\\r'
+                            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4844:41: '\\r'
                             {
                             match('\r'); 
 
@@ -932,10 +998,10 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2932:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2932:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4846:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4846:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2932:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4846:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt14=0;
             loop14:
             do {
@@ -989,8 +1055,8 @@ public class InternalDSLLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2934:16: ( . )
-            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:2934:18: .
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4848:16: ( . )
+            // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:4848:18: .
             {
             matchAny(); 
 
@@ -1005,8 +1071,8 @@ public class InternalDSLLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | RULE_IN_REFERENCE_HANDLE | RULE_VAR_REFERENCE_HANDLE | RULE_OUT_REFERENCE_HANDLE | RULE_PROTOCOL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt15=21;
+        // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:8: ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | RULE_IN_REFERENCE_HANDLE | RULE_VAR_REFERENCE_HANDLE | RULE_OUT_REFERENCE_HANDLE | RULE_PROTOCOL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt15=24;
         alt15 = dfa15.predict(input);
         switch (alt15) {
             case 1 :
@@ -1080,77 +1146,98 @@ public class InternalDSLLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:70: RULE_IN_REFERENCE_HANDLE
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:70: T__25
+                {
+                mT__25(); 
+
+                }
+                break;
+            case 12 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:76: T__26
+                {
+                mT__26(); 
+
+                }
+                break;
+            case 13 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:82: T__27
+                {
+                mT__27(); 
+
+                }
+                break;
+            case 14 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:88: RULE_IN_REFERENCE_HANDLE
                 {
                 mRULE_IN_REFERENCE_HANDLE(); 
 
                 }
                 break;
-            case 12 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:95: RULE_VAR_REFERENCE_HANDLE
+            case 15 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:113: RULE_VAR_REFERENCE_HANDLE
                 {
                 mRULE_VAR_REFERENCE_HANDLE(); 
 
                 }
                 break;
-            case 13 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:121: RULE_OUT_REFERENCE_HANDLE
+            case 16 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:139: RULE_OUT_REFERENCE_HANDLE
                 {
                 mRULE_OUT_REFERENCE_HANDLE(); 
 
                 }
                 break;
-            case 14 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:147: RULE_PROTOCOL
+            case 17 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:165: RULE_PROTOCOL
                 {
                 mRULE_PROTOCOL(); 
 
                 }
                 break;
-            case 15 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:161: RULE_ID
+            case 18 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:179: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 16 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:169: RULE_INT
+            case 19 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:187: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 17 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:178: RULE_STRING
+            case 20 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:196: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 18 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:190: RULE_ML_COMMENT
+            case 21 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:208: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 19 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:206: RULE_SL_COMMENT
+            case 22 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:224: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 20 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:222: RULE_WS
+            case 23 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:240: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 21 :
-                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:230: RULE_ANY_OTHER
+            case 24 :
+                // ../de.hsos.richwps.lang.ui/src-gen/de/hsos/richwps/ui/contentassist/antlr/internal/InternalDSL.g:1:248: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1164,116 +1251,128 @@ public class InternalDSLLexer extends Lexer {
 
     protected DFA15 dfa15 = new DFA15(this);
     static final String DFA15_eotS =
-        "\1\uffff\7\31\2\uffff\1\44\7\31\2\uffff\2\27\2\uffff\1\31\1\uffff"+
-        "\1\31\1\61\3\31\1\65\5\uffff\7\31\3\uffff\2\31\1\uffff\3\31\2\uffff"+
-        "\5\31\1\104\2\31\1\107\1\31\2\uffff\1\112\1\uffff\2\31\1\uffff\1"+
-        "\115\1\112\1\uffff\2\31\1\uffff\1\120\1\121\2\uffff";
+        "\1\uffff\10\31\2\uffff\1\50\6\31\2\uffff\2\27\2\uffff\1\31\1\uffff"+
+        "\1\31\1\64\5\31\1\72\1\73\1\31\5\uffff\6\31\3\uffff\2\31\1\uffff"+
+        "\1\31\1\105\3\31\3\uffff\5\31\1\114\2\31\1\uffff\1\117\1\120\1\31"+
+        "\2\uffff\1\123\1\uffff\2\31\2\uffff\1\126\1\123\1\uffff\2\31\1\uffff"+
+        "\1\131\1\132\2\uffff";
     static final String DFA15_eofS =
-        "\122\uffff";
+        "\133\uffff";
     static final String DFA15_minS =
-        "\1\0\1\151\1\162\1\157\1\170\1\151\1\164\1\163\2\uffff\1\52\1\156"+
+        "\1\0\1\151\1\162\1\157\1\154\1\151\1\164\1\163\1\146\2\uffff\1\52"+
         "\1\116\1\141\1\101\1\165\1\125\1\164\2\uffff\2\0\2\uffff\1\156\1"+
-        "\uffff\1\157\1\55\1\145\1\164\1\157\1\55\5\uffff\2\56\1\162\1\122"+
-        "\1\164\1\124\1\164\3\uffff\1\144\1\143\1\uffff\1\143\1\150\1\162"+
-        "\2\uffff\4\56\1\160\1\55\1\145\1\165\1\55\1\145\2\uffff\1\55\1\uffff"+
-        "\1\163\1\164\1\uffff\2\55\1\uffff\1\163\1\145\1\uffff\2\55\2\uffff";
+        "\uffff\1\157\1\55\1\145\1\144\1\163\1\164\1\157\2\55\1\56\5\uffff"+
+        "\1\56\1\162\1\122\1\164\1\124\1\164\3\uffff\1\144\1\143\1\uffff"+
+        "\1\143\1\55\1\145\1\150\1\162\3\uffff\4\56\1\160\1\55\1\145\1\165"+
+        "\1\uffff\2\55\1\145\2\uffff\1\55\1\uffff\1\163\1\164\2\uffff\2\55"+
+        "\1\uffff\1\163\1\145\1\uffff\2\55\2\uffff";
     static final String DFA15_maxS =
-        "\1\uffff\1\151\1\162\1\157\1\170\1\151\1\164\1\163\2\uffff\1\57"+
-        "\1\156\1\116\1\141\1\101\1\165\1\125\1\164\2\uffff\2\uffff\2\uffff"+
-        "\1\156\1\uffff\1\157\1\172\1\145\1\164\1\157\1\172\5\uffff\2\56"+
-        "\1\162\1\122\1\164\1\124\1\164\3\uffff\1\144\1\143\1\uffff\1\143"+
-        "\1\150\1\162\2\uffff\4\56\1\160\1\172\1\145\1\165\1\172\1\145\2"+
-        "\uffff\1\172\1\uffff\1\163\1\164\1\uffff\2\172\1\uffff\1\163\1\145"+
-        "\1\uffff\2\172\2\uffff";
+        "\1\uffff\1\151\1\162\1\157\1\170\1\151\1\164\1\163\1\156\2\uffff"+
+        "\1\57\1\116\1\141\1\101\1\165\1\125\1\164\2\uffff\2\uffff\2\uffff"+
+        "\1\156\1\uffff\1\157\1\172\1\145\1\144\1\163\1\164\1\157\2\172\1"+
+        "\56\5\uffff\1\56\1\162\1\122\1\164\1\124\1\164\3\uffff\1\144\1\143"+
+        "\1\uffff\1\143\1\172\1\145\1\150\1\162\3\uffff\4\56\1\160\1\172"+
+        "\1\145\1\165\1\uffff\2\172\1\145\2\uffff\1\172\1\uffff\1\163\1\164"+
+        "\2\uffff\2\172\1\uffff\1\163\1\145\1\uffff\2\172\2\uffff";
     static final String DFA15_acceptS =
-        "\10\uffff\1\10\1\11\10\uffff\1\17\1\20\2\uffff\1\24\1\25\1\uffff"+
-        "\1\17\6\uffff\1\10\1\11\1\22\1\23\1\12\7\uffff\1\20\1\21\1\24\2"+
-        "\uffff\1\3\3\uffff\1\7\1\13\12\uffff\1\14\1\15\1\uffff\1\1\2\uffff"+
-        "\1\5\2\uffff\1\16\2\uffff\1\6\2\uffff\1\2\1\4";
+        "\11\uffff\1\13\1\14\7\uffff\1\22\1\23\2\uffff\1\27\1\30\1\uffff"+
+        "\1\22\12\uffff\1\13\1\14\1\25\1\26\1\15\6\uffff\1\23\1\24\1\27\2"+
+        "\uffff\1\3\5\uffff\1\7\1\10\1\16\10\uffff\1\11\3\uffff\1\17\1\20"+
+        "\1\uffff\1\1\2\uffff\1\12\1\5\2\uffff\1\21\2\uffff\1\6\2\uffff\1"+
+        "\2\1\4";
     static final String DFA15_specialS =
-        "\1\1\23\uffff\1\0\1\2\74\uffff}>";
+        "\1\1\23\uffff\1\2\1\0\105\uffff}>";
     static final String[] DFA15_transitionS = {
             "\11\27\2\26\2\27\1\26\22\27\1\26\1\27\1\24\4\27\1\25\5\27\1"+
-            "\22\1\11\1\12\12\23\3\27\1\10\3\27\10\22\1\14\5\22\1\20\6\22"+
-            "\1\16\4\22\4\27\1\22\1\27\1\7\1\1\2\22\1\4\2\22\1\21\1\13\5"+
+            "\22\1\12\1\13\12\23\3\27\1\11\3\27\10\22\1\14\5\22\1\20\6\22"+
+            "\1\16\4\22\4\27\1\22\1\27\1\7\1\1\2\22\1\4\2\22\1\21\1\10\5"+
             "\22\1\17\1\2\2\22\1\6\1\3\1\22\1\15\1\5\3\22\uff85\27",
             "\1\30",
             "\1\32",
             "\1\33",
-            "\1\34",
-            "\1\35",
-            "\1\36",
+            "\1\36\1\uffff\1\35\11\uffff\1\34",
             "\1\37",
+            "\1\40",
+            "\1\41",
+            "\1\42\7\uffff\1\43",
             "",
             "",
-            "\1\42\4\uffff\1\43",
-            "\1\45",
-            "\1\46",
-            "\1\47",
-            "\1\50",
+            "\1\46\4\uffff\1\47",
             "\1\51",
             "\1\52",
             "\1\53",
+            "\1\54",
+            "\1\55",
+            "\1\56",
             "",
             "",
-            "\0\55",
-            "\0\55",
+            "\0\60",
+            "\0\60",
             "",
             "",
-            "\1\57",
-            "",
-            "\1\60",
-            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\62",
+            "",
             "\1\63",
-            "\1\64",
             "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "\1\66",
+            "\1\65",
             "\1\66",
             "\1\67",
             "\1\70",
             "\1\71",
-            "\1\72",
-            "\1\73",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\74",
+            "",
+            "",
             "",
             "",
             "",
             "\1\74",
             "\1\75",
-            "",
             "\1\76",
             "\1\77",
             "\1\100",
+            "\1\101",
             "",
             "",
-            "\1\101",
-            "\1\101",
-            "\1\102",
+            "",
             "\1\102",
             "\1\103",
+            "",
+            "\1\104",
             "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
-            "\1\105",
             "\1\106",
-            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\107",
             "\1\110",
             "",
             "",
-            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\22\31"+
-            "\1\111\7\31",
             "",
+            "\1\111",
+            "\1\111",
+            "\1\112",
+            "\1\112",
             "\1\113",
-            "\1\114",
-            "",
             "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
-            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
-            "",
+            "\1\115",
             "\1\116",
-            "\1\117",
+            "",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\121",
+            "",
+            "",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\22\31"+
+            "\1\122\7\31",
+            "",
+            "\1\124",
+            "\1\125",
+            "",
+            "",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
+            "",
+            "\1\127",
+            "\1\130",
             "",
             "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
             "\1\31\2\uffff\12\31\7\uffff\32\31\4\uffff\1\31\1\uffff\32\31",
@@ -1311,17 +1410,17 @@ public class InternalDSLLexer extends Lexer {
             this.transition = DFA15_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | RULE_IN_REFERENCE_HANDLE | RULE_VAR_REFERENCE_HANDLE | RULE_OUT_REFERENCE_HANDLE | RULE_PROTOCOL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | RULE_IN_REFERENCE_HANDLE | RULE_VAR_REFERENCE_HANDLE | RULE_OUT_REFERENCE_HANDLE | RULE_PROTOCOL | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA15_20 = input.LA(1);
+                        int LA15_21 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA15_20>='\u0000' && LA15_20<='\uFFFF')) ) {s = 45;}
+                        if ( ((LA15_21>='\u0000' && LA15_21<='\uFFFF')) ) {s = 48;}
 
                         else s = 23;
 
@@ -1345,13 +1444,13 @@ public class InternalDSLLexer extends Lexer {
 
                         else if ( (LA15_0=='a') ) {s = 7;}
 
-                        else if ( (LA15_0=='=') ) {s = 8;}
+                        else if ( (LA15_0=='i') ) {s = 8;}
 
-                        else if ( (LA15_0=='.') ) {s = 9;}
+                        else if ( (LA15_0=='=') ) {s = 9;}
 
-                        else if ( (LA15_0=='/') ) {s = 10;}
+                        else if ( (LA15_0=='.') ) {s = 10;}
 
-                        else if ( (LA15_0=='i') ) {s = 11;}
+                        else if ( (LA15_0=='/') ) {s = 11;}
 
                         else if ( (LA15_0=='I') ) {s = 12;}
 
@@ -1380,10 +1479,10 @@ public class InternalDSLLexer extends Lexer {
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA15_21 = input.LA(1);
+                        int LA15_20 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA15_21>='\u0000' && LA15_21<='\uFFFF')) ) {s = 45;}
+                        if ( ((LA15_20>='\u0000' && LA15_20<='\uFFFF')) ) {s = 48;}
 
                         else s = 23;
 

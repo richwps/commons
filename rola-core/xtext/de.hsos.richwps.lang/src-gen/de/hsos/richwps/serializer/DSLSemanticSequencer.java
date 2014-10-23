@@ -8,6 +8,7 @@ import de.hsos.richwps.dSL.ExecInput;
 import de.hsos.richwps.dSL.ExecOutput;
 import de.hsos.richwps.dSL.ExecuteStatement;
 import de.hsos.richwps.dSL.IN_REFERENCE;
+import de.hsos.richwps.dSL.IfStatement;
 import de.hsos.richwps.dSL.LocalBinding;
 import de.hsos.richwps.dSL.OUT_REFERENCE;
 import de.hsos.richwps.dSL.RemoteBinding;
@@ -63,6 +64,13 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 			case DSLPackage.IN_REFERENCE:
 				if(context == grammarAccess.getIN_REFERENCERule()) {
 					sequence_IN_REFERENCE(context, (IN_REFERENCE) semanticObject); 
+					return; 
+				}
+				else break;
+			case DSLPackage.IF_STATEMENT:
+				if(context == grammarAccess.getIfStatementRule() ||
+				   context == grammarAccess.getOperationRule()) {
+					sequence_IfStatement(context, (IfStatement) semanticObject); 
 					return; 
 				}
 				else break;
@@ -156,6 +164,31 @@ public class DSLSemanticSequencer extends AbstractDelegatingSemanticSequencer {
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getIN_REFERENCEAccess().getRefnameIDTerminalRuleCall_1_0(), semanticObject.getRefname());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         (
+	 *             (lefthand=IN_REFERENCE operator=ID righthand=IN_REFERENCE) | 
+	 *             (lefthand=IN_REFERENCE operator=ID val_s=STRING) | 
+	 *             (lefthand=IN_REFERENCE operator=ID val_i=INT) | 
+	 *             (lefthand=VAR_REFERENCE operator=ID righthand=IN_REFERENCE) | 
+	 *             (lefthand=VAR_REFERENCE operator=ID righthand=VAR_REFERENCE) | 
+	 *             (lefthand=VAR_REFERENCE operator=ID val_s=STRING) | 
+	 *             (lefthand=VAR_REFERENCE operator=ID val_i=INT) | 
+	 *             (lefthand=OUT_REFERENCE operator=ID righthand=IN_REFERENCE) | 
+	 *             (lefthand=OUT_REFERENCE operator=ID righthand=VAR_REFERENCE) | 
+	 *             (lefthand=OUT_REFERENCE operator=ID val_s=STRING) | 
+	 *             (lefthand=OUT_REFERENCE operator=ID val_i=INT)
+	 *         ) 
+	 *         (ifoperations+=Assignment | ifoperations+=ExecuteStatement)* 
+	 *         (elseoperations+=Assignment | elseoperations+=ExecuteStatement)*
+	 *     )
+	 */
+	protected void sequence_IfStatement(EObject context, IfStatement semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
