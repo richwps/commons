@@ -71,6 +71,7 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
       case DSLPackage.EXECUTE_STATEMENT: return createExecuteStatement();
       case DSLPackage.EXEC_INPUT: return createExecInput();
       case DSLPackage.EXEC_OUTPUT: return createExecOutput();
+      case DSLPackage.IF_STATEMENT: return createIfStatement();
       case DSLPackage.ASSIGNMENT: return createAssignment();
       case DSLPackage.IN_REFERENCE: return createIN_REFERENCE();
       case DSLPackage.OUT_REFERENCE: return createOUT_REFERENCE();
@@ -155,6 +156,17 @@ public class DSLFactoryImpl extends EFactoryImpl implements DSLFactory
   {
     ExecOutputImpl execOutput = new ExecOutputImpl();
     return execOutput;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public IfStatement createIfStatement()
+  {
+    IfStatementImpl ifStatement = new IfStatementImpl();
+    return ifStatement;
   }
 
   /**

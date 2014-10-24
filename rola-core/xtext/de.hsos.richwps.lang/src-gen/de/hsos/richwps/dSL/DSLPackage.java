@@ -334,6 +334,88 @@ public interface DSLPackage extends EPackage
   int EXEC_OUTPUT_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link de.hsos.richwps.dSL.impl.IfStatementImpl <em>If Statement</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see de.hsos.richwps.dSL.impl.IfStatementImpl
+   * @see de.hsos.richwps.dSL.impl.DSLPackageImpl#getIfStatement()
+   * @generated
+   */
+  int IF_STATEMENT = 7;
+
+  /**
+   * The feature id for the '<em><b>Lefthand</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_STATEMENT__LEFTHAND = OPERATION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Operator</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_STATEMENT__OPERATOR = OPERATION_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Righthand</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_STATEMENT__RIGHTHAND = OPERATION_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Val s</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_STATEMENT__VAL_S = OPERATION_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Val i</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_STATEMENT__VAL_I = OPERATION_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Ifoperations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_STATEMENT__IFOPERATIONS = OPERATION_FEATURE_COUNT + 5;
+
+  /**
+   * The feature id for the '<em><b>Elseoperations</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_STATEMENT__ELSEOPERATIONS = OPERATION_FEATURE_COUNT + 6;
+
+  /**
+   * The number of structural features of the '<em>If Statement</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int IF_STATEMENT_FEATURE_COUNT = OPERATION_FEATURE_COUNT + 7;
+
+  /**
    * The meta object id for the '{@link de.hsos.richwps.dSL.impl.AssignmentImpl <em>Assignment</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -341,7 +423,7 @@ public interface DSLPackage extends EPackage
    * @see de.hsos.richwps.dSL.impl.DSLPackageImpl#getAssignment()
    * @generated
    */
-  int ASSIGNMENT = 7;
+  int ASSIGNMENT = 8;
 
   /**
    * The feature id for the '<em><b>Lefthand</b></em>' containment reference.
@@ -396,7 +478,7 @@ public interface DSLPackage extends EPackage
    * @see de.hsos.richwps.dSL.impl.DSLPackageImpl#getIN_REFERENCE()
    * @generated
    */
-  int IN_REFERENCE = 8;
+  int IN_REFERENCE = 9;
 
   /**
    * The feature id for the '<em><b>Refname</b></em>' attribute.
@@ -424,7 +506,7 @@ public interface DSLPackage extends EPackage
    * @see de.hsos.richwps.dSL.impl.DSLPackageImpl#getOUT_REFERENCE()
    * @generated
    */
-  int OUT_REFERENCE = 9;
+  int OUT_REFERENCE = 10;
 
   /**
    * The feature id for the '<em><b>Refname</b></em>' attribute.
@@ -452,7 +534,7 @@ public interface DSLPackage extends EPackage
    * @see de.hsos.richwps.dSL.impl.DSLPackageImpl#getVAR_REFERENCE()
    * @generated
    */
-  int VAR_REFERENCE = 10;
+  int VAR_REFERENCE = 11;
 
   /**
    * The feature id for the '<em><b>Refname</b></em>' attribute.
@@ -718,6 +800,93 @@ public interface DSLPackage extends EPackage
    * @generated
    */
   EReference getExecOutput_Reference();
+
+  /**
+   * Returns the meta object for class '{@link de.hsos.richwps.dSL.IfStatement <em>If Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>If Statement</em>'.
+   * @see de.hsos.richwps.dSL.IfStatement
+   * @generated
+   */
+  EClass getIfStatement();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.hsos.richwps.dSL.IfStatement#getLefthand <em>Lefthand</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Lefthand</em>'.
+   * @see de.hsos.richwps.dSL.IfStatement#getLefthand()
+   * @see #getIfStatement()
+   * @generated
+   */
+  EReference getIfStatement_Lefthand();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.hsos.richwps.dSL.IfStatement#getOperator <em>Operator</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Operator</em>'.
+   * @see de.hsos.richwps.dSL.IfStatement#getOperator()
+   * @see #getIfStatement()
+   * @generated
+   */
+  EAttribute getIfStatement_Operator();
+
+  /**
+   * Returns the meta object for the containment reference '{@link de.hsos.richwps.dSL.IfStatement#getRighthand <em>Righthand</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Righthand</em>'.
+   * @see de.hsos.richwps.dSL.IfStatement#getRighthand()
+   * @see #getIfStatement()
+   * @generated
+   */
+  EReference getIfStatement_Righthand();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.hsos.richwps.dSL.IfStatement#getVal_s <em>Val s</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val s</em>'.
+   * @see de.hsos.richwps.dSL.IfStatement#getVal_s()
+   * @see #getIfStatement()
+   * @generated
+   */
+  EAttribute getIfStatement_Val_s();
+
+  /**
+   * Returns the meta object for the attribute '{@link de.hsos.richwps.dSL.IfStatement#getVal_i <em>Val i</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val i</em>'.
+   * @see de.hsos.richwps.dSL.IfStatement#getVal_i()
+   * @see #getIfStatement()
+   * @generated
+   */
+  EAttribute getIfStatement_Val_i();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link de.hsos.richwps.dSL.IfStatement#getIfoperations <em>Ifoperations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Ifoperations</em>'.
+   * @see de.hsos.richwps.dSL.IfStatement#getIfoperations()
+   * @see #getIfStatement()
+   * @generated
+   */
+  EReference getIfStatement_Ifoperations();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link de.hsos.richwps.dSL.IfStatement#getElseoperations <em>Elseoperations</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elseoperations</em>'.
+   * @see de.hsos.richwps.dSL.IfStatement#getElseoperations()
+   * @see #getIfStatement()
+   * @generated
+   */
+  EReference getIfStatement_Elseoperations();
 
   /**
    * Returns the meta object for class '{@link de.hsos.richwps.dSL.Assignment <em>Assignment</em>}'.
@@ -1056,6 +1225,72 @@ public interface DSLPackage extends EPackage
      * @generated
      */
     EReference EXEC_OUTPUT__REFERENCE = eINSTANCE.getExecOutput_Reference();
+
+    /**
+     * The meta object literal for the '{@link de.hsos.richwps.dSL.impl.IfStatementImpl <em>If Statement</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see de.hsos.richwps.dSL.impl.IfStatementImpl
+     * @see de.hsos.richwps.dSL.impl.DSLPackageImpl#getIfStatement()
+     * @generated
+     */
+    EClass IF_STATEMENT = eINSTANCE.getIfStatement();
+
+    /**
+     * The meta object literal for the '<em><b>Lefthand</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_STATEMENT__LEFTHAND = eINSTANCE.getIfStatement_Lefthand();
+
+    /**
+     * The meta object literal for the '<em><b>Operator</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IF_STATEMENT__OPERATOR = eINSTANCE.getIfStatement_Operator();
+
+    /**
+     * The meta object literal for the '<em><b>Righthand</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_STATEMENT__RIGHTHAND = eINSTANCE.getIfStatement_Righthand();
+
+    /**
+     * The meta object literal for the '<em><b>Val s</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IF_STATEMENT__VAL_S = eINSTANCE.getIfStatement_Val_s();
+
+    /**
+     * The meta object literal for the '<em><b>Val i</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute IF_STATEMENT__VAL_I = eINSTANCE.getIfStatement_Val_i();
+
+    /**
+     * The meta object literal for the '<em><b>Ifoperations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_STATEMENT__IFOPERATIONS = eINSTANCE.getIfStatement_Ifoperations();
+
+    /**
+     * The meta object literal for the '<em><b>Elseoperations</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference IF_STATEMENT__ELSEOPERATIONS = eINSTANCE.getIfStatement_Elseoperations();
 
     /**
      * The meta object literal for the '{@link de.hsos.richwps.dSL.impl.AssignmentImpl <em>Assignment</em>}' class.

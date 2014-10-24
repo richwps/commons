@@ -8,6 +8,7 @@ import de.hsos.richwps.dSL.DSLPackage;
 import de.hsos.richwps.dSL.ExecInput;
 import de.hsos.richwps.dSL.ExecOutput;
 import de.hsos.richwps.dSL.ExecuteStatement;
+import de.hsos.richwps.dSL.IfStatement;
 import de.hsos.richwps.dSL.LocalBinding;
 import de.hsos.richwps.dSL.Operation;
 import de.hsos.richwps.dSL.RemoteBinding;
@@ -76,6 +77,13 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * @generated
    */
   private EClass execOutputEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ifStatementEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -403,6 +411,86 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getIfStatement()
+  {
+    return ifStatementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfStatement_Lefthand()
+  {
+    return (EReference)ifStatementEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIfStatement_Operator()
+  {
+    return (EAttribute)ifStatementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfStatement_Righthand()
+  {
+    return (EReference)ifStatementEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIfStatement_Val_s()
+  {
+    return (EAttribute)ifStatementEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getIfStatement_Val_i()
+  {
+    return (EAttribute)ifStatementEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfStatement_Ifoperations()
+  {
+    return (EReference)ifStatementEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getIfStatement_Elseoperations()
+  {
+    return (EReference)ifStatementEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAssignment()
   {
     return assignmentEClass;
@@ -568,6 +656,15 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     createEAttribute(execOutputEClass, EXEC_OUTPUT__WPSID);
     createEReference(execOutputEClass, EXEC_OUTPUT__REFERENCE);
 
+    ifStatementEClass = createEClass(IF_STATEMENT);
+    createEReference(ifStatementEClass, IF_STATEMENT__LEFTHAND);
+    createEAttribute(ifStatementEClass, IF_STATEMENT__OPERATOR);
+    createEReference(ifStatementEClass, IF_STATEMENT__RIGHTHAND);
+    createEAttribute(ifStatementEClass, IF_STATEMENT__VAL_S);
+    createEAttribute(ifStatementEClass, IF_STATEMENT__VAL_I);
+    createEReference(ifStatementEClass, IF_STATEMENT__IFOPERATIONS);
+    createEReference(ifStatementEClass, IF_STATEMENT__ELSEOPERATIONS);
+
     assignmentEClass = createEClass(ASSIGNMENT);
     createEReference(assignmentEClass, ASSIGNMENT__LEFTHAND);
     createEReference(assignmentEClass, ASSIGNMENT__RIGHTHAND);
@@ -616,6 +713,7 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     localBindingEClass.getESuperTypes().add(this.getOperation());
     remoteBindingEClass.getESuperTypes().add(this.getOperation());
     executeStatementEClass.getESuperTypes().add(this.getOperation());
+    ifStatementEClass.getESuperTypes().add(this.getOperation());
     assignmentEClass.getESuperTypes().add(this.getOperation());
 
     // Initialize classes and features; add operations and parameters
@@ -648,6 +746,15 @@ public class DSLPackageImpl extends EPackageImpl implements DSLPackage
     initEClass(execOutputEClass, ExecOutput.class, "ExecOutput", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getExecOutput_Wpsid(), ecorePackage.getEString(), "wpsid", null, 0, 1, ExecOutput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getExecOutput_Reference(), ecorePackage.getEObject(), null, "reference", null, 0, 1, ExecOutput.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(ifStatementEClass, IfStatement.class, "IfStatement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getIfStatement_Lefthand(), ecorePackage.getEObject(), null, "lefthand", null, 0, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getIfStatement_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfStatement_Righthand(), ecorePackage.getEObject(), null, "righthand", null, 0, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getIfStatement_Val_s(), ecorePackage.getEString(), "val_s", null, 0, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getIfStatement_Val_i(), ecorePackage.getEInt(), "val_i", null, 0, 1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfStatement_Ifoperations(), this.getOperation(), null, "ifoperations", null, 0, -1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getIfStatement_Elseoperations(), this.getOperation(), null, "elseoperations", null, 0, -1, IfStatement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(assignmentEClass, Assignment.class, "Assignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAssignment_Lefthand(), ecorePackage.getEObject(), null, "lefthand", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

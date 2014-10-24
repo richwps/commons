@@ -36,6 +36,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//ExecOutput/wpsid"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//ExecOutput/reference"/>
     </genClasses>
+    <genClasses ecoreClass="DSL.ecore#//IfStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//IfStatement/lefthand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//IfStatement/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//IfStatement/righthand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//IfStatement/val_s"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DSL.ecore#//IfStatement/val_i"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//IfStatement/ifoperations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//IfStatement/elseoperations"/>
+    </genClasses>
     <genClasses ecoreClass="DSL.ecore#//Assignment">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//Assignment/lefthand"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DSL.ecore#//Assignment/righthand"/>

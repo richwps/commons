@@ -110,6 +110,11 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
         return createExecOutputAdapter();
       }
       @Override
+      public Adapter caseIfStatement(IfStatement object)
+      {
+        return createIfStatementAdapter();
+      }
+      @Override
       public Adapter caseAssignment(Assignment object)
       {
         return createAssignmentAdapter();
@@ -252,6 +257,21 @@ public class DSLAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createExecOutputAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link de.hsos.richwps.dSL.IfStatement <em>If Statement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see de.hsos.richwps.dSL.IfStatement
+   * @generated
+   */
+  public Adapter createIfStatementAdapter()
   {
     return null;
   }

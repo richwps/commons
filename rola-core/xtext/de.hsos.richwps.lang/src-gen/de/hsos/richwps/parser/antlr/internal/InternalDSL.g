@@ -155,6 +155,16 @@ ruleOperation returns [EObject current=null]
         $current = $this_ExecuteStatement_3.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getOperationAccess().getIfStatementParserRuleCall_4()); 
+    }
+    this_IfStatement_4=ruleIfStatement
+    { 
+        $current = $this_IfStatement_4.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -657,6 +667,715 @@ ruleExecOutput returns [EObject current=null]
 
 )
 )))
+;
+
+
+
+
+
+// Entry rule entryRuleIfStatement
+entryRuleIfStatement returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getIfStatementRule()); }
+	 iv_ruleIfStatement=ruleIfStatement 
+	 { $current=$iv_ruleIfStatement.current; } 
+	 EOF 
+;
+
+// Rule IfStatement
+ruleIfStatement returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='if' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getIfStatementAccess().getIfKeyword_0());
+    }
+(((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandIN_REFERENCEParserRuleCall_1_0_0_0()); 
+	    }
+		lv_lefthand_1_0=ruleIN_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_1_0, 
+        		"IN_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_2_0=RULE_ID
+		{
+			newLeafNode(lv_operator_2_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_0_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_2_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getRighthandIN_REFERENCEParserRuleCall_1_0_2_0()); 
+	    }
+		lv_righthand_3_0=ruleIN_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"righthand",
+        		lv_righthand_3_0, 
+        		"IN_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandIN_REFERENCEParserRuleCall_1_1_0_0()); 
+	    }
+		lv_lefthand_4_0=ruleIN_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_4_0, 
+        		"IN_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_5_0=RULE_ID
+		{
+			newLeafNode(lv_operator_5_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_5_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_val_s_6_0=RULE_STRING
+		{
+			newLeafNode(lv_val_s_6_0, grammarAccess.getIfStatementAccess().getVal_sSTRINGTerminalRuleCall_1_1_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val_s",
+        		lv_val_s_6_0, 
+        		"STRING");
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandIN_REFERENCEParserRuleCall_1_2_0_0()); 
+	    }
+		lv_lefthand_7_0=ruleIN_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_7_0, 
+        		"IN_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_8_0=RULE_ID
+		{
+			newLeafNode(lv_operator_8_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_2_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_8_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_val_i_9_0=RULE_INT
+		{
+			newLeafNode(lv_val_i_9_0, grammarAccess.getIfStatementAccess().getVal_iINTTerminalRuleCall_1_2_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val_i",
+        		lv_val_i_9_0, 
+        		"INT");
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandVAR_REFERENCEParserRuleCall_1_3_0_0()); 
+	    }
+		lv_lefthand_10_0=ruleVAR_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_10_0, 
+        		"VAR_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_11_0=RULE_ID
+		{
+			newLeafNode(lv_operator_11_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_3_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_11_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getRighthandIN_REFERENCEParserRuleCall_1_3_2_0()); 
+	    }
+		lv_righthand_12_0=ruleIN_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"righthand",
+        		lv_righthand_12_0, 
+        		"IN_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandVAR_REFERENCEParserRuleCall_1_4_0_0()); 
+	    }
+		lv_lefthand_13_0=ruleVAR_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_13_0, 
+        		"VAR_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_14_0=RULE_ID
+		{
+			newLeafNode(lv_operator_14_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_4_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_14_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getRighthandVAR_REFERENCEParserRuleCall_1_4_2_0()); 
+	    }
+		lv_righthand_15_0=ruleVAR_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"righthand",
+        		lv_righthand_15_0, 
+        		"VAR_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandVAR_REFERENCEParserRuleCall_1_5_0_0()); 
+	    }
+		lv_lefthand_16_0=ruleVAR_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_16_0, 
+        		"VAR_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_17_0=RULE_ID
+		{
+			newLeafNode(lv_operator_17_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_5_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_17_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_val_s_18_0=RULE_STRING
+		{
+			newLeafNode(lv_val_s_18_0, grammarAccess.getIfStatementAccess().getVal_sSTRINGTerminalRuleCall_1_5_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val_s",
+        		lv_val_s_18_0, 
+        		"STRING");
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandVAR_REFERENCEParserRuleCall_1_6_0_0()); 
+	    }
+		lv_lefthand_19_0=ruleVAR_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_19_0, 
+        		"VAR_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_20_0=RULE_ID
+		{
+			newLeafNode(lv_operator_20_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_6_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_20_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_val_i_21_0=RULE_INT
+		{
+			newLeafNode(lv_val_i_21_0, grammarAccess.getIfStatementAccess().getVal_iINTTerminalRuleCall_1_6_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val_i",
+        		lv_val_i_21_0, 
+        		"INT");
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandOUT_REFERENCEParserRuleCall_1_7_0_0()); 
+	    }
+		lv_lefthand_22_0=ruleOUT_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_22_0, 
+        		"OUT_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_23_0=RULE_ID
+		{
+			newLeafNode(lv_operator_23_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_7_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_23_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getRighthandIN_REFERENCEParserRuleCall_1_7_2_0()); 
+	    }
+		lv_righthand_24_0=ruleIN_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"righthand",
+        		lv_righthand_24_0, 
+        		"IN_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandOUT_REFERENCEParserRuleCall_1_8_0_0()); 
+	    }
+		lv_lefthand_25_0=ruleOUT_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_25_0, 
+        		"OUT_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_26_0=RULE_ID
+		{
+			newLeafNode(lv_operator_26_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_8_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_26_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getRighthandVAR_REFERENCEParserRuleCall_1_8_2_0()); 
+	    }
+		lv_righthand_27_0=ruleVAR_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"righthand",
+        		lv_righthand_27_0, 
+        		"VAR_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandOUT_REFERENCEParserRuleCall_1_9_0_0()); 
+	    }
+		lv_lefthand_28_0=ruleOUT_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_28_0, 
+        		"OUT_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_29_0=RULE_ID
+		{
+			newLeafNode(lv_operator_29_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_9_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_29_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_val_s_30_0=RULE_STRING
+		{
+			newLeafNode(lv_val_s_30_0, grammarAccess.getIfStatementAccess().getVal_sSTRINGTerminalRuleCall_1_9_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val_s",
+        		lv_val_s_30_0, 
+        		"STRING");
+	    }
+
+)
+))
+    |((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getLefthandOUT_REFERENCEParserRuleCall_1_10_0_0()); 
+	    }
+		lv_lefthand_31_0=ruleOUT_REFERENCE		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		set(
+       			$current, 
+       			"lefthand",
+        		lv_lefthand_31_0, 
+        		"OUT_REFERENCE");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(
+(
+		lv_operator_32_0=RULE_ID
+		{
+			newLeafNode(lv_operator_32_0, grammarAccess.getIfStatementAccess().getOperatorIDTerminalRuleCall_1_10_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"operator",
+        		lv_operator_32_0, 
+        		"ID");
+	    }
+
+)
+)(
+(
+		lv_val_i_33_0=RULE_INT
+		{
+			newLeafNode(lv_val_i_33_0, grammarAccess.getIfStatementAccess().getVal_iINTTerminalRuleCall_1_10_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getIfStatementRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"val_i",
+        		lv_val_i_33_0, 
+        		"INT");
+	    }
+
+)
+)))(
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getIfoperationsAssignmentParserRuleCall_2_0_0()); 
+	    }
+		lv_ifoperations_34_1=ruleAssignment		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		add(
+       			$current, 
+       			"ifoperations",
+        		lv_ifoperations_34_1, 
+        		"Assignment");
+	        afterParserOrEnumRuleCall();
+	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getIfoperationsExecuteStatementParserRuleCall_2_0_1()); 
+	    }
+		lv_ifoperations_34_2=ruleExecuteStatement		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		add(
+       			$current, 
+       			"ifoperations",
+        		lv_ifoperations_34_2, 
+        		"ExecuteStatement");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
+)*(	otherlv_35='else' 
+    {
+    	newLeafNode(otherlv_35, grammarAccess.getIfStatementAccess().getElseKeyword_3_0());
+    }
+(
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getElseoperationsAssignmentParserRuleCall_3_1_0_0()); 
+	    }
+		lv_elseoperations_36_1=ruleAssignment		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		add(
+       			$current, 
+       			"elseoperations",
+        		lv_elseoperations_36_1, 
+        		"Assignment");
+	        afterParserOrEnumRuleCall();
+	    }
+
+    |		{ 
+	        newCompositeNode(grammarAccess.getIfStatementAccess().getElseoperationsExecuteStatementParserRuleCall_3_1_0_1()); 
+	    }
+		lv_elseoperations_36_2=ruleExecuteStatement		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getIfStatementRule());
+	        }
+       		add(
+       			$current, 
+       			"elseoperations",
+        		lv_elseoperations_36_2, 
+        		"ExecuteStatement");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+
+)
+)*)?	otherlv_37='end' 
+    {
+    	newLeafNode(otherlv_37, grammarAccess.getIfStatementAccess().getEndKeyword_4());
+    }
+)
 ;
 
 
