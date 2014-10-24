@@ -123,10 +123,10 @@ public class RichWPSClientSession {
             conn.connect();
             HttpURLConnection httpConnection = (HttpURLConnection) conn;
             int resp = httpConnection.getResponseCode();
-            if(resp == 200){    //200 O.K. maybe with OWS-Exception.
-                return true;
-            } else if (resp == 405) {   //method not allowed
-                return true;
+            //200 O.K. maybe with OWS-Exception.
+            //405 Method not allowed.
+            if ((resp != 200) && (resp != 405)) {
+                return false;
             }
         } catch (Exception e) {
             LOGGER.info("Unable to reach service: " + richwpsurl);
@@ -299,39 +299,37 @@ public class RichWPSClientSession {
     }
 
     /**
-	 * Deploy a process to a WPS
-	 * 
-	 * @param url url of server not the entry additionally defined in the caps
-	 * @param doc DeployProcess document
-	 * @return a DeployProcessResponseDocument
-	 */
+     * Deploy a process to a WPS
+     *
+     * @param url url of server not the entry additionally defined in the caps
+     * @param doc DeployProcess document
+     * @return a DeployProcessResponseDocument
+     */
     public Object deploy(String serverId, DeployProcessDocument doc) throws WPSClientException {
-    	String richwpsurl;
-    	if (loggedTransactionalServices.containsKey(serverId)) {
-    		richwpsurl = loggedTransactionalServices.get(serverId);
-    		LOGGER.info("DeployProcess: " + doc.getDeployProcess().getProcessDescription().getIdentifier().getStringValue());
-        	return this.retrieveDeployProcessResponseViaPOST(richwpsurl, doc);
-    	}
-    	else {
-    		LOGGER.info("Server ID " + serverId + " not registered as transactional service");
-    		return null;
-    	}
-    	
+        String richwpsurl;
+        if (loggedTransactionalServices.containsKey(serverId)) {
+            richwpsurl = loggedTransactionalServices.get(serverId);
+            LOGGER.info("DeployProcess: " + doc.getDeployProcess().getProcessDescription().getIdentifier().getStringValue());
+            return this.retrieveDeployProcessResponseViaPOST(richwpsurl, doc);
+        } else {
+            LOGGER.info("Server ID " + serverId + " not registered as transactional service");
+            return null;
+        }
+
     }
 
     /**
      */
     public Object undeploy(String serverId, UndeployProcessDocument doc) throws WPSClientException {
-    	String richwpsurl;
-    	if (loggedTransactionalServices.containsKey(serverId)) {
-    		richwpsurl = loggedTransactionalServices.get(serverId);
-    		LOGGER.info("UndeployProcess: " + doc.getUndeployProcess().getProcess().getIdentifier().getStringValue());
-    		return this.retrieveUndeployProcessResponseViaPOST(richwpsurl, doc);
-    	}
-    	else {
-    		LOGGER.info("Server ID " + serverId + " not registered as transactional service");
-    		return null;
-    	}
+        String richwpsurl;
+        if (loggedTransactionalServices.containsKey(serverId)) {
+            richwpsurl = loggedTransactionalServices.get(serverId);
+            LOGGER.info("UndeployProcess: " + doc.getUndeployProcess().getProcess().getIdentifier().getStringValue());
+            return this.retrieveUndeployProcessResponseViaPOST(richwpsurl, doc);
+        } else {
+            LOGGER.info("Server ID " + serverId + " not registered as transactional service");
+            return null;
+        }
     }
 
     private CapabilitiesDocument retrieveCapsViaGET(String url) throws WPSClientException {
@@ -369,52 +367,55 @@ public class RichWPSClientSession {
             throw new WPSClientException("Error occured while parsing ProcessDescription document", e);
         }
     }
-    
-    /**
-	 * Retrieves a DeployProcess response via Http POST request and tries to parse it
-	 * @param url
-	 * @param doc
-	 * @return either an DeployProcessResponseDocument or an ExceptionReportDocument
-	 * @throws WPSClientException
-	 */
-	private Object retrieveDeployProcessResponseViaPOST(String url, DeployProcessDocument doc) throws WPSClientException{
-		InputStream is = retrieveDataViaPOST(doc, url);
-		Document documentObj = checkInputStream(is);
-		try {
-			return DeployProcessResponseDocument.Factory.parse(documentObj);
-		}
-		catch(XmlException e) {
-			try {
-				return ExceptionReportDocument.Factory.parse(documentObj);
-			} catch (Exception e2) {
-				throw new WPSClientException("Error occured while parsing deployProcessResponse", e);
-			}
-		}
-	}
-	
-	/**
-	 * Retrieves a UndeployProcess response via Http POST request and tries to parse it
-	 * @param url
-	 * @param doc
-	 * @return either an UndeployProcessResponseDocument or an ExceptionReportDocument
-	 * @throws WPSClientException
-	 */
-	private Object retrieveUndeployProcessResponseViaPOST(String url, UndeployProcessDocument doc) throws WPSClientException{
-		InputStream is = retrieveDataViaPOST(doc, url);
-		Document documentObj = checkInputStream(is);
-		try {
-			return UndeployProcessResponseDocument.Factory.parse(documentObj);
-		}
-		catch(XmlException e) {
-			try {
-				return ExceptionReportDocument.Factory.parse(documentObj);
-			} catch (Exception e2) {
-				throw new WPSClientException("Error occured while parsing undeployProcessResponse", e);
-			}
-		}
-	}
 
-    
+    /**
+     * Retrieves a DeployProcess response via Http POST request and tries to
+     * parse it
+     *
+     * @param url
+     * @param doc
+     * @return either an DeployProcessResponseDocument or an
+     * ExceptionReportDocument
+     * @throws WPSClientException
+     */
+    private Object retrieveDeployProcessResponseViaPOST(String url, DeployProcessDocument doc) throws WPSClientException {
+        InputStream is = retrieveDataViaPOST(doc, url);
+        Document documentObj = checkInputStream(is);
+        try {
+            return DeployProcessResponseDocument.Factory.parse(documentObj);
+        } catch (XmlException e) {
+            try {
+                return ExceptionReportDocument.Factory.parse(documentObj);
+            } catch (Exception e2) {
+                throw new WPSClientException("Error occured while parsing deployProcessResponse", e);
+            }
+        }
+    }
+
+    /**
+     * Retrieves a UndeployProcess response via Http POST request and tries to
+     * parse it
+     *
+     * @param url
+     * @param doc
+     * @return either an UndeployProcessResponseDocument or an
+     * ExceptionReportDocument
+     * @throws WPSClientException
+     */
+    private Object retrieveUndeployProcessResponseViaPOST(String url, UndeployProcessDocument doc) throws WPSClientException {
+        InputStream is = retrieveDataViaPOST(doc, url);
+        Document documentObj = checkInputStream(is);
+        try {
+            return UndeployProcessResponseDocument.Factory.parse(documentObj);
+        } catch (XmlException e) {
+            try {
+                return ExceptionReportDocument.Factory.parse(documentObj);
+            } catch (Exception e2) {
+                throw new WPSClientException("Error occured while parsing undeployProcessResponse", e);
+            }
+        }
+    }
+
     private InputStream retrieveDataViaPOST(XmlObject obj, String urlString) throws WPSClientException {
         try {
             URL url = new URL(urlString);
@@ -425,7 +426,7 @@ public class RichWPSClientSession {
             obj.save(conn.getOutputStream());
             InputStream input = null;
             String encoding = conn.getContentEncoding();
-            if(encoding != null && encoding.equalsIgnoreCase("gzip")) {
+            if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
                 input = new GZIPInputStream(conn.getInputStream());
             } else {
                 input = conn.getInputStream();

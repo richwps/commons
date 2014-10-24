@@ -5,7 +5,7 @@ package de.hsos.richwps.dsl.api.elements;
  * execute statements.
  *
  * @author dalcacer
- * @version draft
+ * @version 0.0.1
  */
 public class OutReference extends Reference {
 

@@ -9,7 +9,7 @@ import java.text.MessageFormat;
  *
  * @author fbensmann
  * @author dalcacer
- * @version draft
+ * @version 0.0.1
  */
 public class Assignment implements IOperation {
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * @author dalcacer
- * @version draft
+ * @version 0.0.1
  */
 public class Workflow extends ArrayList<IOperation> {
 
@@ -62,6 +62,23 @@ public class Workflow extends ArrayList<IOperation> {
         }
         return executes;
     }
+    
+      /**
+     * Returns the amount of given execute-statements. Debugging/testing
+     * and statistical purpose only.
+     *
+     * @return amount execute-statements.
+     */
+    public int countIfStatement() {
+        int ifs = 0;
+        for (Object o : this) {
+            if (o instanceof IfStatement) {
+                ifs++;
+            }
+        }
+        return ifs;
+    }
+
 
     /**
      * Transforms this model to notation.
