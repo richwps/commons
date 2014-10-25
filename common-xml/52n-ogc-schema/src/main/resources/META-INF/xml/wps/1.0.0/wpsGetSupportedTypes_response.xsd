@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:wps="http://www.opengis.net/wps/1.0.0" targetNamespace="http://www.opengis.net/wps/1.0.0" elementFormDefault="qualified" xml:lang="en" version="1.0.0.3">
+	<annotation>
+		<appinfo>$Id: wpsGetSupportedTypes_response.xsd 2014-24-10 $</appinfo>
+	<documentation>
+			<description>DRAFT</description>
+			<copyright>
+			</copyright>
+		</documentation>
+	</annotation>
+	<!-- =============================================================
+		includes and imports
+	============================================================== -->
+	<include schemaLocation="wpsAll.xsd"/>
+	<include schemaLocation="common/ResponseBaseType.xsd"/>
+	<import namespace="http://www.opengis.net/ows/1.1" schemaLocation="http://schemas.opengis.net/ows/1.1.0/owsAll.xsd"/>
+	<!-- =============================================================
+		elements and types
+	============================================================== -->
+	<element name="SupportedTypesResponse">
+		<complexType>
+			<complexContent>
+				<extension base="wps:ResponseBaseType">
+					 <sequence>
+					 	<element name="SupportedTypes">
+						 	<annotation>
+						 		<documentation>Contains a full list of supported formats the server provides</documentation>
+						 	</annotation>
+					 		<complexType>
+					 			<sequence>
+					 				<element name="LiteralTypes" minOccurs="0" maxOccurs="unbounded">
+					 					<complexType>
+					 						<sequence>
+					 							<annotation>
+													<documentation>Describes a specific literal type</documentation>
+												</annotation>
+												<element ref="ows:DataType" minOccurs="0" maxOccurs="unbounded" />
+					 						</sequence>
+					 					</complexType>
+					 				</element>
+					 				<element name="ComplexTypes" minOccurs="0" maxOccurs="unbounded">
+					 					<complexType>
+								 			<sequence>
+												<annotation>
+													<documentation>Describes a specific complex type with its attributes schema, mimeType and encoding</documentation>
+												</annotation>
+												<element name="Type" minOccurs="0" maxOccurs="unbounded" type="wps:ComplexDataDescriptionType" />
+								 			</sequence>
+					 					</complexType>
+					 				</element>
+					 			</sequence>
+					 		</complexType>
+					 	</element>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+</schema>
