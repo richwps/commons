@@ -2,7 +2,7 @@ package de.hsos.richwps.dsl.api.elements;
 
 /**
  * @author dalcacer
- * @version draft
+ * @version 0.0.1
  */
 public interface IOperation {
     

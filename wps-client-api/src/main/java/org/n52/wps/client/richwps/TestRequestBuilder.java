@@ -1,11 +1,8 @@
 package org.n52.wps.client.richwps;
 
-import net.opengis.wps.x100.DeployProcessDocument;
 import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.TestProcessDocument;
 
-
-import org.apache.xmlbeans.SimpleValue;
 import org.apache.xmlbeans.XmlString;
 import org.n52.wps.client.WPSClientException;
 
@@ -18,8 +15,9 @@ import org.n52.wps.client.WPSClientException;
  */
 public class TestRequestBuilder {
 
-    private TestProcessDocument testprocessdocument;
-    /**
+	private TestProcessDocument testprocessdocument;
+	
+	/**
      * Deployment request.
      */
     private TestProcessDocument.TestProcess testprocess;
@@ -75,6 +73,10 @@ public class TestRequestBuilder {
     public void setTestInputs(final net.opengis.wps.x100.DataInputsType inputs){
         this.testprocess.setDataInputs(inputs);
     }
+    
+    public void setTestOutputs(final net.opengis.wps.x100.ResponseFormType outputs){
+        this.testprocess.setResponseForm(outputs);
+    }
 
     /**
      * DeployProcess: Returns the deploy request.
@@ -115,6 +117,4 @@ public class TestRequestBuilder {
     	}*/
     	return doc;
     }
-    
-   
 }

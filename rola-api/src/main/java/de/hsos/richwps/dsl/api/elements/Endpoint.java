@@ -4,7 +4,7 @@ package de.hsos.richwps.dsl.api.elements;
  *
  * @author fbensman
  * @author dalcacer
- * @version draft
+ * @version 0.0.1
  */
 public class Endpoint {
 

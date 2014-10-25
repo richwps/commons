@@ -13,7 +13,7 @@ import junit.framework.TestCase;
 /**
  *
  * @author dalcacer
- * @versoin draft
+ * @versoin 0.0.1
  */
 public class ReaderTest extends TestCase {
 
@@ -350,5 +350,26 @@ public class ReaderTest extends TestCase {
         assertEquals(7, amountExecutes);
         assertEquals(5, amountBindings);
         assertEquals(2, amountAssignment);
+    }
+    
+     public void testIfElse() {
+        System.out.println("testIfElse");
+        String path = testfileprefix + "IfStatements" + ext;
+        Reader instance = new Reader();
+        try {
+            instance.load(path);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+
+        try {
+            instance.inspect();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+        int ifs = instance.getWorksequence().countIfStatement();
+
     }
 }

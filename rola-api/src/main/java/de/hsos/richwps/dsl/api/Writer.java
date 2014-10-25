@@ -2,16 +2,13 @@ package de.hsos.richwps.dsl.api;
 
 import com.google.inject.Injector;
 import de.hsos.richwps.DSLStandaloneSetup;
-import java.io.FileWriter;
 import java.io.PrintWriter;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
 /**
  * @author dalcacer
- * @version v1
+ * @version 0.0.1
  */
 public class Writer {
 

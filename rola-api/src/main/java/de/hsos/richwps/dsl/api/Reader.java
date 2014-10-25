@@ -12,6 +12,7 @@ import de.hsos.richwps.dsl.api.elements.Binding;
 import de.hsos.richwps.dsl.api.elements.Endpoint;
 import de.hsos.richwps.dsl.api.elements.Execute;
 import de.hsos.richwps.dsl.api.elements.IOperation;
+import de.hsos.richwps.dsl.api.elements.IfStatement;
 import de.hsos.richwps.dsl.api.elements.InReference;
 import de.hsos.richwps.dsl.api.elements.OutReference;
 import de.hsos.richwps.dsl.api.elements.Reference;
@@ -35,19 +36,19 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
  * </ol>
  *
  * @author dalcacer
- * @version v1
+ * @version 0.0.1
  */
 public class Reader {
 
     /**
-     * XText model of an actual worksequence.
+     * XText model of an actual workflow.
      */
     private de.hsos.richwps.dSL.Worksequence xtext_ws;
     /**
      * A more convinient representation of the worksequence, which can be
      * inspected.
      */
-    private Workflow worksequence;
+    private Workflow workflow;
     /**
      * Goolge Guice injector, which is needed by XText.
      */
@@ -64,17 +65,22 @@ public class Reader {
      * Internal statistics.
      */
     private int stat_assignments = 0;
+    /**
+     * Internal statistics.
+     */
+    private int stat_ifs = 0;
 
     /**
      * Constructs a new reader-object.
      */
     public Reader() {
         this.xtext_ws = null;
-        this.worksequence = new Workflow();
+        this.workflow = new Workflow();
         this.injector = new DSLStandaloneSetup().createInjectorAndDoEMFRegistration();
         this.stat_bindings = 0;
         this.stat_executes = 0;
         this.stat_assignments = 0;
+        this.stat_ifs = 0;
     }
 
     /**
@@ -135,6 +141,7 @@ public class Reader {
         //2. remote bindings
         //3. execute statement
         //4. assignment
+        //5. if/else
         while (iterator.hasNext()) {
             final EObject eo = iterator.next();
             IOperation elem = null;
@@ -158,9 +165,14 @@ public class Reader {
                 final de.hsos.richwps.dSL.Assignment as = (de.hsos.richwps.dSL.Assignment) eo;
                 System.out.println("assigment statement found: " + as.toString());
                 elem = this.createAssignment(as);
+            } else if (eo instanceof de.hsos.richwps.dSL.IfStatement) {
+                this.stat_ifs += 1;
+                final de.hsos.richwps.dSL.IfStatement as = (de.hsos.richwps.dSL.IfStatement) eo;
+                System.out.println("if statement found: " + as.toString());
+                elem = this.createIfStatement(as);
             }
             if (elem != null) {
-                this.worksequence.add(elem);
+                this.workflow.add(elem);
             }
         }
     }
@@ -253,7 +265,7 @@ public class Reader {
             if (as.getVal_s() != null) {
                 oas = new Assignment(lefthand, as.getVal_s());
             } else {
-                oas = new Assignment(lefthand, new Integer(as.getVal_i()));
+                oas = new Assignment(lefthand, as.getVal_i());
             }
         }
 
@@ -306,13 +318,84 @@ public class Reader {
         return oas;
     }
 
+    private IfStatement createIfStatement(de.hsos.richwps.dSL.IfStatement es) throws Exception {
+        IfStatement ifstatement = new IfStatement();
+
+        EObject xtextlefthand = es.getLefthand();
+        Reference lefthand = null;
+        if (xtextlefthand instanceof OUT_REFERENCE) {
+            de.hsos.richwps.dSL.OUT_REFERENCE out = (de.hsos.richwps.dSL.OUT_REFERENCE) xtextlefthand;
+            String identifier = out.getRefname();
+            lefthand = new OutReference(identifier);
+        } else if (xtextlefthand instanceof VAR_REFERENCE) {
+            de.hsos.richwps.dSL.VAR_REFERENCE var = (de.hsos.richwps.dSL.VAR_REFERENCE) xtextlefthand;
+            String identifier = var.getRefname();
+            lefthand = new VarReference(identifier);
+        } else if (xtextlefthand instanceof IN_REFERENCE) {
+            de.hsos.richwps.dSL.IN_REFERENCE var = (de.hsos.richwps.dSL.IN_REFERENCE) xtextlefthand;
+            String identifier = var.getRefname();
+            lefthand = new InReference(identifier);
+        }
+        ifstatement.setLefthand(lefthand);
+
+        EObject xtextrighthand = es.getLefthand();
+        Reference righthand = null;
+        if (xtextrighthand instanceof OUT_REFERENCE) {
+            de.hsos.richwps.dSL.OUT_REFERENCE out = (de.hsos.richwps.dSL.OUT_REFERENCE) xtextrighthand;
+            String identifier = out.getRefname();
+            righthand = new OutReference(identifier);
+        } else if (xtextrighthand instanceof VAR_REFERENCE) {
+            de.hsos.richwps.dSL.VAR_REFERENCE var = (de.hsos.richwps.dSL.VAR_REFERENCE) xtextrighthand;
+            String identifier = var.getRefname();
+            righthand = new VarReference(identifier);
+        } else if (xtextrighthand instanceof IN_REFERENCE) {
+            de.hsos.richwps.dSL.IN_REFERENCE var = (de.hsos.richwps.dSL.IN_REFERENCE) xtextrighthand;
+            String identifier = var.getRefname();
+            righthand = new InReference(identifier);
+        }
+        ifstatement.setRighthand(righthand);
+
+        String operator = es.getOperator();
+        ifstatement.setOperator(operator);
+
+        EList eifoperations = es.getIfoperations();
+        for (Object eifoperation : eifoperations) {
+            EObject ob = (EObject) eifoperation;
+            if (ob instanceof de.hsos.richwps.dSL.Assignment) {
+                de.hsos.richwps.dSL.Assignment eas = (de.hsos.richwps.dSL.Assignment) ob;
+                Assignment as = this.createAssignment(eas);
+                ifstatement.addIfOperation(as);
+            } else if (ob instanceof de.hsos.richwps.dSL.ExecuteStatement) {
+                de.hsos.richwps.dSL.ExecuteStatement eas = (de.hsos.richwps.dSL.ExecuteStatement) ob;
+                Execute as = this.createExecute(eas);
+                ifstatement.addIfOperation(as);
+            }
+        }
+        
+        EList eelseoperations = es.getElseoperations();
+        for (Object eelseoperation : eelseoperations) {
+            EObject ob = (EObject) eelseoperation;
+            if (ob instanceof de.hsos.richwps.dSL.Assignment) {
+                de.hsos.richwps.dSL.Assignment eas = (de.hsos.richwps.dSL.Assignment) ob;
+                Assignment as = this.createAssignment(eas);
+                ifstatement.addElseOperation(as);
+            } else if (ob instanceof de.hsos.richwps.dSL.ExecuteStatement) {
+                de.hsos.richwps.dSL.ExecuteStatement eas = (de.hsos.richwps.dSL.ExecuteStatement) ob;
+                Execute as = this.createExecute(eas);
+                ifstatement.addElseOperation(as);
+            }
+        }
+        
+        return ifstatement;
+    }
+
     /**
-     * Returns the worksequence.
+     * Returns the sequential worksequence.
      *
      * @return worksequence the worksequence.
      *
      */
     public Workflow getWorksequence() {
-        return this.worksequence;
+        return this.workflow;
     }
 }
