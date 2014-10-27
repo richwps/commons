@@ -19,8 +19,10 @@
 	============================================================== -->
 	<element name="GetSupportedTypes">
 		<complexType>
+			<annotation>
+				<documentation>Attribute to limit response to supported complex types only</documentation>
+			</annotation>
 			<attribute name="complexTypesOnly" type="boolean" />
-			<annotation>Attribute to limit response to supported complex types only</annotation>
 		</complexType>
 	</element>
 </schema>
