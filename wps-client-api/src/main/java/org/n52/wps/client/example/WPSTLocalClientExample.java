@@ -9,11 +9,13 @@ import net.opengis.wps.x100.DeployProcessResponseDocument;
 import net.opengis.wps.x100.ProcessBriefType;
 import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.ProcessDescriptionsDocument;
+import net.opengis.wps.x100.SupportedTypesResponseDocument;
 import net.opengis.wps.x100.UndeployProcessResponseDocument;
 
 import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.WPSClientSession;
 import org.n52.wps.client.RichWPSClientSession;
+import org.n52.wps.client.richwps.GetSupportedTypesRequestBuilder;
 import org.n52.wps.client.richwps.ProcessDescriptionTypeBuilder;
 import org.n52.wps.client.richwps.TransactionalRequestBuilder;
 
@@ -35,6 +37,31 @@ public class WPSTLocalClientExample {
     	this.wpsURL = wpsURL;
     	this.wpstURL = wpstURL;
 	}
+    
+    public void testGetSupportedTypes() throws WPSClientException {
+    	//build GetSupportedTypes request
+    	GetSupportedTypesRequestBuilder builder = new GetSupportedTypesRequestBuilder();
+    	builder.setComplexTypesOnly(false);
+    	
+    	System.out.println("--- GetSupportedTypes request: ---");
+        System.out.println(builder.build().toString());
+    	
+    	// request supported types
+        Object responseObject = wpstClient.getSupportedTypes(wpsURL, builder.build());
+        
+        // analyze response
+        if (responseObject instanceof SupportedTypesResponseDocument) {
+        	SupportedTypesResponseDocument response = (SupportedTypesResponseDocument) responseObject;
+        	System.out.println("--- GetSupportedTypesDocument: ---");
+        	System.out.println(response.toString());
+        }
+        if (responseObject instanceof ExceptionReportDocument) {
+        	ExceptionReportDocument response = (ExceptionReportDocument) responseObject;
+        	System.out.println("--- ExceptionReport: ---");
+        	System.out.println(response.toString());
+        }
+        
+    }
 
     public void testDeploy() throws WPSClientException {
 
@@ -145,6 +172,7 @@ public class WPSTLocalClientExample {
         WPSTLocalClientExample client = new WPSTLocalClientExample(wpsURL, wpstURL);
         
         client.connect();
+        client.testGetSupportedTypes();
         client.testDeploy();
         client.listProcesses();
         client.testUndeploy();

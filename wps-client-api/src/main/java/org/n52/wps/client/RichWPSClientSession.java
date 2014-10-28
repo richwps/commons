@@ -20,9 +20,11 @@ import net.opengis.ows.x11.OperationDocument.Operation;
 import net.opengis.wps.x100.CapabilitiesDocument;
 import net.opengis.wps.x100.DeployProcessDocument;
 import net.opengis.wps.x100.DeployProcessResponseDocument;
+import net.opengis.wps.x100.GetSupportedTypesDocument;
 import net.opengis.wps.x100.ProcessBriefType;
 import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.ProcessDescriptionsDocument;
+import net.opengis.wps.x100.SupportedTypesResponseDocument;
 import net.opengis.wps.x100.UndeployProcessDocument;
 import net.opengis.wps.x100.UndeployProcessResponseDocument;
 
@@ -42,6 +44,7 @@ import org.xml.sax.SAXException;
  *
  * @author foerster
  * @author dalcacer
+ * @author woessner
  * @see WPSClientSession
  */
 public class RichWPSClientSession {
@@ -312,7 +315,7 @@ public class RichWPSClientSession {
             LOGGER.info("DeployProcess: " + doc.getDeployProcess().getProcessDescription().getIdentifier().getStringValue());
             return this.retrieveDeployProcessResponseViaPOST(richwpsurl, doc);
         } else {
-            LOGGER.info("Server ID " + serverId + " not registered as transactional service");
+            LOGGER.info("Server ID " + serverId + " not registered as RichWPS service");
             return null;
         }
 
@@ -327,7 +330,19 @@ public class RichWPSClientSession {
             LOGGER.info("UndeployProcess: " + doc.getUndeployProcess().getProcess().getIdentifier().getStringValue());
             return this.retrieveUndeployProcessResponseViaPOST(richwpsurl, doc);
         } else {
-            LOGGER.info("Server ID " + serverId + " not registered as transactional service");
+            LOGGER.info("Server ID " + serverId + " not registered as RichWPS service");
+            return null;
+        }
+    }
+    
+    public Object getSupportedTypes(String serverId, GetSupportedTypesDocument doc) throws WPSClientException {
+        String richwpsurl;
+        if (loggedTransactionalServices.containsKey(serverId)) {
+            richwpsurl = loggedTransactionalServices.get(serverId);
+            LOGGER.info("GetSupportedTypes");
+            return this.retrieveGetSupportedTypesResponseViaPOST(richwpsurl, doc);
+        } else {
+            LOGGER.info("Server ID " + serverId + " not registered as RichWPS service");
             return null;
         }
     }
@@ -412,6 +427,30 @@ public class RichWPSClientSession {
                 return ExceptionReportDocument.Factory.parse(documentObj);
             } catch (Exception e2) {
                 throw new WPSClientException("Error occured while parsing undeployProcessResponse", e);
+            }
+        }
+    }
+    
+    /**
+     * Retrieves a GetSupportedTypes response via Http POST request and tries to
+     * parse it
+     *
+     * @param url
+     * @param doc
+     * @return either an SupportedTypesResponseDocument or an
+     * ExceptionReportDocument
+     * @throws WPSClientException
+     */
+    private Object retrieveGetSupportedTypesResponseViaPOST(String url, GetSupportedTypesDocument doc) throws WPSClientException {
+        InputStream is = retrieveDataViaPOST(doc, url);
+        Document documentObj = checkInputStream(is);
+        try {
+            return SupportedTypesResponseDocument.Factory.parse(documentObj);
+        } catch (XmlException e) {
+            try {
+                return ExceptionReportDocument.Factory.parse(documentObj);
+            } catch (Exception e2) {
+                throw new WPSClientException("Error occured while parsing SupportedTypesResponseDocument", e);
             }
         }
     }
