@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wps:SupportedTypesResponse xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ows="http://www.opengis.net/ows/1.1" xsi:schemaLocation="./wpsGetSupportedTypes_response.xsd">
+  <wps:SupportedInputTypes>
+    <wps:LiteralTypes>
+      <ows:DataType ows:reference="xs:float"/>
+      <ows:DataType ows:reference="xs:double"/>
+      <ows:DataType ows:reference="xs:long"/>
+      <ows:DataType ows:reference="xs:int"/>
+      <ows:DataType ows:reference="xs:short"/>
+      <ows:DataType ows:reference="xs:byte"/>
+      <ows:DataType ows:reference="xs:boolean"/>
+      <ows:DataType ows:reference="xs:string"/>
+      <ows:DataType ows:reference="xs:dateTime"/>
+      <ows:DataType ows:reference="xs:base64Binary"/>
+      <ows:DataType ows:reference="xs:anyURI"/>
+    </wps:LiteralTypes>
+    <wps:ComplexTypes>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.0.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.0.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.1.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.1.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.2.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.2.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.2.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://www.opengeospatial.org/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://geoserver.itc.nl:8080/wps/schemas/gml/2.1.2/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.0.0/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.0.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.0.0/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.2</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.2.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.0.0/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.0.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.0.0/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.2</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.2.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.2.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.0.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.0.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.1.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.1.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.2.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.2.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>application/vnd.google-earth.kml+xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>application/vnd.google-earth.kml+xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/plain</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/wcps/1.0/wcpsAll.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/plain</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/wcps/1.0/wcpsAll.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+    </wps:ComplexTypes>
+  </wps:SupportedInputTypes>
+  <wps:SupportedOutputTypes>
+    <wps:LiteralTypes>
+      <ows:DataType ows:reference="xs:float"/>
+      <ows:DataType ows:reference="xs:double"/>
+      <ows:DataType ows:reference="xs:long"/>
+      <ows:DataType ows:reference="xs:int"/>
+      <ows:DataType ows:reference="xs:short"/>
+      <ows:DataType ows:reference="xs:byte"/>
+      <ows:DataType ows:reference="xs:boolean"/>
+      <ows:DataType ows:reference="xs:string"/>
+      <ows:DataType ows:reference="xs:dateTime"/>
+      <ows:DataType ows:reference="xs:base64Binary"/>
+      <ows:DataType ows:reference="xs:anyURI"/>
+    </wps:LiteralTypes>
+    <wps:ComplexTypes>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.2.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.0.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.0.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.1.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.1.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.2.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.2.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.0.0/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.0.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.0.0/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.2</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.2.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://www.opengeospatial.org/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://geoserver.itc.nl:8080/wps/schemas/gml/2.1.2/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.0.0/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.0.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.0.0/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.2</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/2.1.2.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2.1/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.2.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://www.opengeospatial.org/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://geoserver.itc.nl:8080/wps/schemas/gml/2.1.2/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/gmlpacket.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.0.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.0.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.0.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.1.0</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.0/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.1.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.1.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml; subtype=gml/3.2.1</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/3.2.1/base/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>application/vnd.google-earth.kml+xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+      <wps:Type>
+        <MimeType>text/xml</MimeType>
+        <Encoding>UTF-8</Encoding>
+        <Schema>http://schemas.opengis.net/gml/2.1.2/feature.xsd</Schema>
+      </wps:Type>
+    </wps:ComplexTypes>
+  </wps:SupportedOutputTypes>
+</wps:SupportedTypesResponse>
