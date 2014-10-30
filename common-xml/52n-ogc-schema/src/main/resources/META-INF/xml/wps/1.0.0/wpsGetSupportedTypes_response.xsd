@@ -22,32 +22,25 @@
 			<complexContent>
 				<extension base="wps:ResponseBaseType">
 					 <sequence>
-					 	<element name="SupportedTypes">
+					 	<element name="SupportedInputTypes">
 						 	<annotation>
-						 		<documentation>Contains a full list of supported formats the server provides</documentation>
+						 		<documentation>Contains a full list of supported input formats the server provides</documentation>
 						 	</annotation>
 					 		<complexType>
 					 			<sequence>
-					 				<element name="LiteralTypes" minOccurs="0" maxOccurs="unbounded">
-					 					<complexType>
-					 						<sequence>
-					 							<annotation>
-													<documentation>Describes a specific literal type</documentation>
-												</annotation>
-												<element ref="ows:DataType" minOccurs="0" maxOccurs="unbounded" />
-					 						</sequence>
-					 					</complexType>
-					 				</element>
-					 				<element name="ComplexTypes" minOccurs="0" maxOccurs="unbounded">
-					 					<complexType>
-								 			<sequence>
-												<annotation>
-													<documentation>Describes a specific complex type with its attributes schema, mimeType and encoding</documentation>
-												</annotation>
-												<element name="Type" minOccurs="0" maxOccurs="unbounded" type="wps:ComplexDataDescriptionType" />
-								 			</sequence>
-					 					</complexType>
-					 				</element>
+					 				<element name="LiteralTypes" minOccurs="0" maxOccurs="unbounded" type="wps:LiteralTypesType" />
+					 				<element name="ComplexTypes" minOccurs="0" maxOccurs="unbounded" type="wps:ComplexTypesType" />
+					 			</sequence>
+					 		</complexType>
+					 	</element>
+					 	<element name="SupportedOutputTypes">
+						 	<annotation>
+						 		<documentation>Contains a full list of supported output formats the server provides</documentation>
+						 	</annotation>
+					 		<complexType>
+					 			<sequence>
+					 				<element name="LiteralTypes" minOccurs="0" maxOccurs="unbounded" type="wps:LiteralTypesType" />
+					 				<element name="ComplexTypes" minOccurs="0" maxOccurs="unbounded" type="wps:ComplexTypesType" />
 					 			</sequence>
 					 		</complexType>
 					 	</element>
@@ -56,4 +49,20 @@
 			</complexContent>
 		</complexType>
 	</element>
+	<complexType name="LiteralTypesType">
+		<sequence>
+			<annotation>
+			<documentation>Describes a specific literal type</documentation>
+		</annotation>
+		<element ref="ows:DataType" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	<complexType name="ComplexTypesType">
+		<sequence>
+		<annotation>
+			<documentation>Describes a specific complex type with its attributes schema, mimeType and encoding</documentation>
+		</annotation>
+		<element name="Type" minOccurs="0" maxOccurs="unbounded" type="wps:ComplexDataDescriptionType" />
+		</sequence>
+	</complexType>
 </schema>
