@@ -136,14 +136,16 @@ public class Reader {
      */
     public void inspect() throws Exception {
         TreeIterator<EObject> iterator = this.xtext_ws.eAllContents();
+
         //identifiy top-level language elements
         //1. local bindings
         //2. remote bindings
         //3. execute statement
         //4. assignment
         //5. if/else
+        EObject eo;
         while (iterator.hasNext()) {
-            final EObject eo = iterator.next();
+            eo = iterator.next();
             IOperation elem = null;
             if (eo instanceof de.hsos.richwps.dSL.LocalBinding) {
                 this.stat_bindings += 1;
@@ -170,6 +172,13 @@ public class Reader {
                 final de.hsos.richwps.dSL.IfStatement as = (de.hsos.richwps.dSL.IfStatement) eo;
                 System.out.println("if statement found: " + as.toString());
                 elem = this.createIfStatement(as);
+
+                //tricky: consume all if- and elseoperations.
+                int consumedElements = ((IfStatement) elem).getElseoperations().size();
+                consumedElements += ((IfStatement) elem).getIfoperations().size();
+                for (int i = 0; i < consumedElements; i++) {
+                    iterator.prune();
+                }
             }
             if (elem != null) {
                 this.workflow.add(elem);
@@ -371,7 +380,7 @@ public class Reader {
                 ifstatement.addIfOperation(as);
             }
         }
-        
+
         EList eelseoperations = es.getElseoperations();
         for (Object eelseoperation : eelseoperations) {
             EObject ob = (EObject) eelseoperation;
@@ -385,7 +394,7 @@ public class Reader {
                 ifstatement.addElseOperation(as);
             }
         }
-        
+
         return ifstatement;
     }
 
