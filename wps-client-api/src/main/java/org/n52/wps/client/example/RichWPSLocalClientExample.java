@@ -24,14 +24,14 @@ import org.n52.wps.client.richwps.TransactionalRequestBuilder;
  * @author woessner
  * @version 0.0.2
  */
-public class WPSTLocalClientExample {
+public class RichWPSLocalClientExample {
 	
 	String wpsURL, wpstURL;
     RichWPSClientSession wpstClient;
     WPSClientSession wpsClient;
     
     
-    public WPSTLocalClientExample(String wpsURL, String wpstURL) {
+    public RichWPSLocalClientExample(String wpsURL, String wpstURL) {
     	wpstClient = RichWPSClientSession.getInstance();
     	wpsClient = WPSClientSession.getInstance();
     	this.wpsURL = wpsURL;
@@ -167,9 +167,9 @@ public class WPSTLocalClientExample {
      */
     public static void main(String[] args) throws WPSClientException {
     	String wpsURL = "http://localhost:8085/wps/WebProcessingService";
-        String wpstURL = "http://localhost:8085/wps/WPS-T";
+        String wpstURL = "http://localhost:8085/wps/RichWPS";
     	
-        WPSTLocalClientExample client = new WPSTLocalClientExample(wpsURL, wpstURL);
+        RichWPSLocalClientExample client = new RichWPSLocalClientExample(wpsURL, wpstURL);
         
         client.connect();
         client.testGetSupportedTypes();
