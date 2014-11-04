@@ -369,7 +369,10 @@ public class ReaderTest extends TestCase {
             e.printStackTrace();
             fail();
         }
-        int ifs = instance.getWorksequence().countIfStatement();
+       
+        assertEquals(6, instance.getWorksequence().size());//6 ioperations
+        assertEquals(3, instance.getWorksequence().countIfStatement()); //3 ifstatements
+        assertEquals(3, instance.getWorksequence().countAssignments());
 
     }
 }
