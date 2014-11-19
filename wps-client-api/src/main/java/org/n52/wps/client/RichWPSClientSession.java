@@ -3,7 +3,9 @@ package org.n52.wps.client;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -61,6 +63,7 @@ public class RichWPSClientSession {
     // a Map of <url, all available process descriptions>
     private Map<String, ProcessDescriptionsDocument> processDescriptions;
 
+    private Proxy proxy;
     /**
      * Initializes a RichWPS client session.
      */
@@ -71,6 +74,20 @@ public class RichWPSClientSession {
         this.loggedServices = new HashMap<String, CapabilitiesDocument>();
         this.processDescriptions = new HashMap<String, ProcessDescriptionsDocument>();
         this.loggedTransactionalServices = new HashMap<String, String>();
+        
+        // initialize proxy
+		String host = System.getProperty("http.proxyHost");
+		String port = System.getProperty("http.proxyPort");
+
+		if (host != null && !host.equals("") && port != null
+				&& !port.equals("")) {
+			proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host,  Integer.parseInt(port)));
+			LOGGER.info("Set up http client to use proxy: [ " + host + ":"
+					+ port + " ]");
+		} else {
+			proxy = null;
+			LOGGER.info("Set up http client to use no proxy");
+		}
     }
 
     /*
@@ -122,7 +139,7 @@ public class RichWPSClientSession {
         // HTTP::GET Operation 405 Method Not Allowed, instead of 404?
         try {
             URL urlobj = new URL(richwpsurl);
-            URLConnection conn = urlobj.openConnection();
+            URLConnection conn = (proxy == null) ? urlobj.openConnection() : urlobj.openConnection(proxy);
             conn.connect();
             HttpURLConnection httpConnection = (HttpURLConnection) conn;
             int resp = httpConnection.getResponseCode();
@@ -458,7 +475,7 @@ public class RichWPSClientSession {
     private InputStream retrieveDataViaPOST(XmlObject obj, String urlString) throws WPSClientException {
         try {
             URL url = new URL(urlString);
-            URLConnection conn = url.openConnection();
+            URLConnection conn = (proxy == null) ? url.openConnection() : url.openConnection(proxy);
             conn.setRequestProperty("Accept-Encoding", "gzip");
             conn.setRequestProperty("Content-Type", "text/xml");
             conn.setDoOutput(true);
