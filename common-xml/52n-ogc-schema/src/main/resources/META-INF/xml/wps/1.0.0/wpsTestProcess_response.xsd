@@ -14,7 +14,6 @@
 	<include schemaLocation="wpsAll.xsd"/>
 	<include schemaLocation="common/ResponseBaseType.xsd"/>
 	<include schemaLocation="common/ProcessBriefType.xsd"/>
-	<include schemaLocation="wpsExecute_response.xsd"/>
 	<import namespace="http://www.opengis.net/ows/1.1" schemaLocation="http://schemas.opengis.net/ows/1.1.0/owsAll.xsd"/>
 	<!-- =============================================================
 		elements and types
@@ -27,9 +26,24 @@
 			<complexContent>
 				<extension base="wps:ResponseBaseType">
 					<sequence>
+						<element name="Process" type="wps:ProcessBriefType">
+							<annotation>
+								<documentation>Process description from the ProcessOfferings section of the GetCapabilities response. </documentation>
+							</annotation>
+						</element>
 						<element name="Status" type="wps:StatusType">
 							<annotation>
 								<documentation>Execution status of this process. </documentation>
+							</annotation>
+						</element>
+						<element name="DataInputs" type="wps:DataInputsType" minOccurs="0">
+							<annotation>
+								<documentation></documentation>
+							</annotation>
+						</element> 
+						<element name="OutputDefinitions" type="wps:OutputDefinitionsType" minOccurs="0">
+							<annotation>
+								<documentation>Complete list of Output data types that were requested as part of the Execute request. This element shall be omitted unless the lineage attribute of the execute request is set to "true".</documentation>
 							</annotation>
 						</element>
 						<element name="ProcessOutputs" minOccurs="0">
@@ -41,6 +55,25 @@
 									<element name="Output" type="wps:OutputDataType" maxOccurs="unbounded">
 										<annotation>
 											<documentation>Unordered list of values of all the outputs produced by this process. It is not necessary to include an output until the Status is ProcessSucceeded. </documentation>
+										</annotation>
+									</element>
+								</sequence>
+							</complexType>
+						</element>
+						<element name="IntermediateOutputDefinitions" type="wps:IntermediateOutputDefinitionsType" minOccurs="0">
+							<annotation>
+								<documentation>Complete list of Output data types that were requested as part of the Execute request. This element shall be omitted unless the lineage attribute of the execute request is set to "true".</documentation>
+							</annotation>
+						</element>
+						<element name="IntermediateProcessOutputs" minOccurs="0">
+							<annotation>
+								<documentation></documentation>
+							</annotation>
+							<complexType>
+								<sequence>
+									<element name="IntermediateOutput" type="wps:IntermediateOutputDataType" minOccurs="0" maxOccurs="unbounded">
+										<annotation>
+											<documentation></documentation>
 										</annotation>
 									</element>
 								</sequence>
@@ -61,8 +94,7 @@
 			</complexContent>
 		</complexType>
 	</element>
-	<!-- =========================================================== -->
-	<complexType name="OutputDefinitionsType">
+	<complexType name="IntermediateOutputDefinitionsType">
 		<annotation>
 			<documentation>Definition of a format, encoding,  schema, and unit-of-measure for an output to be returned from a process. </documentation>
 		</annotation>
@@ -74,15 +106,14 @@
 			</element>
 		</sequence>
 	</complexType>
-	<!-- =========================================================== -->
-	<complexType name="OutputDataType">
+	<complexType name="IntermediateOutputDataType">
 		<annotation>
-			<documentation>Value of one output from a process. </documentation>
+			<documentation>Value of one output from an intermediate process. </documentation>
 		</annotation>
 		<complexContent>
-			<extension base="wps:DescriptionType">
+			<extension base="wps:IntermediateOutputDescriptionType">
 				<annotation>
-					<documentation>In this use, the DescriptionType shall describe this process output. </documentation>
+					<documentation>In this use, the DescriptionType shall describe this intermediate process output. </documentation>
 				</annotation>
 				<group ref="wps:OutputDataFormChoice">
 					<annotation>
@@ -91,108 +122,18 @@
 				</group>
 			</extension>
 		</complexContent>
+			
 	</complexType>
-	<!-- =========================================================== -->
-	<group name="OutputDataFormChoice">
+	<complexType name="IntermediateOutputDescriptionType">
 		<annotation>
-			<documentation>Identifies the form of this input or output value, and provides supporting information. </documentation>
+			<documentation>Description of an intermediate process Output. </documentation>
 		</annotation>
-		<choice>
-			<element name="Reference" type="wps:OutputReferenceType">
+		<complexContent>
+			<extension base="wps:DescriptionType">
 				<annotation>
-					<documentation>Identifies this output as a web accessible resource, and references that resource.  This element shall only be used for complex data. This element shall be used by a server when "store" in the Execute request is "true". </documentation>
+					<documentation>In this use, the DescriptionType shall describe this intermediate process output identified by its rola-variable-name. </documentation>
 				</annotation>
-			</element>
-			<element name="Data" type="wps:DataType">
-				<annotation>
-					<documentation>Identifies this output value as a data embedded in this response, and includes that data. This element shall be used by a server when "store" in the Execute request is "false". </documentation>
-				</annotation>
-			</element>
-		</choice>
-	</group>
-	<!-- =========================================================== -->
-	<complexType name="OutputReferenceType">
-		<annotation>
-			<documentation>Reference to an output value that is a web accessible resource. </documentation>
-		</annotation>
-		<attribute name="href" type="anyURI" use="required">
-			<annotation>
-				<documentation>Reference to a web-accessible resource that is provided by the process as output. This attribute shall contain a URL from which this output can be electronically retrieved. </documentation>
-			</annotation>
-		</attribute>
-		<attributeGroup ref="wps:ComplexDataEncoding"/>
-	</complexType>
-	<!-- =========== STATUS ========================================= -->
-	<!-- =========================================================== -->
-	<complexType name="StatusType">
-		<annotation>
-			<documentation>Description of the status of process execution. </documentation>
-		</annotation>
-		<choice>
-			<element name="ProcessAccepted" type="string">
-				<annotation>
-					<documentation>Indicates that this process has been accepted by the server, but is in a queue and has not yet started to execute. The contents of this human-readable text string is left open to definition by each server implementation, but is expected to include any messages the server may wish to let the clients know. Such information could include how long the queue is, or any warning conditions that may have been encountered. The client may display this text to a human user. </documentation>
-				</annotation>
-			</element>
-			<element name="ProcessStarted" type="wps:ProcessStartedType">
-				<annotation>
-					<documentation>Indicates that this process has been accepted by the server, and processing has begun. </documentation>
-				</annotation>
-			</element>
-			<element name="ProcessPaused" type="wps:ProcessStartedType">
-				<annotation>
-					<documentation>Indicates that this process has been  accepted by the server, and processing has started but subsequently been paused by the server.</documentation>
-				</annotation>
-			</element>
-			<element name="ProcessSucceeded" type="string">
-				<annotation>
-					<documentation>Indicates that this process has successfully completed execution. The contents of this human-readable text string is left open to definition by each server, but is expected to include any messages the server may wish to let the clients know, such as how long the process took to execute, or any warning conditions that may have been encountered. The client may display this text string to a human user. The client should make use of the presence of this element to trigger automated or manual access to the results of the process. If manual access is intended, the client should use the presence of this element to present the results as downloadable links to the user. </documentation>
-				</annotation>
-			</element>
-			<element name="ProcessFailed" type="wps:ProcessFailedType">
-				<annotation>
-					<documentation>Indicates that execution of this process has failed, and includes error information. </documentation>
-				</annotation>
-			</element>
-		</choice>
-		<attribute name="creationTime" type="dateTime" use="required">
-			<annotation>
-				<documentation>The time (UTC) that the process finished.  If the process is still executing or awaiting execution, this element shall contain the creation time of this document.</documentation>
-			</annotation>
-		</attribute>
-	</complexType>
-	<!-- =========================================================== -->
-	<complexType name="ProcessStartedType">
-		<annotation>
-			<documentation>Indicates that this process has been has been accepted by the server, and processing has begun. </documentation>
-		</annotation>
-		<simpleContent>
-			<extension base="string">
-				<annotation>
-					<documentation>A human-readable text string whose contents are left open to definition by each WPS server, but is expected to include any messages the server may wish to let the clients know. Such information could include how much longer the process may take to execute, or any warning conditions that may have been encountered to date. The client may display this text to a human user. </documentation>
-				</annotation>
-				<attribute name="percentCompleted" use="optional">
-					<annotation>
-						<documentation>Percentage of process that has been completed, where 0 means the process has just started, and 99 means the process is almost complete.  This value is expected to be accurate to within ten percent.</documentation>
-					</annotation>
-					<simpleType>
-						<restriction base="integer">
-							<minInclusive value="0"/>
-							<maxInclusive value="99"/>
-						</restriction>
-					</simpleType>
-				</attribute>
 			</extension>
-		</simpleContent>
+		</complexContent>
 	</complexType>
-	<!-- =========================================================== -->
-	<complexType name="ProcessFailedType">
-		<annotation>
-			<documentation>Indicator that the process has failed to execute successfully. The reason for failure is given in the exception report. </documentation>
-		</annotation>
-		<sequence>
-			<element ref="ows:ExceptionReport"/>
-		</sequence>
-	</complexType>
-	<!-- =========================================================== -->
 </schema>
