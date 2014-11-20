@@ -3,7 +3,9 @@ package org.n52.wps.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -55,6 +57,8 @@ public class WPSClientSession {
 	// a Map of <url, all available process descriptions>
 	private Map<String, ProcessDescriptionsDocument> processDescriptions;
 
+	private Proxy proxy;
+	
 	/**
 	 * Initializes a WPS client session.
 	 *
@@ -65,6 +69,20 @@ public class WPSClientSession {
 		options.setLoadTrimTextBuffer();
 		loggedServices = new HashMap<String, CapabilitiesDocument>();
 		processDescriptions = new HashMap<String, ProcessDescriptionsDocument>();
+		
+		// initialize proxy
+		String host = System.getProperty("http.proxyHost");
+		String port = System.getProperty("http.proxyPort");
+
+		if (host != null && !host.equals("") && port != null
+				&& !port.equals("")) {
+			proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress(host,  Integer.parseInt(port)));
+			LOGGER.info("Set up http client to use proxy: [ " + host + ":"
+					+ port + " ]");
+		} else {
+			proxy = null;
+			LOGGER.info("Set up http client to use no proxy");
+		}
 	}
 	
 	/*
@@ -326,7 +344,7 @@ public class WPSClientSession {
 	private InputStream retrieveDataViaPOST(XmlObject obj, String urlString) throws WPSClientException{
 		try {
 			URL url = new URL(urlString);
-			URLConnection conn = url.openConnection();
+			URLConnection conn = (proxy == null) ? url.openConnection() : url.openConnection(proxy);
 			conn.setRequestProperty("Accept-Encoding", "gzip");
 			conn.setRequestProperty("Content-Type", "text/xml");
 			conn.setDoOutput(true);
