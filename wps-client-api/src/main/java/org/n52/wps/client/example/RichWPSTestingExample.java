@@ -35,7 +35,6 @@ public class RichWPSTestingExample {
 
 	public RichWPSTestingExample() {
 		try {
-			TestProcessRequestBuilder builder = new TestProcessRequestBuilder();
 
 			// Phase 1. Build Processdescription.
 
@@ -70,15 +69,16 @@ public class RichWPSTestingExample {
 			procOutputs.setOutputArray(0, basicOutputDescriptionType3.getOdt());
 			String richwpsurl = "http://localhost:8080/wps/RichWPS";
 			String wpsurl = "http://localhost:8080/wps/WebProcessingService";
-			String processID = "test";
+			String processID = "testProcessId";
 			ProcessDescriptionTypeBuilder pdtb = new ProcessDescriptionTypeBuilder(
-					processID, "test", "1", procOutputs);
+					processID, "testProcessTitle", "1", procOutputs);
 
 			// Build Input
 			InputDescriptionTypeBuilder idtb = new InputDescriptionTypeBuilder(
-					"name", "input1", BigInteger.ZERO, BigInteger.ONE);
+					"executionLiteralInput", "input1", BigInteger.ZERO,
+					BigInteger.ONE);
 
-			List<ComplexDataDescriptionType> supportedFormatList = new ArrayList();
+			List<ComplexDataDescriptionType> supportedFormatList = new ArrayList<ComplexDataDescriptionType>();
 			ComplexDataDescriptionType ogctype = InputDescriptionTypeBuilder
 					.createComplexDataDescriptionType("text/xml", null, null);
 			supportedFormatList.add(ogctype);
@@ -87,14 +87,18 @@ public class RichWPSTestingExample {
 			pdtb.addNewInputToDataInputs(idtb.getIdt());
 
 			// Build request
-			builder.setTestProcessDescription(pdtb);
+			TestProcessRequestBuilder builder = new TestProcessRequestBuilder(
+					pdtb);
 			builder.setTestExecutionUnit("bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummyProcess1 execute richwps/dummyProcess1 with in.name as LiteralInputData store	LiteralOutputData as var.firstResult bind process http localhost 8080 /wps/WebProcessingService	org.n52.wps.server.algorithm.test.DummyTestClass to	richwps/dummyProcess2 execute richwps/dummyProcess2	with var.firstResult as LiteralInputData store LiteralOutputData as out.result");
-			builder.setTestProfileName("rola");
-
+			builder.setTestDeploymentProfileName("rola");
 			ResponseFormBuilder outputsBuilder = new ResponseFormBuilder(
 					pdtb.getPdt());
 			outputsBuilder.addOutput("result");
 			builder.setTestOutputs(outputsBuilder.getResponseFormType());
+
+			// Add inputs for execute
+			builder.addLiteralData("executionLiteralInput",
+					"executionLiteralInputValue");
 
 			System.out.println("--- TestProcess request: ---");
 			System.out.println(builder.getTestdocument().toString());
