@@ -38,7 +38,7 @@ public class RichWPSTestingExample {
 
 			// Phase 1. Build Processdescription.
 
-			// Build Outputs
+			// Build Output Descriptions
 			ProcessDescriptionType.ProcessOutputs procOutputs;
 			procOutputs = ProcessDescriptionType.ProcessOutputs.Factory
 					.newInstance();
@@ -67,13 +67,15 @@ public class RichWPSTestingExample {
 			basicOutputDescriptionType3.addNewLiteralOutput("xs:string");
 			procOutputs.addNewOutput();
 			procOutputs.setOutputArray(0, basicOutputDescriptionType3.getOdt());
+			procOutputs.addNewOutput();
+			procOutputs.setOutputArray(1, basicOutputDescriptionType.getOdt());
 			String richwpsurl = "http://localhost:8080/wps/RichWPS";
 			String wpsurl = "http://localhost:8080/wps/WebProcessingService";
 			String processID = "testProcessId";
 			ProcessDescriptionTypeBuilder pdtb = new ProcessDescriptionTypeBuilder(
 					processID, "testProcessTitle", "1", procOutputs);
 
-			// Build Input
+			// Build Input Descriptions
 			InputDescriptionTypeBuilder idtb = new InputDescriptionTypeBuilder(
 					"executionLiteralInput", "input1", BigInteger.ZERO,
 					BigInteger.ONE);
@@ -87,28 +89,28 @@ public class RichWPSTestingExample {
 			pdtb.addNewInputToDataInputs(idtb.getIdt());
 
 			// Build request
-			TestProcessRequestBuilder builder = new TestProcessRequestBuilder(
+			TestProcessRequestBuilder testProcessRequestbuilder = new TestProcessRequestBuilder(
 					pdtb);
-			builder.setTestExecutionUnit("bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummyProcess1 execute richwps/dummyProcess1 with in.name as LiteralInputData store	LiteralOutputData as var.firstResult bind process http localhost 8080 /wps/WebProcessingService	org.n52.wps.server.algorithm.test.DummyTestClass to	richwps/dummyProcess2 execute richwps/dummyProcess2	with var.firstResult as LiteralInputData store LiteralOutputData as out.result");
-			builder.setTestDeploymentProfileName("rola");
-			ResponseFormBuilder outputsBuilder = new ResponseFormBuilder(
+			testProcessRequestbuilder.setTestExecutionUnit("bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummyProcess1 execute richwps/dummyProcess1 with in.name as LiteralInputData store	LiteralOutputData as var.firstResult bind process http localhost 8080 /wps/WebProcessingService	org.n52.wps.server.algorithm.test.DummyTestClass to	richwps/dummyProcess2 execute richwps/dummyProcess2	with var.firstResult as LiteralInputData store LiteralOutputData as out.result");
+			testProcessRequestbuilder.setTestDeploymentProfileName("rola");
+			ResponseFormBuilder responseFormBuilder = new ResponseFormBuilder(
 					pdtb.getPdt());
-			outputsBuilder.addOutput("result");
-			builder.setTestOutputs(outputsBuilder.getResponseFormType());
-
+			responseFormBuilder.addOutput("result");
+			testProcessRequestbuilder.setTestOutputs(responseFormBuilder.getResponseFormType());
+			testProcessRequestbuilder.addOutput("output1");
 			// Add inputs for execute
-			builder.addLiteralData("executionLiteralInput",
+			testProcessRequestbuilder.addLiteralData("executionLiteralInput",
 					"executionLiteralInputValue");
 
 			System.out.println("--- TestProcess request: ---");
-			System.out.println(builder.getTestdocument().toString());
+			System.out.println(testProcessRequestbuilder.getTestdocument().toString());
 
 			// Response
 			RichWPSClientSession richWPSClient = RichWPSClientSession
 					.getInstance();
 			richWPSClient.connect(wpsurl, richwpsurl);
 			Object responseObject = richWPSClient.test(wpsurl,
-					builder.getTestdocument());
+					testProcessRequestbuilder.getTestdocument());
 			if (responseObject instanceof TestProcessResponseDocument) {
 				TestProcessResponseDocument response = (TestProcessResponseDocument) responseObject;
 				System.out.println("--- TestProcess response: ---");

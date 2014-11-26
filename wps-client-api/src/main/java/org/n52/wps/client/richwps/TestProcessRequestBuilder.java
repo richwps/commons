@@ -1,5 +1,6 @@
 package org.n52.wps.client.richwps;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -31,9 +32,6 @@ public class TestProcessRequestBuilder {
 	public static String VERSION = "1.0.0";
 
 	private void updateInputs() {
-		// if (testprocess.getDataInputs() == null) {
-		// testprocess.addNewDataInputs();
-		// }
 		testprocess.setDataInputs(executeRequestBuilder.getExecute()
 				.getExecute().getDataInputs());
 	}
@@ -200,6 +198,16 @@ public class TestProcessRequestBuilder {
 	}
 
 	/**
+	 * checks, if the execute, which has been build is valid according to the
+	 * process description.
+	 * 
+	 * @return
+	 */
+	public boolean isExecuteValid() {
+		return executeRequestBuilder.isExecuteValid();
+	}
+
+	/**
 	 * TestProcess: Sets process description.
 	 *
 	 * @param description
@@ -289,6 +297,49 @@ public class TestProcessRequestBuilder {
 	}
 
 	/**
+	 * 
+	 * @param outputIdentifier
+	 * @param schema
+	 * @param encoding
+	 * @param mimeType
+	 * @return
+	 */
+	public boolean setResponseDocument(String outputIdentifier, String schema,
+			String encoding, String mimeType) {
+		// TODO implement
+		return false;
+	}
+
+	/**
+	 * Asks for data as raw data, i.e. without WPS XML wrapping
+	 * 
+	 * @param schema
+	 *            if applicable otherwise null
+	 * @param encoding
+	 *            if default encoding = null, otherwise base64
+	 * @param mimeType
+	 *            requested mimetype of the output according to the process
+	 *            description. if not set, default mime type is used.
+	 * @return
+	 */
+	public boolean setRawData(String outputIdentifier, String schema,
+			String encoding, String mimeType) {
+		// TODO implement
+		return false;
+	}
+
+	/**
+	 * return a KVP representation for the created document.
+	 * 
+	 * @return KVP request string
+	 * @throws UnsupportedEncodingException
+	 *             if the URL encoding using UTF-8 fails
+	 */
+	public String getDocumentAsGETString() throws UnsupportedEncodingException {
+		return executeRequestBuilder.getExecuteAsGETString();
+	}
+
+	/**
 	 * TestProcess: Sets process description.
 	 *
 	 * @param description
@@ -326,7 +377,9 @@ public class TestProcessRequestBuilder {
 
 	public void setTestOutputs(
 			final net.opengis.wps.x100.ResponseFormType outputs) {
-		testprocess.setResponseForm(outputs);
+		executeRequestBuilder.getExecute().getExecute()
+				.setResponseForm(outputs);
+		updateResponseForm();
 	}
 
 	/**
@@ -369,5 +422,16 @@ public class TestProcessRequestBuilder {
 		 * } }
 		 */
 		return doc;
+	}
+
+	/*** @author mkiss **/
+	public void addOutput(String outputName) {
+		executeRequestBuilder.addOutput(outputName);
+		updateResponseForm();
+	}
+
+	private void updateResponseForm() {
+		testprocess.setResponseForm(executeRequestBuilder.getExecute()
+				.getExecute().getResponseForm());
 	}
 }
