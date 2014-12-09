@@ -89,7 +89,7 @@ public class Workflow extends ArrayList<IOperation> {
         String notation = "";
         for (IOperation o : this) {
             notation += o.toNotation();
-            notation += "\n";
+            notation += "\n\n";
         }
         return notation;
     }
