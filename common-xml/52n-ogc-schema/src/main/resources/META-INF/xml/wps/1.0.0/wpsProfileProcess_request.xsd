@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ows="http://www.opengis.net/ows/1.1"
+	xmlns:wps="http://www.opengis.net/wps/1.0.0" targetNamespace="http://www.opengis.net/wps/1.0.0"
+	elementFormDefault="qualified" xml:lang="en" version="1.0.0.3">
+	<annotation>
+		<appinfo>$Id: wpsProfileProcess_request.xsd 2014-12-08 $</appinfo>
+		<documentation>
+			<description>DRAFT</description>
+			<copyright>
+			</copyright>
+		</documentation>
+	</annotation>
+	<!-- ============================================================= includes 
+		and imports ============================================================== -->
+	<include schemaLocation="wpsAll.xsd" />
+	<include schemaLocation="common/RequestBaseType.xsd" />
+	<include schemaLocation="common/DescriptionType.xsd" />
+	<include schemaLocation="common/ProcessBriefType.xsd" />
+	<import namespace="http://www.opengis.net/ows/1.1"
+		schemaLocation="http://schemas.opengis.net/ows/1.1.0/owsAll.xsd" />
+
+	<!-- ============================================================= elements 
+		and types ============================================================== -->
+	<element name="ProfileProcess">
+		<complexType>
+			<complexContent>
+				<extension base="wps:RequestBaseType">
+					<sequence>
+						<element minOccurs="1"  maxOccurs="1" name="ProcessDescription" type="wps:ProcessDescriptionType" />
+						<element minOccurs="1" maxOccurs="1" name="ExecutionUnit" /> <!-- any simple type! -->
+						<element minOccurs="0" maxOccurs="1" name="DeploymentProfileName" type="string" nillable="false"/>
+						<element name="DataInputs" type="wps:DataInputsType" minOccurs="0"/>
+						<element name="ResponseForm" type="wps:ResponseFormType" minOccurs="0"/>
+					</sequence>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element><!-- of TestProcess -->
+</schema>

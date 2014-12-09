@@ -31,6 +31,8 @@
 	<include schemaLocation="wpsUndeployProcess_response.xsd" />
 	<include schemaLocation="wpsTestProcess_request.xsd" />
     <include schemaLocation="wpsTestProcess_response.xsd" />
+	<include schemaLocation="wpsProfileProcess_request.xsd" />
+    <include schemaLocation="wpsProfileProcess_response.xsd" />
     <include schemaLocation="wpsGetSupportedTypes_request.xsd" />
     <include schemaLocation="wpsGetSupportedTypes_response.xsd" />
     
