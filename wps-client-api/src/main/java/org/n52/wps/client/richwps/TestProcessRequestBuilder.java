@@ -4,8 +4,10 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.List;
 
+import net.opengis.wps.x100.DocumentOutputDefinitionType;
 import net.opengis.wps.x100.InputType;
 import net.opengis.wps.x100.ProcessDescriptionType;
+import net.opengis.wps.x100.ResponseFormType;
 import net.opengis.wps.x100.TestProcessDocument;
 
 import org.apache.xmlbeans.XmlString;
@@ -208,17 +210,6 @@ public class TestProcessRequestBuilder {
 	}
 
 	/**
-	 * TestProcess: Sets process description.
-	 *
-	 * @param description
-	 *            process description.
-	 */
-	public void setTestProcessDescription(
-			final ProcessDescriptionTypeBuilder description) {
-		testprocess.setProcessDescription(description.getPdt());
-	}
-
-	/**
 	 * this sets store for the specific output.
 	 * 
 	 * @param parentInput
@@ -345,8 +336,7 @@ public class TestProcessRequestBuilder {
 	 * @param description
 	 *            process description.
 	 */
-	public void setTestProcessDescription(
-			final ProcessDescriptionType description) {
+	public void setProcessDescription(final ProcessDescriptionType description) {
 		testprocess.setProcessDescription(description);
 	}
 
@@ -357,26 +347,35 @@ public class TestProcessRequestBuilder {
 	 *            execution unit, plain text or base 64 zip. FIXME, not
 	 *            implemented, yet.
 	 */
-	public void setTestExecutionUnit(final String exec) {
+	public void setExecutionUnit(final String exec) {
 		testprocess.setExecutionUnit(XmlString.Factory.newValue(exec));
 	}
 
 	/**
-	 * TestProcess: Sets testdeployment profile name.
+	 * TestProcess: Sets deployment profile name.
 	 *
 	 * @param profileName
 	 *            deploymentProfileName
 	 */
-	public void setTestDeploymentProfileName(final String profileName) {
+	public void setDeploymentProfileName(final String profileName) {
 		testprocess.setDeploymentProfileName(profileName);
 	}
 
-	public void setTestInputs(final net.opengis.wps.x100.DataInputsType inputs) {
+	/**
+	 * TestProcess: Sets Data Inputs.
+	 * 
+	 * @param inputs
+	 */
+	public void setInputs(final net.opengis.wps.x100.DataInputsType inputs) {
 		testprocess.setDataInputs(inputs);
 	}
 
-	public void setTestOutputs(
-			final net.opengis.wps.x100.ResponseFormType outputs) {
+	/**
+	 * TestProcess: Sets Data Outputs.
+	 * 
+	 * @param outputs
+	 */
+	public void setOutputs(final net.opengis.wps.x100.ResponseFormType outputs) {
 		executeRequestBuilder.getExecute().getExecute()
 				.setResponseForm(outputs);
 		updateResponseForm();
@@ -424,14 +423,73 @@ public class TestProcessRequestBuilder {
 		return doc;
 	}
 
-	/*** @author mkiss **/
+	/**
+	 * TestProcess: Adds Output to ResponseForm.
+	 * 
+	 * @param outputName
+	 */
 	public void addOutput(String outputName) {
-		executeRequestBuilder.addOutput(outputName);
+		String rolaOutputIdentifier = null;
+		try {
+			executeRequestBuilder.addOutput(outputName);
+		} catch (NullPointerException e) {
+			rolaOutputIdentifier = getRolaIdentifier(outputName);
+			addRolaOutput(rolaOutputIdentifier);
+		}
 		updateResponseForm();
 	}
 
 	private void updateResponseForm() {
 		testprocess.setResponseForm(executeRequestBuilder.getExecute()
 				.getExecute().getResponseForm());
+	}
+
+	private void addRolaOutput(String outputName) {
+
+		addOutputIdentifier(outputName);
+	}
+
+	private String getRolaIdentifier(String outputName) {
+		String execUnitString;
+		String rolaIdentifier = null;
+		execUnitString = testprocess.getExecutionUnit().xmlText();
+		if (execUnitString.contains(outputName)) {
+			rolaIdentifier = outputName;
+		}
+		if (rolaIdentifier == null) {
+			throw new IllegalArgumentException(
+					"Argument is not a rola identifier in Execution Unit.");
+		}
+		return rolaIdentifier;
+	}
+
+	private DocumentOutputDefinitionType addOutputIdentifier(String identifier) {
+		DocumentOutputDefinitionType outputDef;
+		ResponseFormType responseForm = executeRequestBuilder.getExecute()
+				.getExecute().getResponseForm();
+		if (responseForm == null) {
+			responseForm = executeRequestBuilder.getExecute().getExecute()
+					.addNewResponseForm();
+			responseForm.addNewResponseDocument();
+		}
+		outputDef = getExistingUndefinedOutput();
+		if (outputDef == null) {
+			outputDef = responseForm.getResponseDocument().addNewOutput();
+		}
+		outputDef.addNewIdentifier().setStringValue(identifier);
+		return outputDef;
+	}
+
+	private DocumentOutputDefinitionType getExistingUndefinedOutput() {
+		DocumentOutputDefinitionType[] outputDefs = executeRequestBuilder
+				.getExecute().getExecute().getResponseForm()
+				.getResponseDocument().getOutputArray();
+		DocumentOutputDefinitionType outputDef = null;
+		for (DocumentOutputDefinitionType documentOutputDefinitionType : outputDefs) {
+			if (documentOutputDefinitionType.getIdentifier() == null) {
+				outputDef = documentOutputDefinitionType;
+			}
+		}
+		return outputDef;
 	}
 }

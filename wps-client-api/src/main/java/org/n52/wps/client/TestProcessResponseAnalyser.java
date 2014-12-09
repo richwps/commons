@@ -8,7 +8,6 @@ import java.net.URL;
 import net.opengis.ows.x11.ExceptionReportDocument.ExceptionReport;
 import net.opengis.wps.x100.DocumentOutputDefinitionType;
 import net.opengis.wps.x100.ExecuteDocument;
-import net.opengis.wps.x100.IntermediateOutputDataType;
 import net.opengis.wps.x100.OutputDataType;
 import net.opengis.wps.x100.OutputDescriptionType;
 import net.opengis.wps.x100.ProcessDescriptionType;
@@ -146,38 +145,29 @@ public class TestProcessResponseAnalyser {
 		throw new RuntimeException("No reference found in response");
 	}
 
-	/**
-	 * delivers just the URL of a referenced output identified by index of
-	 * rola-variable in order of occurrence in Execution-Unit
-	 * 
-	 * @param index
-	 *            index of the output
-	 * @return URL of the stored output
-	 * @throws WPSClientException
-	 */
-	public String getComplexReferenceOfIntermediateOutputByIndex(int index)
-			throws WPSClientException {
-		TestProcessResponseDocument doc = null;
-		if (response instanceof TestProcessResponseDocument) {
-			doc = (TestProcessResponseDocument) response;
-		} else {
-			throw new WPSClientException(
-					"Output cannot be determined by index since it is either raw data or an exception report");
-		}
-		IntermediateOutputDataType[] outputs = doc.getTestProcessResponse()
-				.getIntermediateProcessOutputs().getIntermediateOutputArray();
-
-		int counter = 0;
-		for (IntermediateOutputDataType output : outputs) {
-			if (output.getReference() != null) {
-				if (counter == index) {
-					return output.getReference().getHref();
-				}
-				counter++;
-			}
-		}
-		throw new RuntimeException("No reference found in response");
-	}
+	// public String getComplexReferenceOfIntermediateOutputByIndex(int index)
+	// throws WPSClientException {
+	// TestProcessResponseDocument doc = null;
+	// if (response instanceof TestProcessResponseDocument) {
+	// doc = (TestProcessResponseDocument) response;
+	// } else {
+	// throw new WPSClientException(
+	// "Output cannot be determined by index since it is either raw data or an exception report");
+	// }
+	// IntermediateOutputDataType[] outputs = doc.getTestProcessResponse()
+	// .getIntermediateProcessOutputs().getIntermediateOutputArray();
+	//
+	// int counter = 0;
+	// for (IntermediateOutputDataType output : outputs) {
+	// if (output.getReference() != null) {
+	// if (counter == index) {
+	// return output.getReference().getHref();
+	// }
+	// counter++;
+	// }
+	// }
+	// throw new RuntimeException("No reference found in response");
+	// }
 
 	/**
 	 * parses a specific WPS output

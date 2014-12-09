@@ -60,25 +60,6 @@
 								</sequence>
 							</complexType>
 						</element>
-						<element name="IntermediateOutputDefinitions" type="wps:IntermediateOutputDefinitionsType" minOccurs="0">
-							<annotation>
-								<documentation>Complete list of Output data types that were requested as part of the Execute request. This element shall be omitted unless the lineage attribute of the execute request is set to "true".</documentation>
-							</annotation>
-						</element>
-						<element name="IntermediateProcessOutputs" minOccurs="0">
-							<annotation>
-								<documentation></documentation>
-							</annotation>
-							<complexType>
-								<sequence>
-									<element name="IntermediateOutput" type="wps:IntermediateOutputDataType" minOccurs="0" maxOccurs="unbounded">
-										<annotation>
-											<documentation></documentation>
-										</annotation>
-									</element>
-								</sequence>
-							</complexType>
-						</element>
 					</sequence>
 					<attribute name="serviceInstance" type="anyURI" use="required">
 						<annotation>
@@ -94,46 +75,4 @@
 			</complexContent>
 		</complexType>
 	</element>
-	<complexType name="IntermediateOutputDefinitionsType">
-		<annotation>
-			<documentation>Definition of a format, encoding,  schema, and unit-of-measure for an output to be returned from a process. </documentation>
-		</annotation>
-		<sequence>
-			<element name="Output" type="wps:DocumentOutputDefinitionType" maxOccurs="unbounded">
-				<annotation>
-					<documentation>Output definition as provided in the execute request </documentation>
-				</annotation>
-			</element>
-		</sequence>
-	</complexType>
-	<complexType name="IntermediateOutputDataType">
-		<annotation>
-			<documentation>Value of one output from an intermediate process. </documentation>
-		</annotation>
-		<complexContent>
-			<extension base="wps:IntermediateOutputDescriptionType">
-				<annotation>
-					<documentation>In this use, the DescriptionType shall describe this intermediate process output. </documentation>
-				</annotation>
-				<group ref="wps:OutputDataFormChoice">
-					<annotation>
-						<documentation>Identifies the form of this output, and provides supporting information. </documentation>
-					</annotation>
-				</group>
-			</extension>
-		</complexContent>
-			
-	</complexType>
-	<complexType name="IntermediateOutputDescriptionType">
-		<annotation>
-			<documentation>Description of an intermediate process Output. </documentation>
-		</annotation>
-		<complexContent>
-			<extension base="wps:DescriptionType">
-				<annotation>
-					<documentation>In this use, the DescriptionType shall describe this intermediate process output identified by its rola-variable-name. </documentation>
-				</annotation>
-			</extension>
-		</complexContent>
-	</complexType>
 </schema>

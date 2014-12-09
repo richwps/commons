@@ -19,7 +19,6 @@ import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.richwps.InputDescriptionTypeBuilder;
 import org.n52.wps.client.richwps.OutputDescriptionTypeBuilder;
 import org.n52.wps.client.richwps.ProcessDescriptionTypeBuilder;
-import org.n52.wps.client.richwps.ResponseFormBuilder;
 import org.n52.wps.client.richwps.TestProcessRequestBuilder;
 
 /**
@@ -93,14 +92,24 @@ public class RichWPSTestingExample {
 			TestProcessRequestBuilder testProcessRequestbuilder = new TestProcessRequestBuilder(
 					pdtb);
 			testProcessRequestbuilder
-					.setTestExecutionUnit("bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummyProcess1 execute richwps/dummyProcess1 with in.name as LiteralInputData store	LiteralOutputData as var.firstResult bind process http localhost 8080 /wps/WebProcessingService	org.n52.wps.server.algorithm.test.DummyTestClass to	richwps/dummyProcess2 execute richwps/dummyProcess2	with var.firstResult as LiteralInputData store LiteralOutputData as out.result");
-			testProcessRequestbuilder.setTestDeploymentProfileName("rola");
-			ResponseFormBuilder responseFormBuilder = new ResponseFormBuilder(
-					pdtb.getPdt());
-			responseFormBuilder.addOutput("result");
-			testProcessRequestbuilder.setTestOutputs(responseFormBuilder
-					.getResponseFormType());
+					.setExecutionUnit("bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummyProcess1 execute richwps/dummyProcess1 with in.name as LiteralInputData store	LiteralOutputData as var.firstResult bind process http localhost 8080 /wps/WebProcessingService	org.n52.wps.server.algorithm.test.DummyTestClass to	richwps/dummyProcess2 execute richwps/dummyProcess2	with var.firstResult as LiteralInputData store LiteralOutputData as out.result");
+			testProcessRequestbuilder.setDeploymentProfileName("rola");
+			// ResponseFormBuilder responseFormBuilder = new
+			// ResponseFormBuilder(
+			// pdtb.getPdt());
+			// responseFormBuilder.addOutput("result");
+			// testProcessRequestbuilder.setOutputs(responseFormBuilder
+			// .getResponseFormType());
 			testProcessRequestbuilder.addOutput("output1");
+			testProcessRequestbuilder.addOutput("result");
+			testProcessRequestbuilder.addOutput("var.firstResult");
+			testProcessRequestbuilder.getTestdocument().getTestProcess()
+					.getResponseForm().getResponseDocument().getOutputArray(0)
+					.setEncoding("LATIN1");
+			testProcessRequestbuilder.getTestdocument().getTestProcess()
+					.getResponseForm().getResponseDocument().getOutputArray(0)
+					.setMimeType("GML");
+
 			// Add inputs for execute
 			testProcessRequestbuilder.addLiteralData("executionLiteralInput",
 					"executionLiteralInputValue");
@@ -120,10 +129,9 @@ public class RichWPSTestingExample {
 				TestProcessResponseAnalyser testProcessResponseAnalyser = new TestProcessResponseAnalyser(
 						testProcessRequestbuilder.getTestdocument(),
 						responseObject);
-				System.out
-						.println("complexReferenceOfIntermediateOutput"
-								+ testProcessResponseAnalyser
-										.getComplexReferenceOfIntermediateOutputByIndex(0));
+				System.out.println("complexReferenceByIndex(0): "
+						+ testProcessResponseAnalyser
+								.getComplexReferenceByIndex(0));
 
 				System.out.println("--- TestProcess response: ---");
 				System.out.println(testProcessResponseDocument.toString());
