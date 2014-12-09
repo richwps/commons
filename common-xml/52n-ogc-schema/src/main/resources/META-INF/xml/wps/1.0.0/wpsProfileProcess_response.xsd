@@ -57,7 +57,6 @@
 								</sequence>
 							</complexType>
 						</element>
-						
 						<element name="ProcessProfiles">
 							<annotation>
 								<documentation>List of values of the Process output parameters. Normally there would be at least one output when the process has completed successfully. If the process has not finished executing, the implementer can choose to include whatever final results are ready at the time the Execute response is provided. If the reference locations of outputs are known in advance, these URLs may be provided before they are populated. </documentation>
@@ -89,34 +88,33 @@
 	</element>
 	<complexType name="ProcessProfileType">
 		<annotation>
-			<documentation>Runtime profile of a process. Default unit is milliseconds. </documentation>
+			<documentation>Profile of a process especially regarding the runtime. </documentation>
 		</annotation>
 		<complexContent>
 			<extension base="wps:DescriptionType">
 				<annotation>
-					<documentation>In this use, the DescriptionType shall describe this profiled process. </documentation>
+					<documentation>In this use, the DescriptionType shall indentify and describe this profiled process. </documentation>
 				</annotation>
 				<sequence>
-					<element name="TotalRuntime" type="string"/>
-					<element name="PartialRuntime" type="wps:PartialRuntimeType" minOccurs="0" maxOccurs="unbounded"/>
+					<element name="RuntimeInfo" type="wps:RuntimeInfoType"/>
 					<element name="AdditionalInfo" type="wps:AdditionalInfoType" minOccurs="0" maxOccurs="unbounded"/>
 				</sequence>
 			</extension>
 		</complexContent>
 	</complexType>
-		<complexType name="PartialRuntimeType">
+		<complexType name="RuntimeInfoType">
 		<annotation>
-			<documentation>A partial runtime of a process. </documentation>
+			<documentation>A total or partial runtime of a process. </documentation>
 		</annotation>
 				<sequence>
-					<element name="Runtime" type="string"/>
-					<element name="Unit" type="string" default="ms"/>
-					<element name="Description" type="string"/>
+					<element name="Starttime" type="dateTime"/>
+					<element name="Runtime" type="duration"/>
+					<element name="Description" type="string" minOccurs="0"/>
 				</sequence>
 	</complexType>
 	<complexType name="AdditionalInfoType">
 		<annotation>
-			<documentation>A partial runtime of a process. </documentation>
+			<documentation>Additional information for a process. </documentation>
 		</annotation>
 				<sequence>
 					<element name="Value" type="string"/>
