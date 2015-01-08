@@ -10,6 +10,7 @@ import net.opengis.ows.x11.ExceptionReportDocument;
 import net.opengis.wps.x100.ComplexDataCombinationType;
 import net.opengis.wps.x100.ComplexDataCombinationsType;
 import net.opengis.wps.x100.ComplexDataDescriptionType;
+import net.opengis.wps.x100.DocumentOutputDefinitionType;
 import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.TestProcessResponseDocument;
 
@@ -102,10 +103,15 @@ public class RichWPSTestingExample {
 			// .getResponseFormType());
 			testProcessRequestbuilder.addOutput("output1");
 			testProcessRequestbuilder.addOutput("result");
+			// OutputDescriptionType
 			testProcessRequestbuilder.addOutput("var.firstResult");
 			testProcessRequestbuilder.getTestdocument().getTestProcess()
 					.getResponseForm().getResponseDocument().getOutputArray(0)
 					.setEncoding("LATIN1");
+			DocumentOutputDefinitionType odt = testProcessRequestbuilder
+					.getTestdocument().getTestProcess().getResponseForm()
+					.getResponseDocument().getOutputArray(0);
+			odt.setMimeType("test");
 			testProcessRequestbuilder.getTestdocument().getTestProcess()
 					.getResponseForm().getResponseDocument().getOutputArray(0)
 					.setMimeType("GML");

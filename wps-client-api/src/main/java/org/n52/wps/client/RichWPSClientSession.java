@@ -375,22 +375,6 @@ public class RichWPSClientSession {
 	public Object test(String serverId, TestProcessDocument doc)
 			throws WPSClientException {
 		String richwpsurl;
-		// FIXME Deploy has to be managed by RichWPS-Server not by Client
-		DeployProcessDocument deployDoc = DeployProcessDocument.Factory
-				.newInstance();
-		deployDoc.addNewDeployProcess();
-		deployDoc.getDeployProcess().setProcessDescription(
-				doc.getTestProcess().getProcessDescription());
-		deployDoc.getDeployProcess().setExecutionUnit(
-				doc.getTestProcess().getExecutionUnit());
-		deployDoc.getDeployProcess().setDeploymentProfileName("rola");
-		Object responseObject = deploy(serverId, deployDoc);
-		if (responseObject instanceof ExceptionReportDocument) {
-			ExceptionReportDocument response = (ExceptionReportDocument) responseObject;
-			System.out.println("---ExceptionReport:---");
-			System.out.println(response.toString());
-			return response;
-		}
 		if (loggedTransactionalServices.containsKey(serverId)) {
 			richwpsurl = loggedTransactionalServices.get(serverId);
 			LOGGER.info("TestProcess: "
