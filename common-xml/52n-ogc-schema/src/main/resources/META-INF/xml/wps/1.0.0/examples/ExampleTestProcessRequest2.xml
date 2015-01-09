@@ -57,104 +57,79 @@
 			</Input>
 		</DataInputs>
 		<ProcessOutputs>
-<Output>
-<ows:Identifier>existingTopographyYears</ows:Identifier>
-<ows:Title>.</ows:Title>
-<ows:Abstract>None.</ows:Abstract>
-<ComplexOutput>
-<Default>
-<Format>
-<MimeType>application/xml</MimeType>
-<Encoding>UTF-8</Encoding>
-<Schema>http://richwps.github.io/schemas/IntegerList</Schema>
-</Format>
-</Default>
-<Supported>
-<Format>
-<MimeType>application/xml</MimeType>
-<Encoding>UTF-8</Encoding>
-<Schema>http://richwps.github.io/schemas/IntegerList</Schema>
-</Format>
-</Supported>
-</ComplexOutput>
-</Output>
-<Output>
-<ows:Identifier>relevantTopographies</ows:Identifier>
-<ows:Title>.</ows:Title>
-<ows:Abstract>None.</ows:Abstract>
-<ComplexOutput>
-<Default>
-<Format>
-<MimeType>application/xml</MimeType>
-<Encoding>UTF-8</Encoding>
-<Schema>
-http://richwps.github.io/schemas/ObservationFeatureCollectionList
-</Schema>
-</Format>
-</Default>
-<Supported>
-<Format>
-<MimeType>application/xml</MimeType>
-<Encoding>UTF-8</Encoding>
-<Schema>
-http://richwps.github.io/schemas/ObservationFeatureCollectionList
-</Schema>
-</Format>
-</Supported>
-</ComplexOutput>
-</Output>
-<Output>
-<ows:Identifier>relevantTopographyYears</ows:Identifier>
-<ows:Title>.</ows:Title>
-<ows:Abstract>None.</ows:Abstract>
-<ComplexOutput>
-<Default>
-<Format>
-<MimeType>application/xml</MimeType>
-<Encoding>UTF-8</Encoding>
-<Schema>http://richwps.github.io/schemas/IntegerList</Schema>
-</Format>
-</Default>
-<Supported>
-<Format>
-<MimeType>application/xml</MimeType>
-<Encoding>UTF-8</Encoding>
-<Schema>http://richwps.github.io/schemas/IntegerList</Schema>
-</Format>
-</Supported>
-</ComplexOutput>
-</Output>
+			<Output>
+				<ows:Identifier>existingTopographyYears</ows:Identifier>
+				<ows:Title>.</ows:Title>
+				<ows:Abstract>None.</ows:Abstract>
+				<ComplexOutput>
+					<Default>
+						<Format>
+							<MimeType>application/xml</MimeType>
+							<Encoding>UTF-8</Encoding>
+							<Schema>http://richwps.github.io/schemas/IntegerList</Schema>
+						</Format>
+					</Default>
+					<Supported>
+						<Format>
+							<MimeType>application/xml</MimeType>
+							<Encoding>UTF-8</Encoding>
+							<Schema>http://richwps.github.io/schemas/IntegerList</Schema>
+						</Format>
+					</Supported>
+				</ComplexOutput>
+			</Output>
+			<Output>
+				<ows:Identifier>relevantTopographies</ows:Identifier>
+				<ows:Title>.</ows:Title>
+				<ows:Abstract>None.</ows:Abstract>
+				<ComplexOutput>
+					<Default>
+						<Format>
+							<MimeType>application/xml</MimeType>
+							<Encoding>UTF-8</Encoding>
+							<Schema>http://richwps.github.io/schemas/ObservationFeatureCollectionList</Schema>
+						</Format>
+					</Default>
+					<Supported>
+						<Format>
+							<MimeType>application/xml</MimeType>
+							<Encoding>UTF-8</Encoding>
+							<Schema>http://richwps.github.io/schemas/ObservationFeatureCollectionList</Schema>
+						</Format>
+					</Supported>
+				</ComplexOutput>
+			</Output>
+			<Output>
+				<ows:Identifier>relevantTopographyYears</ows:Identifier>
+				<ows:Title>.</ows:Title>
+				<ows:Abstract>None.</ows:Abstract>
+				<ComplexOutput>
+					<Default>
+						<Format>
+							<MimeType>application/xml</MimeType>
+							<Encoding>UTF-8</Encoding>
+							<Schema>http://richwps.github.io/schemas/IntegerList</Schema>
+						</Format>
+					</Default>
+					<Supported>
+						<Format>
+							<MimeType>application/xml</MimeType>
+							<Encoding>UTF-8</Encoding>
+							<Schema>http://richwps.github.io/schemas/IntegerList</Schema>
+						</Format>
+					</Supported>
+				</ComplexOutput>
+			</Output>
 		</ProcessOutputs>
 	</wps:ProcessDescription>
   <wps:ExecutionUnit>
-// 		bind process
-//		net.disy.wps.lkn.processes.SelectReportingArea to
-//		lkn/selreporting
 		bind process
 		net.disy.wps.lkn.mpa.processes.MSRLD5selection to
 		mpa/selmsrld5
-//		bind process
-//		net.disy.wps.lkn.mpa.processes.Intersect to mpa/intersect
 		bind process
 		net.disy.wps.lkn.mpa.processes.SelectTopography to mpa/seltopo
 
 		var.areaVar = "NF"
-
-//		execute lkn/selreporting with
-//		var.area as area
-//		in.reportingareas as reportingareas
-//		store
-//		reportingarea
-//		as out.reportingarea
-//		as var.reportingAreasNF
-	
-
-//		execute lkn/selreporting with
-//		var.area as area
-//		in.reportingareas as reportingareas
-//		store
-//		reportingarea
-//		as var.reportingAreasDI
 
 		execute mpa/selmsrld5 with
 		in.msrld5 as msrld5
@@ -173,14 +148,6 @@ http://richwps.github.io/schemas/ObservationFeatureCollectionList
 		relevantTopographies as out.relevantTopographies
 		relevantTopographyYears as out.relevantTopographyYears
 		existingTopographyYears as out.existingTopographyYears
-
-//		execute	mpa/intersect with
-//		var.reportingAreasNF as reportingAreas
-//		var.relevantTopographies as topography
-//		var.relevantTopographyYears as relevantTopographyYears
-//		store
-//		intersections as var.intersectionTidelandsReportingAreasNF
-
   </wps:ExecutionUnit>
   <wps:DeploymentProfileName>rola</wps:DeploymentProfileName>
  <wps:DataInputs>
