@@ -10,6 +10,7 @@ import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.ResponseFormType;
 import net.opengis.wps.x100.TestProcessDocument;
 
+import org.apache.xmlbeans.SimpleValue;
 import org.apache.xmlbeans.XmlString;
 import org.n52.wps.client.ExecuteRequestBuilder;
 import org.n52.wps.client.WPSClientException;
@@ -40,6 +41,9 @@ public class TestProcessRequestBuilder {
 
 	/**
 	 * Constructs a new TestProcessRequestBuilder.
+	 * 
+	 * @param pdtb
+	 *            a ProcessDescription-Builder
 	 */
 	public TestProcessRequestBuilder(ProcessDescriptionTypeBuilder pdtb) {
 		this.processDesc = pdtb.getPdt();
@@ -53,6 +57,9 @@ public class TestProcessRequestBuilder {
 
 	/**
 	 * Constructs a new TestProcessRequestBuilder.
+	 * 
+	 * @param processDesc
+	 *            the ProcessDescription
 	 */
 	public TestProcessRequestBuilder(ProcessDescriptionType processDesc) {
 		this.processDesc = processDesc;
@@ -65,7 +72,7 @@ public class TestProcessRequestBuilder {
 	}
 
 	/**
-	 * add an input element. sets the data in the xml request
+	 * Add an input element. Sets the data in the xml request
 	 * 
 	 * @param parameterID
 	 *            the ID of the input (see process description)
@@ -83,6 +90,12 @@ public class TestProcessRequestBuilder {
 	 */
 	public void addComplexData(String parameterID, IData value, String schema,
 			String encoding, String mimeType) throws WPSClientException {
+		if (schema.isEmpty()) {
+			schema = null;
+		}
+		if (encoding.isEmpty()) {
+			encoding = null;
+		}
 		executeRequestBuilder.addComplexData(parameterID, value, schema,
 				encoding, mimeType);
 		updateInputs();
@@ -107,6 +120,12 @@ public class TestProcessRequestBuilder {
 	 */
 	public void addComplexData(String parameterID, String value, String schema,
 			String encoding, String mimeType) throws WPSClientException {
+		if (schema.isEmpty()) {
+			schema = null;
+		}
+		if (encoding.isEmpty()) {
+			encoding = null;
+		}
 		executeRequestBuilder.addComplexData(parameterID, value, schema,
 				encoding, mimeType);
 		updateInputs();
@@ -132,6 +151,12 @@ public class TestProcessRequestBuilder {
 	public void addComplexData(String parameterID, String value, String schema,
 			String encoding, String mimeType, boolean asReference)
 			throws WPSClientException {
+		if (schema.isEmpty()) {
+			schema = null;
+		}
+		if (encoding.isEmpty()) {
+			encoding = null;
+		}
 		executeRequestBuilder.addComplexData(parameterID, value, schema,
 				encoding, mimeType, asReference);
 		updateInputs();
@@ -194,6 +219,12 @@ public class TestProcessRequestBuilder {
 	 */
 	public void addComplexDataReference(String parameterID, String value,
 			String schema, String encoding, String mimetype) {
+		if (schema.isEmpty()) {
+			schema = null;
+		}
+		if (encoding.isEmpty()) {
+			encoding = null;
+		}
 		executeRequestBuilder.addComplexDataReference(parameterID, value,
 				schema, encoding, mimetype);
 		updateInputs();
@@ -216,8 +247,10 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setStoreSupport(String outputName, boolean storeSupport) {
-		// TODO implement
-		return false;
+		boolean storeSupportReturn = executeRequestBuilder.setStoreSupport(
+				outputName, storeSupport);
+		updateResponseForm();
+		return storeSupportReturn;
 	}
 
 	/**
@@ -227,8 +260,10 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setAsReference(String outputName, boolean asReference) {
-		// TODO implement
-		return false;
+		boolean setAsReferenceReturn = executeRequestBuilder.setAsReference(
+				outputName, asReference);
+		updateResponseForm();
+		return setAsReferenceReturn;
 	}
 
 	/**
@@ -238,8 +273,10 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setStatus(String outputName, boolean status) {
-		// TODO implement
-		return false;
+		boolean setStatusReturn = executeRequestBuilder.setStatus(outputName,
+				status);
+		updateResponseForm();
+		return setStatusReturn;
 	}
 
 	/**
@@ -251,8 +288,10 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setSchemaForOutput(String schema, String outputName) {
-		// TODO implement
-		return false;
+		boolean setSchemaForOutputReturn = executeRequestBuilder
+				.setSchemaForOutput(schema, outputName);
+		updateResponseForm();
+		return setSchemaForOutputReturn;
 	}
 
 	/**
@@ -267,8 +306,10 @@ public class TestProcessRequestBuilder {
 	 * @return success
 	 */
 	public boolean setMimeTypeForOutput(String mimeType, String outputName) {
-		// TODO implement
-		return false;
+		boolean setMimeTypeForOutputReturn = executeRequestBuilder
+				.setMimeTypeForOutput(mimeType, outputName);
+		updateResponseForm();
+		return setMimeTypeForOutputReturn;
 	}
 
 	/**
@@ -283,8 +324,10 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setEncodingForOutput(String encoding, String outputName) {
-		// TODO implement
-		return false;
+		boolean setEncodingForOutputReturn = executeRequestBuilder
+				.setEncodingForOutput(encoding, outputName);
+		updateResponseForm();
+		return setEncodingForOutputReturn;
 	}
 
 	/**
@@ -297,8 +340,11 @@ public class TestProcessRequestBuilder {
 	 */
 	public boolean setResponseDocument(String outputIdentifier, String schema,
 			String encoding, String mimeType) {
-		// TODO implement
-		return false;
+		boolean setResponseDocumentReturn = executeRequestBuilder
+				.setResponseDocument(outputIdentifier, schema, encoding,
+						mimeType);
+		updateResponseForm();
+		return setResponseDocumentReturn;
 	}
 
 	/**
@@ -315,8 +361,10 @@ public class TestProcessRequestBuilder {
 	 */
 	public boolean setRawData(String outputIdentifier, String schema,
 			String encoding, String mimeType) {
-		// TODO implement
-		return false;
+		boolean setRawDataReturn = executeRequestBuilder.setRawData(
+				outputIdentifier, schema, encoding, mimeType);
+		updateResponseForm();
+		return setRawDataReturn;
 	}
 
 	/**
@@ -389,8 +437,7 @@ public class TestProcessRequestBuilder {
 	 */
 	public TestProcessDocument getTestdocument() throws WPSClientException {
 		testprocessdocument.setTestProcess(testprocess);
-		return testprocessdocument;
-		// return validateTestProcessDocument(test);
+		return validateTestProcessDocument(testprocessdocument);
 	}
 
 	/**
@@ -401,25 +448,21 @@ public class TestProcessRequestBuilder {
 	 */
 	private TestProcessDocument validateTestProcessDocument(
 			TestProcessDocument doc) throws WPSClientException {
-		/*
-		 * if (doc.getDeployProcess().getProcessDescription() == null) { throw
-		 * new WPSClientException(
-		 * "DeployProcess document does not contain a ProcessDescription"); } if
-		 * (doc.getDeployProcess().getExecutionUnit() == null) { throw new
-		 * WPSClientException
-		 * ("DeployProcess document does not contain an ExecutionUnit"); } else
-		 * { if
-		 * (((SimpleValue)doc.getDeployProcess().getExecutionUnit()).getStringValue
-		 * ().isEmpty()) { throw new WPSClientException(
-		 * "ExecutionUnit of DeployProcessDocument does not contain any value");
-		 * } } if (doc.getDeployProcess().getDeploymentProfileName() == null) {
-		 * throw new WPSClientException(
-		 * "DeployProcess document does not contain an ExecutionUnit"); } else {
-		 * if (doc.getDeployProcess().getDeploymentProfileName().isEmpty()) {
-		 * throw new WPSClientException(
-		 * "ExecutionUnit of DeployProcessDocument does not contain any value");
-		 * } }
-		 */
+
+		if (doc.getTestProcess().getProcessDescription() == null) {
+			throw new WPSClientException(
+					"TestProcess document does not contain a ProcessDescription");
+		}
+		if (doc.getTestProcess().getExecutionUnit() == null) {
+			throw new WPSClientException(
+					"TestProcess document does not contain an ExecutionUnit");
+		} else {
+			if (((SimpleValue) doc.getTestProcess().getExecutionUnit())
+					.getStringValue().isEmpty()) {
+				throw new WPSClientException(
+						"ExecutionUnit of TestProcessDocument does not contain any value");
+			}
+		}
 		return doc;
 	}
 
@@ -445,7 +488,6 @@ public class TestProcessRequestBuilder {
 	}
 
 	private void addRolaOutput(String outputName) {
-
 		addOutputIdentifier(outputName);
 	}
 

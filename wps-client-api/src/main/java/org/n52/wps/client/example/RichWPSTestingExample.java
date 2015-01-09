@@ -86,9 +86,18 @@ public class RichWPSTestingExample {
 					.createComplexDataDescriptionType("text/xml", null, null);
 			supportedFormatList.add(ogctype);
 			idtb.addNewLiteralData("xs:string", "val");
-			// Add Input
 			pdtb.addNewInputToDataInputs(idtb.getIdt());
-
+			// Add Input
+			ComplexDataDescriptionType cddt = InputDescriptionTypeBuilder
+					.createComplexDataDescriptionType("application/json",
+							"encoding", "schema");
+			InputDescriptionTypeBuilder idtbComplex = new InputDescriptionTypeBuilder(
+					"complexInput", "complexInput", new BigInteger("1"),
+					new BigInteger("1"));
+			BigInteger bi = new BigInteger("100");
+			idtbComplex.addNewComplexData(cddt, cddt, bi);
+			pdtb.addNewInputToDataInputs(idtbComplex.getIdt());
+			// pdtb.add
 			// Build request
 			TestProcessRequestBuilder testProcessRequestbuilder = new TestProcessRequestBuilder(
 					pdtb);
@@ -119,7 +128,8 @@ public class RichWPSTestingExample {
 			// Add inputs for execute
 			testProcessRequestbuilder.addLiteralData("executionLiteralInput",
 					"executionLiteralInputValue");
-
+			testProcessRequestbuilder.addComplexDataReference("complexInput",
+					"http://foo.bar", "", "", "");
 			System.out.println("--- TestProcess request: ---");
 			System.out.println(testProcessRequestbuilder.getTestdocument()
 					.toString());
