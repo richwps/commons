@@ -57,13 +57,13 @@
 								</sequence>
 							</complexType>
 						</element>
-						<element name="ProcessProfiles">
+						<element name="Profiles">
 							<annotation>
-								<documentation>List of values of the Process output parameters. Normally there would be at least one output when the process has completed successfully. If the process has not finished executing, the implementer can choose to include whatever final results are ready at the time the Execute response is provided. If the reference locations of outputs are known in advance, these URLs may be provided before they are populated. </documentation>
+								<documentation>List of values of the measured parts of the process. These can be runtime measurements or any other measurements. </documentation>
 							</annotation>
 							<complexType>
 								<sequence>
-									<element name="ProcessProfile" type="wps:ProcessProfileType" maxOccurs="unbounded">
+									<element name="Profile" type="wps:ProfileType" maxOccurs="unbounded">
 										<annotation>
 											<documentation></documentation>
 										</annotation>
@@ -86,25 +86,31 @@
 			</complexContent>
 		</complexType>
 	</element>
-	<complexType name="ProcessProfileType">
+	<complexType name="ProfileType">
 		<annotation>
-			<documentation>Profile of a process especially regarding the runtime. </documentation>
+			<documentation>Profile of a process or part of it especially regarding runtime. Parts can be parsing inputs, subprocesses, generating outputs or any other part. </documentation>
 		</annotation>
 		<complexContent>
 			<extension base="wps:DescriptionType">
 				<annotation>
-					<documentation>In this use, the DescriptionType shall indentify and describe this profiled process. </documentation>
+					<documentation>In this use, the DescriptionType shall indentify and describe this profiled process or part of the process. </documentation>
 				</annotation>
-				<sequence>
-					<element name="RuntimeInfo" type="wps:RuntimeInfoType"/>
-					<element name="AdditionalInfo" type="wps:AdditionalInfoType" minOccurs="0" maxOccurs="unbounded"/>
-				</sequence>
+				<choice>
+					<sequence>
+						<element name="RuntimeInfo" type="wps:RuntimeInfoType"/>
+						<element name="ArbitraryInfo" type="wps:ArbitraryInfoType" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+					<sequence>
+						<element name="ArbitraryInfo" type="wps:ArbitraryInfoType" maxOccurs="unbounded"/>
+						<element name="RuntimeInfo" type="wps:RuntimeInfoType" minOccurs="0"/>
+					</sequence>
+				</choice>
 			</extension>
 		</complexContent>
 	</complexType>
 		<complexType name="RuntimeInfoType">
 		<annotation>
-			<documentation>A total or partial runtime of a process. </documentation>
+			<documentation>A total or partial runtime of a process or part of the process. </documentation>
 		</annotation>
 				<sequence>
 					<element name="Starttime" type="dateTime"/>
@@ -112,14 +118,14 @@
 					<element name="Description" type="string" minOccurs="0"/>
 				</sequence>
 	</complexType>
-	<complexType name="AdditionalInfoType">
+	<complexType name="ArbitraryInfoType">
 		<annotation>
-			<documentation>Additional information for a process. </documentation>
+			<documentation>Here any other measurement data can be placed. </documentation>
 		</annotation>
 				<sequence>
 					<element name="Value" type="string"/>
 					<element name="Unit" type="string"/>
-					<element name="Description" type="string"/>
+					<element name="Description" type="string" minOccurs="0"/>
 				</sequence>
 	</complexType>
 </schema>

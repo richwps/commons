@@ -11,31 +11,35 @@ import net.opengis.wps.x100.ExecuteDocument;
 import net.opengis.wps.x100.OutputDataType;
 import net.opengis.wps.x100.OutputDescriptionType;
 import net.opengis.wps.x100.ProcessDescriptionType;
-import net.opengis.wps.x100.TestProcessDocument;
-import net.opengis.wps.x100.TestProcessResponseDocument;
+import net.opengis.wps.x100.ProfileProcessDocument;
+import net.opengis.wps.x100.ProfileProcessResponseDocument;
+import net.opengis.wps.x100.ProfileType;
 
 import org.n52.wps.io.IParser;
 import org.n52.wps.io.data.IData;
 
 /**
- * This implementation provides functionality to analyse process test responses.
+ * This implementation provides functionality to analyse process profile
+ * responses.
  * 
  * @author faltin
  *
  */
-public class TestProcessResponseAnalyser {
+
+public class ProfileProcessResponseAnalyser {
 
 	ExecuteResponseAnalyser executeResponseAnalyser;
 	ProcessDescriptionType processDesc;
-	TestProcessDocument testProcessDocument;
+	ProfileProcessDocument profileProcessDocument;
 	Object response;
 	ExecuteDocument exec;
 
-	public TestProcessResponseAnalyser(TestProcessDocument testProcessDocument,
-			Object response) throws WPSClientException {
-		processDesc = testProcessDocument.getTestProcess()
+	public ProfileProcessResponseAnalyser(
+			ProfileProcessDocument profileProcessDocument, Object response)
+			throws WPSClientException {
+		processDesc = profileProcessDocument.getProfileProcess()
 				.getProcessDescription();
-		this.testProcessDocument = testProcessDocument;
+		this.profileProcessDocument = profileProcessDocument;
 		if (response instanceof ExceptionReport) {
 			throw new WPSClientException(
 					"Output is not ComplexData but an Exception Report");
@@ -43,22 +47,47 @@ public class TestProcessResponseAnalyser {
 		exec = ExecuteDocument.Factory.newInstance();
 		exec.addNewExecute();
 		exec.getExecute().setIdentifier(
-				testProcessDocument.getTestProcess().getProcessDescription()
-						.getIdentifier());
+				profileProcessDocument.getProfileProcess()
+						.getProcessDescription().getIdentifier());
 		exec.getExecute().setDataInputs(
-				testProcessDocument.getTestProcess().getDataInputs());
+				profileProcessDocument.getProfileProcess().getDataInputs());
 		exec.getExecute().setResponseForm(
-				testProcessDocument.getTestProcess().getResponseForm());
+				profileProcessDocument.getProfileProcess().getResponseForm());
 		this.response = response;
+	}
+
+	/**
+	 * Returns the ProfileProcessDocument
+	 * 
+	 * @return the ProfileProcessDocument
+	 */
+	public ProfileProcessDocument getProfileProcessDocument() {
+		return profileProcessDocument;
+
 	}
 
 	/**
 	 * Returns the extracted execute document.
 	 * 
-	 * @return ExecuteDocument contained in TestProcessDocument
+	 * @return ExecuteDocument contained in ProfileProcessDocument
 	 */
 	public ExecuteDocument getExecuteDocument() {
 		return exec;
+	}
+
+	/**
+	 * Returns the measured profiles of the process.
+	 * 
+	 * @return the profiles
+	 */
+	public ProfileType[] getProfiles() {
+		ProfileProcessResponseDocument doc;
+		if (response instanceof ProfileProcessResponseDocument) {
+			doc = (ProfileProcessResponseDocument) response;
+			return doc.getProfileProcessResponse().getProfiles()
+					.getProfileArray();
+		}
+		return null;
 	}
 
 	/**
@@ -91,14 +120,14 @@ public class TestProcessResponseAnalyser {
 	 */
 	public IData getComplexDataByIndex(int index, Class binding)
 			throws WPSClientException {
-		TestProcessResponseDocument doc = null;
-		if (response instanceof TestProcessResponseDocument) {
-			doc = (TestProcessResponseDocument) response;
+		ProfileProcessResponseDocument doc = null;
+		if (response instanceof ProfileProcessResponseDocument) {
+			doc = (ProfileProcessResponseDocument) response;
 		} else {
 			throw new WPSClientException(
 					"Output cannot be determined by index since it is either raw data or an exception report");
 		}
-		OutputDataType[] outputs = doc.getTestProcessResponse()
+		OutputDataType[] outputs = doc.getProfileProcessResponse()
 				.getProcessOutputs().getOutputArray();
 		int counter = 0;
 		for (OutputDataType output : outputs) {
@@ -123,14 +152,14 @@ public class TestProcessResponseAnalyser {
 	 */
 	public String getComplexReferenceByIndex(int index)
 			throws WPSClientException {
-		TestProcessResponseDocument doc = null;
-		if (response instanceof TestProcessResponseDocument) {
-			doc = (TestProcessResponseDocument) response;
+		ProfileProcessResponseDocument doc = null;
+		if (response instanceof ProfileProcessResponseDocument) {
+			doc = (ProfileProcessResponseDocument) response;
 		} else {
 			throw new WPSClientException(
 					"Output cannot be determined by index since it is either raw data or an exception report");
 		}
-		OutputDataType[] outputs = doc.getTestProcessResponse()
+		OutputDataType[] outputs = doc.getProfileProcessResponse()
 				.getProcessOutputs().getOutputArray();
 
 		int counter = 0;
@@ -208,10 +237,10 @@ public class TestProcessResponseAnalyser {
 		InputStream is = null;
 		if (response instanceof InputStream) {
 			is = (InputStream) response;
-		} else if (response instanceof TestProcessResponseDocument) {
-			TestProcessResponseDocument responseDocument = (TestProcessResponseDocument) response;
+		} else if (response instanceof ProfileProcessResponseDocument) {
+			ProfileProcessResponseDocument responseDocument = (ProfileProcessResponseDocument) response;
 			OutputDataType[] processOutputs = responseDocument
-					.getTestProcessResponse().getProcessOutputs()
+					.getProfileProcessResponse().getProcessOutputs()
 					.getOutputArray();
 			for (OutputDataType processOutput : processOutputs) {
 				if (processOutput.getIdentifier().getStringValue()
@@ -256,4 +285,5 @@ public class TestProcessResponseAnalyser {
 
 		throw new RuntimeException("Could not find suitable parser");
 	}
+
 }

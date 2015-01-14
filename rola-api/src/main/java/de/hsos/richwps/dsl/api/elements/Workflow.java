@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * @author dalcacer
+ * @author faltin
  * @version 0.0.1
  */
 public class Workflow extends ArrayList<IOperation> {
@@ -97,17 +98,17 @@ public class Workflow extends ArrayList<IOperation> {
 	}
 
 	/**
-	 * Assembles Process-handle with ProcessId, related Outputs and
-	 * Output-References.
+	 * Assembles each process identifier and related output identifier with
+	 * appropriate output reference (variable name).
 	 * 
 	 * @param output
-	 *            -reference-names
+	 *            reference names
 	 * 
-	 * @return Assembly
+	 * @return output reference on output identifier mappings
 	 */
-	public List<OutputReferenceMapping> getOutputReferenceMappings(
+	public List<ReferenceOutputMapping> getReferenceOutputMappings(
 			List<String> variableNames) {
-		List<OutputReferenceMapping> processOutputsOnVariablesMapping = new ArrayList<OutputReferenceMapping>();
+		List<ReferenceOutputMapping> processOutputsOnVariablesMapping = new ArrayList<ReferenceOutputMapping>();
 		Map<String, String> handleProcessIdMappings = new HashMap<String, String>();
 		for (IOperation o : this) {
 			if (o instanceof Binding) {
@@ -118,16 +119,13 @@ public class Workflow extends ArrayList<IOperation> {
 		for (IOperation o : this) {
 			if (o instanceof Execute) {
 				String handle = ((Execute) o).getHandle();
-				// HandleProcessIdMapping handleProcessIdMapping = new
-				// HandleProcessIdMapping(
-				// handle, handleProcessIdMappings.get(handle));
 				List<String> outputnames = (ArrayList<String>) ((Execute) o)
 						.getOutputnames();
 				List<Reference> outputreferences = (List<Reference>) ((Execute) o)
 						.getOutputreferences();
 				for (int i = 0; i < outputnames.size(); i++) {
 					if (variableNames.contains(outputreferences.get(i).getId())) {
-						OutputReferenceMapping processOutputOnVariableMapping = new OutputReferenceMapping(
+						ReferenceOutputMapping processOutputOnVariableMapping = new ReferenceOutputMapping(
 								handleProcessIdMappings.get(handle),
 								outputnames.get(i), "var."
 										+ outputreferences.get(i).getId());

@@ -24,6 +24,8 @@ import net.opengis.wps.x100.GetSupportedTypesDocument;
 import net.opengis.wps.x100.ProcessBriefType;
 import net.opengis.wps.x100.ProcessDescriptionType;
 import net.opengis.wps.x100.ProcessDescriptionsDocument;
+import net.opengis.wps.x100.ProfileProcessDocument;
+import net.opengis.wps.x100.ProfileProcessResponseDocument;
 import net.opengis.wps.x100.SupportedTypesResponseDocument;
 import net.opengis.wps.x100.TestProcessDocument;
 import net.opengis.wps.x100.TestProcessResponseDocument;
@@ -47,6 +49,7 @@ import org.xml.sax.SAXException;
  * @author foerster
  * @author dalcacer
  * @author woessner
+ * @author faltin
  * @see WPSClientSession
  */
 public class RichWPSClientSession {
@@ -366,11 +369,12 @@ public class RichWPSClientSession {
 	/**
 	 * Test a process
 	 *
-	 * @param url
+	 * @param serverId
 	 *            url of server
 	 * @param doc
-	 *            TestProcess document
+	 *            Test process document
 	 * @return a TestProcessResponseDocument or ExceptionReportDocument
+	 * @throws WPSClientException
 	 */
 	public Object test(String serverId, TestProcessDocument doc)
 			throws WPSClientException {
@@ -387,6 +391,32 @@ public class RichWPSClientSession {
 			return null;
 		}
 
+	}
+
+	/**
+	 * Profile a process
+	 *
+	 * @param serverId
+	 *            url of server
+	 * @param doc
+	 *            Profile process document
+	 * @return a ProfileProcessResponseDocument or ExceptionReportDocument
+	 * @throws WPSClientException
+	 */
+	public Object profile(String serverId, ProfileProcessDocument doc)
+			throws WPSClientException {
+		String richwpsurl;
+		if (loggedTransactionalServices.containsKey(serverId)) {
+			richwpsurl = loggedTransactionalServices.get(serverId);
+			LOGGER.info("TestProcess: "
+					+ doc.getProfileProcess().getProcessDescription()
+							.getIdentifier().getStringValue());
+			return this.retrieveProfileProcessResponseViaPOST(richwpsurl, doc);
+		} else {
+			LOGGER.info("Server ID " + serverId
+					+ " not registered as RichWPS service");
+			return null;
+		}
 	}
 
 	public Object getSupportedTypes(String serverId,
@@ -523,6 +553,32 @@ public class RichWPSClientSession {
 			} catch (Exception e2) {
 				throw new WPSClientException(
 						"Error occured while parsing testProcessResponse", e);
+			}
+		}
+	}
+
+	/**
+	 * Retrieves a ProfileProcess response via Http POST request and tries to
+	 * parse it
+	 *
+	 * @param url
+	 * @param doc
+	 * @return either an ProfileProcessResponseDocument or an
+	 *         ExceptionReportDocument
+	 * @throws WPSClientException
+	 */
+	private Object retrieveProfileProcessResponseViaPOST(String url,
+			ProfileProcessDocument doc) throws WPSClientException {
+		InputStream is = retrieveDataViaPOST(doc, url);
+		Document documentObj = checkInputStream(is);
+		try {
+			return ProfileProcessResponseDocument.Factory.parse(documentObj);
+		} catch (XmlException e) {
+			try {
+				return ExceptionReportDocument.Factory.parse(documentObj);
+			} catch (Exception e2) {
+				throw new WPSClientException(
+						"Error occured while parsing profileProcessResponse", e);
 			}
 		}
 	}

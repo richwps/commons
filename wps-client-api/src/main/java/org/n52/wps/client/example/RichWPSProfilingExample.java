@@ -12,29 +12,22 @@ import net.opengis.wps.x100.ComplexDataCombinationsType;
 import net.opengis.wps.x100.ComplexDataDescriptionType;
 import net.opengis.wps.x100.DocumentOutputDefinitionType;
 import net.opengis.wps.x100.ProcessDescriptionType;
-import net.opengis.wps.x100.TestProcessResponseDocument;
+import net.opengis.wps.x100.ProfileProcessResponseDocument;
 
+import org.n52.wps.client.ProfileProcessResponseAnalyser;
 import org.n52.wps.client.RichWPSClientSession;
-import org.n52.wps.client.TestProcessResponseAnalyser;
 import org.n52.wps.client.WPSClientException;
 import org.n52.wps.client.richwps.InputDescriptionTypeBuilder;
 import org.n52.wps.client.richwps.OutputDescriptionTypeBuilder;
 import org.n52.wps.client.richwps.ProcessDescriptionTypeBuilder;
-import org.n52.wps.client.richwps.TestProcessRequestBuilder;
+import org.n52.wps.client.richwps.ProfileProcessRequestBuilder;
 
-/**
- *
- * @author dalcacer
- * @author faltin
- * @version 0.0.1
- */
-public class RichWPSTestingExample {
-
+public class RichWPSProfilingExample {
 	public static void main(String[] args) {
-		new RichWPSTestingExample();
+		new RichWPSProfilingExample();
 	}
 
-	public RichWPSTestingExample() {
+	public RichWPSProfilingExample() {
 		try {
 
 			// Phase 1. Build Processdescription.
@@ -66,7 +59,6 @@ public class RichWPSTestingExample {
 			basicOutputDescriptionType3 = new OutputDescriptionTypeBuilder(
 					"result", "textData");
 			basicOutputDescriptionType3.addNewLiteralOutput("xs:string");
-
 			procOutputs.addNewOutput();
 			procOutputs.setOutputArray(0, basicOutputDescriptionType3.getOdt());
 			procOutputs.addNewOutput();
@@ -88,7 +80,6 @@ public class RichWPSTestingExample {
 			supportedFormatList.add(ogctype);
 			idtb.addNewLiteralData("xs:string", "val");
 			pdtb.addNewInputToDataInputs(idtb.getIdt());
-
 			// Add Input
 			ComplexDataDescriptionType cddt = InputDescriptionTypeBuilder
 					.createComplexDataDescriptionType("application/json",
@@ -99,54 +90,59 @@ public class RichWPSTestingExample {
 			BigInteger bi = new BigInteger("100");
 			idtbComplex.addNewComplexData(cddt, cddt, bi);
 			pdtb.addNewInputToDataInputs(idtbComplex.getIdt());
-
+			// pdtb.add
 			// Build request
-			TestProcessRequestBuilder testProcessRequestbuilder = new TestProcessRequestBuilder(
+			ProfileProcessRequestBuilder profileProcessRequestbuilder = new ProfileProcessRequestBuilder(
 					pdtb);
-			testProcessRequestbuilder
+			profileProcessRequestbuilder
 					.setExecutionUnit("bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummyProcess1 execute richwps/dummyProcess1 with in.name as LiteralInputData store	LiteralOutputData as var.firstResult bind process http localhost 8080 /wps/WebProcessingService	org.n52.wps.server.algorithm.test.DummyTestClass to	richwps/dummyProcess2 execute richwps/dummyProcess2	with var.firstResult as LiteralInputData store LiteralOutputData as out.result");
-			testProcessRequestbuilder.setDeploymentProfileName("rola");
-			testProcessRequestbuilder.addOutput("output1");
-			testProcessRequestbuilder.addOutput("result");
-
+			profileProcessRequestbuilder.setDeploymentProfileName("rola");
+			// ResponseFormBuilder responseFormBuilder = new
+			// ResponseFormBuilder(
+			// pdtb.getPdt());
+			// responseFormBuilder.addOutput("result");
+			// testProcessRequestbuilder.setOutputs(responseFormBuilder
+			// .getResponseFormType());
+			profileProcessRequestbuilder.addOutput("output1");
+			profileProcessRequestbuilder.addOutput("result");
 			// OutputDescriptionType
-			testProcessRequestbuilder.addOutput("var.firstResult");
-			testProcessRequestbuilder.getTestdocument().getTestProcess()
+			profileProcessRequestbuilder.addOutput("var.firstResult");
+			profileProcessRequestbuilder.getProfiledocument().getProfileProcess()
 					.getResponseForm().getResponseDocument().getOutputArray(0)
 					.setEncoding("LATIN1");
-			DocumentOutputDefinitionType odt = testProcessRequestbuilder
-					.getTestdocument().getTestProcess().getResponseForm()
+			DocumentOutputDefinitionType odt = profileProcessRequestbuilder
+					.getProfiledocument().getProfileProcess().getResponseForm()
 					.getResponseDocument().getOutputArray(0);
 			odt.setMimeType("test");
-			testProcessRequestbuilder.getTestdocument().getTestProcess()
+			profileProcessRequestbuilder.getProfiledocument().getProfileProcess()
 					.getResponseForm().getResponseDocument().getOutputArray(0)
 					.setMimeType("GML");
 
 			// Add inputs for execute
-			testProcessRequestbuilder.addLiteralData("executionLiteralInput",
+			profileProcessRequestbuilder.addLiteralData("executionLiteralInput",
 					"executionLiteralInputValue");
-			testProcessRequestbuilder.addComplexDataReference("complexInput",
+			profileProcessRequestbuilder.addComplexDataReference("complexInput",
 					"http://foo.bar", "", "", "");
-			System.out.println("--- TestProcess request: ---");
-			System.out.println(testProcessRequestbuilder.getTestdocument()
+			System.out.println("--- ProfileProcess request: ---");
+			System.out.println(profileProcessRequestbuilder.getProfiledocument()
 					.toString());
 
 			// Response
 			RichWPSClientSession richWPSClient = RichWPSClientSession
 					.getInstance();
 			richWPSClient.connect(wpsurl, richwpsurl);
-			Object responseObject = richWPSClient.test(wpsurl,
-					testProcessRequestbuilder.getTestdocument());
-			if (responseObject instanceof TestProcessResponseDocument) {
-				TestProcessResponseDocument testProcessResponseDocument = (TestProcessResponseDocument) responseObject;
-				TestProcessResponseAnalyser testProcessResponseAnalyser = new TestProcessResponseAnalyser(
-						testProcessRequestbuilder.getTestdocument(),
+			Object responseObject = richWPSClient.profile(wpsurl,
+					profileProcessRequestbuilder.getProfiledocument());
+			if (responseObject instanceof ProfileProcessResponseDocument) {
+				ProfileProcessResponseDocument testProcessResponseDocument = (ProfileProcessResponseDocument) responseObject;
+				ProfileProcessResponseAnalyser testProcessResponseAnalyser = new ProfileProcessResponseAnalyser(
+						profileProcessRequestbuilder.getProfiledocument(),
 						responseObject);
 				System.out.println("complexReferenceByIndex(0): "
 						+ testProcessResponseAnalyser
 								.getComplexReferenceByIndex(0));
 
-				System.out.println("--- TestProcess response: ---");
+				System.out.println("--- ProfileProcess response: ---");
 				System.out.println(testProcessResponseDocument.toString());
 			} else if (responseObject instanceof ExceptionReportDocument) {
 				ExceptionReportDocument response = (ExceptionReportDocument) responseObject;
@@ -156,9 +152,10 @@ public class RichWPSTestingExample {
 
 			richWPSClient.disconnect(wpsurl);
 		} catch (WPSClientException ex) {
-			Logger.getLogger(RichWPSTestingExample.class.getName()).log(
+			Logger.getLogger(RichWPSProfilingExample.class.getName()).log(
 					Level.SEVERE, null, ex);
 		}
 
 	}
+
 }

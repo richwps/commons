@@ -7,8 +7,8 @@ import java.util.List;
 import net.opengis.wps.x100.DocumentOutputDefinitionType;
 import net.opengis.wps.x100.InputType;
 import net.opengis.wps.x100.ProcessDescriptionType;
+import net.opengis.wps.x100.ProfileProcessDocument;
 import net.opengis.wps.x100.ResponseFormType;
-import net.opengis.wps.x100.TestProcessDocument;
 
 import org.apache.xmlbeans.SimpleValue;
 import org.apache.xmlbeans.XmlString;
@@ -19,59 +19,60 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This implementation provides functionality for building process test
- * requests.
+ * This implementation provides functionality to build a request for profiling a
+ * process.
  * 
- *
  * @author faltin
- * @version 0.0.1
+ *
  */
-public class TestProcessRequestBuilder {
+public class ProfileProcessRequestBuilder {
 	private static Logger LOGGER = LoggerFactory
-			.getLogger(TestProcessRequestBuilder.class);
+			.getLogger(ProfileProcessRequestBuilder.class);
 	private ProcessDescriptionType processDesc;
-	private TestProcessDocument testprocessdocument;
-	private TestProcessDocument.TestProcess testprocess;
+	private ProfileProcessDocument profileProcessDocument;
+	private ProfileProcessDocument.ProfileProcess profileProcess;
 	private ExecuteRequestBuilder executeRequestBuilder;
 
 	public static String SERVICE = "WPS";
 	public static String VERSION = "1.0.0";
 
-	private void updateInputs() {
-		testprocess.setDataInputs(executeRequestBuilder.getExecute()
-				.getExecute().getDataInputs());
-	}
-
 	/**
-	 * Constructs a new TestProcessRequestBuilder.
+	 * Constructs a new ProfileProcessRequestBuilder.
 	 * 
 	 * @param pdtb
 	 *            a ProcessDescription-Builder
 	 */
-	public TestProcessRequestBuilder(ProcessDescriptionTypeBuilder pdtb) {
+	public ProfileProcessRequestBuilder(ProcessDescriptionTypeBuilder pdtb) {
 		this.processDesc = pdtb.getPdt();
 		executeRequestBuilder = new ExecuteRequestBuilder(processDesc);
-		testprocessdocument = TestProcessDocument.Factory.newInstance();
-		testprocess = TestProcessDocument.TestProcess.Factory.newInstance();
-		testprocess.setProcessDescription(processDesc);
-		testprocess.setService(SERVICE);
-		testprocess.setVersion(VERSION);
+		profileProcessDocument = ProfileProcessDocument.Factory.newInstance();
+		profileProcess = ProfileProcessDocument.ProfileProcess.Factory
+				.newInstance();
+		profileProcess.setProcessDescription(processDesc);
+		profileProcess.setService(SERVICE);
+		profileProcess.setVersion(VERSION);
 	}
 
 	/**
-	 * Constructs a new TestProcessRequestBuilder.
+	 * Constructs a new ProfileProcessRequestBuilder.
 	 * 
 	 * @param processDesc
 	 *            the ProcessDescription
 	 */
-	public TestProcessRequestBuilder(ProcessDescriptionType processDesc) {
+	public ProfileProcessRequestBuilder(ProcessDescriptionType processDesc) {
 		this.processDesc = processDesc;
 		executeRequestBuilder = new ExecuteRequestBuilder(processDesc);
-		testprocessdocument = TestProcessDocument.Factory.newInstance();
-		testprocess = TestProcessDocument.TestProcess.Factory.newInstance();
-		testprocess.setService(SERVICE);
-		testprocess.setVersion(VERSION);
-		testprocess.setProcessDescription(this.processDesc);
+		profileProcessDocument = ProfileProcessDocument.Factory.newInstance();
+		profileProcess = ProfileProcessDocument.ProfileProcess.Factory
+				.newInstance();
+		profileProcess.setService(SERVICE);
+		profileProcess.setVersion(VERSION);
+		profileProcess.setProcessDescription(this.processDesc);
+	}
+
+	private void updateInputs() {
+		profileProcess.setDataInputs(executeRequestBuilder.getExecute()
+				.getExecute().getDataInputs());
 	}
 
 	/**
@@ -382,47 +383,47 @@ public class TestProcessRequestBuilder {
 	}
 
 	/**
-	 * TestProcess: Sets process description.
+	 * ProfileProcess: Sets process description.
 	 *
 	 * @param description
 	 *            process description.
 	 */
 	public void setProcessDescription(final ProcessDescriptionType description) {
-		testprocess.setProcessDescription(description);
+		profileProcess.setProcessDescription(description);
 	}
 
 	/**
-	 * TestProcess: Sets execution unit.
+	 * ProfileProcess: Sets execution unit.
 	 *
 	 * @param exec
 	 *            execution unit, plain text or base 64 zip. FIXME, not
 	 *            implemented, yet.
 	 */
 	public void setExecutionUnit(final String exec) {
-		testprocess.setExecutionUnit(XmlString.Factory.newValue(exec));
+		profileProcess.setExecutionUnit(XmlString.Factory.newValue(exec));
 	}
 
 	/**
-	 * TestProcess: Sets deployment profile name.
+	 * ProfileProcess: Sets deployment profile name.
 	 *
 	 * @param profileName
 	 *            deploymentProfileName
 	 */
 	public void setDeploymentProfileName(final String profileName) {
-		testprocess.setDeploymentProfileName(profileName);
+		profileProcess.setDeploymentProfileName(profileName);
 	}
 
 	/**
-	 * TestProcess: Sets Data Inputs.
+	 * ProfileProcess: Sets Data Inputs.
 	 * 
 	 * @param inputs
 	 */
 	public void setInputs(final net.opengis.wps.x100.DataInputsType inputs) {
-		testprocess.setDataInputs(inputs);
+		profileProcess.setDataInputs(inputs);
 	}
 
 	/**
-	 * TestProcess: Sets Data Outputs.
+	 * ProfileProcess: Sets Data Outputs.
 	 * 
 	 * @param outputs
 	 */
@@ -433,44 +434,45 @@ public class TestProcessRequestBuilder {
 	}
 
 	/**
-	 * TestProcess: Returns the testProcess request.
+	 * ProfileProcess: Returns the profileProcess request.
 	 *
-	 * @return test request.
+	 * @return profileProcessDocument
 	 * @throws WPSClientException
 	 */
-	public TestProcessDocument getTestdocument() throws WPSClientException {
-		testprocessdocument.setTestProcess(testprocess);
-		return validateTestProcessDocument(testprocessdocument);
+	public ProfileProcessDocument getProfiledocument()
+			throws WPSClientException {
+		profileProcessDocument.setProfileProcess(profileProcess);
+		return validateProfileProcessDocument(profileProcessDocument);
 	}
 
 	/**
-	 * Validates the TestProcessDocument
+	 * Validates the ProfileProcessDocument
 	 * 
 	 * @param doc
 	 * @throws WPSClientException
 	 */
-	private TestProcessDocument validateTestProcessDocument(
-			TestProcessDocument doc) throws WPSClientException {
+	private ProfileProcessDocument validateProfileProcessDocument(
+			ProfileProcessDocument doc) throws WPSClientException {
 
-		if (doc.getTestProcess().getProcessDescription() == null) {
+		if (doc.getProfileProcess().getProcessDescription() == null) {
 			throw new WPSClientException(
-					"TestProcess document does not contain a ProcessDescription");
+					"ProfileProcess document does not contain a ProcessDescription");
 		}
-		if (doc.getTestProcess().getExecutionUnit() == null) {
+		if (doc.getProfileProcess().getExecutionUnit() == null) {
 			throw new WPSClientException(
-					"TestProcess document does not contain an ExecutionUnit");
+					"ProfileProcess document does not contain an ExecutionUnit");
 		} else {
-			if (((SimpleValue) doc.getTestProcess().getExecutionUnit())
+			if (((SimpleValue) doc.getProfileProcess().getExecutionUnit())
 					.getStringValue().isEmpty()) {
 				throw new WPSClientException(
-						"ExecutionUnit of TestProcessDocument does not contain any value");
+						"ExecutionUnit of ProfileProcessDocument does not contain any value");
 			}
 		}
 		return doc;
 	}
 
 	/**
-	 * TestProcess: Adds Output to ResponseForm.
+	 * ProfileProcess: Adds Output to ResponseForm.
 	 * 
 	 * @param outputName
 	 */
@@ -486,7 +488,7 @@ public class TestProcessRequestBuilder {
 	}
 
 	private void updateResponseForm() {
-		testprocess.setResponseForm(executeRequestBuilder.getExecute()
+		profileProcess.setResponseForm(executeRequestBuilder.getExecute()
 				.getExecute().getResponseForm());
 	}
 
@@ -497,7 +499,7 @@ public class TestProcessRequestBuilder {
 	private String getRolaIdentifier(String outputName) {
 		String execUnitString;
 		String rolaIdentifier = null;
-		execUnitString = testprocess.getExecutionUnit().xmlText();
+		execUnitString = profileProcess.getExecutionUnit().xmlText();
 		if (execUnitString.contains(outputName)) {
 			rolaIdentifier = outputName;
 		}

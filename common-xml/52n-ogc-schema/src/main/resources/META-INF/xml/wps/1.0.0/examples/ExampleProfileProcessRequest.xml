@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<wps:TestProcess xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink"	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0" service="WPS" version="1.0.0">
+<wps:ProfileProcess xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink"	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0" service="WPS" version="1.0.0">
 	<wps:ProcessDescription statusSupported="true"
 		storeSupported="true" wps:processVersion="1.0.0">
-		<ows:Identifier>testProcessExample</ows:Identifier>
+		<ows:Identifier>profileProcessExample</ows:Identifier>
 		<ows:Title>MacrophyteAssesmentChain</ows:Title>
 		<ows:Abstract>Prozess zur Bewertung der Berichtsgebiete Nordfriesland
 			und Dithmarschen anhand von MSRL-D5 Daten
@@ -107,7 +107,10 @@
 		mpa/selmsrld5
 		bind process
 		net.disy.wps.lkn.mpa.processes.SelectTopography to mpa/seltopo
+		bind process
+		net.disy.wps.lkn.mpa.processes.SelectTopography to mpa/seltopo
 
+		var.areaVar = "NF"
 		var.areaVar = "NF"
 
 		execute mpa/selmsrld5 with
@@ -145,5 +148,5 @@
       </wps:Data>
     </wps:Input>
 </wps:DataInputs>
-</wps:TestProcess>
+</wps:ProfileProcess>
 

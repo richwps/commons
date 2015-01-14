@@ -8,25 +8,25 @@ package de.hsos.richwps.dsl.api.elements;
  * @author faltin
  *
  */
-public class OutputReferenceMapping {
-	private String processId;
+public class ReferenceOutputMapping {
+	private String processIdentifier;
 	private String outputIdentifier;
 	private String outputReference;
 
 	/**
-	 * Constructs a new OutputreferenceMapping with the output-reference,
+	 * Constructs a new ReferenceOutputMapping with the output-reference,
 	 * related process-identifier and output-identifier.
 	 * 
-	 * @param processId
+	 * @param processIdentifier
 	 *            the process-identifier
 	 * @param outputIdentifier
 	 *            the output-identifier
 	 * @param outputReference
 	 *            the output-reference
 	 */
-	public OutputReferenceMapping(String processId, String outputIdentifier,
+	public ReferenceOutputMapping(String processIdentifier, String outputIdentifier,
 			String outputReference) {
-		this.processId = processId;
+		this.processIdentifier = processIdentifier;
 		this.outputIdentifier = outputIdentifier;
 		this.outputReference = outputReference;
 	}
@@ -36,8 +36,8 @@ public class OutputReferenceMapping {
 	 * 
 	 * @return the process-identifier
 	 */
-	public String getProcessId() {
-		return processId;
+	public String getProcessIdentifier() {
+		return processIdentifier;
 	}
 
 	/**
