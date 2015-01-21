@@ -106,35 +106,34 @@ public class Workflow extends ArrayList<IOperation> {
 	 * 
 	 * @return output reference on output identifier mappings
 	 */
-	public List<ReferenceOutputMapping> getReferenceOutputMappings(
-			List<String> variableNames) {
-		List<ReferenceOutputMapping> processOutputsOnVariablesMapping = new ArrayList<ReferenceOutputMapping>();
+	public List<ReferenceOutputMapping> getReferenceOutputMappings(List<String> variableNames) {
+		List<ReferenceOutputMapping> referenceOutputMappings = new ArrayList<ReferenceOutputMapping>();
 		Map<String, String> handleProcessIdMappings = new HashMap<String, String>();
+
 		for (IOperation o : this) {
 			if (o instanceof Binding) {
-				handleProcessIdMappings.put(((Binding) o).getHandle(),
-						((Binding) o).getProcessId());
+				handleProcessIdMappings
+						.put(((Binding) o).getHandle(), ((Binding) o).getProcessId());
 			}
 		}
+
 		for (IOperation o : this) {
 			if (o instanceof Execute) {
 				String handle = ((Execute) o).getHandle();
-				List<String> outputnames = (ArrayList<String>) ((Execute) o)
-						.getOutputnames();
+				List<String> outputnames = (ArrayList<String>) ((Execute) o).getOutputnames();
 				List<Reference> outputreferences = (List<Reference>) ((Execute) o)
 						.getOutputreferences();
 				for (int i = 0; i < outputnames.size(); i++) {
 					if (variableNames.contains(outputreferences.get(i).getId())) {
 						ReferenceOutputMapping processOutputOnVariableMapping = new ReferenceOutputMapping(
-								handleProcessIdMappings.get(handle),
-								outputnames.get(i), "var."
+								handleProcessIdMappings.get(handle), outputnames.get(i), "var."
 										+ outputreferences.get(i).getId());
-						processOutputsOnVariablesMapping
-								.add(processOutputOnVariableMapping);
+						referenceOutputMappings.add(processOutputOnVariableMapping);
 					}
 				}
 			}
 		}
-		return processOutputsOnVariablesMapping;
+
+		return referenceOutputMappings;
 	}
 }
