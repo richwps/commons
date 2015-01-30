@@ -27,8 +27,7 @@ import org.slf4j.LoggerFactory;
  * @version 0.0.1
  */
 public class TestProcessRequestBuilder {
-	private static Logger LOGGER = LoggerFactory
-			.getLogger(TestProcessRequestBuilder.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(TestProcessRequestBuilder.class);
 	private ProcessDescriptionType processDesc;
 	private TestProcessDocument testprocessdocument;
 	private TestProcessDocument.TestProcess testprocess;
@@ -38,8 +37,7 @@ public class TestProcessRequestBuilder {
 	public static String VERSION = "1.0.0";
 
 	private void updateInputs() {
-		testprocess.setDataInputs(executeRequestBuilder.getExecute()
-				.getExecute().getDataInputs());
+		testprocess.setDataInputs(executeRequestBuilder.getExecute().getExecute().getDataInputs());
 	}
 
 	/**
@@ -91,16 +89,15 @@ public class TestProcessRequestBuilder {
 	 *            mimetype of the data, has to be set
 	 * @throws WPSClientException
 	 */
-	public void addComplexData(String parameterID, IData value, String schema,
-			String encoding, String mimeType) throws WPSClientException {
+	public void addComplexData(String parameterID, IData value, String schema, String encoding,
+			String mimeType) throws WPSClientException {
 		if (schema.isEmpty()) {
 			schema = null;
 		}
 		if (encoding.isEmpty()) {
 			encoding = null;
 		}
-		executeRequestBuilder.addComplexData(parameterID, value, schema,
-				encoding, mimeType);
+		executeRequestBuilder.addComplexData(parameterID, value, schema, encoding, mimeType);
 		updateInputs();
 	}
 
@@ -121,16 +118,15 @@ public class TestProcessRequestBuilder {
 	 *            mimetype of the data, has to be set
 	 * @throws WPSClientException
 	 */
-	public void addComplexData(String parameterID, String value, String schema,
-			String encoding, String mimeType) throws WPSClientException {
+	public void addComplexData(String parameterID, String value, String schema, String encoding,
+			String mimeType) throws WPSClientException {
 		if (schema.isEmpty()) {
 			schema = null;
 		}
 		if (encoding.isEmpty()) {
 			encoding = null;
 		}
-		executeRequestBuilder.addComplexData(parameterID, value, schema,
-				encoding, mimeType);
+		executeRequestBuilder.addComplexData(parameterID, value, schema, encoding, mimeType);
 		updateInputs();
 	}
 
@@ -151,17 +147,16 @@ public class TestProcessRequestBuilder {
 	 *            mimetype of the data, has to be set
 	 * @throws WPSClientException
 	 */
-	public void addComplexData(String parameterID, String value, String schema,
-			String encoding, String mimeType, boolean asReference)
-			throws WPSClientException {
+	public void addComplexData(String parameterID, String value, String schema, String encoding,
+			String mimeType, boolean asReference) throws WPSClientException {
 		if (schema.isEmpty()) {
 			schema = null;
 		}
 		if (encoding.isEmpty()) {
 			encoding = null;
 		}
-		executeRequestBuilder.addComplexData(parameterID, value, schema,
-				encoding, mimeType, asReference);
+		executeRequestBuilder.addComplexData(parameterID, value, schema, encoding, mimeType,
+				asReference);
 		updateInputs();
 	}
 
@@ -198,10 +193,9 @@ public class TestProcessRequestBuilder {
 	 *            the ID of the input paramter according to the describe process
 	 */
 	public void addBoundingBoxData(final String parameterID, final String crs,
-			final BigInteger dimensions, final List lowerCorner,
-			final List upperCorner) {
-		executeRequestBuilder.addBoundingBoxData(parameterID, crs, dimensions,
-				lowerCorner, upperCorner);
+			final BigInteger dimensions, final List lowerCorner, final List upperCorner) {
+		executeRequestBuilder.addBoundingBoxData(parameterID, crs, dimensions, lowerCorner,
+				upperCorner);
 		updateInputs();
 	}
 
@@ -220,16 +214,16 @@ public class TestProcessRequestBuilder {
 	 *            mimetype of the input according to the process description.
 	 *            has to be set
 	 */
-	public void addComplexDataReference(String parameterID, String value,
-			String schema, String encoding, String mimetype) {
+	public void addComplexDataReference(String parameterID, String value, String schema,
+			String encoding, String mimetype) {
 		if (schema.isEmpty()) {
 			schema = null;
 		}
 		if (encoding.isEmpty()) {
 			encoding = null;
 		}
-		executeRequestBuilder.addComplexDataReference(parameterID, value,
-				schema, encoding, mimetype);
+		executeRequestBuilder.addComplexDataReference(parameterID, value, schema, encoding,
+				mimetype);
 		updateInputs();
 	}
 
@@ -250,23 +244,39 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setStoreSupport(String outputName, boolean storeSupport) {
-		boolean storeSupportReturn = executeRequestBuilder.setStoreSupport(
-				outputName, storeSupport);
+		boolean storeSupportReturn = executeRequestBuilder
+				.setStoreSupport(outputName, storeSupport);
 		updateResponseForm();
 		return storeSupportReturn;
 	}
 
 	/**
-	 * this sets store for the specific output.
-	 * 
-	 * @param parentInput
-	 * @return
+	 * @param outputName
+	 * @param asReference
 	 */
-	public boolean setAsReference(String outputName, boolean asReference) {
-		boolean setAsReferenceReturn = executeRequestBuilder.setAsReference(
-				outputName, asReference);
+	public void setAsReference(String outputName, boolean asReference) {
+		DocumentOutputDefinitionType outputDef = null;
+		if (!executeRequestBuilder.getExecute().getExecute().isSetResponseForm()) {
+			executeRequestBuilder.getExecute().getExecute().addNewResponseForm();
+		}
+		if (!executeRequestBuilder.getExecute().getExecute().getResponseForm()
+				.isSetResponseDocument()) {
+			executeRequestBuilder.getExecute().getExecute().getResponseForm()
+					.addNewResponseDocument();
+		}
+		for (DocumentOutputDefinitionType outputDefTemp : executeRequestBuilder.getExecute()
+				.getExecute().getResponseForm().getResponseDocument().getOutputArray()) {
+			if (outputDefTemp.getIdentifier().getStringValue().equals(outputName)) {
+				outputDef = outputDefTemp;
+				break;
+			}
+		}
+		if (outputDef == null) {
+			outputDef = executeRequestBuilder.getExecute().getExecute().getResponseForm()
+					.getResponseDocument().addNewOutput();
+		}
+		outputDef.setAsReference(asReference);
 		updateResponseForm();
-		return setAsReferenceReturn;
 	}
 
 	/**
@@ -276,8 +286,7 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setStatus(String outputName, boolean status) {
-		boolean setStatusReturn = executeRequestBuilder.setStatus(outputName,
-				status);
+		boolean setStatusReturn = executeRequestBuilder.setStatus(outputName, status);
 		updateResponseForm();
 		return setStatusReturn;
 	}
@@ -291,8 +300,8 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setSchemaForOutput(String schema, String outputName) {
-		boolean setSchemaForOutputReturn = executeRequestBuilder
-				.setSchemaForOutput(schema, outputName);
+		boolean setSchemaForOutputReturn = executeRequestBuilder.setSchemaForOutput(schema,
+				outputName);
 		updateResponseForm();
 		return setSchemaForOutputReturn;
 	}
@@ -309,8 +318,8 @@ public class TestProcessRequestBuilder {
 	 * @return success
 	 */
 	public boolean setMimeTypeForOutput(String mimeType, String outputName) {
-		boolean setMimeTypeForOutputReturn = executeRequestBuilder
-				.setMimeTypeForOutput(mimeType, outputName);
+		boolean setMimeTypeForOutputReturn = executeRequestBuilder.setMimeTypeForOutput(mimeType,
+				outputName);
 		updateResponseForm();
 		return setMimeTypeForOutputReturn;
 	}
@@ -327,8 +336,8 @@ public class TestProcessRequestBuilder {
 	 * @return
 	 */
 	public boolean setEncodingForOutput(String encoding, String outputName) {
-		boolean setEncodingForOutputReturn = executeRequestBuilder
-				.setEncodingForOutput(encoding, outputName);
+		boolean setEncodingForOutputReturn = executeRequestBuilder.setEncodingForOutput(encoding,
+				outputName);
 		updateResponseForm();
 		return setEncodingForOutputReturn;
 	}
@@ -341,11 +350,10 @@ public class TestProcessRequestBuilder {
 	 * @param mimeType
 	 * @return
 	 */
-	public boolean setResponseDocument(String outputIdentifier, String schema,
-			String encoding, String mimeType) {
-		boolean setResponseDocumentReturn = executeRequestBuilder
-				.setResponseDocument(outputIdentifier, schema, encoding,
-						mimeType);
+	public boolean setResponseDocument(String outputIdentifier, String schema, String encoding,
+			String mimeType) {
+		boolean setResponseDocumentReturn = executeRequestBuilder.setResponseDocument(
+				outputIdentifier, schema, encoding, mimeType);
 		updateResponseForm();
 		return setResponseDocumentReturn;
 	}
@@ -362,10 +370,10 @@ public class TestProcessRequestBuilder {
 	 *            description. if not set, default mime type is used.
 	 * @return
 	 */
-	public boolean setRawData(String outputIdentifier, String schema,
-			String encoding, String mimeType) {
-		boolean setRawDataReturn = executeRequestBuilder.setRawData(
-				outputIdentifier, schema, encoding, mimeType);
+	public boolean setRawData(String outputIdentifier, String schema, String encoding,
+			String mimeType) {
+		boolean setRawDataReturn = executeRequestBuilder.setRawData(outputIdentifier, schema,
+				encoding, mimeType);
 		updateResponseForm();
 		return setRawDataReturn;
 	}
@@ -427,8 +435,7 @@ public class TestProcessRequestBuilder {
 	 * @param outputs
 	 */
 	public void setOutputs(final net.opengis.wps.x100.ResponseFormType outputs) {
-		executeRequestBuilder.getExecute().getExecute()
-				.setResponseForm(outputs);
+		executeRequestBuilder.getExecute().getExecute().setResponseForm(outputs);
 		updateResponseForm();
 	}
 
@@ -449,19 +456,17 @@ public class TestProcessRequestBuilder {
 	 * @param doc
 	 * @throws WPSClientException
 	 */
-	private TestProcessDocument validateTestProcessDocument(
-			TestProcessDocument doc) throws WPSClientException {
+	private TestProcessDocument validateTestProcessDocument(TestProcessDocument doc)
+			throws WPSClientException {
 
 		if (doc.getTestProcess().getProcessDescription() == null) {
 			throw new WPSClientException(
 					"TestProcess document does not contain a ProcessDescription");
 		}
 		if (doc.getTestProcess().getExecutionUnit() == null) {
-			throw new WPSClientException(
-					"TestProcess document does not contain an ExecutionUnit");
+			throw new WPSClientException("TestProcess document does not contain an ExecutionUnit");
 		} else {
-			if (((SimpleValue) doc.getTestProcess().getExecutionUnit())
-					.getStringValue().isEmpty()) {
+			if (((SimpleValue) doc.getTestProcess().getExecutionUnit()).getStringValue().isEmpty()) {
 				throw new WPSClientException(
 						"ExecutionUnit of TestProcessDocument does not contain any value");
 			}
@@ -486,8 +491,8 @@ public class TestProcessRequestBuilder {
 	}
 
 	private void updateResponseForm() {
-		testprocess.setResponseForm(executeRequestBuilder.getExecute()
-				.getExecute().getResponseForm());
+		testprocess.setResponseForm(executeRequestBuilder.getExecute().getExecute()
+				.getResponseForm());
 	}
 
 	private void addRolaOutput(String outputName) {
@@ -510,11 +515,10 @@ public class TestProcessRequestBuilder {
 
 	private DocumentOutputDefinitionType addOutputIdentifier(String identifier) {
 		DocumentOutputDefinitionType outputDef;
-		ResponseFormType responseForm = executeRequestBuilder.getExecute()
-				.getExecute().getResponseForm();
+		ResponseFormType responseForm = executeRequestBuilder.getExecute().getExecute()
+				.getResponseForm();
 		if (responseForm == null) {
-			responseForm = executeRequestBuilder.getExecute().getExecute()
-					.addNewResponseForm();
+			responseForm = executeRequestBuilder.getExecute().getExecute().addNewResponseForm();
 			responseForm.addNewResponseDocument();
 		}
 		outputDef = getExistingUndefinedOutput();
@@ -526,9 +530,8 @@ public class TestProcessRequestBuilder {
 	}
 
 	private DocumentOutputDefinitionType getExistingUndefinedOutput() {
-		DocumentOutputDefinitionType[] outputDefs = executeRequestBuilder
-				.getExecute().getExecute().getResponseForm()
-				.getResponseDocument().getOutputArray();
+		DocumentOutputDefinitionType[] outputDefs = executeRequestBuilder.getExecute().getExecute()
+				.getResponseForm().getResponseDocument().getOutputArray();
 		DocumentOutputDefinitionType outputDef = null;
 		for (DocumentOutputDefinitionType documentOutputDefinitionType : outputDefs) {
 			if (documentOutputDefinitionType.getIdentifier() == null) {

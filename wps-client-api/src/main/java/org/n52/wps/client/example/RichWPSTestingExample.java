@@ -41,30 +41,24 @@ public class RichWPSTestingExample {
 
 			// Build Output Descriptions
 			ProcessDescriptionType.ProcessOutputs procOutputs;
-			procOutputs = ProcessDescriptionType.ProcessOutputs.Factory
-					.newInstance();
+			procOutputs = ProcessDescriptionType.ProcessOutputs.Factory.newInstance();
 			ComplexDataCombinationType outputDefaultFormats;
-			outputDefaultFormats = OutputDescriptionTypeBuilder
-					.createComplexDataCombiType("text/xml", "base64",
-							"http://foo.bar/gml/3.1.0/polygon.xsd");
+			outputDefaultFormats = OutputDescriptionTypeBuilder.createComplexDataCombiType(
+					"text/xml", "base64", "http://foo.bar/gml/3.1.0/polygon.xsd");
 			ComplexDataCombinationsType outputSupportedFormats;
-			outputSupportedFormats = OutputDescriptionTypeBuilder
-					.createComplexDataCombisType("text/xml", "UTF-8",
-							"http://foo.bar/gml/3.1.0/polygon.xsd");
+			outputSupportedFormats = OutputDescriptionTypeBuilder.createComplexDataCombisType(
+					"text/xml", "UTF-8", "http://foo.bar/gml/3.1.0/polygon.xsd");
 
 			OutputDescriptionTypeBuilder basicOutputDescriptionType;
 			OutputDescriptionTypeBuilder basicOutputDescriptionType2;
 			OutputDescriptionTypeBuilder basicOutputDescriptionType3;
-			basicOutputDescriptionType = new OutputDescriptionTypeBuilder(
-					outputDefaultFormats, outputSupportedFormats, "output1",
-					"Buffered Polygon");
-			basicOutputDescriptionType2 = new OutputDescriptionTypeBuilder(
-					outputDefaultFormats, outputSupportedFormats, "output2",
-					"Buffered Polygon");
+			basicOutputDescriptionType = new OutputDescriptionTypeBuilder(outputDefaultFormats,
+					outputSupportedFormats, "output1", "Buffered Polygon");
+			basicOutputDescriptionType2 = new OutputDescriptionTypeBuilder(outputDefaultFormats,
+					outputSupportedFormats, "output2", "Buffered Polygon");
 			basicOutputDescriptionType
 					.setAbstract("GML stream describing the buffered polygon feature.");
-			basicOutputDescriptionType3 = new OutputDescriptionTypeBuilder(
-					"result", "textData");
+			basicOutputDescriptionType3 = new OutputDescriptionTypeBuilder("result", "textData");
 			basicOutputDescriptionType3.addNewLiteralOutput("xs:string");
 
 			procOutputs.addNewOutput();
@@ -74,13 +68,12 @@ public class RichWPSTestingExample {
 			String richwpsurl = "http://localhost:8080/wps/RichWPS";
 			String wpsurl = "http://localhost:8080/wps/WebProcessingService";
 			String processID = "testProcessId";
-			ProcessDescriptionTypeBuilder pdtb = new ProcessDescriptionTypeBuilder(
-					processID, "testProcessTitle", "1", procOutputs);
+			ProcessDescriptionTypeBuilder pdtb = new ProcessDescriptionTypeBuilder(processID,
+					"testProcessTitle", "1", procOutputs);
 
 			// Build Input Descriptions
 			InputDescriptionTypeBuilder idtb = new InputDescriptionTypeBuilder(
-					"executionLiteralInput", "input1", BigInteger.ZERO,
-					BigInteger.ONE);
+					"executionLiteralInput", "input1", BigInteger.ZERO, BigInteger.ONE);
 
 			List<ComplexDataDescriptionType> supportedFormatList = new ArrayList<ComplexDataDescriptionType>();
 			ComplexDataDescriptionType ogctype = InputDescriptionTypeBuilder
@@ -91,11 +84,9 @@ public class RichWPSTestingExample {
 
 			// Add Input
 			ComplexDataDescriptionType cddt = InputDescriptionTypeBuilder
-					.createComplexDataDescriptionType("application/json",
-							"encoding", "schema");
+					.createComplexDataDescriptionType("application/json", "encoding", "schema");
 			InputDescriptionTypeBuilder idtbComplex = new InputDescriptionTypeBuilder(
-					"complexInput", "complexInput", new BigInteger("1"),
-					new BigInteger("1"));
+					"complexInput", "complexInput", new BigInteger("1"), new BigInteger("1"));
 			BigInteger bi = new BigInteger("100");
 			idtbComplex.addNewComplexData(cddt, cddt, bi);
 			pdtb.addNewInputToDataInputs(idtbComplex.getIdt());
@@ -107,44 +98,40 @@ public class RichWPSTestingExample {
 					.setExecutionUnit("bind process org.n52.wps.server.algorithm.test.DummyTestClass to richwps/dummyProcess1 execute richwps/dummyProcess1 with in.name as LiteralInputData store	LiteralOutputData as var.firstResult bind process http localhost 8080 /wps/WebProcessingService	org.n52.wps.server.algorithm.test.DummyTestClass to	richwps/dummyProcess2 execute richwps/dummyProcess2	with var.firstResult as LiteralInputData store LiteralOutputData as out.result");
 			testProcessRequestbuilder.setDeploymentProfileName("rola");
 			testProcessRequestbuilder.addOutput("output1");
+			testProcessRequestbuilder.setAsReference("output1", true);
+			testProcessRequestbuilder.addOutput("var.firstResult");
+			testProcessRequestbuilder.setAsReference("var.firstResult", true);
 			testProcessRequestbuilder.addOutput("result");
 
 			// OutputDescriptionType
 			testProcessRequestbuilder.addOutput("var.firstResult");
-			testProcessRequestbuilder.getTestdocument().getTestProcess()
-					.getResponseForm().getResponseDocument().getOutputArray(0)
-					.setEncoding("LATIN1");
-			DocumentOutputDefinitionType odt = testProcessRequestbuilder
-					.getTestdocument().getTestProcess().getResponseForm()
-					.getResponseDocument().getOutputArray(0);
+			testProcessRequestbuilder.getTestdocument().getTestProcess().getResponseForm()
+					.getResponseDocument().getOutputArray(0).setEncoding("LATIN1");
+			DocumentOutputDefinitionType odt = testProcessRequestbuilder.getTestdocument()
+					.getTestProcess().getResponseForm().getResponseDocument().getOutputArray(0);
 			odt.setMimeType("test");
-			testProcessRequestbuilder.getTestdocument().getTestProcess()
-					.getResponseForm().getResponseDocument().getOutputArray(0)
-					.setMimeType("GML");
+			testProcessRequestbuilder.getTestdocument().getTestProcess().getResponseForm()
+					.getResponseDocument().getOutputArray(0).setMimeType("GML");
 
 			// Add inputs for execute
 			testProcessRequestbuilder.addLiteralData("executionLiteralInput",
 					"executionLiteralInputValue");
-			testProcessRequestbuilder.addComplexDataReference("complexInput",
-					"http://foo.bar", "", "", "");
+			testProcessRequestbuilder.addComplexDataReference("complexInput", "http://foo.bar", "",
+					"", "");
 			System.out.println("--- TestProcess request: ---");
-			System.out.println(testProcessRequestbuilder.getTestdocument()
-					.toString());
+			System.out.println(testProcessRequestbuilder.getTestdocument().toString());
 
 			// Response
-			RichWPSClientSession richWPSClient = RichWPSClientSession
-					.getInstance();
+			RichWPSClientSession richWPSClient = RichWPSClientSession.getInstance();
 			richWPSClient.connect(wpsurl, richwpsurl);
 			Object responseObject = richWPSClient.test(wpsurl,
 					testProcessRequestbuilder.getTestdocument());
 			if (responseObject instanceof TestProcessResponseDocument) {
 				TestProcessResponseDocument testProcessResponseDocument = (TestProcessResponseDocument) responseObject;
 				TestProcessResponseAnalyser testProcessResponseAnalyser = new TestProcessResponseAnalyser(
-						testProcessRequestbuilder.getTestdocument(),
-						responseObject);
+						testProcessRequestbuilder.getTestdocument(), responseObject);
 				System.out.println("complexReferenceByIndex(0): "
-						+ testProcessResponseAnalyser
-								.getComplexReferenceByIndex(0));
+						+ testProcessResponseAnalyser.getComplexReferenceByIndex(0));
 
 				System.out.println("--- TestProcess response: ---");
 				System.out.println(testProcessResponseDocument.toString());
@@ -156,8 +143,7 @@ public class RichWPSTestingExample {
 
 			richWPSClient.disconnect(wpsurl);
 		} catch (WPSClientException ex) {
-			Logger.getLogger(RichWPSTestingExample.class.getName()).log(
-					Level.SEVERE, null, ex);
+			Logger.getLogger(RichWPSTestingExample.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 	}
